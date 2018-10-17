@@ -46,7 +46,11 @@
       </el-table-column>
       <el-table-column label="Status" width="100" align="center">
         <template slot-scope="scope">
+          <<<<<<< HEAD
           <el-tag type="danger">untreated</el-tag>
+          =======
+          <el-tag type="danger">Untreated</el-tag>
+          >>>>>>> 首页UI + 语言配置
         </template>
       </el-table-column>
     </el-table>
