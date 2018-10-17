@@ -106,7 +106,12 @@ export default {
     stickyTips: '当页面滚动到预设的位置会吸附在顶部',
     backToTopTips1: '页面滚动到指定位置会在右下角出现返回顶部按钮',
     backToTopTips2: '可自定义按钮的样式、show/hide、出现的高度、返回的位置 如需文字提示，可在外部使用Element的el-tooltip元素',
-    imageUploadTips: '由于我在使用时它只有vue@1版本，而且和mockjs不兼容，所以自己改造了一下，如果大家要使用的话，优先还是使用官方版本。'
+    imageUploadTips: '由于我在使用时它只有vue@1版本，而且和mockjs不兼容，所以自己改造了一下，如果大家要使用的话，优先还是使用官方版本。',
+    // extend
+    newUniqueVisits: '最新唯一访问量',
+    newPageVisits: '最新页面访问量',
+    messages: '信息',
+    turnover: '营业额'
   },
   table: {
     dynamicTips1: '固定表头, 按照表头顺序排序',
@@ -132,7 +137,20 @@ export default {
     draft: '草稿',
     delete: '删除',
     cancel: '取 消',
-    confirm: '确 定'
+    confirm: '确 定',
+    name: '名字',
+    surname: '姓',
+    phone: '手机号',
+    email: '邮箱',
+    source: '来源',
+    identity: '身份',
+    comments: '留言',
+    lastComments: '最新留言',
+    todoList: '代办项列表',
+    unfinished: '未完成的',
+    all: '全部',
+    active: '进行中的',
+    completed: '已完成的'
   },
   errorLog: {
     tips: '请点击右上角bug小图标',

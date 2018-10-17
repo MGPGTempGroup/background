@@ -106,7 +106,12 @@ export default {
     stickyTips: 'when the page is scrolled to the preset position will be sticky on the top.',
     backToTopTips1: 'When the page is scrolled to the specified position, the Back to Top button appears in the lower right corner',
     backToTopTips2: 'You can customize the style of the button, show / hide, height of appearance, height of the return. If you need a text prompt, you can use element-ui el-tooltip elements externally',
-    imageUploadTips: 'Since I was using only the vue@1 version, and it is not compatible with mockjs at the moment, I modified it myself, and if you are going to use it, it is better to use official version.'
+    imageUploadTips: 'Since I was using only the vue@1 version, and it is not compatible with mockjs at the moment, I modified it myself, and if you are going to use it, it is better to use official version.',
+    // extend
+    newUniqueVisits: 'New Unique Visits',
+    newPageVisits: 'New Page Visits',
+    messages: 'Messages',
+    turnover: 'Turnover'
   },
   table: {
     dynamicTips1: 'Fixed header, sorted by header order',
@@ -132,7 +137,20 @@ export default {
     draft: 'Draft',
     delete: 'Delete',
     cancel: 'Cancel',
-    confirm: 'Confirm'
+    confirm: 'Confirm',
+    name: 'Name',
+    surname: 'Surname',
+    phone: 'Phone',
+    email: 'Email',
+    source: 'source',
+    identity: 'identity',
+    comments: 'comments',
+    lastComments: 'Last comments',
+    todoList: 'Todo List',
+    unfinished: 'Unfinished',
+    all: 'All',
+    active: 'Active',
+    completed: 'Completed'
   },
   errorLog: {
     tips: 'Please click the bug icon in the upper right corner',
