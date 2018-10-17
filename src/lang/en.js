@@ -61,7 +61,14 @@ export default {
     theme: 'Theme',
     clipboardDemo: 'Clipboard',
     i18n: 'I18n',
-    externalLink: 'External Link'
+    externalLink: 'External Link',
+
+    // extend
+    propertyOwnerMGT: 'Property Owner MGT',
+    contentMGT: 'Content MGT',
+    housingMGT: 'Housing MGT',
+    companyInfoMGT: 'Company Info MGT'
+
   },
   navbar: {
     logOut: 'Log Out',

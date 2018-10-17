@@ -61,7 +61,14 @@ export default {
     theme: '换肤',
     clipboardDemo: 'Clipboard',
     i18n: '国际化',
-    externalLink: '外链'
+    externalLink: '外链',
+
+    // extend
+    propertyOwnerMGT: '物业业主管理',
+    contentMGT: '内容管理',
+    housingMGT: '房屋管理',
+    companyInfoMGT: '公司信息管理'
+
   },
   navbar: {
     logOut: '退出登录',
