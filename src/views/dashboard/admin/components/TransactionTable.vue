@@ -46,7 +46,7 @@
       </el-table-column>
       <el-table-column label="Status" width="100" align="center">
         <template slot-scope="scope">
-          <el-tag type="danger">Untreated</el-tag>
+          <el-tag type="danger">untreated</el-tag>
         </template>
       </el-table-column>
     </el-table>
