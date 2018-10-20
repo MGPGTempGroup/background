@@ -74,6 +74,18 @@ export const constantRouterMap = [
         meta: { title: 'dashboard', icon: 'dashboard', noCache: true }
       }
     ]
+  },
+  {
+    path: '/i18n',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/i18n-demo/index'),
+        name: 'I18n',
+        meta: { title: 'i18n', icon: 'international' }
+      }
+    ]
   }
 ]
 
@@ -153,8 +165,9 @@ export const asyncRouterMap = [
   {
     path: '/housing-management',
     component: Layout,
-    redirect: '/housing-management/index',
+    redirect: 'noredirect',
     alwaysShow: true,
+    name: 'housing-management',
     meta: {
       title: 'housingMGT',
       icon: 'rental_housing',
@@ -162,11 +175,11 @@ export const asyncRouterMap = [
     },
     children: [
       {
-        path: 'page',
-        component: () => import('@/views/permission/page'),
-        name: 'PagePermission',
+        path: 'rental-housing',
+        component: () => import('@/views/housing/rental-housing'),
+        name: 'rental-housing',
         meta: {
-          title: 'pagePermission',
+          title: 'rentalHousing',
           roles: ['admin'] // or you can only set roles in sub nav
         }
       }
