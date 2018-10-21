@@ -65,11 +65,12 @@ export default {
 
     // extend
     propertyOwnerMGT: '物业业主管理',
+    propertyOwner: '物业业主',
     contentMGT: '内容管理',
     housingMGT: '房屋管理',
     companyInfoMGT: '公司信息管理',
-    rentalHousing: '租赁房屋'
-
+    rentalHousing: '租赁房屋',
+    customerMGT: '客户管理'
   },
   navbar: {
     logOut: '退出登录',
@@ -248,5 +249,49 @@ export default {
     vic: '维多利亚',
     mooneePonds: '月光池塘',
     margaretStreet: '玛格丽特街'
+  },
+  owner: {
+    id: '序号',
+    name: '姓名',
+    surname: '姓',
+    phoneNumber: '手机号码',
+    photoThumbnail: '照片缩略图',
+    email: '邮箱',
+    idCardNum: '身份证号',
+    wechat: '微信',
+    propertyOwnersList: '物业业主列表',
+    identity: '身份',
+    landlord: '房东',
+    vendor: '供应商',
+    isSignContract: '是否签署合同',
+    address: '住址',
+    notSigned: '未签订',
+    alreadySigned: '已签订',
+    followUpState: '跟进状态',
+    followUpTime: '跟进时间',
+    intentionalCustomers: '意向户',
+    noIntention: '无意向',
+    iSuccess: '成交',
+    actions: '操作',
+    details: '详情',
+    edit: '编辑',
+    agent: '代理',
+    conditionalFiltering: '条件筛选',
+    phone: '手机号码',
+    startDate: '开始时间',
+    endDate: '结束时间',
+    createdDate: '创建日期',
+    updatedDate: '修改时间',
+    reset: '重置',
+    query: '查询',
+    // placeholder
+    searchByNamePlaceholder: '输入名称部分字符',
+    searchByPhonePlaceholder: '输入部分手机号码',
+    searchByEmailPlaceholder: '输入邮箱部分字符',
+    searchByIdCardNumPlaceholder: '输入身份证号码部分字符',
+    searchByWeChatPlaceholder: '输入微信部分号码',
+    searchByAddressPlaceholder: '输入地址部分信息',
+    selectByIdentityPlaceholder: '选择客户身份',
+    searchByAgentNamePlaceholder: 'Input agent name fragment'
   }
 }

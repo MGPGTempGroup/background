@@ -65,11 +65,12 @@ export default {
 
     // extend
     propertyOwnerMGT: 'Property Owner MGT',
+    propertyOwner: 'Property Owner',
     contentMGT: 'Content MGT',
     housingMGT: 'Housing MGT',
     companyInfoMGT: 'Company Info MGT',
-    rentalHousing: 'Rental Housing'
-
+    rentalHousing: 'Rental Housing',
+    customerMGT: 'Customer MGT'
   },
   navbar: {
     logOut: 'Log Out',
@@ -248,5 +249,49 @@ export default {
     vic: 'Vic',
     mooneePonds: 'Moonee Ponds',
     margaretStreet: 'Margaret Street'
+  },
+  owner: {
+    id: 'ID',
+    name: 'Name',
+    surname: 'Surname',
+    phoneNumber: 'Phone',
+    photoThumbnail: 'Photo thumbnail',
+    email: 'Email',
+    idCardNum: 'ID Card',
+    wechat: 'Wechat',
+    propertyOwnersList: 'Property Owners List',
+    identity: 'Identity',
+    landlord: 'Landlord',
+    vendor: 'Vendor',
+    isSignContract: 'Sign Contract',
+    address: 'Address',
+    notSigned: 'Not signed',
+    alreadySigned: 'Already signed',
+    followUpState: 'Follow up state',
+    followUpTime: 'Follow up time',
+    intentionalCustomers: 'Intentional customers',
+    noIntention: 'No intention',
+    iSuccess: 'Success',
+    actions: 'Action',
+    details: 'Details',
+    edit: 'Edit',
+    agent: 'Agent',
+    conditionalFiltering: 'Conditional filtering',
+    phone: 'Phone',
+    startDate: 'Start date',
+    endDate: 'End date',
+    createdDate: 'Created date',
+    updatedDate: 'Updated date',
+    reset: 'Reset',
+    query: 'Query',
+    // placeholder
+    searchByNamePlaceholder: 'Input name fragment',
+    searchByPhonePlaceholder: 'Input phone fragment',
+    searchByEmailPlaceholder: 'Input email fragment',
+    searchByIdCardNumPlaceholder: 'Input ID Card number fragment',
+    searchByWeChatPlaceholder: 'Input wechat number fragment',
+    searchByAddressPlaceholder: 'Input address number fragment',
+    selectByIdentityPlaceholder: 'Select customer identity',
+    searchByAgentNamePlaceholder: 'Input agent name fragment'
   }
 }
