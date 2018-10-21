@@ -178,6 +178,7 @@
 
 import rentalHousingFilter from './rental-housing-filter'
 import rentalHousingEditForm from './rental-housing-edit'
+import 'font-awesome/css/font-awesome.min.css'
 import { mapState } from 'vuex'
 
 export default {
@@ -239,8 +240,7 @@ export default {
       margin: 10px 0px;
       font-size: 17px;
     }
-    &__tab-content-inner {
-    }
+    &__tab-content-inner {}
     &__basic-info {
       dl {
         margin: 0px;
@@ -264,9 +264,5 @@ export default {
 </style>
 
 <style lang="scss" >
-  h2 {
-    font-size: 20px;
-    letter-spacing: .5px;
-    color: #4D5050;
-  }
+  @import '@/styles/text.scss';
 </style>

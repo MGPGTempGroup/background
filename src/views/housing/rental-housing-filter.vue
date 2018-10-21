@@ -1,6 +1,6 @@
 <template>
   <el-card class="rental-housing-filter" body-style="padding: 5px 20px 5px 20px;" shadow="never" >
-    <el-collapse v-model="collapseActiveNames" style="border: none;">
+    <el-collapse v-model="collapseActiveNames">
       <el-collapse-item name="1">
         <template slot="title">
           <h2 style="margin: 0" >
@@ -154,7 +154,7 @@
                   :start-placeholder="$t('house.startDate')"
                   :end-placeholder="$t('house.endDate')"
                   :default-time="['12:00:00']"
-                  type="datetimerange"/>
+                  type="datetimerange" />
               </el-form-item>
             </el-col>
             <el-col
@@ -164,7 +164,7 @@
               :lg="{ span: 24 }"
               :xl="{ span: 24 }"
               class="rental-housing-filter__form-col rental-housing-filter__actions" >
-              <el-button type="primary">{{ $t('house.reset') }}</el-button>
+              <el-button type="info">{{ $t('house.reset') }}</el-button>
               <el-button type="primary">{{ $t('house.query') }}</el-button>
             </el-col>
           </el-row>
@@ -175,7 +175,6 @@
 </template>
 
 <script>
-import 'font-awesome/css/font-awesome.min.css'
 export default {
   name: 'RentalHousingFilter',
   props: {
@@ -252,14 +251,11 @@ export default {
 
 <style scoped lang="scss" >
   .rental-housing-filter {
-    &__form {
-
-    }
+    &__form {}
     &__form-row {
       margin-top: 10px;
     }
-    &__form-col {
-    }
+    &__form-col {}
     &__actions {
       display: flex;
       justify-content: center;
@@ -268,17 +264,8 @@ export default {
 </style>
 
 <style lang="scss" >
-  .el-collapse-item {
-    &__wrap {
-      border: none !important;
-    }
-    &__header {
-      border: none !important;
-    }
-    &__content {
-      padding-bottom: 20px;
-    }
-  }
+  @import '@/styles/filter-form.scss';
+  @import '@/styles/text.scss';
   .el-select {
     width: 100%;
   }
