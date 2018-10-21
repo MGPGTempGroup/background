@@ -284,6 +284,7 @@ export default {
     updatedDate: '修改时间',
     reset: '重置',
     query: '查询',
+    create: '创建',
     // placeholder
     searchByNamePlaceholder: '输入名称部分字符',
     searchByPhonePlaceholder: '输入部分手机号码',
@@ -293,5 +294,9 @@ export default {
     searchByAddressPlaceholder: '输入地址部分信息',
     selectByIdentityPlaceholder: '选择客户身份',
     searchByAgentNamePlaceholder: 'Input agent name fragment'
-  }
+  },
+  submit: '提交',
+  reset: '重置',
+  create: '创建',
+  update: '更新'
 }

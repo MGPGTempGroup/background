@@ -102,17 +102,17 @@ export const asyncRouterMap = [
     redirect: '/property-owner-management/index',
     alwaysShow: true,
     meta: {
-      title: 'propertyOwnerMGT',
+      title: 'customerMGT',
       icon: 'user',
       roles: ['admin']
     },
     children: [
       {
-        path: 'page',
-        component: () => import('@/views/permission/page'),
-        name: 'PagePermission',
+        path: 'owners',
+        component: () => import('@/views/propertyOwner'),
+        name: 'propertyOwner',
         meta: {
-          title: 'pagePermission',
+          title: 'propertyOwnerMGT',
           roles: ['admin'] // or you can only set roles in sub nav
         }
       }

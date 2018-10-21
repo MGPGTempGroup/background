@@ -1,0 +1,17 @@
+.el-collapse {
+  border: none !important;
+}
+.el-select {
+  width: 100%;
+}
+.el-date-editor--datetimerange {
+  width: 100% !important;
+}
+.el-collapse-item {
+  &__wrap, &__header {
+    border: none !important;
+  }
+  &__content {
+    padding-bottom: 20px;
+  }
+}

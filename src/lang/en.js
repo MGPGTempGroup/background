@@ -284,6 +284,7 @@ export default {
     updatedDate: 'Updated date',
     reset: 'Reset',
     query: 'Query',
+    create: 'Create',
     // placeholder
     searchByNamePlaceholder: 'Input name fragment',
     searchByPhonePlaceholder: 'Input phone fragment',
@@ -293,5 +294,9 @@ export default {
     searchByAddressPlaceholder: 'Input address number fragment',
     selectByIdentityPlaceholder: 'Select customer identity',
     searchByAgentNamePlaceholder: 'Input agent name fragment'
-  }
+  },
+  submit: 'Submit',
+  reset: 'Reset',
+  create: 'Create',
+  update: 'Update'
 }
