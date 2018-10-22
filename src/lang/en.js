@@ -300,5 +300,6 @@ export default {
   create: 'Create',
   update: 'Update',
   allow: 'Allow',
-  close: 'Close'
+  close: 'Close',
+  edit: 'Edit'
 }

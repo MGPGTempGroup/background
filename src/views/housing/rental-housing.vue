@@ -2,8 +2,8 @@
   <div class="rental-housing-container" >
     <rental-housing-filter :form.sync="filterForm" />
     <el-card style="margin-top: 20px;" shadow="never" >
-      <div slot="header" >
-        <h2 style="margin: 0;" >
+      <div slot="header" class="rental-housing__list-header" >
+        <h2 >
           <i class="fa fa-list" />
           &nbsp;{{ $t('house.rentalHousingList') }}
           <!-- <el-button type="primary" style="float: right; margin-top: -3px;">
@@ -233,6 +233,12 @@ export default {
   .rental-housing-container {
     padding: 20px;
   }
+  .rental-housing {
+    &__list-header {
+      position: relative;
+      padding: 1px 0px; // margin collapsing
+    }
+  }
   .rental-housing-details {
     &__tab-content {
       padding-left: 10px;
@@ -251,4 +257,8 @@ export default {
 
 <style lang="scss" >
   @import '@/styles/text.scss';
+  .el-card__header {
+    position: relative;
+    padding: 0px 20px;
+  }
 </style>

@@ -299,5 +299,6 @@ export default {
   reset: '重置',
   create: '创建',
   update: '更新',
-  close: '关闭'
+  close: '关闭',
+  edit: '编辑'
 }

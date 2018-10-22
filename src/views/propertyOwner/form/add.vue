@@ -1,5 +1,6 @@
 <template>
   <div class="property-owners-add" >
+    <!-- 基础表单 -->
     <el-form
       :model="dataCreationForm"
       label-position="top" >
@@ -62,12 +63,14 @@
           </el-form-item>
         </el-col>
       </el-row>
+      <!-- 上传控件 -->
       <div class="property-owners-add__form-upload" >
         <p class="property-owners-add__form-upload-title" >头像上传</p>
         <image-file-upload-control
           class="property-owners-add__form-upload-btn"
           @change="handleImageFileUploadControlChange" />
       </div>
+      <!-- 头像剪裁 -->
       <image-cropper
         v-show="imagecropperShow"
         :width="300"
@@ -75,8 +78,9 @@
         :key="0"
         url="https://httpbin.org/post"
         lang-type="en"
-        @close="close"
+        @close="imagecropperShow = false"
         @crop-upload-success="cropSuccess"/>
+      <!-- 提交相关按钮 -->
       <div class="property-owners-add__form-actions" >
         <el-button type="info">
           {{ $t('reset') }}

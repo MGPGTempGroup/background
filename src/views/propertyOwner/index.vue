@@ -51,7 +51,7 @@
           width="100">
           <template slot-scope="scope">
             <el-button type="text" size="small" @click="handleDetailsClick(scope.row)">{{ $t('owner.details') }}</el-button>
-            <el-button type="text" size="small">{{ $t('owner.edit') }}</el-button>
+            <el-button type="text" size="small" @click="handleEditClick(scope.row)" >{{ $t('owner.edit') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -76,20 +76,23 @@
     </el-dialog>
     <!-- Owner Details Dialog -->
     <details-dialog />
+    <!-- Edit Data Dialog -->
+    <edit-dialog />
   </div>
 </template>
 
 <script>
 import filterForm from './form/filter'
 import addForm from './form/add'
-import detailsDialog from './details-dialog'
+import detailsDialog from './dialog/details'
+import editDialog from './dialog/edit'
 import 'font-awesome/css/font-awesome.min.css'
 import { createNamespacedHelpers } from 'vuex'
 const { mapState, mapMutations } = createNamespacedHelpers('propertyOwner')
 
 export default {
   name: 'PropertyOwner',
-  components: { filterForm, addForm, detailsDialog },
+  components: { filterForm, addForm, editDialog, detailsDialog },
   filters: {
     truncate(str) {
       return str.length > 18 ? (str.substr(0, 18) + '...') : str
@@ -117,10 +120,14 @@ export default {
   methods: {
     ...mapMutations([
       'updateDataCreationDialogVisible',
+      'updateDataEditionDialogVisible',
       'updateDetailsDialogVisible'
     ]),
     handleDetailsClick() {
       this.updateDetailsDialogVisible({ visible: true })
+    },
+    handleEditClick() {
+      this.updateDataEditionDialogVisible({ visible: true })
     },
     onPaginatorSizeChange() {},
     onPaginatorChange() {}

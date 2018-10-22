@@ -45,13 +45,26 @@ const propertyOwner = {
       address: [],
       identity: '',
       agent: '',
+      idCardNum: '',
       photo: ''
+    },
+    dataEditionForm: {
+      name: 'Jerry Smith',
+      surname: 'Smith',
+      email: '********@gmail.com',
+      wechat: 'xxxxx',
+      idCardNum: '***********',
+      address: [],
+      identity: ['landlords'],
+      agent: ['Jerry'],
+      photo: '173****4331'
     },
     availableIdentity: [
       { value: 'landlord' },
       { value: 'vendor' }
     ],
     dataCreationDialogVisible: false,
+    dataEditionDialogVisible: false,
     detailsDialogVisible: false
   },
   mutations: {
@@ -60,6 +73,9 @@ const propertyOwner = {
     },
     updateDataCreationDialogVisible(state, payload) {
       state.dataCreationDialogVisible = !!payload.visible
+    },
+    updateDataEditionDialogVisible(state, payload) {
+      state.dataEditionDialogVisible = !!payload.visible
     },
     updateDetailsDialogVisible(state, payload) {
       state.detailsDialogVisible = !!payload.visible
