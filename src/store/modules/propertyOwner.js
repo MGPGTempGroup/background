@@ -42,7 +42,7 @@ const propertyOwner = {
       surname: '',
       email: '',
       wechat: '',
-      address: '',
+      address: [],
       identity: '',
       agent: '',
       photo: ''

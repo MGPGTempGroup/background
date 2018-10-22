@@ -62,6 +62,21 @@
           </el-form-item>
         </el-col>
       </el-row>
+      <div class="property-owners-add__form-upload" >
+        <p class="property-owners-add__form-upload-title" >头像上传</p>
+        <image-file-upload-control
+          class="property-owners-add__form-upload-btn"
+          @change="handleImageFileUploadControlChange" />
+      </div>
+      <image-cropper
+        v-show="imagecropperShow"
+        :width="300"
+        :height="300"
+        :key="0"
+        url="https://httpbin.org/post"
+        lang-type="en"
+        @close="close"
+        @crop-upload-success="cropSuccess"/>
       <div class="property-owners-add__form-actions" >
         <el-button type="info">
           {{ $t('reset') }}
@@ -76,14 +91,20 @@
 </template>
 
 <script>
+import ImageFileUploadControl from '@/components/ImageFileUploadControl'
+import ImageCropper from '@/components/ImageCropper'
 import { createNamespacedHelpers } from 'vuex'
 const { mapState } = createNamespacedHelpers('propertyOwner')
 
 export default {
   name: 'PropertyOwnersAddForm',
+  components: {
+    ImageFileUploadControl, ImageCropper
+  },
   data() {
     return {
-      formItemLayoutProps: { xs: 24, sm: 12, md: 12, lg: 8, xl: 8 }
+      formItemLayoutProps: { xs: 24, sm: 12, md: 12, lg: 8, xl: 8 },
+      imagecropperShow: false
     }
   },
   computed: {
@@ -128,6 +149,17 @@ export default {
           }
         ]
       }]
+    },
+    beforeAvatarUpload(file) {},
+    handleAvatarSuccess(res, file) {},
+    handleImageFileUploadControlChange({ dataURL }) {
+      this.imagecropperShow = true
+    },
+    cropSuccess() {
+
+    },
+    close() {
+
     }
   }
 }
@@ -138,6 +170,17 @@ export default {
     &__form-actions {
       display: flex;
       justify-content: flex-end;
+    }
+    &__form-upload {
+      width: 150px;
+      &-title {
+        font-size: 14px;
+        font-weight: bold;
+      }
+      &-btn {
+        width: 100%;
+        height: 150px;
+      }
     }
   }
   .el-cascader {
