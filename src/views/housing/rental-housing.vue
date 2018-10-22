@@ -229,6 +229,7 @@ export default {
 </script>
 
 <style lang="scss" scoped >
+  @import '@/styles/dl.scss';
   .rental-housing-container {
     padding: 20px;
   }
@@ -241,22 +242,7 @@ export default {
       font-size: 17px;
     }
     &__tab-content-inner {}
-    &__basic-info {
-      dl {
-        margin: 0px;
-      }
-      dt, dd {
-        letter-spacing: .5px;
-      }
-      dt {
-        margin-top: 15px;
-        font-weight: bold;
-      }
-      dd {
-        margin: 0;
-        margin-top: 8px;
-      }
-    }
+    &__basic-info {}
     &__photo-and-video {
       margin-top: 18px;
     }

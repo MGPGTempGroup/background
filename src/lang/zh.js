@@ -298,5 +298,6 @@ export default {
   submit: '提交',
   reset: '重置',
   create: '创建',
-  update: '更新'
+  update: '更新',
+  close: '关闭'
 }

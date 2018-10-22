@@ -298,5 +298,7 @@ export default {
   submit: 'Submit',
   reset: 'Reset',
   create: 'Create',
-  update: 'Update'
+  update: 'Update',
+  allow: 'Allow',
+  close: 'Close'
 }

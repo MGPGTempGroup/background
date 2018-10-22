@@ -51,7 +51,8 @@ const propertyOwner = {
       { value: 'landlord' },
       { value: 'vendor' }
     ],
-    dataCreationDialogVisible: false
+    dataCreationDialogVisible: false,
+    detailsDialogVisible: false
   },
   mutations: {
     updateFilterForm(state, payload) {
@@ -59,6 +60,9 @@ const propertyOwner = {
     },
     updateDataCreationDialogVisible(state, payload) {
       state.dataCreationDialogVisible = !!payload.visible
+    },
+    updateDetailsDialogVisible(state, payload) {
+      state.detailsDialogVisible = !!payload.visible
     }
   }
 }
