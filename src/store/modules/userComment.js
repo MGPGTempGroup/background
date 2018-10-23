@@ -18,6 +18,7 @@ const userComment = {
   namespaced: true,
   state: {
     comments: temp,
+    currCommentsPage: 1,
     filterForm: {
       name: [],
       surname: [],
@@ -28,11 +29,21 @@ const userComment = {
       comments: [],
       createdAt: []
     },
+    deleteConfirmationDialogVisible: false,
+    messageForCurrOperation: {},
     // 可用身份
     availableIdentity: [
       { value: 'landlord' },
       { value: 'vendor' }
     ]
+  },
+  mutations: {
+    updateDeleteConfirmationDialogVisible(state, visible) {
+      state.deleteConfirmationDialogVisible = !!visible
+    },
+    updateMessageForCurrOperation(state, payload) {
+      state.messageForCurrOperation = payload
+    }
   }
 }
 

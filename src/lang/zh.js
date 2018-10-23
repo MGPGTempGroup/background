@@ -308,14 +308,20 @@ export default {
     landlord: '房东',
     vendor: '供应商',
     comments: '留言',
+    comment: '留言',
     createdAt: '创建时间',
-    conditionalFiltering: '条件筛选'
+    conditionalFiltering: '条件筛选',
+    confirmDeleteTip: '你确定要删除此条留言吗？'
   },
   submit: '提交',
   reset: '重置',
   create: '创建',
   update: '更新',
+  query: '查询',
   close: '关闭',
   edit: '编辑',
-  delete: '删除'
+  delete: '删除',
+  tips: '提示',
+  confirm: '确认',
+  cancel: '取消'
 }

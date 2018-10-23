@@ -64,11 +64,40 @@
           label="操作"
           width="100">
           <template slot-scope="scope">
-            <el-button type="danger" size="small" @click="() => null">{{ $t('delete') }}</el-button>
+            <el-button type="danger" size="small" @click="deleteComment(scope.row)">{{ $t('delete') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
+      <div class="user-comment__paginator-wrapper" >
+        <el-pagination
+          :current-page="currCommentsPage"
+          :page-sizes="[10, 30, 50, 100]"
+          :page-size="10"
+          :total="100"
+          layout="total, sizes, prev, pager, next, jumper"
+          @size-change="onPaginatorSizeChange"
+          @current-change="onPaginatorChange"/>
+      </div>
     </el-card>
+    <!-- 删除确认Dialog -->
+    <el-dialog
+      :visible.sync="deleteConfirmationDialogVisible"
+      :title="$t('userComment.confirmDeleteTip')"
+      width="35%"
+      center>
+      <dl class="user-comment-delete-dialog__info" >
+        <dt>{{ $t('userComment.id') }}</dt>
+        <dd>{{ messageForCurrOperation.id }}</dd>
+        <dt>{{ $t('userComment.name') }}</dt>
+        <dd>{{ messageForCurrOperation.name }}</dd>
+        <dt>{{ $t('userComment.comment') }}</dt>
+        <dd>{{ messageForCurrOperation.comments }}</dd>
+      </dl>
+      <span slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="deleteConfirmationDialogVisible = false">{{ $t('cancel') }}</el-button>
+        <el-button type="danger" @click="deleteConfirmationDialogVisible = false">{{ $t('confirm') }}</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -76,7 +105,7 @@
 import 'font-awesome/css/font-awesome.min.css'
 import { createNamespacedHelpers } from 'vuex'
 import filterForm from './form/filter'
-const { mapState } = createNamespacedHelpers('userComment')
+const { mapState, mapMutations } = createNamespacedHelpers('userComment')
 
 export default {
   name: 'UserComment',
@@ -85,9 +114,24 @@ export default {
     return { }
   },
   computed: {
-    ...mapState([
-      'comments'
-    ])
+    ...mapState(['comments', 'currCommentsPage', 'messageForCurrOperation']),
+    deleteConfirmationDialogVisible: {
+      get() {
+        return this.$store.state.userComment.deleteConfirmationDialogVisible
+      },
+      set(visible) {
+        this.updateDeleteConfirmationDialogVisible(visible)
+      }
+    }
+  },
+  methods: {
+    ...mapMutations(['updateDeleteConfirmationDialogVisible', 'updateMessageForCurrOperation']),
+    deleteComment(row) {
+      this.updateMessageForCurrOperation(row)
+      this.deleteConfirmationDialogVisible = true
+    },
+    onPaginatorSizeChange() {},
+    onPaginatorChange() {}
   }
 }
 </script>
@@ -101,6 +145,21 @@ export default {
     &__list-header {
       position: relative;
       padding: 1px 0px; // margin collapsing
+    }
+    &__paginator-wrapper {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    &-delete-dialog__info {
+      dt {
+        margin-top: 15px;
+        width: 100%;
+        font-weight: bold;
+      }
+      dd {
+        margin-top: 15px;
+      }
     }
   }
 </style>

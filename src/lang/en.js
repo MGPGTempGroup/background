@@ -308,15 +308,21 @@ export default {
     landlord: 'Landlord',
     vendor: 'Vendor',
     comments: 'Comments',
+    comment: 'Comment',
     createdAt: 'Created At',
-    conditionalFiltering: 'Conditional filtering'
+    conditionalFiltering: 'Conditional filtering',
+    confirmDeleteTip: 'Are you sure you want to delete this message?'
   },
   submit: 'Submit',
   reset: 'Reset',
   create: 'Create',
   update: 'Update',
+  query: 'Query',
   allow: 'Allow',
   close: 'Close',
   edit: 'Edit',
-  delete: 'Delete'
+  delete: 'Delete',
+  tips: 'Tips',
+  confirm: 'Confirm',
+  cancel: 'Cancel'
 }
