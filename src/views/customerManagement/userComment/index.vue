@@ -1,6 +1,7 @@
 <template>
   <div class="user-comment" >
-    <el-card>
+    <filter-form />
+    <el-card class="user-comment__list-card" shadow="never" >
       <div slot="header" class="user-comment__list-header" >
         <h2>
           <i class="fa fa-list" />
@@ -72,11 +73,14 @@
 </template>
 
 <script>
+import 'font-awesome/css/font-awesome.min.css'
 import { createNamespacedHelpers } from 'vuex'
-const { mapState } = createNamespacedHelpers('comment')
+import filterForm from './form/filter'
+const { mapState } = createNamespacedHelpers('userComment')
 
 export default {
   name: 'UserComment',
+  components: { filterForm },
   data() {
     return { }
   },
@@ -91,6 +95,9 @@ export default {
 <style scoped lang="scss" >
   .user-comment {
     padding: 20px;
+    &__list-card {
+      margin-top: 20px;
+    }
     &__list-header {
       position: relative;
       padding: 1px 0px; // margin collapsing

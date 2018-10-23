@@ -308,7 +308,8 @@ export default {
     landlord: 'Landlord',
     vendor: 'Vendor',
     comments: 'Comments',
-    createdAt: 'Created At'
+    createdAt: 'Created At',
+    conditionalFiltering: 'Conditional filtering'
   },
   submit: 'Submit',
   reset: 'Reset',

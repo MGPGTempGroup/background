@@ -308,7 +308,8 @@ export default {
     landlord: '房东',
     vendor: '供应商',
     comments: '留言',
-    createdAt: '创建时间'
+    createdAt: '创建时间',
+    conditionalFiltering: '条件筛选'
   },
   submit: '提交',
   reset: '重置',

@@ -14,10 +14,20 @@ for (let i = 0; i <= 20; i++) {
   })
 }
 
-const comment = {
+const userComment = {
   namespaced: true,
   state: {
     comments: temp,
+    filterForm: {
+      name: [],
+      surname: [],
+      email: [],
+      phone: [],
+      wechat: [],
+      identity: [],
+      comments: [],
+      createdAt: []
+    },
     // 可用身份
     availableIdentity: [
       { value: 'landlord' },
@@ -26,4 +36,4 @@ const comment = {
   }
 }
 
-export default comment
+export default userComment
