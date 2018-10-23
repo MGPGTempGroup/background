@@ -1,6 +1,6 @@
 <template>
   <el-card>
-    <div slot="header" >
+    <div slot="header" class="transaction-table__card-header" >
       <h2 style="margin: 0px;" >{{ $t('table.lastComments') }}</h2>
     </div>
     <el-table :data="list" style="width: 100%;">
@@ -87,3 +87,13 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" >
+  .el-card__header {
+    padding: 0px 20px;
+  }
+  .transaction-table__card-header {
+    padding: 20px 0px;
+  }
+</style>
+

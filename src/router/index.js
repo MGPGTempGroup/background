@@ -85,9 +85,9 @@ export default new Router({
 
 export const asyncRouterMap = [
   {
-    path: '/property-owner-management',
+    path: '/customer-management',
     component: Layout,
-    redirect: '/property-owner-management/index',
+    redirect: '/customer-management/index',
     alwaysShow: true,
     meta: {
       title: 'customerMGT',
@@ -97,11 +97,20 @@ export const asyncRouterMap = [
     children: [
       {
         path: 'owners',
-        component: () => import('@/views/propertyOwner'),
+        component: () => import('@/views/customerManagement/propertyOwner'),
         name: 'propertyOwner',
         meta: {
-          title: 'propertyOwnerMGT',
+          title: 'propertyOwner',
           roles: ['admin'] // or you can only set roles in sub nav
+        }
+      },
+      {
+        path: 'user-comment',
+        component: () => import('@/views/customerManagement/userComment'),
+        name: 'userComment',
+        meta: {
+          title: 'userComment',
+          roles: ['admin']
         }
       }
     ]

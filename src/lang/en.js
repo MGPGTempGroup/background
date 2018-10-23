@@ -70,7 +70,8 @@ export default {
     housingMGT: 'Housing MGT',
     companyInfoMGT: 'Company Info MGT',
     rentalHousing: 'Rental Housing',
-    customerMGT: 'Customer MGT'
+    customerMGT: 'Customer MGT',
+    userComment: 'User Comment'
   },
   navbar: {
     logOut: 'Log Out',
@@ -295,11 +296,26 @@ export default {
     selectByIdentityPlaceholder: 'Select customer identity',
     searchByAgentNamePlaceholder: 'Input agent name fragment'
   },
+  userComment: {
+    id: 'ID',
+    userCommentsList: 'User Comments List',
+    surname: 'Surname',
+    name: 'Name',
+    email: 'Email',
+    phone: 'Phone',
+    wechat: 'Wechat',
+    identity: 'Identity',
+    landlord: 'Landlord',
+    vendor: 'Vendor',
+    comments: 'Comments',
+    createdAt: 'Created At'
+  },
   submit: 'Submit',
   reset: 'Reset',
   create: 'Create',
   update: 'Update',
   allow: 'Allow',
   close: 'Close',
-  edit: 'Edit'
+  edit: 'Edit',
+  delete: 'Delete'
 }

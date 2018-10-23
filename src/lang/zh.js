@@ -70,7 +70,8 @@ export default {
     housingMGT: '房屋管理',
     companyInfoMGT: '公司信息管理',
     rentalHousing: '租赁房屋',
-    customerMGT: '客户管理'
+    customerMGT: '客户管理',
+    userComment: '用户留言'
   },
   navbar: {
     logOut: '退出登录',
@@ -295,10 +296,25 @@ export default {
     selectByIdentityPlaceholder: '选择客户身份',
     searchByAgentNamePlaceholder: 'Input agent name fragment'
   },
+  userComment: {
+    id: '序号',
+    userCommentsList: '用户留言列表',
+    surname: '姓',
+    name: '名字',
+    email: '邮箱',
+    phone: '手机号',
+    wechat: '微信',
+    identity: '身份',
+    landlord: '房东',
+    vendor: '供应商',
+    comments: '留言',
+    createdAt: '创建时间'
+  },
   submit: '提交',
   reset: '重置',
   create: '创建',
   update: '更新',
   close: '关闭',
-  edit: '编辑'
+  edit: '编辑',
+  delete: '删除'
 }

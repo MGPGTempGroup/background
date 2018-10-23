@@ -7,6 +7,7 @@ import tagsView from './modules/tagsView'
 import user from './modules/user'
 import housing from './modules/housing'
 import propertyOwner from './modules/propertyOwner'
+import comment from './modules/comment'
 import getters from './getters'
 
 Vue.use(Vuex)
@@ -19,7 +20,8 @@ const store = new Vuex.Store({
     tagsView,
     user,
     housing,
-    propertyOwner
+    propertyOwner,
+    comment
   },
   getters
 })
