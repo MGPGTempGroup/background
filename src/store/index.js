@@ -8,6 +8,7 @@ import user from './modules/user'
 import housing from './modules/housing'
 import propertyOwner from './modules/propertyOwner'
 import userComment from './modules/userComment'
+import content from './modules/content'
 import getters from './getters'
 
 Vue.use(Vuex)
@@ -21,6 +22,7 @@ const store = new Vuex.Store({
     user,
     housing,
     propertyOwner,
+    content,
     userComment
   },
   getters

@@ -94,8 +94,8 @@
         <dd>{{ messageForCurrOperation.comments }}</dd>
       </dl>
       <span slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="deleteConfirmationDialogVisible = false">{{ $t('cancel') }}</el-button>
-        <el-button type="danger" @click="deleteConfirmationDialogVisible = false">{{ $t('confirm') }}</el-button>
+        <el-button type="warning" @click="deleteConfirmationDialogVisible = false">{{ $t('confirm') }}</el-button>
+        <el-button type="info" @click="deleteConfirmationDialogVisible = false">{{ $t('cancel') }}</el-button>
       </span>
     </el-dialog>
   </div>

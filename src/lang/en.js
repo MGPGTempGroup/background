@@ -71,7 +71,8 @@ export default {
     companyInfoMGT: 'Company Info MGT',
     rentalHousing: 'Rental Housing',
     customerMGT: 'Customer MGT',
-    userComment: 'User Comment'
+    userComment: 'User Comment',
+    landlordSupport: 'Landlord Support'
   },
   navbar: {
     logOut: 'Log Out',
@@ -313,6 +314,10 @@ export default {
     conditionalFiltering: 'Conditional filtering',
     confirmDeleteTip: 'Are you sure you want to delete this message?'
   },
+  contentMGT: {
+    historicalContent: 'Historical content',
+    confirmUpdateTips: 'Are you sure you want to update the content? Landlord support page will use your latest changes.'
+  },
   submit: 'Submit',
   reset: 'Reset',
   create: 'Create',
@@ -324,5 +329,7 @@ export default {
   delete: 'Delete',
   tips: 'Tips',
   confirm: 'Confirm',
-  cancel: 'Cancel'
+  cancel: 'Cancel',
+  details: 'Details',
+  apply: 'Apply'
 }

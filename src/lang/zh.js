@@ -71,7 +71,8 @@ export default {
     companyInfoMGT: '公司信息管理',
     rentalHousing: '租赁房屋',
     customerMGT: '客户管理',
-    userComment: '用户留言'
+    userComment: '用户留言',
+    landlordSupport: '房东支持'
   },
   navbar: {
     logOut: '退出登录',
@@ -313,6 +314,10 @@ export default {
     conditionalFiltering: '条件筛选',
     confirmDeleteTip: '你确定要删除此条留言吗？'
   },
+  contentMGT: {
+    historicalContent: '历史内容',
+    confirmUpdateTips: '你确认要更新内容吗？房东支持页面将会应用您最新修改的内容。'
+  },
   submit: '提交',
   reset: '重置',
   create: '创建',
@@ -323,5 +328,7 @@ export default {
   delete: '删除',
   tips: '提示',
   confirm: '确认',
-  cancel: '取消'
+  cancel: '取消',
+  details: '详情',
+  apply: '应用'
 }
