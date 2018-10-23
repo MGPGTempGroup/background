@@ -42,5 +42,5 @@ export function toThousandFilter(num) {
 }
 
 export function textTruncate(str, len) {
-  return str.length > 18 ? str.substr(0, len) + '...' : str
+  return str.length > len ? str.substr(0, len) + '...' : str
 }
