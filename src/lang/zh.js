@@ -72,7 +72,8 @@ export default {
     rentalHousing: '租赁房屋',
     customerMGT: '客户管理',
     userComment: '用户留言',
-    landlordSupport: '房东支持'
+    landlordSupport: '房东支持',
+    prospectiveTenants: '未来房客'
   },
   navbar: {
     logOut: '退出登录',
@@ -316,7 +317,9 @@ export default {
   },
   contentMGT: {
     historicalContent: '历史内容',
-    confirmUpdateTips: '你确认要更新内容吗？房东支持页面将会应用您最新修改的内容。'
+    confirmUpdateTips: '你确认要更新内容吗？房东支持页面将会应用您最新修改的内容。',
+    editImage: '编辑轮播图数据',
+    editMainContent: '编辑主体内容'
   },
   submit: '提交',
   reset: '重置',
@@ -330,5 +333,6 @@ export default {
   confirm: '确认',
   cancel: '取消',
   details: '详情',
-  apply: '应用'
+  apply: '应用',
+  preview: '预览'
 }

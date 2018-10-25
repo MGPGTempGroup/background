@@ -2,7 +2,10 @@ const content = {
   namespaced: true,
   state: {
     landlordSupport: {
-      currRichEditorContent: `Test Content`
+      editorContent: `Test Content`
+    },
+    prospectiveTenants: {
+      editorContent: 'Test Content'
     },
     historicalContent: {
       dialogVisible: false,
@@ -27,8 +30,11 @@ const content = {
     }
   },
   mutations: {
-    updateCurrRichEditorContent(state, payload) {
-      state.currRichEditorContent = payload.content
+    updateLandlordSupportEditorContent(state, payload) {
+      state.landlordSupport.editorContent = payload.content
+    },
+    updateProspectiveTenantsEditorContent(state, payload) {
+      state.prospectiveTenants.editorContent = payload.content
     },
     updateHistoricalContent(state, payload) {
       console.log('payload', payload)

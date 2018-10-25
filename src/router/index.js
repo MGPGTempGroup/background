@@ -134,6 +134,15 @@ export const asyncRouterMap = [
           title: 'landlordSupport',
           roles: ['admin']
         }
+      },
+      {
+        path: 'prospective-tenants',
+        component: () => import('@/views/contentManagement/prospectiveTenants'),
+        name: 'prospectiveTenants',
+        meta: {
+          title: 'prospectiveTenants',
+          roles: ['admin']
+        }
       }
     ]
   },

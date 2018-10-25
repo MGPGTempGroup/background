@@ -72,7 +72,8 @@ export default {
     rentalHousing: 'Rental Housing',
     customerMGT: 'Customer MGT',
     userComment: 'User Comment',
-    landlordSupport: 'Landlord Support'
+    landlordSupport: 'Landlord Support',
+    prospectiveTenants: 'Prospective Tenants'
   },
   navbar: {
     logOut: 'Log Out',
@@ -316,7 +317,9 @@ export default {
   },
   contentMGT: {
     historicalContent: 'Historical content',
-    confirmUpdateTips: 'Are you sure you want to update the content? Landlord support page will use your latest changes.'
+    confirmUpdateTips: 'Are you sure you want to update the content? Landlord support page will use your latest changes.',
+    editImage: 'Edit the data of the broadcast chart',
+    editMainContent: "Editor's main content"
   },
   submit: 'Submit',
   reset: 'Reset',
@@ -331,5 +334,6 @@ export default {
   confirm: 'Confirm',
   cancel: 'Cancel',
   details: 'Details',
-  apply: 'Apply'
+  apply: 'Apply',
+  preview: 'Preview'
 }
