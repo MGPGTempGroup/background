@@ -1,30 +1,20 @@
 <template>
   <div class="landlord-support" >
+    <h2>{{ $t('contentMGT.editImage') }}</h2>
+    <div class="landlord-support__upload-image-wrapper" >
+      <upload-image :image-list="imageList" />
+    </div>
+    <h2 style="margin-top: 30px;" >{{ $t('contentMGT.editMainContent') }}</h2>
     <div class="landlord-support__rich-editor-wrapper" >
       <tinymce :height="600" v-model="currRichEditorContent"/>
     </div>
     <div class="landlord-support__actions" >
-      <el-button type="info" @click="historicalContentDialogVisible = true" >{{ $t('contentMGT.historicalContent') }}</el-button>
+      <el-button type="info" @click="updateHistoricalContent({ dialogVisible: true })" >{{ $t('contentMGT.historicalContent') }}</el-button>
       &nbsp;
       <el-button type="primary" @click="confirmUpdateDialogVisible = true" >{{ $t('update') }}</el-button>
     </div>
-    <el-dialog :visible.sync="historicalContentDialogVisible" title="收货地址">
-      <el-table :data="historicalContent">
-        <el-table-column property="date" label="日期" width="150" align="center"/>
-        <el-table-column property="name" label="姓名" width="200" align="center"/>
-        <el-table-column property="address" label="地址" align="center"/>
-        <el-table-column
-          fixed="right"
-          label="操作"
-          width="120"
-          align="center">
-          <template slot-scope="scope">
-            <el-button type="text" size="small" @click="() => null">{{ $t('details') }}</el-button>
-            <el-button type="text" size="small">{{ $t('apply') }}</el-button>
-          </template>
-        </el-table-column>
-      </el-table>
-    </el-dialog>
+    <!-- 历史内容对话框 -->
+    <historical-content-dialog />
     <!-- 更新确认对话框 -->
     <el-dialog :title="$t('tips')" :visible.sync="confirmUpdateDialogVisible" >
       <strong>{{ $t('contentMGT.confirmUpdateTips') }}</strong>
@@ -38,32 +28,17 @@
 
 <script>
 import Tinymce from '@/components/Tinymce'
+import UploadImage from '@/components/UploadImage'
+import historicalContentDialog from '../historicalContentDialog'
 import { createNamespacedHelpers } from 'vuex'
 const { mapMutations } = createNamespacedHelpers('content')
 export default {
   name: 'LandlordSupport',
-  components: { Tinymce },
+  components: { Tinymce, UploadImage, historicalContentDialog },
   data() {
     return {
       confirmUpdateDialogVisible: false,
-      historicalContentDialogVisible: false,
-      historicalContent: [{
-        date: '2016-05-02',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-04',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-01',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-03',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }]
+      imageList: []
     }
   },
   computed: {
@@ -79,13 +54,14 @@ export default {
   },
   methods: {
     ...mapMutations([
-      'updateCurrRichEditorContent'
+      'updateCurrRichEditorContent', 'updateHistoricalContent'
     ])
   }
 }
 </script>
 
 <style lang="scss" scoped >
+  @import '../common.scss';
   .landlord-support {
     padding: 20px;
     &__rich-editor-wrapper {}
