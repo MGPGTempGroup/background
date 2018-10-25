@@ -11,18 +11,10 @@
     <div class="landlord-support__actions" >
       <el-button type="info" @click="updateHistoricalContent({ dialogVisible: true })" >{{ $t('contentMGT.historicalContent') }}</el-button>
       &nbsp;
-      <el-button type="primary" @click="confirmUpdateDialogVisible = true" >{{ $t('update') }}</el-button>
+      <el-button type="primary" @click="onUpdate" >{{ $t('update') }}</el-button>
     </div>
     <!-- 历史内容对话框 -->
     <historical-content-dialog />
-    <!-- 更新确认对话框 -->
-    <el-dialog :title="$t('tips')" :visible.sync="confirmUpdateDialogVisible" >
-      <strong>{{ $t('contentMGT.confirmUpdateTips') }}</strong>
-      <div slot="footer" class="dialog-footer">
-        <el-button @click="confirmUpdateDialogVisible = false">{{ $t('cancel') }}</el-button>
-        <el-button type="primary" @click="() => undefined">{{ $t('confirm') }}</el-button>
-      </div>
-    </el-dialog>
   </div>
 </template>
 
@@ -37,25 +29,22 @@ export default {
   components: { Tinymce, UploadImage, historicalContentDialog },
   data() {
     return {
-      confirmUpdateDialogVisible: false,
+      currRichEditorContent: this.$store.state.content.landlordSupport.currRichEditorContent,
       imageList: []
     }
   },
-  computed: {
-    // todo: 组件自身先维护一份富文本内容的数据（v-model的数据源也是这个），在update时再commit mutation同步到store
-    currRichEditorContent: {
-      get() {
-        return this.$store.state.content.landlordSupport.currRichEditorContent
-      },
-      set(content) {
-        this.updateCurrRichEditorContent({ content })
-      }
-    }
-  },
+  computed: {},
   methods: {
     ...mapMutations([
-      'updateCurrRichEditorContent', 'updateHistoricalContent'
-    ])
+      'updateLandlordSupportEditorContent', 'updateHistoricalContent'
+    ]),
+    onUpdate() {
+      this.$confirm(this.$t('contentMGT.confirmUpdateTips'), this.$t('tips'), {
+        distinguishCancelAndClose: true,
+        confirmButtonText: this.$t('confirm'),
+        cancelButtonText: this.$t('cancel')
+      }).then(() => {}).catch(action => { })
+    }
   }
 }
 </script>
