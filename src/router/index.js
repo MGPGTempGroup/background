@@ -161,6 +161,15 @@ export const asyncRouterMap = [
           title: 'areasWeServe',
           roles: ['admin']
         }
+      },
+      {
+        path: 'project-marketing',
+        component: () => import('@/views/contentManagement/projectMarketing'),
+        name: 'projectMarketing',
+        meta: {
+          title: 'projectMarketing',
+          roles: ['admin']
+        }
       }
     ]
   },

@@ -75,7 +75,8 @@ export default {
     landlordSupport: 'Landlord Support',
     prospectiveTenants: 'Prospective Tenants',
     currentTenants: 'Current Tenants',
-    areasWeServe: 'Areas We Serve'
+    areasWeServe: 'Areas We Serve',
+    projectMarketing: 'Project marketing'
   },
   navbar: {
     logOut: 'Log Out',
@@ -321,11 +322,14 @@ export default {
     historicalContent: 'Historical content',
     confirmUpdateTips: 'Are you sure you want to update the content? Landlord support page will use your latest changes.',
     editImage: 'Edit the data of the broadcast chart',
-    editMainContent: "Editor's main content",
+    editMainContent: 'Edit main content',
     editServiceAreas: 'Edit service areas',
     editServiceAreaDetails: 'Edit service area details',
     createServiceArea: 'Create service area',
-    areaName: 'Area name'
+    areaName: 'Area name',
+    selectContacts: 'Select contacts',
+    searchContacts: 'Search contacts',
+    searchAgents: 'Search sgents'
   },
   submit: 'Submit',
   reset: 'Reset',

@@ -75,7 +75,8 @@ export default {
     landlordSupport: '房东支持',
     prospectiveTenants: '意向租户',
     currentTenants: '当前租户',
-    areasWeServe: '服务领域'
+    areasWeServe: '服务领域',
+    projectMarketing: '项目营销'
   },
   navbar: {
     logOut: '退出登录',
@@ -298,7 +299,7 @@ export default {
     searchByWeChatPlaceholder: '输入微信部分号码',
     searchByAddressPlaceholder: '输入地址部分信息',
     selectByIdentityPlaceholder: '选择客户身份',
-    searchByAgentNamePlaceholder: 'Input agent name fragment'
+    searchByAgentNamePlaceholder: '输入代理名称部分字符'
   },
   userComment: {
     id: '序号',
@@ -325,7 +326,10 @@ export default {
     editServiceAreas: '编辑服务地区',
     editServiceAreaDetails: '编辑服务地区详情',
     createServiceArea: '创建服务地区',
-    areaName: '区域名称'
+    areaName: '区域名称',
+    selectContacts: '选择联系人',
+    searchContacts: '搜索联系人',
+    searchAgents: '搜索代理'
   },
   submit: '提交',
   reset: '重置',
