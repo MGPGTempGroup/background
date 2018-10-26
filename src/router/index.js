@@ -143,6 +143,24 @@ export const asyncRouterMap = [
           title: 'prospectiveTenants',
           roles: ['admin']
         }
+      },
+      {
+        path: 'current-tenants',
+        component: () => import('@/views/contentManagement/currentTenants'),
+        name: 'currentTenants',
+        meta: {
+          title: 'currentTenants',
+          roles: ['admin']
+        }
+      },
+      {
+        path: 'areas-we-serve',
+        component: () => import('@/views/contentManagement/areasWeServe'),
+        name: 'areasWeServe',
+        meta: {
+          title: 'areasWeServe',
+          roles: ['admin']
+        }
       }
     ]
   },

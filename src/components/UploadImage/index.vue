@@ -90,9 +90,6 @@ export default {
       const currData = imageList.splice(this.currDragIndex, 1)[0]
       imageList.splice(this.willDragToBeforeIndex, 0, currData)
       this.imageList = imageList
-      this.$nextTick(function() {
-        console.log(this.imageList)
-      })
     }
   }
 }

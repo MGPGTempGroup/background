@@ -73,7 +73,9 @@ export default {
     customerMGT: '客户管理',
     userComment: '用户留言',
     landlordSupport: '房东支持',
-    prospectiveTenants: '未来房客'
+    prospectiveTenants: '意向租户',
+    currentTenants: '当前租户',
+    areasWeServe: '服务领域'
   },
   navbar: {
     logOut: '退出登录',
@@ -319,7 +321,11 @@ export default {
     historicalContent: '历史内容',
     confirmUpdateTips: '你确认要更新内容吗？房东支持页面将会应用您最新修改的内容。',
     editImage: '编辑轮播图数据',
-    editMainContent: '编辑主体内容'
+    editMainContent: '编辑主体内容',
+    editServiceAreas: '编辑服务地区',
+    editServiceAreaDetails: '编辑服务地区详情',
+    createServiceArea: '创建服务地区',
+    areaName: '区域名称'
   },
   submit: '提交',
   reset: '重置',
@@ -334,5 +340,6 @@ export default {
   cancel: '取消',
   details: '详情',
   apply: '应用',
-  preview: '预览'
+  preview: '预览',
+  add: '添加'
 }

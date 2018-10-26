@@ -73,7 +73,9 @@ export default {
     customerMGT: 'Customer MGT',
     userComment: 'User Comment',
     landlordSupport: 'Landlord Support',
-    prospectiveTenants: 'Prospective Tenants'
+    prospectiveTenants: 'Prospective Tenants',
+    currentTenants: 'Current Tenants',
+    areasWeServe: 'Areas We Serve'
   },
   navbar: {
     logOut: 'Log Out',
@@ -319,7 +321,11 @@ export default {
     historicalContent: 'Historical content',
     confirmUpdateTips: 'Are you sure you want to update the content? Landlord support page will use your latest changes.',
     editImage: 'Edit the data of the broadcast chart',
-    editMainContent: "Editor's main content"
+    editMainContent: "Editor's main content",
+    editServiceAreas: 'Edit service areas',
+    editServiceAreaDetails: 'Edit service area details',
+    createServiceArea: 'Create service area',
+    areaName: 'Area name'
   },
   submit: 'Submit',
   reset: 'Reset',
@@ -335,5 +341,6 @@ export default {
   cancel: 'Cancel',
   details: 'Details',
   apply: 'Apply',
-  preview: 'Preview'
+  preview: 'Preview',
+  add: 'Add'
 }
