@@ -76,7 +76,8 @@ export default {
     prospectiveTenants: 'Prospective Tenants',
     currentTenants: 'Current Tenants',
     areasWeServe: 'Areas We Serve',
-    projectMarketing: 'Project marketing'
+    projectMarketing: 'Project marketing',
+    projectLeasing: 'Project leasing'
   },
   navbar: {
     logOut: 'Log Out',

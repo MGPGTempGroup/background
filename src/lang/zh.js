@@ -76,7 +76,8 @@ export default {
     prospectiveTenants: '意向租户',
     currentTenants: '当前租户',
     areasWeServe: '服务领域',
-    projectMarketing: '项目营销'
+    projectMarketing: '项目营销',
+    projectLeasing: '项目租赁'
   },
   navbar: {
     logOut: '退出登录',
