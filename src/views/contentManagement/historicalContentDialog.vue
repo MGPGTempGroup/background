@@ -1,5 +1,5 @@
 <template>
-  <el-dialog :visible.sync="visible" title="收货地址">
+  <el-dialog :visible.sync="visible" title="收货地址" append-to-body >
     <el-table :data="tableData">
       <el-table-column property="date" label="日期" width="150" align="center" />
       <el-table-column property="name" label="姓名" width="200" align="center" />

@@ -71,12 +71,13 @@
 <script>
 import Tinymce from '@/components/Tinymce'
 import UploadImage from '@/components/UploadImage'
+import HistoricalContentDialog from '../historicalContentDialog'
 import { createNamespacedHelpers } from 'vuex'
 const { mapState, mapGetters, mapMutations } = createNamespacedHelpers('content')
 export default {
   name: 'AreasList',
   components: {
-    Tinymce, UploadImage
+    Tinymce, UploadImage, HistoricalContentDialog
   },
   data() {
     return {
