@@ -1,17 +1,17 @@
 <template>
-  <div class="project-marketing">
+  <div class="content">
     <h2>{{ $t('contentMGT.editImage') }}</h2>
-    <div class="project-marketing__upload-image-wrapper" >
+    <div class="content__upload-image-wrapper" >
       <upload-image :image-list="imageList" />
     </div>
-    <div class="project-marketing__select-contacts-wrapper" >
+    <div class="content__select-contacts-wrapper" >
       <select-contacts />
     </div>
     <h2 style="margin-top: 30px;" >{{ $t('contentMGT.editMainContent') }}</h2>
-    <div class="project-marketing__rich-editor-wrapper" >
+    <div class="content__rich-editor-wrapper" >
       <tinymce :height="600" v-model="currRichEditorContent"/>
     </div>
-    <div class="project-marketing__actions" >
+    <div class="content__actions" >
       <el-button type="info" @click="updateHistoricalContent({ dialogVisible: true })" >{{ $t('contentMGT.historicalContent') }}</el-button>
       &nbsp;
       <el-button type="primary" @click="onUpdate" >{{ $t('update') }}</el-button>
@@ -54,16 +54,5 @@ export default {
 
 <style lang="scss" scoped >
   @import '../common.scss';
-  .project-marketing {
-    padding: 20px;
-    &__select-contacts-wrapper {
-      margin-top: 30px;
-    }
-    &__actions {
-      display: flex;
-      justify-content: flex-end;
-      margin-top: 20px;
-    }
-  }
 </style>
 

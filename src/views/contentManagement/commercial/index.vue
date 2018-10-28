@@ -25,7 +25,7 @@ import historicalContentDialog from '../historicalContentDialog'
 import { createNamespacedHelpers } from 'vuex'
 const { mapMutations } = createNamespacedHelpers('content')
 export default {
-  name: 'ProspectiveTenants',
+  name: 'Commercial',
   components: { UploadImage, Tinymce, historicalContentDialog },
   data() {
     return {

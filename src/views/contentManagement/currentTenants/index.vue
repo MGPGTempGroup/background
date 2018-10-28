@@ -1,14 +1,14 @@
 <template>
-  <div class="current-tenants">
+  <div class="content">
     <h2>{{ $t('contentMGT.editImage') }}</h2>
-    <div class="current-tenants__upload-image-wrapper" >
+    <div class="content__upload-image-wrapper" >
       <upload-image :image-list="imageList" />
     </div>
     <h2 style="margin-top: 30px;" >{{ $t('contentMGT.editMainContent') }}</h2>
-    <div class="current-tenants__rich-editor-wrapper" >
+    <div class="content__rich-editor-wrapper" >
       <tinymce :height="600" v-model="currRichEditorContent"/>
     </div>
-    <div class="current-tenants__actions" >
+    <div class="content__actions" >
       <el-button type="info" @click="updateHistoricalContent({ dialogVisible: true })" >{{ $t('contentMGT.historicalContent') }}</el-button>
       &nbsp;
       <el-button type="primary" @click="onUpdate" >{{ $t('update') }}</el-button>
@@ -50,13 +50,5 @@ export default {
 
 <style lang="scss" scoped >
   @import '../common.scss';
-  .current-tenants {
-    padding: 20px;
-    &__actions {
-      display: flex;
-      justify-content: flex-end;
-      margin-top: 20px;
-    }
-  }
 </style>
 

@@ -1,17 +1,17 @@
 <template>
-  <div class="areas-we-serve">
+  <div class="content">
     <h2>{{ $t('contentMGT.editImage') }}</h2>
-    <div class="areas-we-serve__upload-image-wrapper" >
+    <div class="content__upload-image-wrapper" >
       <upload-image :image-list="imageList" />
     </div>
-    <div class="areas-we-serve__list-wrapper" >
+    <div class="content__areas-list-wrapper" >
       <areas-list />
     </div>
     <h2 style="margin-top: 30px;" >{{ $t('contentMGT.editMainContent') }}</h2>
-    <div class="areas-we-serve__rich-editor-wrapper" >
+    <div class="content__rich-editor-wrapper" >
       <tinymce :height="600" v-model="currRichEditorContent"/>
     </div>
-    <div class="areas-we-serve__actions" >
+    <div class="content__actions" >
       <el-button type="info" @click="updateHistoricalContent({ dialogVisible: true })" >{{ $t('contentMGT.historicalContent') }}</el-button>
       &nbsp;
       <el-button type="primary" @click="onUpdate" >{{ $t('update') }}</el-button>
@@ -54,16 +54,8 @@ export default {
 
 <style lang="scss" scoped >
   @import '../common.scss';
-  .areas-we-serve {
-    padding: 20px;
-    &__list-wrapper {
-      margin-top: 30px;
-    }
-    &__actions {
-      display: flex;
-      justify-content: flex-end;
-      margin-top: 20px;
-    }
+  .content__areas-list-wrapper {
+    margin-top: 30px;
   }
 </style>
 

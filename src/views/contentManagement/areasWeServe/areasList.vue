@@ -31,14 +31,14 @@
       <h2>{{ $t('contentMGT.areaName') }}</h2>
       <el-input style="width: 200px;" />
       <h2 style="margin-top: 20px;" >{{ $t('contentMGT.editImage') }}</h2>
-      <div class="areas__upload-img-wrapper" >
+      <div class="content__upload-img-wrapper" >
         <upload-image :image-list.sync="imageList" />
       </div>
       <h2 style="margin-top: 30px;" >{{ $t('contentMGT.editMainContent') }}</h2>
-      <div class="areas__editor-wrapper" >
+      <div class="content__editor-wrapper" >
         <tinymce :height="600" v-model="createAreaContent" />
       </div>
-      <div class="areas__actions" >
+      <div class="content__actions" >
         <el-button type="primary" >
           {{ $t('create') }}
         </el-button>
@@ -50,14 +50,14 @@
       :title="$t('contentMGT.editServiceAreaDetails')"
       fullscreen>
       <h2>{{ $t('contentMGT.editImage') }}</h2>
-      <div class="areas__upload-img-wrapper" >
+      <div class="content__upload-img-wrapper" >
         <upload-image :image-list.sync="imageList" />
       </div>
       <h2 style="margin-top: 30px;" >{{ $t('contentMGT.editMainContent') }}</h2>
-      <div class="areas__editor-wrapper" >
+      <div class="content__editor-wrapper" >
         <tinymce :height="600" v-model="content" />
       </div>
-      <div class="areas__actions" >
+      <div class="content__actions" >
         <el-button type="info" @click="updateHistoricalContent({ dialogVisible: true })" >{{ $t('contentMGT.historicalContent') }}</el-button>
         &nbsp;
         <el-button type="primary" @click="onUpdate" >{{ $t('update') }}</el-button>
@@ -152,11 +152,6 @@ export default {
     }
     &__item-img {
       width: 100%;
-    }
-    &__actions {
-      display: flex;
-      justify-content: flex-end;
-      margin-top: 20px;
     }
   }
 </style>
