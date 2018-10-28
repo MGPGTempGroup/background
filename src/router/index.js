@@ -179,6 +179,42 @@ export const asyncRouterMap = [
           title: 'projectLeasing',
           roles: ['admin']
         }
+      },
+      {
+        path: 'commercial',
+        component: () => import('@/views/contentManagement/commercial'),
+        name: 'commercial',
+        meta: {
+          title: 'commercial',
+          roles: ['admin']
+        }
+      },
+      {
+        path: 'sell',
+        component: () => import('@/views/contentManagement/projectLeasing'),
+        name: 'sell',
+        meta: {
+          title: 'sell',
+          roles: ['admin']
+        }
+      },
+      {
+        path: '/careers',
+        component: () => import('@/views/contentManagement/projectLeasing'),
+        name: 'careers',
+        meta: {
+          title: 'careers',
+          roles: ['admin']
+        }
+      },
+      {
+        path: 'industry-updates',
+        component: () => import('@/views/contentManagement/projectLeasing'),
+        name: 'industryUpdates',
+        meta: {
+          title: 'industryUpdates',
+          roles: ['admin']
+        }
       }
     ]
   },

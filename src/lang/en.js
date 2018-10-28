@@ -75,9 +75,15 @@ export default {
     landlordSupport: 'Landlord Support',
     prospectiveTenants: 'Prospective Tenants',
     currentTenants: 'Current Tenants',
-    areasWeServe: 'Areas We Serve',
+    areasWeServe: 'Areas we serve',
     projectMarketing: 'Project marketing',
-    projectLeasing: 'Project leasing'
+    projectLeasing: 'Project leasing',
+    pastSuccess: 'Past success',
+    commercial: 'Commercial',
+    sell: 'Sell',
+    headquarters: 'Headquarters',
+    industryUpdates: 'Industry updates',
+    careers: 'Careers'
   },
   navbar: {
     logOut: 'Log Out',

@@ -77,7 +77,13 @@ export default {
     currentTenants: '当前租户',
     areasWeServe: '服务领域',
     projectMarketing: '项目营销',
-    projectLeasing: '项目租赁'
+    projectLeasing: '项目租赁',
+    pastSuccess: '过去的成功',
+    commercial: '广告',
+    sell: '销售',
+    headquarters: '总部',
+    industryUpdates: '行业更新',
+    careers: '职业'
   },
   navbar: {
     logOut: '退出登录',
