@@ -61,14 +61,13 @@ export default {
         })
       })
       Promise.all(promises).then(res => {
-        this.imageList.push(...res)
+        this.$emit('update:imageList', res)
       })
     },
     del(item, index) {
-      this.imageList.splice(index, 1)
+      this.$emit('update:imageList', this.imageList.filter((v, i) => i !== index))
     },
     preview(src) {
-      console.log(src)
       this.currPreviewImgSrc = src
       this.visible = true
     },
@@ -89,7 +88,7 @@ export default {
       const imageList = JSON.parse(JSON.stringify(this.imageList))
       const currData = imageList.splice(this.currDragIndex, 1)[0]
       imageList.splice(this.willDragToBeforeIndex, 0, currData)
-      this.imageList = imageList
+      this.$emit('update:imageList', imageList)
     }
   }
 }
