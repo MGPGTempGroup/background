@@ -3,7 +3,7 @@
     <filter-form />
     <el-card class="user-comment__list-card" shadow="never" >
       <div slot="header" class="user-comment__list-header" >
-        <h2>
+        <h2 style="margin: 0;" >
           <i class="fa fa-list" />
           &nbsp;{{ $t('userComment.userCommentsList') }}
         </h2>
@@ -144,7 +144,6 @@ export default {
     }
     &__list-header {
       position: relative;
-      padding: 1px 0px; // margin collapsing
     }
     &__paginator-wrapper {
       display: flex;
@@ -161,13 +160,6 @@ export default {
         margin-top: 15px;
       }
     }
-  }
-</style>
-
-<style>
-  .el-card__header {
-    position: relative;
-    padding: 0px 20px;
   }
 </style>
 

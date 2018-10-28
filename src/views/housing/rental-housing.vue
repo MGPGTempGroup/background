@@ -3,7 +3,7 @@
     <rental-housing-filter :form.sync="filterForm" />
     <el-card style="margin-top: 20px;" shadow="never" >
       <div slot="header" class="rental-housing__list-header" >
-        <h2 >
+        <h2 style="margin: 0;" >
           <i class="fa fa-list" />
           &nbsp;{{ $t('house.rentalHousingList') }}
           <!-- <el-button type="primary" style="float: right; margin-top: -3px;">
@@ -257,8 +257,4 @@ export default {
 
 <style lang="scss" >
   @import '@/styles/text.scss';
-  .el-card__header {
-    position: relative;
-    padding: 0px 20px;
-  }
 </style>

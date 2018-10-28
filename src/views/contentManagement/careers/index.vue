@@ -16,7 +16,6 @@
       &nbsp;
       <el-button type="primary" @click="onUpdate" >{{ $t('update') }}</el-button>
     </div>
-    <!-- 历史内容对话框 -->
     <historical-content-dialog />
   </div>
 </template>
@@ -29,7 +28,7 @@ import SelectContacts from '../selectContacts'
 import { createNamespacedHelpers } from 'vuex'
 const { mapMutations } = createNamespacedHelpers('content')
 export default {
-  name: 'ProjectMarketing',
+  name: 'Sell',
   components: { UploadImage, Tinymce, HistoricalContentDialog, SelectContacts },
   data() {
     return {
@@ -55,4 +54,3 @@ export default {
 <style lang="scss" scoped >
   @import '../common.scss';
 </style>
-

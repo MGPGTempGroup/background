@@ -9,7 +9,7 @@
           {{ $t('owner.create') }}&nbsp;
           <i class="fa fa-edit" />
         </el-button>
-        <h2 style="" >
+        <h2 style="margin: 0px;" >
           <i class="fa fa-list" />
           &nbsp;{{ $t('owner.propertyOwnersList') }}
         </h2>
@@ -140,7 +140,6 @@ export default {
     padding: 20px;
     &__list-header {
       position: relative;
-      padding: 1px 0px; // margin collapsing
     }
     &__card {
       // position: relative;
@@ -159,11 +158,3 @@ export default {
     }
   }
 </style>
-
-<style>
-  .el-card__header {
-    position: relative;
-    padding: 0px 20px;
-  }
-</style>
-

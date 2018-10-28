@@ -39,7 +39,7 @@ export default {
 </script>
 
 <style lang="scss" scoped >
-  @import '../common.scss';
+  @import './common.scss';
   .select-contacts {
     &__selected-agents-list {
       padding: 0px;

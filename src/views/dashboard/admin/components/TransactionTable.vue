@@ -89,9 +89,6 @@ export default {
 </script>
 
 <style lang="scss" >
-  .el-card__header {
-    padding: 0px 20px;
-  }
   .transaction-table__card-header {
     padding: 20px 0px;
   }
