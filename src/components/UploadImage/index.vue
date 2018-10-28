@@ -61,7 +61,7 @@ export default {
         })
       })
       Promise.all(promises).then(res => {
-        this.$emit('update:imageList', res)
+        this.$emit('update:imageList', this.imageList.concat(res))
       })
     },
     del(item, index) {

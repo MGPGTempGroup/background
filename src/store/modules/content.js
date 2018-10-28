@@ -28,6 +28,11 @@ const content = {
         }
       ]
     },
+    projectLeasing: {},
+    commercial: {},
+    sell: {},
+    headquarters: {},
+    industryUpdates: {},
     historicalContent: {
       dialogVisible: false,
       currentServiceId: null,

@@ -191,7 +191,7 @@ export const asyncRouterMap = [
       },
       {
         path: 'sell',
-        component: () => import('@/views/contentManagement/projectLeasing'),
+        component: () => import('@/views/contentManagement/sell'),
         name: 'sell',
         meta: {
           title: 'sell',
@@ -204,15 +204,6 @@ export const asyncRouterMap = [
         name: 'careers',
         meta: {
           title: 'careers',
-          roles: ['admin']
-        }
-      },
-      {
-        path: 'industry-updates',
-        component: () => import('@/views/contentManagement/projectLeasing'),
-        name: 'industryUpdates',
-        meta: {
-          title: 'industryUpdates',
           roles: ['admin']
         }
       }
@@ -241,11 +232,34 @@ export const asyncRouterMap = [
     ]
   },
   {
+    path: '/industry-updates',
+    component: Layout,
+    redirect: '/industry-updates/article',
+    alwaysShow: true,
+    name: 'industryUpdates',
+    meta: {
+      title: 'industryUpdates',
+      icon: 'up',
+      roles: ['admin']
+    },
+    children: [
+      {
+        path: 'articles',
+        component: () => import('@/views/industryUpdates'),
+        name: 'industryUpdates',
+        meta: {
+          title: 'articleList',
+          roles: ['admin'] // or you can only set roles in sub nav
+        }
+      }
+    ]
+  },
+  {
     path: '/housing-management',
     component: Layout,
     redirect: 'noredirect',
     alwaysShow: true,
-    name: 'housing-management',
+    name: 'housingManagement',
     meta: {
       title: 'housingMGT',
       icon: 'rental_housing',

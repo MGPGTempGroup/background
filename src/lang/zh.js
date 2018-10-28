@@ -47,7 +47,6 @@ export default {
     form: '表单',
     createArticle: '创建文章',
     editArticle: '编辑文章',
-    articleList: '文章列表',
     errorPages: '错误页面',
     page401: '401',
     page404: '404',
@@ -83,7 +82,8 @@ export default {
     sell: '销售',
     headquarters: '总部',
     industryUpdates: '行业更新',
-    careers: '职业'
+    careers: '职业',
+    articleList: '文章列表'
   },
   navbar: {
     logOut: '退出登录',
@@ -338,6 +338,18 @@ export default {
     searchContacts: '搜索联系人',
     searchAgents: '搜索代理'
   },
+  industryUpdates: {
+    articleList: '文章列表',
+    contentFragment: '内容片段',
+    publisher: '发表者',
+    title: '标题',
+    createArticle: '创建文章',
+    mainPicture: '主图',
+    content: '内容',
+    editArticle: '编辑文章',
+    confirmDeleteTips: '你确定要删除这篇文章吗？'
+  },
+  id: '编号',
   submit: '提交',
   reset: '重置',
   create: '创建',
@@ -352,5 +364,9 @@ export default {
   details: '详情',
   apply: '应用',
   preview: '预览',
-  add: '添加'
+  add: '添加',
+  actions: '操作',
+  createdAt: '创建于',
+  updatedAt: '修改于',
+  publish: '发表'
 }

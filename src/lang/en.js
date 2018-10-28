@@ -47,7 +47,6 @@ export default {
     form: 'Form',
     createArticle: 'Create Article',
     editArticle: 'Edit Article',
-    articleList: 'Article List',
     errorPages: 'Error Pages',
     page401: '401',
     page404: '404',
@@ -64,17 +63,17 @@ export default {
     externalLink: 'External Link',
 
     // extend
-    propertyOwnerMGT: 'Property Owner MGT',
-    propertyOwner: 'Property Owner',
+    propertyOwnerMGT: 'Property owner MGT',
+    propertyOwner: 'Property owner',
     contentMGT: 'Content MGT',
     housingMGT: 'Housing MGT',
-    companyInfoMGT: 'Company Info MGT',
-    rentalHousing: 'Rental Housing',
+    companyInfoMGT: 'Company info MGT',
+    rentalHousing: 'Rental housing',
     customerMGT: 'Customer MGT',
     userComment: 'User Comment',
-    landlordSupport: 'Landlord Support',
-    prospectiveTenants: 'Prospective Tenants',
-    currentTenants: 'Current Tenants',
+    landlordSupport: 'Landlord support',
+    prospectiveTenants: 'Prospective tenants',
+    currentTenants: 'Current tenants',
     areasWeServe: 'Areas we serve',
     projectMarketing: 'Project marketing',
     projectLeasing: 'Project leasing',
@@ -83,7 +82,8 @@ export default {
     sell: 'Sell',
     headquarters: 'Headquarters',
     industryUpdates: 'Industry updates',
-    careers: 'Careers'
+    careers: 'Careers',
+    articleList: 'Article list'
   },
   navbar: {
     logOut: 'Log Out',
@@ -338,6 +338,18 @@ export default {
     searchContacts: 'Search contacts',
     searchAgents: 'Search sgents'
   },
+  industryUpdates: {
+    articleList: 'Article list',
+    contentFragment: 'Content fragment',
+    publisher: 'Publisher',
+    title: 'Title',
+    createArticle: 'Create article',
+    mainPicture: 'Main picture',
+    content: 'Content',
+    editArticle: 'Edit article',
+    confirmDeleteTips: 'Are you sure you want to delete this article?'
+  },
+  id: 'ID',
   submit: 'Submit',
   reset: 'Reset',
   create: 'Create',
@@ -353,5 +365,9 @@ export default {
   details: 'Details',
   apply: 'Apply',
   preview: 'Preview',
-  add: 'Add'
+  add: 'Add',
+  actions: 'Actions',
+  createdAt: 'Created at',
+  updatedAt: 'Updated at',
+  publish: 'Publish'
 }
