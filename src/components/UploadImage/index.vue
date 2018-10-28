@@ -21,7 +21,7 @@
         <span>点击上传</span>
       </li>
     </ul>
-    <el-dialog :visible.sync="visible" :title="$t('preview')" height="600px" >
+    <el-dialog :visible.sync="visible" :title="$t('preview')" height="600px" append-to-body >
       <img :src="currPreviewImgSrc" style="width: 100%;" alt="">
     </el-dialog>
   </div>
