@@ -66,6 +66,7 @@ export default {
     propertyOwnerMGT: '物业业主管理',
     propertyOwner: '物业业主',
     contentMGT: '内容管理',
+    serviceAndContentMGT: '服务 & 内容管理',
     housingMGT: '房屋管理',
     companyInfoMGT: '公司信息管理',
     rentalHousing: '租赁房屋',

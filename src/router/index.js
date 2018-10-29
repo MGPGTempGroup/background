@@ -121,7 +121,7 @@ export const asyncRouterMap = [
     redirect: '/content-management/index',
     alwaysShow: true,
     meta: {
-      title: 'contentMGT',
+      title: 'serviceAndContentMGT',
       icon: 'content_mgt',
       roles: ['admin']
     },

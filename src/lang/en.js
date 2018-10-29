@@ -66,6 +66,7 @@ export default {
     propertyOwnerMGT: 'Property owner MGT',
     propertyOwner: 'Property owner',
     contentMGT: 'Content MGT',
+    serviceAndContentMGT: 'Service & Content MGT',
     housingMGT: 'Housing MGT',
     companyInfoMGT: 'Company info MGT',
     rentalHousing: 'Rental housing',
