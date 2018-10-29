@@ -1,5 +1,5 @@
 <template>
-  <el-card class="rental-housing-filter" body-style="padding: 5px 20px 5px 20px;" shadow="never" >
+  <el-card class="sale-housing-filter" body-style="padding: 5px 20px 5px 20px;" shadow="never" >
     <el-collapse v-model="collapseActiveNames">
       <el-collapse-item name="1">
         <template slot="title">
@@ -8,15 +8,15 @@
             &nbsp;{{ $t('house.conditionalFiltering') }}
           </h2>
         </template>
-        <el-form :inline="false" :model="form" label-position="top" class="rental-housing-filter__form" >
-          <el-row :gutter="48" class="rental-housing-filter__form-row" >
+        <el-form :inline="false" :model="form" label-position="top" class="sale-housing-filter__form" >
+          <el-row :gutter="48" class="sale-housing-filter__form-row" >
             <el-col
               :xs="{ span: 24 }"
               :sm="{ span: 12 }"
               :md="{ span: 12 }"
               :lg="{ span: 12 }"
               :xl="{ span: 8 }"
-              class="rental-housing-filter__form-col" >
+              class="sale-housing-filter__form-col" >
               <!-- 物业类型 -->
               <el-form-item :label="$t('house.propertyTypes')" >
                 <el-select
@@ -118,7 +118,7 @@
               :md="{ span: 12 }"
               :lg="{ span: 12 }"
               :xl="{ span: 8 }"
-              class="rental-housing-filter__form-col" >
+              class="sale-housing-filter__form-col" >
               <!-- 目前状态 -->
               <el-form-item :label="$t('house.currState')" >
                 <el-select v-model="form.currState" :placeholder="$t('house.currState')" multiple>
@@ -163,7 +163,7 @@
               :md="{ span: 24 }"
               :lg="{ span: 24 }"
               :xl="{ span: 24 }"
-              class="rental-housing-filter__form-col rental-housing-filter__actions" >
+              class="sale-housing-filter__form-col sale-housing-filter__actions" >
               <el-button type="info">{{ $t('house.reset') }}</el-button>
               <el-button type="primary">{{ $t('house.query') }}</el-button>
             </el-col>
@@ -176,19 +176,14 @@
 
 <script>
 export default {
-  name: 'RentalHousingFilter',
-  props: {
-    form: {
-      type: Object,
-      required: true
-    }
-  },
+  name: 'SaleHousingFilter',
   data() {
     return {
       collapseActiveNames: [],
       propertyTypes: [],
       regions: [],
-      currStateOpts: []
+      currStateOpts: [],
+      form: {}
     }
   },
   computed: {
@@ -250,7 +245,7 @@ export default {
 </script>
 
 <style scoped lang="scss" >
-  .rental-housing-filter {
+  .sale-housing-filter {
     &__form {}
     &__form-row {
       margin-top: 10px;

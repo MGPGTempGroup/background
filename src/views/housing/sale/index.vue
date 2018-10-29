@@ -1,17 +1,17 @@
 <template>
   <div class="house-sale-container" >
-    <rental-housing-filter :form.sync="filterForm" />
+    <sale-housing-filter />
     <el-card style="margin-top: 20px;" shadow="never" >
-      <div slot="header" class="rental-housing__list-header" >
+      <div slot="header" class="house-sale__list-header" >
         <h2 style="margin: 0;" >
           <i class="fa fa-list" />
-          &nbsp;{{ $t('house.rentalHousingList') }}
-          <!-- <el-button type="primary" style="float: right; margin-top: -3px;">
-            <i class="fa fa-search" />
-          </el-button> -->
+          &nbsp;{{ $t('house.houseList') }}
         </h2>
+        <el-button type="primary" class="house-sale__add-btn" @click="toggleCreateSaleHousingDialogVisible({ visible: true })" >
+          {{ $t('create') }}
+        </el-button>
       </div>
-      <el-table :data="rentalHousingList" >
+      <el-table :data="saleHousingList" >
         <el-table-column :label="$t('house.id')" prop="id" min-width="35px" />
         <el-table-column :label="$t('house.aState')" prop="state" min-width="50px" />
         <el-table-column :label="$t('house.suburb')" prop="suburb" />
@@ -168,22 +168,27 @@
       :title="$t('house.edit')"
       :visible.sync="editDialogVisible"
       width="65%">
-      <house-sale-edit-form />
+      <sale-house-edit-form />
     </el-dialog>
+
+    <!-- Create sale house data -->
+    <create-sale-housing-dialog />
 
   </div>
 </template>
 
 <script>
 
-import HouseSaleFilter from './filter'
-import HouseSaleEditForm from './edit'
+import SaleHousingFilter from './filter'
+import SaleHouseEditForm from './edit'
+import CreateSaleHousingDialog from './create'
 import 'font-awesome/css/font-awesome.min.css'
-import { mapState } from 'vuex'
+import { createNamespacedHelpers } from 'vuex'
+const { mapState, mapMutations } = createNamespacedHelpers('housing')
 
 export default {
   name: 'HouseSale',
-  components: { HouseSaleFilter, HouseSaleEditForm },
+  components: { SaleHousingFilter, SaleHouseEditForm, CreateSaleHousingDialog },
   data() {
     return {
       detailDialogVisible: false,
@@ -209,8 +214,8 @@ export default {
   computed: {
     ...mapState({
       // 租赁房屋列表数据
-      rentalHousingList: function(state) {
-        return state.housing.rentalHousingList.map(item => ({
+      saleHousingList: function(state) {
+        return state.saleHousingList.map(item => ({
           ...item,
           currState: this.$t(`house.${item.currState}`)
         }))
@@ -219,6 +224,9 @@ export default {
   },
   created() {},
   methods: {
+    ...mapMutations([
+      'toggleCreateSaleHousingDialogVisible'
+    ]),
     handleDetailsClick(rowData) {
       this.detailDialogVisible = true
     },
@@ -237,6 +245,12 @@ export default {
     &__list-header {
       position: relative;
       padding: 1px 0px; // margin collapsing
+    }
+    &__add-btn {
+      position: absolute;
+      right: 0px;
+      top: 50%;
+      transform: translateY(-50%);
     }
   }
   .house-sale-details {

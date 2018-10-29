@@ -259,6 +259,7 @@ export default {
     uploadImgTip: 'Click here to upload pictures.',
     stateSelectionPlaceholder: 'Please select the current state',
     createRentalHousingData: 'Create rental housing data',
+    createSaleHousingData: 'Create sale housing data',
     housingPicture: 'Housing picture'
   },
   address: {
