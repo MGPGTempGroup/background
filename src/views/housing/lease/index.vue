@@ -5,7 +5,7 @@
       <div slot="header" class="rental-housing__list-header" >
         <h2 style="margin: 0;" >
           <i class="fa fa-list" />
-          &nbsp;{{ $t('house.rentalHousingList') }}
+          &nbsp;{{ $t('house.houseList') }}
           <!-- <el-button type="primary" style="float: right; margin-top: -3px;">
             <i class="fa fa-search" />
           </el-button> -->
@@ -176,8 +176,8 @@
 
 <script>
 
-import rentalHousingFilter from './rental-housing-filter'
-import rentalHousingEditForm from './rental-housing-edit'
+import rentalHousingFilter from './filter'
+import rentalHousingEditForm from './edit'
 import 'font-awesome/css/font-awesome.min.css'
 import { mapState } from 'vuex'
 
