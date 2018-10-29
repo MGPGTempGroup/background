@@ -87,7 +87,8 @@ export default {
     industryUpdates: '行业更新',
     careers: '职业',
     articleList: '文章列表',
-    saleHouse: '房屋买卖'
+    saleHouse: '出售房屋',
+    members: '成员'
   },
   navbar: {
     logOut: '退出登录',
@@ -357,6 +358,16 @@ export default {
     editArticle: '编辑文章',
     confirmDeleteTips: '你确定要删除这篇文章吗？'
   },
+  company: {
+    memberList: '成员列表',
+    branch: '部门',
+    position: '职位',
+    description: '介绍',
+    googlePlusHomePage: 'google+主页',
+    linkinHomePage: '领英主页',
+    createMembersData: '创建成员数据',
+    department: '部门'
+  },
   id: '编号',
   submit: '提交',
   reset: '重置',
@@ -376,5 +387,9 @@ export default {
   actions: '操作',
   createdAt: '创建于',
   updatedAt: '修改于',
-  publish: '发表'
+  publish: '发表',
+  phone: '手机号码',
+  email: '邮箱',
+  name: '名称',
+  uploadPhoto: '上传照片'
 }

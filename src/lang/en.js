@@ -86,7 +86,8 @@ export default {
     industryUpdates: 'Industry updates',
     careers: 'Careers',
     articleList: 'Article list',
-    saleHouse: '房屋买卖'
+    saleHouse: 'Sale house',
+    members: 'Members'
   },
   navbar: {
     logOut: 'Log Out',
@@ -356,6 +357,16 @@ export default {
     editArticle: 'Edit article',
     confirmDeleteTips: 'Are you sure you want to delete this article?'
   },
+  company: {
+    memberList: 'Member list',
+    position: 'Position',
+    branch: 'Branch',
+    description: 'Description',
+    googlePlusHomePage: 'google+ homepage',
+    linkinHomePage: 'linkin homepage',
+    createMembersData: 'Create members data',
+    department: 'Department'
+  },
   id: 'ID',
   submit: 'Submit',
   reset: 'Reset',
@@ -376,5 +387,9 @@ export default {
   actions: 'Actions',
   createdAt: 'Created at',
   updatedAt: 'Updated at',
-  publish: 'Publish'
+  publish: 'Publish',
+  phone: 'Phone',
+  email: 'Email',
+  name: 'Name',
+  uploadPhoto: 'Upload photo'
 }

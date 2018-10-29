@@ -10,6 +10,7 @@ import propertyOwner from './modules/propertyOwner'
 import userComment from './modules/userComment'
 import content from './modules/content'
 import industryUpdates from './modules/industryUpdates'
+import company from './modules/company'
 import getters from './getters'
 
 Vue.use(Vuex)
@@ -25,6 +26,7 @@ const store = new Vuex.Store({
     propertyOwner,
     content,
     userComment,
+    company,
     industryUpdates
   },
   getters

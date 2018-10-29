@@ -221,11 +221,11 @@ export const asyncRouterMap = [
     },
     children: [
       {
-        path: 'page',
-        component: () => import('@/views/permission/page'),
-        name: 'PagePermission',
+        path: 'members',
+        component: () => import('@/views/company/members/index'),
+        name: 'members',
         meta: {
-          title: 'pagePermission',
+          title: 'members',
           roles: ['admin'] // or you can only set roles in sub nav
         }
       }
