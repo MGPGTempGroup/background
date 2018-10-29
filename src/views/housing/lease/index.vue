@@ -6,10 +6,10 @@
         <h2 style="margin: 0;" >
           <i class="fa fa-list" />
           &nbsp;{{ $t('house.houseList') }}
-          <!-- <el-button type="primary" style="float: right; margin-top: -3px;">
-            <i class="fa fa-search" />
-          </el-button> -->
         </h2>
+        <el-button type="primary" class="rental-housing__add-btn" @click="toggleCreateRentalHousingDialogVisible({ visible: true })" >
+          {{ $t('create') }}
+        </el-button>
       </div>
       <el-table :data="rentalHousingList" >
         <el-table-column :label="$t('house.id')" prop="id" min-width="35px" />
@@ -171,6 +171,9 @@
       <rental-housing-edit-form />
     </el-dialog>
 
+    <!-- Create -->
+    <create-rental-housing-data />
+
   </div>
 </template>
 
@@ -178,12 +181,14 @@
 
 import rentalHousingFilter from './filter'
 import rentalHousingEditForm from './edit'
+import createRentalHousingData from './create'
 import 'font-awesome/css/font-awesome.min.css'
-import { mapState } from 'vuex'
+import { createNamespacedHelpers } from 'vuex'
+const { mapState, mapMutations } = createNamespacedHelpers('housing')
 
 export default {
   name: 'RentalHousing',
-  components: { rentalHousingFilter, rentalHousingEditForm },
+  components: { rentalHousingFilter, rentalHousingEditForm, createRentalHousingData },
   data() {
     return {
       detailDialogVisible: false,
@@ -210,7 +215,7 @@ export default {
     ...mapState({
       // 租赁房屋列表数据
       rentalHousingList: function(state) {
-        return state.housing.rentalHousingList.map(item => ({
+        return state.rentalHousingList.map(item => ({
           ...item,
           currState: this.$t(`house.${item.currState}`)
         }))
@@ -219,6 +224,9 @@ export default {
   },
   created() {},
   methods: {
+    ...mapMutations([
+      'toggleCreateRentalHousingDialogVisible'
+    ]),
     handleDetailsClick(rowData) {
       this.detailDialogVisible = true
     },
@@ -238,19 +246,25 @@ export default {
       position: relative;
       padding: 1px 0px; // margin collapsing
     }
-  }
-  .rental-housing-details {
-    &__tab-content {
-      padding-left: 10px;
+    &__add-btn {
+      position: absolute;
+      right: 0px;
+      top: 50%;
+      transform: translateY(-50%);
     }
-    &__tab-title {
-      margin: 10px 0px;
-      font-size: 17px;
-    }
-    &__tab-content-inner {}
-    &__basic-info {}
-    &__photo-and-video {
-      margin-top: 18px;
+    &-details {
+      &__tab-content {
+        padding-left: 10px;
+      }
+      &__tab-title {
+        margin: 10px 0px;
+        font-size: 17px;
+      }
+      &__tab-content-inner {}
+      &__basic-info {}
+      &__photo-and-video {
+        margin-top: 18px;
+      }
     }
   }
 </style>

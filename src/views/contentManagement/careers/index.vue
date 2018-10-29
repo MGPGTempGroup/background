@@ -2,7 +2,7 @@
   <div class="content">
     <h2>{{ $t('contentMGT.editImage') }}</h2>
     <div class="content__upload-image-wrapper" >
-      <upload-image :image-list="imageList" />
+      <upload-image :image-list.sync="imageList" />
     </div>
     <div class="content__select-contacts-wrapper" >
       <select-contacts />
@@ -28,7 +28,7 @@ import SelectContacts from '../selectContacts'
 import { createNamespacedHelpers } from 'vuex'
 const { mapMutations } = createNamespacedHelpers('content')
 export default {
-  name: 'Sell',
+  name: 'Careers',
   components: { UploadImage, Tinymce, HistoricalContentDialog, SelectContacts },
   data() {
     return {

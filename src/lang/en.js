@@ -69,6 +69,8 @@ export default {
     housingMGT: 'Housing MGT',
     companyInfoMGT: 'Company info MGT',
     rentalHousing: 'Rental housing',
+    lease: 'Lease',
+    sale: 'Sale',
     customerMGT: 'Customer MGT',
     userComment: 'User Comment',
     landlordSupport: 'Landlord support',
@@ -79,11 +81,11 @@ export default {
     projectLeasing: 'Project leasing',
     pastSuccess: 'Past success',
     commercial: 'Commercial',
-    sell: 'Sell',
     headquarters: 'Headquarters',
     industryUpdates: 'Industry updates',
     careers: 'Careers',
-    articleList: 'Article list'
+    articleList: 'Article list',
+    saleHouse: '房屋买卖'
   },
   navbar: {
     logOut: 'Log Out',
@@ -198,6 +200,7 @@ export default {
     details: 'Details',
     actions: 'Actions',
     rentalHousingList: 'Rental housing list',
+    houseList: 'List of houses',
     streetName: 'Street Name',
     streetCode: 'Street Code',
     postCode: 'Post Code',
@@ -254,7 +257,9 @@ export default {
     address: 'Address',
     update: 'Update',
     uploadImgTip: 'Click here to upload pictures.',
-    stateSelectionPlaceholder: 'Please select the current state'
+    stateSelectionPlaceholder: 'Please select the current state',
+    createRentalHousingData: 'Create rental housing data',
+    housingPicture: 'Housing picture'
   },
   address: {
     australia: 'Australia',

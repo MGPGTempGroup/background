@@ -200,7 +200,7 @@ export const asyncRouterMap = [
       },
       {
         path: '/careers',
-        component: () => import('@/views/contentManagement/projectLeasing'),
+        component: () => import('@/views/contentManagement/careers'),
         name: 'careers',
         meta: {
           title: 'careers',
@@ -267,11 +267,20 @@ export const asyncRouterMap = [
     },
     children: [
       {
-        path: 'rental-housing',
-        component: () => import('@/views/housing/rental-housing'),
-        name: 'rental-housing',
+        path: 'lease',
+        component: () => import('@/views/housing/lease'),
+        name: 'house-lease',
         meta: {
-          title: 'rentalHousing',
+          title: 'lease',
+          roles: ['admin'] // or you can only set roles in sub nav
+        }
+      },
+      {
+        path: 'sale-house',
+        component: () => import('@/views/housing/sale'),
+        name: 'sale-house',
+        meta: {
+          title: 'sale',
           roles: ['admin'] // or you can only set roles in sub nav
         }
       }

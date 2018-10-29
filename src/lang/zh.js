@@ -69,6 +69,8 @@ export default {
     housingMGT: '房屋管理',
     companyInfoMGT: '公司信息管理',
     rentalHousing: '租赁房屋',
+    lease: '租赁',
+    sale: '出售',
     customerMGT: '客户管理',
     userComment: '用户留言',
     landlordSupport: '房东支持',
@@ -83,7 +85,8 @@ export default {
     headquarters: '总部',
     industryUpdates: '行业更新',
     careers: '职业',
-    articleList: '文章列表'
+    articleList: '文章列表',
+    saleHouse: '房屋买卖'
   },
   navbar: {
     logOut: '退出登录',
@@ -199,6 +202,7 @@ export default {
     details: '详情',
     actions: '操作',
     rentalHousingList: '租赁房屋列表',
+    houseList: '房屋列表',
     streetName: '街道名称',
     streetCode: '街道编码',
     postCode: '邮编',
@@ -254,7 +258,9 @@ export default {
     address: '地址',
     update: '更新',
     uploadImgTip: '点击此处上传照片',
-    stateSelectionPlaceholder: '请选择当前状态'
+    stateSelectionPlaceholder: '请选择当前状态',
+    createRentalHousingData: '创建租赁房屋数据',
+    housingPicture: '房屋图片'
   },
   address: {
     australia: '澳大利亚',
