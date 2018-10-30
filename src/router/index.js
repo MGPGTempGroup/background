@@ -90,7 +90,7 @@ export const asyncRouterMap = [
     redirect: '/customer-management/index',
     alwaysShow: true,
     meta: {
-      title: 'customerMGT',
+      title: 'customer',
       icon: 'user',
       roles: ['admin']
     },
@@ -121,7 +121,7 @@ export const asyncRouterMap = [
     redirect: '/company-info-management/index',
     alwaysShow: true,
     meta: {
-      title: 'companyInfoMGT',
+      title: 'companyInfo',
       icon: 'company',
       roles: ['admin']
     },
@@ -153,7 +153,7 @@ export const asyncRouterMap = [
     alwaysShow: true,
     name: 'housingManagement',
     meta: {
-      title: 'housingMGT',
+      title: 'housing',
       icon: 'rental_housing',
       roles: ['admin']
     },
@@ -184,7 +184,7 @@ export const asyncRouterMap = [
     redirect: '/content-management/index',
     alwaysShow: true,
     meta: {
-      title: 'serviceAndContentMGT',
+      title: 'serviceAndContent',
       icon: 'content_mgt',
       roles: ['admin']
     },
