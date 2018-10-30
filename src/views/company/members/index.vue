@@ -54,8 +54,8 @@
           align="center"
           min-width="60">
           <template slot-scope="scope" >
-            <el-button type="primary">{{ $t('edit') }}</el-button>
-            <el-button type="danger">{{ $t('delete') }}</el-button>
+            <el-button type="primary" @click="toggleEditMembersDialogVisible({ visible: true })" >{{ $t('edit') }}</el-button>
+            <el-button type="danger" @click="handleMemberDelete" >{{ $t('delete') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -72,17 +72,20 @@
     </el-card>
     <!-- Create member -->
     <create-members-dialog />
+    <!-- Edit member -->
+    <edit-members-dialog />
   </div>
 </template>
 
 <script>
 import CreateMembersDialog from './create'
+import EditMembersDialog from './edit'
 import { createNamespacedHelpers } from 'vuex'
 const { mapState, mapMutations } = createNamespacedHelpers('company')
 export default {
   name: 'CompanyMembersPage',
   components: {
-    CreateMembersDialog
+    CreateMembersDialog, EditMembersDialog
   },
   data() {
     return {
@@ -96,8 +99,16 @@ export default {
   },
   methods: {
     ...mapMutations([
-      'toggleCreateMembersDialogVisible'
+      'toggleCreateMembersDialogVisible',
+      'toggleEditMembersDialogVisible'
     ]),
+    handleMemberDelete() {
+      this.$confirm(this.$t('company.confirmDeleteMemberTips'), this.$t('tips'), {
+        distinguishCancelAndClose: true,
+        confirmButtonText: this.$t('confirm'),
+        cancelButtonText: this.$t('cancel')
+      }).then(() => {}).catch(action => { })
+    },
     handlePaginatorSizeChange() {},
     handlePaginatorChange() {}
   }

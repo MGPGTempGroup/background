@@ -365,7 +365,9 @@ export default {
     googlePlusHomePage: 'google+ homepage',
     linkinHomePage: 'linkin homepage',
     createMembersData: 'Create members data',
-    department: 'Department'
+    editMembersData: 'Edit members data',
+    department: 'Department',
+    confirmDeleteMemberTips: 'Are you sure you want to delete the member data?'
   },
   id: 'ID',
   submit: 'Submit',

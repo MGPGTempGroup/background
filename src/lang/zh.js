@@ -366,7 +366,9 @@ export default {
     googlePlusHomePage: 'google+主页',
     linkinHomePage: '领英主页',
     createMembersData: '创建成员数据',
-    department: '部门'
+    editMembersData: '编辑成员数据',
+    department: '部门',
+    confirmDeleteMemberTips: '您确定要删除此成员的数据吗？'
   },
   id: '编号',
   submit: '提交',
