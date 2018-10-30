@@ -116,6 +116,69 @@ export const asyncRouterMap = [
     ]
   },
   {
+    path: '/company-info-management',
+    component: Layout,
+    redirect: '/company-info-management/index',
+    alwaysShow: true,
+    meta: {
+      title: 'companyInfoMGT',
+      icon: 'company',
+      roles: ['admin']
+    },
+    children: [
+      {
+        path: 'information',
+        component: () => import('@/views/company/information'),
+        name: 'information',
+        meta: {
+          title: 'information',
+          roles: ['admin']
+        }
+      },
+      {
+        path: 'members',
+        component: () => import('@/views/company/members/index'),
+        name: 'members',
+        meta: {
+          title: 'members',
+          roles: ['admin'] // or you can only set roles in sub nav
+        }
+      }
+    ]
+  },
+  {
+    path: '/housing-management',
+    component: Layout,
+    redirect: 'noredirect',
+    alwaysShow: true,
+    name: 'housingManagement',
+    meta: {
+      title: 'housingMGT',
+      icon: 'rental_housing',
+      roles: ['admin']
+    },
+    children: [
+      {
+        path: 'lease',
+        component: () => import('@/views/housing/lease'),
+        name: 'house-lease',
+        meta: {
+          title: 'lease',
+          roles: ['admin'] // or you can only set roles in sub nav
+        }
+      },
+      {
+        path: 'sale-house',
+        component: () => import('@/views/housing/sale'),
+        name: 'sale-house',
+        meta: {
+          title: 'sale',
+          roles: ['admin'] // or you can only set roles in sub nav
+        }
+      }
+    ]
+  },
+  {
     path: '/content-management',
     component: Layout,
     redirect: '/content-management/index',
@@ -210,37 +273,6 @@ export const asyncRouterMap = [
     ]
   },
   {
-    path: '/company-info-management',
-    component: Layout,
-    redirect: '/company-info-management/index',
-    alwaysShow: true,
-    meta: {
-      title: 'companyInfoMGT',
-      icon: 'company',
-      roles: ['admin']
-    },
-    children: [
-      {
-        path: 'members',
-        component: () => import('@/views/company/members/index'),
-        name: 'members',
-        meta: {
-          title: 'members',
-          roles: ['admin'] // or you can only set roles in sub nav
-        }
-      },
-      {
-        path: 'information',
-        component: () => import('@/views/company/information'),
-        name: 'information',
-        meta: {
-          title: 'information',
-          roles: ['admin']
-        }
-      }
-    ]
-  },
-  {
     path: '/industry-updates',
     component: Layout,
     redirect: '/industry-updates/article',
@@ -258,38 +290,6 @@ export const asyncRouterMap = [
         name: 'industryUpdates',
         meta: {
           title: 'articleList',
-          roles: ['admin'] // or you can only set roles in sub nav
-        }
-      }
-    ]
-  },
-  {
-    path: '/housing-management',
-    component: Layout,
-    redirect: 'noredirect',
-    alwaysShow: true,
-    name: 'housingManagement',
-    meta: {
-      title: 'housingMGT',
-      icon: 'rental_housing',
-      roles: ['admin']
-    },
-    children: [
-      {
-        path: 'lease',
-        component: () => import('@/views/housing/lease'),
-        name: 'house-lease',
-        meta: {
-          title: 'lease',
-          roles: ['admin'] // or you can only set roles in sub nav
-        }
-      },
-      {
-        path: 'sale-house',
-        component: () => import('@/views/housing/sale'),
-        name: 'sale-house',
-        meta: {
-          title: 'sale',
           roles: ['admin'] // or you can only set roles in sub nav
         }
       }

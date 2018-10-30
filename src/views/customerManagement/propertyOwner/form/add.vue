@@ -126,23 +126,23 @@ export default {
     searchByAgent(queryString, callback) {},
     setOpts() {
       this.addressOpts = [{
-        label: this.$t('address.australia'),
+        label: this.$t('addressOpts.australia'),
         value: 'australia',
         children: [
           {
-            label: this.$t('address.vic'),
+            label: this.$t('addressOpts.vic'),
             value: 'vic',
             children: [
               {
-                label: this.$t('address.melbourne'),
+                label: this.$t('addressOpts.melbourne'),
                 value: 'melbourne',
                 children: [
                   {
-                    label: this.$t('address.mooneePonds'),
+                    label: this.$t('addressOpts.mooneePonds'),
                     value: 'mooneePonds',
                     children: [
                       {
-                        label: this.$t('address.margaretStreet'),
+                        label: this.$t('addressOpts.margaretStreet'),
                         value: 'Margaret Street'
                       }
                     ]

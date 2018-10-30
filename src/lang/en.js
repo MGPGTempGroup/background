@@ -82,6 +82,7 @@ export default {
     projectLeasing: 'Project leasing',
     pastSuccess: 'Past success',
     commercial: 'Commercial',
+    sell: 'Sell',
     headquarters: 'Headquarters',
     industryUpdates: 'Industry updates',
     careers: 'Careers',
@@ -265,7 +266,7 @@ export default {
     createSaleHousingData: 'Create sale housing data',
     housingPicture: 'Housing picture'
   },
-  address: {
+  addressList: {
     australia: 'Australia',
     melbourne: 'Aelbourne',
     vic: 'Vic',
@@ -363,15 +364,22 @@ export default {
     position: 'Position',
     branch: 'Branch',
     description: 'Description',
-    googlePlusHomePage: 'google+ homepage',
-    linkinHomePage: 'linkin homepage',
+    googlePlusHomePage: 'Google+ homepage',
+    linkinHomePage: 'Linkin homepage',
+    youtubeHomePaeg: 'Youtube homepage',
+    facebookHomePage: 'Facebook homepage',
+    twitterHomePage: 'Twitter homepage',
+    instagram: 'Instagram homepage',
     createMembersData: 'Create members data',
     editMembersData: 'Edit members data',
     department: 'Department',
     confirmDeleteMemberTips: 'Are you sure you want to delete the member data?',
-    conditionalFiltering: 'Conditional filtering'
+    conditionalFiltering: 'Conditional filtering',
+    companyInformationEditor: 'Company information editor',
+    socialNetworkingSiteHomepage: 'Social networking site Homepage',
+    socialNetworkingSiteHomepageFormTips: 'If you do not fill in the input box, the front desk will not be displayed.',
+    companyContactInfo: 'Company contact information'
   },
-  information: {},
   id: 'ID',
   submit: 'Submit',
   reset: 'Reset',
@@ -396,5 +404,17 @@ export default {
   phone: 'Phone',
   email: 'Email',
   name: 'Name',
-  uploadPhoto: 'Upload photo'
+  uploadPhoto: 'Upload photo',
+  telephone: 'Telephone',
+  facsimile: 'Facsimile',
+  address: 'Address',
+  openingHours: 'Opening hours',
+  monday: 'Monday',
+  tuesday: 'Tuesday',
+  wednesday: 'Wednesday',
+  thursday: 'Thursday',
+  friday: 'Friday',
+  saturday: 'Saturday',
+  sunday: 'Sunday',
+  postCode: 'Post code'
 }

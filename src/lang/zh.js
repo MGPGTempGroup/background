@@ -89,7 +89,8 @@ export default {
     articleList: '文章列表',
     saleHouse: '出售房屋',
     members: '成员',
-    information: '信息'
+    information: '信息',
+    companyContactInfo: '公司联系信息'
   },
   navbar: {
     logOut: '退出登录',
@@ -266,7 +267,7 @@ export default {
     createSaleHousingData: '创建销售房屋数据',
     housingPicture: '房屋图片'
   },
-  address: {
+  addressList: {
     australia: '澳大利亚',
     melbourne: '墨尔本',
     vic: '维多利亚',
@@ -364,13 +365,21 @@ export default {
     branch: '部门',
     position: '职位',
     description: '介绍',
-    googlePlusHomePage: 'google+主页',
-    linkinHomePage: '领英主页',
+    googlePlusHomePage: 'Google+ 主页',
+    linkinHomePage: 'Linkin 主页',
+    youtubeHomePaeg: 'Youtube 主页',
+    facebookHomePage: 'Facebook 主页',
+    twitterHomePage: 'Twitter 主页',
+    instagram: 'Instagram 主页',
     createMembersData: '创建成员数据',
     editMembersData: '编辑成员数据',
     department: '部门',
     confirmDeleteMemberTips: '您确定要删除此成员的数据吗？',
-    conditionalFiltering: '条件筛选'
+    conditionalFiltering: '条件筛选',
+    companyInformationEditor: '公司信息编辑',
+    socialNetworkingSiteHomepage: '社交网站主页',
+    socialNetworkingSiteHomepageFormTips: '如果您不填写输入框，网站前台将不显示。',
+    companyContactInfo: '公司联系信息'
   },
   id: '编号',
   submit: '提交',
@@ -395,5 +404,17 @@ export default {
   phone: '手机号码',
   email: '邮箱',
   name: '名称',
-  uploadPhoto: '上传照片'
+  uploadPhoto: '上传照片',
+  telephone: '电话',
+  facsimile: '传真',
+  address: '地址',
+  openingHours: '营业时间',
+  monday: '周一',
+  tuesday: '周二',
+  wednesday: '周三',
+  thursday: '周四',
+  friday: '周五',
+  saturday: '周六',
+  sunday: '周日',
+  postCode: '邮政编码'
 }
