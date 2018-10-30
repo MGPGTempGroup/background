@@ -88,7 +88,8 @@ export default {
     careers: '职业',
     articleList: '文章列表',
     saleHouse: '出售房屋',
-    members: '成员'
+    members: '成员',
+    information: '信息'
   },
   navbar: {
     logOut: '退出登录',
@@ -368,7 +369,8 @@ export default {
     createMembersData: '创建成员数据',
     editMembersData: '编辑成员数据',
     department: '部门',
-    confirmDeleteMemberTips: '您确定要删除此成员的数据吗？'
+    confirmDeleteMemberTips: '您确定要删除此成员的数据吗？',
+    conditionalFiltering: '条件筛选'
   },
   id: '编号',
   submit: '提交',

@@ -87,7 +87,8 @@ export default {
     careers: 'Careers',
     articleList: 'Article list',
     saleHouse: 'Sale house',
-    members: 'Members'
+    members: 'Members',
+    information: 'Information'
   },
   navbar: {
     logOut: 'Log Out',
@@ -367,8 +368,10 @@ export default {
     createMembersData: 'Create members data',
     editMembersData: 'Edit members data',
     department: 'Department',
-    confirmDeleteMemberTips: 'Are you sure you want to delete the member data?'
+    confirmDeleteMemberTips: 'Are you sure you want to delete the member data?',
+    conditionalFiltering: 'Conditional filtering'
   },
+  information: {},
   id: 'ID',
   submit: 'Submit',
   reset: 'Reset',

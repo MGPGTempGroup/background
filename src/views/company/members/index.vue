@@ -1,6 +1,7 @@
 <template>
   <div class="company-members" >
-    <el-card shadow="never" >
+    <filter-form />
+    <el-card shadow="never" style="margin-top: 20px;" >
       <div slot="header" class="company-members__list-header" >
         <h2 style="margin: 0px;" >{{ $t('company.memberList') }}</h2>
         <el-button type="primary" class="company-members__create-btn" @click="toggleCreateMembersDialogVisible({ visible: true })" >
@@ -80,12 +81,13 @@
 <script>
 import CreateMembersDialog from './create'
 import EditMembersDialog from './edit'
+import FilterForm from './filter'
 import { createNamespacedHelpers } from 'vuex'
 const { mapState, mapMutations } = createNamespacedHelpers('company')
 export default {
   name: 'CompanyMembersPage',
   components: {
-    CreateMembersDialog, EditMembersDialog
+    CreateMembersDialog, EditMembersDialog, FilterForm
   },
   data() {
     return {
