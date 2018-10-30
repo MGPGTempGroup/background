@@ -18,7 +18,10 @@
       </li>
       <li class="upload-image__btn" >
         <input class="upload-image__file-input" type="file" multiple @change="onFileChange" >
-        <span>点击上传</span>
+        <div class="upload-image__btn-text" >
+          <i class="fa fa-cloud-upload" style="font-size: 20px;" />
+          <div style="margin-top: 5px;" >点击上传</div>
+        </div>
       </li>
     </ul>
     <el-dialog :visible.sync="visible" :title="$t('preview')" height="600px" append-to-body >
@@ -148,19 +151,25 @@ export default {
       vertical-align: top;
       justify-content: center;
       align-items: center;
+      flex-wrap: wrap;
       position: relative;
       width: 200px;
       height: 120px;
       font-size: 14px;
+      letter-spacing: .5px;
       color: #666666;
       background-color: white;
-      box-shadow: 0px 0px 8px #DDDDDD;
+      border: 1px dashed #ccc;
       border-radius: 5px;
       transform: translateY(0px);
       transition: all .3s;
+      &-text {
+        text-align: center;
+      }
       &:hover {
         transform: translateY(-3px);
-        box-shadow: 0px 0px 10px #CCCCCC;
+        box-shadow: 0px 0px 15px #EEEEEE;
+        border-color: #1E90FD;
       }
     }
     &__file-input {
