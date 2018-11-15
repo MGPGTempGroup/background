@@ -2,91 +2,69 @@
   <div class="property-owners-add" >
     <!-- 基础表单 -->
     <el-form
+      ref="form"
       :model="dataCreationForm"
+      :rules="formRules"
       label-position="top" >
       <el-row :gutter="36" >
         <el-col v-bind="formItemLayoutProps" >
-          <el-form-item :label="$t('owner.surname')" >
+          <el-form-item :label="$t('owner.surname')" prop="surname" >
             <el-input v-model="dataCreationForm.surname" />
           </el-form-item>
         </el-col>
         <el-col v-bind="formItemLayoutProps" >
-          <el-form-item :label="$t('owner.name')" >
+          <el-form-item :label="$t('owner.name')" prop="name" >
             <el-input v-model="dataCreationForm.name" />
           </el-form-item>
         </el-col>
         <el-col v-bind="formItemLayoutProps" >
-          <el-form-item :label="$t('owner.email')" >
+          <el-form-item :label="$t('owner.email')" prop="email" >
             <el-input v-model="dataCreationForm.email" />
           </el-form-item>
         </el-col>
         <el-col v-bind="formItemLayoutProps" >
-          <el-form-item :label="$t('owner.wechat')" >
+          <el-form-item :label="$t('owner.phone')" prop="phone" >
+            <el-input v-model="dataCreationForm.phone" />
+          </el-form-item>
+        </el-col>
+        <el-col v-bind="formItemLayoutProps" >
+          <el-form-item :label="$t('owner.wechat')" prop="wechat" >
             <el-input v-model="dataCreationForm.wechat" />
           </el-form-item>
         </el-col>
         <el-col v-bind="formItemLayoutProps" >
-          <el-form-item :label="$t('owner.idCardNum')" >
-            <el-input v-model="dataCreationForm.idCardNum" />
+          <el-form-item :label="$t('owner.idCardNum')" prop="id_card" >
+            <el-input v-model="dataCreationForm.id_card" />
           </el-form-item>
         </el-col>
         <el-col v-bind="formItemLayoutProps" >
-          <el-form-item :label="$t('owner.address')" >
+          <el-form-item :label="$t('owner.address')" prop="address" >
             <el-cascader
               :options="addressOpts"
               v-model="dataCreationForm.address"
-              expand-trigger="hover"
-              @change="() => null"/>
+              change-on-select
+              expand-trigger="hover" />
           </el-form-item>
         </el-col>
         <el-col v-bind="formItemLayoutProps" >
-          <el-form-item :label="$t('owner.identity')" >
-            <el-select v-model="dataCreationForm.identity" multiple >
+          <el-form-item :label="$t('owner.identity')" prop="identity" >
+            <el-select v-model="dataCreationForm.identity_id" >
               <el-option
                 v-for="(item, index) in availableIdentity"
                 :key="index"
-                :label="$t(`owner.${item.value}`)"
-                :value="item.value"
-              />
+                :label="$t(`owner.${item.label}`)"
+                :value="item.value" />
             </el-select>
           </el-form-item>
         </el-col>
-        <el-col v-bind="formItemLayoutProps" >
-          <el-form-item :label="$t('owner.agent')" >
-            <el-select
-              v-model="dataCreationForm.agent"
-              :remote-method="searchByAgent"
-              multiple
-              filterable
-              remote
-              reserve-keyword />
-          </el-form-item>
-        </el-col>
       </el-row>
-      <!-- 上传控件 -->
-      <div class="property-owners-add__form-upload" >
-        <p class="property-owners-add__form-upload-title" >头像上传</p>
-        <image-file-upload-control
-          class="property-owners-add__form-upload-btn"
-          @change="handleImageFileUploadControlChange" />
-      </div>
-      <!-- 头像剪裁 -->
-      <image-cropper
-        v-show="imagecropperShow"
-        :width="300"
-        :height="300"
-        :key="0"
-        url="https://httpbin.org/post"
-        lang-type="en"
-        @close="imagecropperShow = false"
-        @crop-upload-success="cropSuccess"/>
       <!-- 提交相关按钮 -->
       <div class="property-owners-add__form-actions" >
-        <el-button type="info">
+        <el-button type="info" @click="hendleReset" >
           {{ $t('reset') }}
         </el-button>
         &nbsp;
-        <el-button type="primary">
+        <el-button type="primary" @click="handleSubmit" >
           {{ $t('create') }}
         </el-button>
       </div>
@@ -95,20 +73,76 @@
 </template>
 
 <script>
-import ImageFileUploadControl from '@/components/ImageFileUploadControl'
-import ImageCropper from '@/components/ImageCropper'
+import { validateEmail, requiredWithoutAll } from '@/utils/validate'
 import { createNamespacedHelpers } from 'vuex'
-const { mapState } = createNamespacedHelpers('propertyOwner')
+const { mapState, mapActions } = createNamespacedHelpers('propertyOwner')
 
 export default {
   name: 'PropertyOwnersAddForm',
-  components: {
-    ImageFileUploadControl, ImageCropper
-  },
+  components: {},
   data() {
     return {
+      fullscreenLoading: false,
       formItemLayoutProps: { xs: 24, sm: 12, md: 12, lg: 8, xl: 8 },
-      imagecropperShow: false
+      formRules: {
+        surname: [
+          {
+            validator: (rule, val, callback) => {
+              if (!requiredWithoutAll(val, this.dataCreationForm.name)) {
+                callback(new Error(this.$t('owner.requiredSurname')))
+              }
+              callback()
+            }
+          }
+        ],
+        email: [
+          {
+            validator: (rule, val, callback) => {
+              const form = this.dataCreationForm
+              if (!requiredWithoutAll(val, form.wechat, form.phone)) {
+                callback(new Error(this.$t('owner.requiredEmail')))
+              }
+              callback()
+            },
+            trigger: 'blur'
+          },
+          {
+            validator: (rule, val, callback) => {
+              if (val !== '' && !validateEmail(val)) {
+                callback(new Error(this.$t('owner.illegalEmailAddress')))
+              }
+              callback()
+            },
+            trigger: 'blur'
+          }
+        ],
+        wechat: [
+          {
+            validator: (rule, val, callback) => {
+              const form = this.dataCreationForm
+              if (!requiredWithoutAll(val, form.email, form.phone)) {
+                callback(new Error(this.$t('owner.requiredWechat')))
+              }
+              callback()
+            },
+            trigger: 'blur'
+          },
+          {
+            pattern: /^[a-zA-Z]{1}[-_a-zA-Z0-9]{5,19}$/, message: this.$t('owner.illegalWechat')
+          }
+        ],
+        phone: [
+          {
+            validator: (rule, val, callback) => {
+              const form = this.dataCreationForm
+              if (!requiredWithoutAll(val, form.email, form.wechat)) {
+                callback(new Error(this.$t('owner.requiredPhone')))
+              }
+              callback()
+            }
+          }
+        ]
+      }
     }
   },
   computed: {
@@ -123,26 +157,28 @@ export default {
     this.setOpts()
   },
   methods: {
-    searchByAgent(queryString, callback) {},
+    ...mapActions([
+      'createOwner'
+    ]),
     setOpts() {
       this.addressOpts = [{
-        label: this.$t('addressOpts.australia'),
+        label: this.$t('addressList.australia'),
         value: 'australia',
         children: [
           {
-            label: this.$t('addressOpts.vic'),
+            label: this.$t('addressList.vic'),
             value: 'vic',
             children: [
               {
-                label: this.$t('addressOpts.melbourne'),
+                label: this.$t('addressList.melbourne'),
                 value: 'melbourne',
                 children: [
                   {
-                    label: this.$t('addressOpts.mooneePonds'),
+                    label: this.$t('addressList.mooneePonds'),
                     value: 'mooneePonds',
                     children: [
                       {
-                        label: this.$t('addressOpts.margaretStreet'),
+                        label: this.$t('addressList.margaretStreet'),
                         value: 'Margaret Street'
                       }
                     ]
@@ -154,16 +190,35 @@ export default {
         ]
       }]
     },
-    beforeAvatarUpload(file) {},
-    handleAvatarSuccess(res, file) {},
-    handleImageFileUploadControlChange({ dataURL }) {
-      this.imagecropperShow = true
+    handleSubmit() {
+      this.$refs.form.validate(valid => {
+        if (valid) {
+          const loading = this.$loading({
+            lock: true,
+            text: 'Loading',
+            spinner: 'el-icon-loading',
+            background: 'rgba(0, 0, 0, 0.7)'
+          })
+          this.createOwner({
+            ...this.dataCreationForm,
+            address: this.dataCreationForm.address.join('/')
+          }).then(res => {
+            this.$message({
+              message: this.$t('createSuccess'),
+              type: 'success'
+            })
+            this.hendleReset()
+          }).finally(() => {
+            loading.close()
+          })
+        } else {
+          console.log('error submit!!')
+          return false
+        }
+      })
     },
-    cropSuccess() {
-
-    },
-    close() {
-
+    hendleReset() {
+      this.$refs.form.resetFields()
     }
   }
 }

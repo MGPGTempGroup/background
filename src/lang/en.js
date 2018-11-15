@@ -316,7 +316,15 @@ export default {
     searchByWeChatPlaceholder: 'Input wechat number fragment',
     searchByAddressPlaceholder: 'Input address number fragment',
     selectByIdentityPlaceholder: 'Select customer identity',
-    searchByAgentNamePlaceholder: 'Input agent name fragment'
+    searchByAgentNamePlaceholder: 'Input agent name fragment',
+
+    // input validation messages
+    illegalEmailAddress: 'Illegal email address.',
+    illegalWechat: 'Illegal wechat number.',
+    requiredWechat: 'When the phone number and Email are not input, the Wechat field is required.',
+    requiredPhone: 'When the Wechat and Email are not input, the Phone field is required.',
+    requiredEmail: 'When the phone number and WeChat are not input, the Email field is required.',
+    requiredSurname: 'When the name is not input, the surname field is required.'
   },
   userComment: {
     id: 'ID',
@@ -416,5 +424,6 @@ export default {
   friday: 'Friday',
   saturday: 'Saturday',
   sunday: 'Sunday',
-  postCode: 'Post code'
+  postCode: 'Post code',
+  createSuccess: 'Create Success'
 }

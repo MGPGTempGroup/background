@@ -1,3 +1,5 @@
+import { createOwner } from '@/api/propertyOwner'
+
 const temp = []
 for (let i = 0; i < 10; i++) {
   temp.push({
@@ -42,11 +44,10 @@ const propertyOwner = {
       surname: '',
       email: '',
       wechat: '',
+      phone: '',
       address: [],
-      identity: '',
-      agent: '',
-      idCardNum: '',
-      photo: ''
+      identity_id: null,
+      id_card: ''
     },
     dataEditionForm: {
       name: 'Jerry Smith',
@@ -60,8 +61,8 @@ const propertyOwner = {
       photo: '173****4331'
     },
     availableIdentity: [
-      { value: 'landlord' },
-      { value: 'vendor' }
+      { label: 'landlord', value: 1 },
+      { label: 'vendor', value: 2 }
     ],
     dataCreationDialogVisible: false,
     dataEditionDialogVisible: false,
@@ -79,6 +80,18 @@ const propertyOwner = {
     },
     updateDetailsDialogVisible(state, payload) {
       state.detailsDialogVisible = !!payload.visible
+    },
+    addOwnerData(state, payload) {
+      state.list.push(payload)
+    }
+  },
+  actions: {
+    async createOwner({ commit }, ownerData) {
+      const res = await createOwner(ownerData)
+      commit('addOwnerData', res.data)
+      commit('updateDataCreationDialogVisible', false)
+      // commit mutations
+      return res
     }
   }
 }

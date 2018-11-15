@@ -40,3 +40,12 @@ export function validateEmail(email) {
   const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
   return re.test(email)
 }
+
+/**
+ * 当otherVals全部都为空字符时，val才必须不为空字符串
+ * @param {string} 验证的val
+ * @param  {...any} 其他val
+ */
+export function requiredWithoutAll(val, ...otherVals) {
+  return val !== '' || otherVals.some(val => val !== '')
+}

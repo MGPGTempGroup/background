@@ -100,7 +100,7 @@ export default {
     size: '布局大小'
   },
   login: {
-    title: 'MGPG系统登录',
+    title: 'MGPG后台管理系统登录',
     logIn: '登录',
     email: '邮箱',
     username: '账号',
@@ -277,7 +277,7 @@ export default {
   owner: {
     id: '序号',
     name: '姓名',
-    surname: '姓',
+    surname: '姓氏',
     phoneNumber: '手机号码',
     photoThumbnail: '照片缩略图',
     email: '邮箱',
@@ -317,7 +317,16 @@ export default {
     searchByWeChatPlaceholder: '输入微信部分号码',
     searchByAddressPlaceholder: '输入地址部分信息',
     selectByIdentityPlaceholder: '选择客户身份',
-    searchByAgentNamePlaceholder: '输入代理名称部分字符'
+    searchByAgentNamePlaceholder: '输入代理名称部分字符',
+
+    // input validation messages
+    illegalEmailAddress: '非法邮箱地址。',
+    illegalWechat: '非法微信号码。',
+    requiredWechat: '当电话号码和邮箱地址未输入时，微信必须输入。',
+    requiredPhone: '当Wechat和邮箱地址未输入时，手机号码必须输入。',
+    requiredEmail: '当微信和手机号码未输入时，邮箱地址必须输入。',
+    requiredSurname: '当姓名未输入时，姓氏必须输入'
+
   },
   userComment: {
     id: '序号',
@@ -416,5 +425,6 @@ export default {
   friday: '周五',
   saturday: '周六',
   sunday: '周日',
-  postCode: '邮政编码'
+  postCode: '邮政编码',
+  createSuccess: '创建成功'
 }
