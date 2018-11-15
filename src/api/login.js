@@ -20,23 +20,21 @@ export function loginByEmail(email, password) {
   return request({
     url: 'authorizations',
     method: 'post',
-    data,
-    baseURL: ''
+    data
   })
 }
 
 export function logout() {
   return request({
-    url: '/login/logout',
-    method: 'post'
+    url: 'authorizations/current',
+    method: 'delete'
   })
 }
 
-export function getUserInfo(token) {
+export function getUserInfo() {
   return request({
-    url: '/user/info',
-    method: 'get',
-    params: { token }
+    url: 'admin-users/current',
+    method: 'get'
   })
 }
 

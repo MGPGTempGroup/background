@@ -77,8 +77,8 @@ export default {
     }
     return {
       loginForm: {
-        email: '',
-        password: ''
+        email: 'Tingting-gao@outlook.com',
+        password: '123456'
       },
       loginRules: {
         email: [{ required: true, trigger: 'blur', validator: validateEmail }],
@@ -118,9 +118,8 @@ export default {
         if (valid) {
           this.loading = true
           this.$store.dispatch('LoginByEmail', this.loginForm).then(() => {
-            console.log(localStorage.getItem('Admin-Token'), 'get')
             this.loading = false
-            // this.$router.push({ path: this.redirect || '/' })
+            this.$router.push({ path: this.redirect || '/' })
           }).catch(() => {
             this.loading = false
           })
