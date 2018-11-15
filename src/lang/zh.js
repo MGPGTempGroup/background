@@ -100,8 +100,9 @@ export default {
     size: '布局大小'
   },
   login: {
-    title: '系统登录',
+    title: 'MGPG系统登录',
     logIn: '登录',
+    email: '邮箱',
     username: '账号',
     password: '密码',
     any: '任意',

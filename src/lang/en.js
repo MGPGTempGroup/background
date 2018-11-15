@@ -99,8 +99,9 @@ export default {
     size: 'Global Size'
   },
   login: {
-    title: 'System Login',
+    title: 'MGPG backstage login',
     logIn: 'Log in',
+    email: 'Email',
     username: 'Username',
     password: 'Password',
     any: 'any',

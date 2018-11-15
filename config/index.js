@@ -9,7 +9,12 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: {
+      '*': {
+        target: 'http://api.melgrand.com/admin',
+        changeOrigin: true,
+      }
+    },
 
     // Various Dev Server settings
 

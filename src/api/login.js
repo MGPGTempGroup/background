@@ -12,6 +12,19 @@ export function loginByUsername(username, password) {
   })
 }
 
+export function loginByEmail(email, password) {
+  const data = {
+    email,
+    password
+  }
+  return request({
+    url: 'authorizations',
+    method: 'post',
+    data,
+    baseURL: ''
+  })
+}
+
 export function logout() {
   return request({
     url: '/login/logout',
