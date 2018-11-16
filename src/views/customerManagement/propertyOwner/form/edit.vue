@@ -1,94 +1,146 @@
 <template>
-  <div class="property-owners-edit" >
-    <el-row :gutter="48" >
-      <el-col v-bind="{ xs: 24, sm: 24, md: 6, lg: 6, xl: 6 }" >
-        <img style="width: 100%;" src="https://www.melbournerealestate.com.au/wp-content/uploads/2015/03/Ella-2.png" alt="">
-      </el-col>
-      <el-col v-bind="{ xs: 24, sm: 24, md: 18, lg: 18, xl: 18 }">
-        <el-form :model="dataEditionForm" >
-          <el-row :gutter="36" >
-            <el-col v-bind="layoutProps" >
-              <el-form-item :label="$t('owner.surname')" >
-                <el-input v-model="dataEditionForm.surname" />
-              </el-form-item>
-            </el-col>
-            <el-col v-bind="layoutProps" >
-              <el-form-item :label="$t('owner.name')" >
-                <el-input v-model="dataEditionForm.name" />
-              </el-form-item>
-            </el-col>
-            <el-col v-bind="layoutProps" >
-              <el-form-item :label="$t('owner.email')" >
-                <el-input v-model="dataEditionForm.email" />
-              </el-form-item>
-            </el-col>
-            <el-col v-bind="layoutProps" >
-              <el-form-item :label="$t('owner.wechat')" >
-                <el-input v-model="dataEditionForm.wechat" />
-              </el-form-item>
-            </el-col>
-            <el-col v-bind="layoutProps" >
-              <el-form-item :label="$t('owner.idCardNum')" >
-                <el-input v-model="dataEditionForm.idCardNum" />
-              </el-form-item>
-            </el-col>
-            <el-col v-bind="layoutProps" >
-              <el-form-item :label="$t('owner.address')" >
-                <el-cascader
-                  :options="addressOpts"
-                  v-model="dataEditionForm.address"
-                  expand-trigger="hover"
-                  @change="() => null"/>
-              </el-form-item>
-            </el-col>
-            <el-col v-bind="layoutProps" >
-              <el-form-item :label="$t('owner.identity')" >
-                <el-select v-model="dataEditionForm.identity" multiple >
-                  <el-option
-                    v-for="(item, index) in availableIdentity"
-                    :key="index"
-                    :label="$t(`owner.${item.value}`)"
-                    :value="item.value"
-                  />
-                </el-select>
-              </el-form-item>
-            </el-col>
-            <el-col v-bind="layoutProps" >
-              <el-form-item :label="$t('owner.agent')" >
-                <el-select
-                  v-model="dataEditionForm.agent"
-                  :remote-method="searchByAgent"
-                  multiple
-                  filterable
-                  remote
-                  reserve-keyword />
-              </el-form-item>
-            </el-col>
-          </el-row>
-          <!-- 提交相关按钮 -->
-          <div class="property-owners-edit__form-actions" >
-            <el-button type="info">
-              {{ $t('reset') }}
-            </el-button>
-            &nbsp;
-            <el-button type="primary">
-              {{ $t('create') }}
-            </el-button>
-          </div>
-        </el-form>
-      </el-col>
-    </el-row>
+  <div v-if="dataEditionForm" class="property-owners-edit" >
+    <el-form
+      ref="form"
+      :model="dataEditionForm"
+      :rules="formRules"
+      label-position="top" >
+      <el-row :gutter="36" >
+        <el-col v-bind="layoutProps" >
+          <el-form-item :label="$t('owner.surname')" prop="surname" >
+            <el-input v-model="dataEditionForm.surname" />
+          </el-form-item>
+        </el-col>
+        <el-col v-bind="layoutProps" >
+          <el-form-item :label="$t('owner.name')" prop="name" >
+            <el-input v-model="dataEditionForm.name" />
+          </el-form-item>
+        </el-col>
+        <el-col v-bind="layoutProps" >
+          <el-form-item :label="$t('owner.email')" prop="email" >
+            <el-input v-model="dataEditionForm.email" />
+          </el-form-item>
+        </el-col>
+        <el-col v-bind="layoutProps" >
+          <el-form-item :label="$t('owner.phone')" prop="phone" >
+            <el-input v-model="dataEditionForm.phone" />
+          </el-form-item>
+        </el-col>
+        <el-col v-bind="layoutProps" >
+          <el-form-item :label="$t('owner.wechat')" prop="wechat" >
+            <el-input v-model="dataEditionForm.wechat" />
+          </el-form-item>
+        </el-col>
+        <el-col v-bind="layoutProps" >
+          <el-form-item :label="$t('owner.idCardNum')" prop="id_card" >
+            <el-input v-model="dataEditionForm.id_card" />
+          </el-form-item>
+        </el-col>
+        <el-col v-bind="layoutProps" >
+          <el-form-item :label="$t('owner.address')" prop="address" >
+            <el-cascader
+              :options="addressOpts"
+              v-model="dataEditionForm.address"
+              expand-trigger="hover"
+              @change="() => null"/>
+          </el-form-item>
+        </el-col>
+        <el-col v-bind="layoutProps" >
+          <el-form-item :label="$t('owner.identity')" prop="identity_id" >
+            <el-select v-model="dataEditionForm.identity_id" >
+              <el-option
+                v-for="(item, index) in availableIdentity"
+                :key="index"
+                :label="$t(`owner.${item.label}`)"
+                :value="item.value"
+              />
+            </el-select>
+          </el-form-item>
+        </el-col>
+      </el-row>
+      <!-- 提交相关按钮 -->
+      <div class="property-owners-edit__form-actions" >
+        <el-button type="info" @click="handleReset" >
+          {{ $t('reset') }}
+        </el-button>
+        &nbsp;
+        <el-button type="primary" @click="handleSubmit" >
+          {{ $t('update') }}
+        </el-button>
+      </div>
+    </el-form>
   </div>
 </template>
 
 <script>
+import { validateEmail, requiredWithoutAll } from '@/utils/validate'
+import { filterObjEmptyVal } from '@/utils'
 import { createNamespacedHelpers } from 'vuex'
-const { mapState } = createNamespacedHelpers('propertyOwner')
+const { mapState, mapActions, mapMutations } = createNamespacedHelpers('propertyOwner')
 export default {
   name: 'PropertyOwnersEditForm',
   data() {
     return {
-      layoutProps: { xs: 24, sm: 12, md: 12, lg: 8, xl: 8 }
+      layoutProps: { xs: 24, sm: 12, md: 12, lg: 8, xl: 8 },
+      formRules: {
+        surname: [
+          {
+            validator: (rule, val, callback) => {
+              if (!requiredWithoutAll(val, this.dataEditionForm.name)) {
+                callback(new Error(this.$t('owner.requiredSurname')))
+              }
+              callback()
+            }
+          }
+        ],
+        email: [
+          {
+            validator: (rule, val, callback) => {
+              const form = this.dataEditionForm
+              if (!requiredWithoutAll(val, form.wechat, form.phone)) {
+                callback(new Error(this.$t('owner.requiredEmail')))
+              }
+              callback()
+            },
+            trigger: 'blur'
+          },
+          {
+            validator: (rule, val, callback) => {
+              if (val !== '' && !validateEmail(val)) {
+                callback(new Error(this.$t('owner.illegalEmailAddress')))
+              }
+              callback()
+            },
+            trigger: 'blur'
+          }
+        ],
+        wechat: [
+          {
+            validator: (rule, val, callback) => {
+              const form = this.dataEditionForm
+              if (!requiredWithoutAll(val, form.email, form.phone)) {
+                callback(new Error(this.$t('owner.requiredWechat')))
+              }
+              callback()
+            },
+            trigger: 'blur'
+          },
+          {
+            pattern: /^[a-zA-Z]{1}[-_a-zA-Z0-9]{5,19}$/, message: this.$t('owner.illegalWechat')
+          }
+        ],
+        phone: [
+          {
+            validator: (rule, val, callback) => {
+              const form = this.dataEditionForm
+              if (!requiredWithoutAll(val, form.email, form.wechat)) {
+                callback(new Error(this.$t('owner.requiredPhone')))
+              }
+              callback()
+            }
+          }
+        ]
+      }
     }
   },
   computed: {
@@ -101,26 +153,32 @@ export default {
     this.setOpts()
   },
   methods: {
-    searchByAgent(queryString, callback) {},
+    ...mapActions([
+      'updateOwner'
+    ]),
+    ...mapMutations([
+      'setDataEditionDialogVisible',
+      'setDataEditionForm'
+    ]),
     setOpts() {
       this.addressOpts = [{
-        label: this.$t('address.australia'),
+        label: this.$t('addressList.australia'),
         value: 'australia',
         children: [
           {
-            label: this.$t('address.vic'),
+            label: this.$t('addressList.vic'),
             value: 'vic',
             children: [
               {
-                label: this.$t('address.melbourne'),
+                label: this.$t('addressList.melbourne'),
                 value: 'melbourne',
                 children: [
                   {
-                    label: this.$t('address.mooneePonds'),
+                    label: this.$t('addressList.mooneePonds'),
                     value: 'mooneePonds',
                     children: [
                       {
-                        label: this.$t('address.margaretStreet'),
+                        label: this.$t('addressList.margaretStreet'),
                         value: 'Margaret Street'
                       }
                     ]
@@ -132,13 +190,35 @@ export default {
         ]
       }]
     },
-    beforeAvatarUpload(file) {},
-    handleAvatarSuccess(res, file) {},
-    handleImageFileUploadControlChange({ dataURL }) {
-      this.imagecropperShow = true
+    handleReset() {
+      // this.$refs.form.resetFields()
+      const originOwnerData = this.$store.state.propertyOwner.owners.data.find(item => {
+        return item.id === this.dataEditionForm.id
+      })
+      this.setDataEditionForm(originOwnerData)
     },
-    cropSuccess() {},
-    close() {}
+    handleSubmit() {
+      this.$refs.form.validate(valid => {
+        if (valid) {
+          const loading = this.$loading({
+            lock: true,
+            text: 'Loading',
+            spinner: 'el-icon-loading',
+            background: 'rgba(0, 0, 0, 0.7)'
+          })
+          let formData = JSON.parse(JSON.stringify(this.dataEditionForm))
+          formData = filterObjEmptyVal(formData, [null, ''])
+          this.updateOwner(formData).finally(() => {
+            this.$message({
+              message: this.$t('updateSuccess'),
+              type: 'success'
+            })
+            this.setDataEditionDialogVisible({ visible: false })
+            loading.close()
+          })
+        }
+      })
+    }
   }
 }
 </script>
@@ -154,4 +234,3 @@ export default {
     width: 100%;
   }
 </style>
-

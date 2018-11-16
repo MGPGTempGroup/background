@@ -104,7 +104,7 @@
                   <el-option
                     v-for="(item, index) in availableIdentity"
                     :key="index"
-                    :label="$t(`owner.${item.value}`)"
+                    :label="$t(`owner.${item.label}`)"
                     :value="item.value"
                   />
                 </el-select>

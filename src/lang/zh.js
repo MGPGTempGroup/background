@@ -276,7 +276,7 @@ export default {
   },
   owner: {
     id: '序号',
-    name: '姓名',
+    name: '名',
     surname: '姓氏',
     phoneNumber: '手机号码',
     photoThumbnail: '照片缩略图',
@@ -325,7 +325,7 @@ export default {
     requiredWechat: '当电话号码和邮箱地址未输入时，微信必须输入。',
     requiredPhone: '当Wechat和邮箱地址未输入时，手机号码必须输入。',
     requiredEmail: '当微信和手机号码未输入时，邮箱地址必须输入。',
-    requiredSurname: '当姓名未输入时，姓氏必须输入'
+    requiredSurname: '当名未输入时，姓氏必须输入'
 
   },
   userComment: {
@@ -426,5 +426,10 @@ export default {
   saturday: '周六',
   sunday: '周日',
   postCode: '邮政编码',
-  createSuccess: '创建成功'
+  createSuccess: '创建成功',
+  updateSuccess: '修改成功',
+  deleteSuccess: '删除成功',
+  deleteFailed: '删除失败',
+  noData: '无数据',
+  deleteDataTips: '您确定要删除此条数据吗？'
 }

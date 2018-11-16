@@ -1,102 +1,93 @@
 <template>
   <el-dialog
-    :visible.sync="dialogVisible"
+    :visible.sync="visible"
     :title="$t('owner.details')"
     width="60%" >
-    <el-row :gutter="48" >
-      <el-col v-bind="{ xs: 24, sm: 24, md: 6, lg: 8, xl: 8 }" >
-        <img style="width: 100%;" src="https://www.melbournerealestate.com.au/wp-content/uploads/2015/03/Ella-2.png" alt="">
+    <el-row v-if="Object.keys(detailsData).length" :gutter="48" >
+      <el-col v-bind="infoLayoutProps" >
+        <dl>
+          <dt>{{ $t('owner.name') }}</dt>
+          <dd>{{ detailsData.name || $t('noData') }}</dd>
+        </dl>
       </el-col>
-      <el-col v-bind="{ xs: 24, sm: 24, md: 18, lg: 16, xl: 16 }">
-        <el-row :gutter="36" >
-          <el-col v-bind="infoLayoutProps" >
-            <dl>
-              <dt>{{ $t('owner.name') }}</dt>
-              <dd>Jerry Smith</dd>
-            </dl>
-          </el-col>
-          <el-col v-bind="infoLayoutProps" >
-            <dl>
-              <dt>{{ $t('owner.surname') }}</dt>
-              <dd>Smith</dd>
-            </dl>
-          </el-col>
-          <el-col v-bind="infoLayoutProps" >
-            <dl>
-              <dt>{{ $t('owner.phone') }}</dt>
-              <dd>173****4331</dd>
-            </dl>
-          </el-col>
-          <el-col v-bind="infoLayoutProps" >
-            <dl>
-              <dt>{{ $t('owner.email') }}</dt>
-              <dd>********@gmail.com</dd>
-            </dl>
-          </el-col>
-          <el-col v-bind="infoLayoutProps" >
-            <dl>
-              <dt>{{ $t('owner.idCardNum') }}</dt>
-              <dd>***********</dd>
-            </dl>
-          </el-col>
-          <el-col v-bind="infoLayoutProps" >
-            <dl>
-              <dt>{{ $t('owner.wechat') }}</dt>
-              <dd>xxxxx</dd>
-            </dl>
-          </el-col>
-          <el-col v-bind="infoLayoutProps" >
-            <dl>
-              <dt>{{ $t('owner.address') }}</dt>
-              <dd>x</dd>
-            </dl>
-          </el-col>
-          <el-col v-bind="infoLayoutProps" >
-            <dl>
-              <dt>{{ $t('owner.identity') }}</dt>
-              <dd>{{ $t(`owner.landlord`) }}</dd>
-            </dl>
-          </el-col>
-          <el-col v-bind="infoLayoutProps" >
-            <dl>
-              <dt>{{ $t('owner.agent') }}</dt>
-              <dd>Jerry</dd>
-            </dl>
-          </el-col>
-        </el-row>
+      <el-col v-bind="infoLayoutProps" >
+        <dl>
+          <dt>{{ $t('owner.surname') }}</dt>
+          <dd>{{ detailsData.surname }}</dd>
+        </dl>
+      </el-col>
+      <el-col v-bind="infoLayoutProps" >
+        <dl>
+          <dt>{{ $t('owner.phone') }}</dt>
+          <dd>{{ detailsData.phone || $t('noData') }}</dd>
+        </dl>
+      </el-col>
+      <el-col v-bind="infoLayoutProps" >
+        <dl>
+          <dt>{{ $t('owner.email') }}</dt>
+          <dd>{{ detailsData.email || $t('noData') }}</dd>
+        </dl>
+      </el-col>
+      <el-col v-bind="infoLayoutProps" >
+        <dl>
+          <dt>{{ $t('owner.idCardNum') }}</dt>
+          <dd>{{ detailsData.id_card || $t('noData') }}</dd>
+        </dl>
+      </el-col>
+      <el-col v-bind="infoLayoutProps" >
+        <dl>
+          <dt>{{ $t('owner.wechat') }}</dt>
+          <dd>{{ detailsData.wechat || $t('noData') }}</dd>
+        </dl>
+      </el-col>
+      <el-col v-bind="infoLayoutProps" >
+        <dl>
+          <dt>{{ $t('owner.identity') }}</dt>
+          <dd>{{ detailsData.identity && detailsData.identity.name }}</dd>
+        </dl>
+      </el-col>
+      <el-col v-bind="infoLargeLayoutProps" >
+        <dl>
+          <dt>{{ $t('owner.address') }}</dt>
+          <dd>{{ detailsData.address.join('/') || $t('noData') }}</dd>
+        </dl>
       </el-col>
     </el-row>
     <span slot="footer" class="dialog-footer">
-      <el-button type="danger" @click="dialogVisible = false">{{ $t('close') }}</el-button>
+      <el-button type="danger" @click="visible = false">{{ $t('close') }}</el-button>
     </span>
   </el-dialog>
 </template>
 
 <script>
 import { createNamespacedHelpers } from 'vuex'
-const { mapMutations } = createNamespacedHelpers('propertyOwner')
+const { mapState, mapMutations } = createNamespacedHelpers('propertyOwner')
 export default {
   name: 'PropertyOwnerDetailsDialog',
   data() {
     return {
       infoLayoutProps: {
-        xs: 24, sm: 12, md: 12, lg: 8, xl: 8
+        xs: 24, sm: 12, md: 12, lg: 8, xl: 6
+      },
+      infoLargeLayoutProps: {
+        xs: 24, sm: 16, md: 16, lg: 12, xl: 12
       }
     }
   },
   computed: {
-    dialogVisible: {
+    ...mapState(['detailsData']),
+    visible: {
       get() {
         return this.$store.state.propertyOwner.detailsDialogVisible
       },
       set(visible) {
-        this.updateDetailsDialogVisible({ visible })
+        this.setDetailsDialogVisible({ visible })
       }
     }
   },
   methods: {
     ...mapMutations([
-      'updateDetailsDialogVisible'
+      'setDetailsDialogVisible'
     ])
   }
 }

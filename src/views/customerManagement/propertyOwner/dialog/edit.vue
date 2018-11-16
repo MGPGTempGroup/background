@@ -23,14 +23,13 @@ export default {
         return this.$store.state.propertyOwner.dataEditionDialogVisible
       },
       set(visible) {
-        this.updateDataEditionDialogVisible({ visible })
+        this.setDataEditionDialogVisible({ visible })
       }
     }
   },
-  watch: {},
   methods: {
     ...mapMutations([
-      'updateDataEditionDialogVisible'
+      'setDataEditionDialogVisible'
     ])
   }
 }

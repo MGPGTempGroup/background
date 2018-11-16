@@ -425,5 +425,10 @@ export default {
   saturday: 'Saturday',
   sunday: 'Sunday',
   postCode: 'Post code',
-  createSuccess: 'Create Success'
+  createSuccess: 'Create Success',
+  updateSuccess: 'Update Success',
+  deleteSuccess: 'Delete Success',
+  deleteFailed: 'Delete failed',
+  noData: 'No data',
+  deleteDataTips: 'Are you sure you want to delete this data?'
 }

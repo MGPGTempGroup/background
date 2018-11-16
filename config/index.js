@@ -13,6 +13,10 @@ module.exports = {
       '*': {
         target: 'http://api.melgrand.com/admin',
         changeOrigin: true,
+        bypass: function(req, res, proxyOptions) {
+          if (req.url.indexOf('/static') !== -1)
+            return req.url
+        }
       }
     },
 

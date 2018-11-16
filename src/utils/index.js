@@ -300,3 +300,14 @@ export function uniqueArr(arr) {
 export function isExternal(path) {
   return /^(https?:|mailto:|tel:)/.test(path)
 }
+
+export function filterObjEmptyVal(data, condition = [null, '']) {
+  const filteredData = {}
+  Object.keys(data).forEach(key => {
+    if (!condition.includes(data[key])) {
+      filteredData[key] = data[key]
+    }
+  })
+  return filteredData
+}
+

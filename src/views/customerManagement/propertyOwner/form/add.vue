@@ -7,37 +7,37 @@
       :rules="formRules"
       label-position="top" >
       <el-row :gutter="36" >
-        <el-col v-bind="formItemLayoutProps" >
+        <el-col v-bind="formItemTinyLayoutProps" >
           <el-form-item :label="$t('owner.surname')" prop="surname" >
             <el-input v-model="dataCreationForm.surname" />
           </el-form-item>
         </el-col>
-        <el-col v-bind="formItemLayoutProps" >
+        <el-col v-bind="formItemTinyLayoutProps" >
           <el-form-item :label="$t('owner.name')" prop="name" >
             <el-input v-model="dataCreationForm.name" />
           </el-form-item>
         </el-col>
-        <el-col v-bind="formItemLayoutProps" >
+        <el-col v-bind="formItemTinyLayoutProps" >
           <el-form-item :label="$t('owner.email')" prop="email" >
             <el-input v-model="dataCreationForm.email" />
           </el-form-item>
         </el-col>
-        <el-col v-bind="formItemLayoutProps" >
+        <el-col v-bind="formItemTinyLayoutProps" >
           <el-form-item :label="$t('owner.phone')" prop="phone" >
             <el-input v-model="dataCreationForm.phone" />
           </el-form-item>
         </el-col>
-        <el-col v-bind="formItemLayoutProps" >
+        <el-col v-bind="formItemTinyLayoutProps" >
           <el-form-item :label="$t('owner.wechat')" prop="wechat" >
             <el-input v-model="dataCreationForm.wechat" />
           </el-form-item>
         </el-col>
-        <el-col v-bind="formItemLayoutProps" >
+        <el-col v-bind="formItemLargeLayoutProps" >
           <el-form-item :label="$t('owner.idCardNum')" prop="id_card" >
             <el-input v-model="dataCreationForm.id_card" />
           </el-form-item>
         </el-col>
-        <el-col v-bind="formItemLayoutProps" >
+        <el-col v-bind="formItemLargeLayoutProps" >
           <el-form-item :label="$t('owner.address')" prop="address" >
             <el-cascader
               :options="addressOpts"
@@ -46,7 +46,7 @@
               expand-trigger="hover" />
           </el-form-item>
         </el-col>
-        <el-col v-bind="formItemLayoutProps" >
+        <el-col v-bind="formItemLargeLayoutProps" >
           <el-form-item :label="$t('owner.identity')" prop="identity" >
             <el-select v-model="dataCreationForm.identity_id" >
               <el-option
@@ -82,8 +82,9 @@ export default {
   components: {},
   data() {
     return {
-      fullscreenLoading: false,
       formItemLayoutProps: { xs: 24, sm: 12, md: 12, lg: 8, xl: 8 },
+      formItemLargeLayoutProps: { xs: 24, sm: 20, md: 18, lg: 12, xl: 12 },
+      formItemTinyLayoutProps: { xs: 24, sm: 8, md: 6, lg: 6, xl: 6 },
       formRules: {
         surname: [
           {
@@ -199,10 +200,7 @@ export default {
             spinner: 'el-icon-loading',
             background: 'rgba(0, 0, 0, 0.7)'
           })
-          this.createOwner({
-            ...this.dataCreationForm,
-            address: this.dataCreationForm.address.join('/')
-          }).then(res => {
+          this.createOwner(this.dataCreationForm).then(res => {
             this.$message({
               message: this.$t('createSuccess'),
               type: 'success'

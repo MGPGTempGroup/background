@@ -5,63 +5,72 @@
     <!-- 列表 -->
     <el-card class="property-owners__card" style="margin-top: 20px; padding: 0px;" shadow="never" >
       <div slot="header" class="property-owners__list-header" >
-        <el-button class="property-owners__add-btn" type="primary" @click="dataCreationDialogVisible = true" >
-          {{ $t('owner.create') }}&nbsp;
-          <i class="fa fa-edit" />
-        </el-button>
         <h2 style="margin: 0px;" >
           <i class="fa fa-list" />
           &nbsp;{{ $t('owner.propertyOwnersList') }}
         </h2>
+        <el-button class="property-owners__add-btn" type="primary" @click="dataCreationDialogVisible = true" >
+          {{ $t('owner.create') }}&nbsp;
+          <i class="fa fa-edit" />
+        </el-button>
       </div>
-      <el-table :data="propertyOwnerList" >
+      <el-table
+        v-loading="tableLoading"
+        :data="owners.data">
         <el-table-column :label="$t('owner.id')" prop="id" align="center" min-width="30px;" />
-        <el-table-column :label="$t('owner.name')" prop="name" align="center" min-width="50px;" />
-        <el-table-column :label="$t('owner.surname')" prop="surname" align="center" min-width="40px;" />
-        <el-table-column :label="$t('owner.phoneNumber')" prop="phone" align="center" min-width="60px;" />
-        <el-table-column :label="$t('owner.email')" prop="email" align="center" min-width="60px;" />
-        <el-table-column :label="$t('owner.photoThumbnail')" align="center" min-width="40px;" >
-          <template slot-scope="scope">
-            <img :src="scope.row.photo_thumbnail" style="width: 30px; height: 30px;" alt="">
+        <el-table-column :label="$t('owner.name')" prop="name" align="center" min-width="50px;">
+          <template slot-scope="scope" >
+            {{ scope.row.name || $t('noData') }}
           </template>
         </el-table-column>
-        <el-table-column :label="$t('owner.idCardNum')" prop="id_card_num" align="center" min-width="60px;" />
-        <el-table-column :label="$t('owner.wechat')" prop="wechat" align="center" min-width="50px;" />
-        <el-table-column :label="$t('owner.address')" align="center" min-width="60px;" >
-          <template slot-scope="scope" > {{ scope.row.address | truncate }} </template>
+        <el-table-column :label="$t('owner.surname')" prop="surname" align="center" min-width="40px;" />
+        <el-table-column :label="$t('owner.phone')" prop="phone" align="center" min-width="60px;">
+          <template slot-scope="scope" >
+            {{ scope.row.phone || $t('noData') }}
+          </template>
+        </el-table-column>
+        <el-table-column :label="$t('owner.email')" prop="email" align="center" min-width="60px;">
+          <template slot-scope="scope" >
+            {{ scope.row.email || $t('noData') }}
+          </template>
+        </el-table-column>
+        <el-table-column :label="$t('owner.wechat')" prop="wechat" align="center" min-width="50px;">
+          <template slot-scope="scope" >
+            {{ scope.row.wechat || $t('noData') }}
+          </template>
+        </el-table-column>
+        <el-table-column :label="$t('owner.idCardNum')" prop="id_card" align="center" min-width="60px;">
+          <template slot-scope="scope" >
+            {{ scope.row.id_card || $t('noData') }}
+          </template>
+        </el-table-column>
+        <el-table-column :label="$t('owner.address')" prop="address" align="center" min-width="80px;">
+          <template slot-scope="scope" > {{ (scope.row.address.join('/') || $t('noData')) | textTruncate }} </template>
         </el-table-column>
         <el-table-column :label="$t('owner.identity')" align="center" min-width="40px;">
-          <template slot-scope="scope" ><el-tag>{{ $t(`owner.${scope.row.identity}`) }}</el-tag></template>
-        </el-table-column>
-        <!-- <el-table-column :label="$t('owner.isSignContract')" align="center" min-width="40px;">
-          <el-tag slot-scope="scope" :type="['danger', 'warning'][scope.row.is_sign_contract]" >
-            {{ $t(`owner.${['notSigned', 'alreadySigned'][scope.row.is_sign_contract]}`) }}
-          </el-tag>
-        </el-table-column> -->
-        <!-- <el-table-column :label="$t('owner.followUpState')" align="center" min-width="40px" >
           <template slot-scope="scope" >
-            {{ $t(`owner.${['intentionalCustomers', 'noIntention', 'iSuccess'][scope.row.follow_up_state]}`) }}
+            <el-tag>{{ $t(`owner.${scope.row.identity.name.toLowerCase()}`) }}</el-tag>
           </template>
-        </el-table-column> -->
-        <!-- <el-table-column :label="$t('owner.followUpTime')" prop="follow_up_time" align="center" min-width="50px" /> -->
-        <el-table-column :label="$t('owner.agent')" prop="agent" align="center" min-width="50px" />
+        </el-table-column>
         <el-table-column
           :label="$t('owner.actions')"
           fixed="right"
-          width="100">
+          align="center"
+          min-width="50px;">
           <template slot-scope="scope">
             <el-button type="text" size="small" @click="handleDetailsClick(scope.row)">{{ $t('owner.details') }}</el-button>
             <el-button type="text" size="small" @click="handleEditClick(scope.row)" >{{ $t('owner.edit') }}</el-button>
+            <el-button type="text" size="small" @click="handleDeleteClick(scope.row.id)" >{{ $t('delete') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
       <!-- Paginator -->
-      <div class="property-owners__list-pagination" >
+      <div v-if="owners.meta" class="property-owners__list-pagination" >
         <el-pagination
-          :current-page="currPage"
+          :current-page="currTablePage"
           :page-sizes="[10, 30, 50, 100]"
-          :page-size="10"
-          :total="100"
+          :page-size="owners.meta.pagination.per_page"
+          :total="owners.meta.pagination.total"
           layout="total, sizes, prev, pager, next, jumper"
           @size-change="onPaginatorSizeChange"
           @current-change="onPaginatorChange"/>
@@ -88,24 +97,19 @@ import detailsDialog from './dialog/details'
 import editDialog from './dialog/edit'
 import 'font-awesome/css/font-awesome.min.css'
 import { createNamespacedHelpers } from 'vuex'
-const { mapState, mapMutations } = createNamespacedHelpers('propertyOwner')
+const { mapState, mapMutations, mapActions } = createNamespacedHelpers('propertyOwner')
 
 export default {
   name: 'PropertyOwner',
   components: { filterForm, addForm, editDialog, detailsDialog },
-  filters: {
-    truncate(str) {
-      return str.length > 18 ? (str.substr(0, 18) + '...') : str
-    }
-  },
   data() {
-    return {
-      currPage: 1
-    }
+    return {}
   },
   computed: {
     ...mapState({
-      propertyOwnerList: state => state.list
+      owners: state => state.owners,
+      tableLoading: state => state.ownersTableLoading,
+      currTablePage: state => state.ownersTablePage
     }),
     dataCreationDialogVisible: {
       get() {
@@ -116,21 +120,64 @@ export default {
       }
     }
   },
-  created() {},
+  created() {
+    // 拉取业主列表数据
+    this.fetchOwners({
+      page: this.currTablePage
+    })
+  },
   methods: {
     ...mapMutations([
       'updateDataCreationDialogVisible',
-      'updateDataEditionDialogVisible',
-      'updateDetailsDialogVisible'
+      'setDetailsDialogVisible',
+      'setDetailsData',
+      'setDataEditionDialogVisible',
+      'setDataEditionForm'
     ]),
-    handleDetailsClick() {
-      this.updateDetailsDialogVisible({ visible: true })
+    ...mapActions([
+      'fetchOwners',
+      'updateOwnersTablePage',
+      'deleteOwner'
+    ]),
+    handleDetailsClick(row) {
+      this.setDetailsData(row)
+      this.setDetailsDialogVisible({ visible: true })
     },
-    handleEditClick() {
-      this.updateDataEditionDialogVisible({ visible: true })
+    handleEditClick(row) {
+      this.setDataEditionForm(JSON.parse(JSON.stringify(row)))
+      this.setDataEditionDialogVisible({ visible: true })
+    },
+    handleDeleteClick(id) {
+      this.$confirm(this.$t('deleteDataTips'), this.$t('tips'), {
+        confirmButtonText: this.$t('confirm'),
+        cancelButtonText: this.$t('cancel'),
+        type: 'warning'
+      }).then(() => {
+        const loading = this.$loading({
+          lock: true,
+          text: 'Loading',
+          spinner: 'el-icon-loading',
+          background: 'rgba(0, 0, 0, 0.7)'
+        })
+        this.deleteOwner(id).then(res => {
+          this.$message({
+            message: this.$t('deleteSuccess'),
+            type: 'success'
+          })
+        }).catch(() => {
+          this.$message({
+            message: this.$t('deleteFailed'),
+            type: 'error'
+          })
+        }).finally(() => {
+          loading.close()
+        })
+      })
     },
     onPaginatorSizeChange() {},
-    onPaginatorChange() {}
+    onPaginatorChange(page) {
+      this.updateOwnersTablePage(page)
+    }
   }
 }
 </script>
@@ -141,9 +188,7 @@ export default {
     &__list-header {
       position: relative;
     }
-    &__card {
-      // position: relative;
-    }
+    &__card {}
     &__add-btn {
       position: absolute;
       right: 0px;

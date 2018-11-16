@@ -47,5 +47,5 @@ export function validateEmail(email) {
  * @param  {...any} 其他val
  */
 export function requiredWithoutAll(val, ...otherVals) {
-  return val !== '' || otherVals.some(val => val !== '')
+  return (val !== '' && val !== null) || otherVals.some(val => val !== '' && val !== null)
 }
