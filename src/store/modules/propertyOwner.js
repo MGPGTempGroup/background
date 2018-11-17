@@ -4,6 +4,7 @@ import {
   updateOwner,
   deleteOwner
 } from '@/api/propertyOwner'
+import { Loading } from 'element-ui'
 
 const propertyOwner = {
   namespaced: true,
@@ -11,20 +12,30 @@ const propertyOwner = {
     owners: {},
     ownersTableLoading: false,
     ownersTablePage: 1,
+    ownersTablePageSize: 15,
     filterForm: {
+      name: [],
+      surname: [],
+      phone: [],
+      email: [],
+      wechat: [],
+      address: [],
+      identity_id: [],
+      id_card: [],
+      createdDateRange: [],
+      updatedDateRange: []
+    },
+    dataCreationDialogVisible: false,
+    dataCreationForm: {
       name: '',
+      surname: '',
       phone: '',
       email: '',
       wechat: '',
-      address: '',
-      identity: '',
-      agent: '',
-      idCardNum: '',
-      createdDateRange: '',
-      updatedDateRange: ''
+      address: [],
+      identity_id: 1,
+      id_card: ''
     },
-    dataCreationDialogVisible: false,
-    dataCreationForm: {},
     dataEditionDialogVisible: false,
     dataEditionForm: {},
     detailsDialogVisible: false,
@@ -32,11 +43,7 @@ const propertyOwner = {
     availableIdentity: [
       { label: 'landlord', value: 1 },
       { label: 'vendor', value: 2 }
-    ],
-    detailsDialog: {
-      data: {},
-      visible: false
-    }
+    ]
   },
   mutations: {
     resetOwnersData(state, payload) {
@@ -47,6 +54,9 @@ const propertyOwner = {
     },
     setCurrTablePage(state, payload) {
       state.ownersTablePage = payload.page
+    },
+    setTablePageSize(state, payload) {
+      state.ownersTablePageSize = payload.pageSize
     },
     addOwnerData(state, payload) {
       state.owners.data.push(payload)
@@ -61,7 +71,7 @@ const propertyOwner = {
       })
     },
     updateFilterForm(state, payload) {
-      state.filterForm[payload.property] = payload.value
+      state.filterForm = Object.assign({}, state.filterForm, payload)
     },
     updateDataCreationDialogVisible(state, payload) {
       state.dataCreationDialogVisible = !!payload.visible
@@ -88,23 +98,48 @@ const propertyOwner = {
       return owners
     },
     async createOwner({ commit }, ownerData) {
+      const loading = Loading.service({
+        lock: true,
+        text: 'Loading',
+        spinner: 'el-icon-loading',
+        background: 'rgba(0, 0, 0, 0.7)'
+      })
       const data = (await createOwner(ownerData)).data
       commit('addOwnerData', data)
       commit('updateDataCreationDialogVisible', false)
+      loading.close()
       return data
     },
     async updateOwner({ commit }, ownerData) {
+      const loading = Loading.service({
+        lock: true,
+        text: 'Loading',
+        spinner: 'el-icon-loading',
+        background: 'rgba(0, 0, 0, 0.7)'
+      })
       const data = (await updateOwner(ownerData)).data
       commit('updateOwnerData', data)
+      loading.close()
       return data
     },
     async deleteOwner({ commit }, ownerId) {
+      const loading = Loading.service({
+        lock: true,
+        text: 'Loading',
+        spinner: 'el-icon-loading',
+        background: 'rgba(0, 0, 0, 0.7)'
+      })
       await deleteOwner(ownerId)
       commit('deleteOwnerData', { id: ownerId })
+      loading.close()
     },
     async updateOwnersTablePage({ commit, dispatch }, page) {
       await dispatch('fetchOwnersData', { page })
       commit('setCurrTablePage', page)
+    },
+    async updateOwnersTablePageSize({ commit, dispatch }, params) {
+      await dispatch('fetchOwners', 'pageSize=' + params.pageSize)
+      commit('setTablePageSize', params.pageSize)
     }
   }
 }

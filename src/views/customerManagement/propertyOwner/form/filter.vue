@@ -8,10 +8,29 @@
             &nbsp;{{ $t('house.conditionalFiltering') }}
           </h2>
         </template>
-        <el-form :model="filterForm" label-position="top" class="property-owners-filter__form" >
+        <el-form
+          ref="filterForm"
+          :model="filterForm"
+          label-position="top"
+          class="property-owners-filter__form" >
           <el-row :gutter="48" >
             <el-col v-bind="filterFormLayoutProps" >
-              <!-- 名称筛选 -->
+              <!-- 姓氏筛选 -->
+              <el-form-item :label="$t('owner.surname')" >
+                <el-select
+                  v-model="filterForm.surname"
+                  :placeholder="$t('owner.searchBySurnamePlaceholder')"
+                  :remote-method="() => null"
+                  multiple
+                  filterable
+                  remote
+                  allow-create
+                  default-first-option
+                  reserve-keyword />
+              </el-form-item>
+            </el-col>
+            <el-col v-bind="filterFormLayoutProps" >
+              <!-- 名筛选 -->
               <el-form-item :label="$t('owner.name')" >
                 <el-select
                   v-model="filterForm.name"
@@ -21,6 +40,7 @@
                   filterable
                   remote
                   allow-create
+                  default-first-option
                   reserve-keyword />
               </el-form-item>
             </el-col>
@@ -35,6 +55,7 @@
                   filterable
                   remote
                   allow-create
+                  default-first-option
                   reserve-keyword />
               </el-form-item>
             </el-col>
@@ -49,6 +70,7 @@
                   filterable
                   remote
                   allow-create
+                  default-first-option
                   reserve-keyword />
               </el-form-item>
             </el-col>
@@ -56,13 +78,14 @@
               <!-- 身份证号码筛选 -->
               <el-form-item :label="$t('owner.idCardNum')" >
                 <el-select
-                  v-model="filterForm.id_card_number"
+                  v-model="filterForm.id_card"
                   :placeholder="$t('owner.searchByIdCardNumPlaceholder')"
                   :remote-method="() => null"
                   multiple
                   filterable
                   remote
                   allow-create
+                  default-first-option
                   reserve-keyword />
               </el-form-item>
             </el-col>
@@ -77,6 +100,7 @@
                   filterable
                   remote
                   allow-create
+                  default-first-option
                   reserve-keyword />
               </el-form-item>
             </el-col>
@@ -91,6 +115,7 @@
                   filterable
                   remote
                   allow-create
+                  default-first-option
                   reserve-keyword />
               </el-form-item>
             </el-col>
@@ -98,7 +123,7 @@
               <!-- Identity -->
               <el-form-item :label="$t('owner.identity')" >
                 <el-select
-                  v-model="filterForm.identity"
+                  v-model="filterForm.identity_id"
                   :placeholder="$t('owner.selectByIdentityPlaceholder')"
                   multiple>
                   <el-option
@@ -108,20 +133,6 @@
                     :value="item.value"
                   />
                 </el-select>
-              </el-form-item>
-            </el-col>
-            <el-col v-bind="filterFormLayoutProps" >
-              <!-- 地址筛选 -->
-              <el-form-item :label="$t('owner.agent')" >
-                <el-select
-                  v-model="filterForm.agent"
-                  :placeholder="$t('owner.searchByAgentNamePlaceholder')"
-                  :remote-method="() => null"
-                  multiple
-                  filterable
-                  remote
-                  allow-create
-                  reserve-keyword />
               </el-form-item>
             </el-col>
             <el-col v-bind="filterFormLayoutProps" >
@@ -148,10 +159,10 @@
             </el-col>
           </el-row>
           <div class="property-owners-filter__form-actions" >
-            <el-button type="info" >
+            <el-button type="info" @click="handleReset" >
               {{ $t('owner.reset') }}
             </el-button>
-            <el-button type="primary" >
+            <el-button type="primary" @click="handleQuery" >
               {{ $t('owner.query') }}
             </el-button>
           </div>
@@ -163,7 +174,13 @@
 
 <script>
 import { createNamespacedHelpers } from 'vuex'
-const { mapState, mapMutations } = createNamespacedHelpers('propertyOwner')
+import { param } from '@/utils'
+import filterData2ConditionalParams from '@/utils/filterData2ConditionalParams'
+const {
+  mapState,
+  mapMutations,
+  mapActions
+} = createNamespacedHelpers('propertyOwner')
 
 export default {
   name: 'PropertyOwnersFilterForm',
@@ -176,14 +193,54 @@ export default {
   computed: {
     ...mapState({
       filterForm: state => state.filterForm,
-      availableIdentity: state => state.availableIdentity
+      availableIdentity: state => state.availableIdentity,
+      ownersTablePageSize: state => state.ownersTablePageSize
     })
   },
   created() {},
   methods: {
+    ...mapActions([
+      'fetchOwners'
+    ]),
     ...mapMutations([
       'updateFilterForm'
-    ])
+    ]),
+    handleQuery() {
+      const filterForm = this.filterForm
+      const params = filterData2ConditionalParams({
+        fuzzy: {
+          phone: filterForm.phone,
+          name: filterForm.name,
+          surname: filterForm.surname,
+          email: filterForm.email,
+          wechat: filterForm.wechat,
+          id_card: filterForm.id_card
+        },
+        dateRange: {
+          created_at: filterForm.createdDateRange,
+          updated_at: filterForm.updatedDateRange
+        },
+        contains: {
+          identity_id: filterForm.identity_id
+        }
+      })
+      this.fetchOwners(params + '&' + param({
+        pageSize: this.ownersTablePageSize
+      }))
+    },
+    handleReset() {
+      this.updateFilterForm({
+        name: [],
+        phone: [],
+        email: [],
+        wechat: [],
+        address: [],
+        identity_id: [],
+        id_card: [],
+        createdDateRange: [],
+        updatedDateRange: []
+      })
+    }
   }
 }
 </script>

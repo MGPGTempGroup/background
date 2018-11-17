@@ -2,7 +2,7 @@
   <el-dialog
     :visible.sync="visible"
     :title="$t('owner.details')"
-    width="60%" >
+    width="55%" >
     <el-row v-if="Object.keys(detailsData).length" :gutter="48" >
       <el-col v-bind="infoLayoutProps" >
         <dl>
@@ -50,6 +50,18 @@
         <dl>
           <dt>{{ $t('owner.address') }}</dt>
           <dd>{{ detailsData.address.join('/') || $t('noData') }}</dd>
+        </dl>
+      </el-col>
+      <el-col v-bind="infoLayoutProps" >
+        <dl>
+          <dt>{{ $t('createdAt') }}</dt>
+          <dd>{{ detailsData.created_at }}</dd>
+        </dl>
+      </el-col>
+      <el-col v-bind="infoLayoutProps" >
+        <dl>
+          <dt>{{ $t('updatedAt') }}</dt>
+          <dd>{{ detailsData.updated_at }}</dd>
         </dl>
       </el-col>
     </el-row>

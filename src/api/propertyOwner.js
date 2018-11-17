@@ -3,8 +3,7 @@ import request from '@/utils/request'
 export function fetchOwners(params) {
   return request({
     method: 'GET',
-    url: '/property-owners',
-    params
+    url: '/property-owners?' + params // URL参数可能为a[]=1&a[]=2 故不可用params选项
   })
 }
 

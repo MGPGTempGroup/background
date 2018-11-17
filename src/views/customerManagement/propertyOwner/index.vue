@@ -52,11 +52,13 @@
             <el-tag>{{ $t(`owner.${scope.row.identity.name.toLowerCase()}`) }}</el-tag>
           </template>
         </el-table-column>
+        <el-table-column :label="$t('createdAt')" prop="created_at" align="center" min-width="55px;" />
+        <el-table-column :label="$t('updatedAt')" prop="updated_at" align="center" min-width="55px;" />
         <el-table-column
           :label="$t('owner.actions')"
           fixed="right"
           align="center"
-          min-width="50px;">
+          min-width="70px;">
           <template slot-scope="scope">
             <el-button type="text" size="small" @click="handleDetailsClick(scope.row)">{{ $t('owner.details') }}</el-button>
             <el-button type="text" size="small" @click="handleEditClick(scope.row)" >{{ $t('owner.edit') }}</el-button>
@@ -137,6 +139,7 @@ export default {
     ...mapActions([
       'fetchOwners',
       'updateOwnersTablePage',
+      'updateOwnersTablePageSize',
       'deleteOwner'
     ]),
     handleDetailsClick(row) {
@@ -153,12 +156,6 @@ export default {
         cancelButtonText: this.$t('cancel'),
         type: 'warning'
       }).then(() => {
-        const loading = this.$loading({
-          lock: true,
-          text: 'Loading',
-          spinner: 'el-icon-loading',
-          background: 'rgba(0, 0, 0, 0.7)'
-        })
         this.deleteOwner(id).then(res => {
           this.$message({
             message: this.$t('deleteSuccess'),
@@ -169,12 +166,12 @@ export default {
             message: this.$t('deleteFailed'),
             type: 'error'
           })
-        }).finally(() => {
-          loading.close()
         })
       })
     },
-    onPaginatorSizeChange() {},
+    onPaginatorSizeChange(pageSize) {
+      this.updateOwnersTablePageSize({ pageSize })
+    },
     onPaginatorChange(page) {
       this.updateOwnersTablePage(page)
     }

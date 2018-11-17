@@ -301,7 +301,7 @@ export function isExternal(path) {
   return /^(https?:|mailto:|tel:)/.test(path)
 }
 
-export function filterObjEmptyVal(data, condition = [null, '']) {
+export function filterObjEmptyVal(data, condition = [null, '', undefined]) {
   const filteredData = {}
   Object.keys(data).forEach(key => {
     if (!condition.includes(data[key])) {
@@ -311,3 +311,10 @@ export function filterObjEmptyVal(data, condition = [null, '']) {
   return filteredData
 }
 
+export function filterArrayEmptyVal(arr, condition = [null, '', undefined]) {
+  return arr.filter(item => {
+    if (!condition.includes(item)) {
+      return true
+    }
+  })
+}

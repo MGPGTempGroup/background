@@ -310,7 +310,8 @@ export default {
     query: '查询',
     create: '创建',
     // placeholder
-    searchByNamePlaceholder: '输入名称部分字符',
+    searchBySurnamePlaceholder: '输入姓氏的部分字符',
+    searchByNamePlaceholder: '输入名的部分字符',
     searchByPhonePlaceholder: '输入部分手机号码',
     searchByEmailPlaceholder: '输入邮箱部分字符',
     searchByIdCardNumPlaceholder: '输入身份证号码部分字符',
