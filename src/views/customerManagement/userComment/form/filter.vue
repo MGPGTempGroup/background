@@ -12,11 +12,23 @@
           <el-form :model="filterForm" label-position="top" >
             <el-row :gutter="36" >
               <el-col v-bind="filterFormItemLayoutProps" >
+                <el-form-item :label="$t('surname')" >
+                  <el-select
+                    v-model="filterForm.surname"
+                    multiple
+                    allow-create
+                    remote
+                    default-first-option
+                    filterable />
+                </el-form-item>
+              </el-col>
+              <el-col v-bind="filterFormItemLayoutProps" >
                 <el-form-item :label="$t('userComment.name')" >
                   <el-select
                     v-model="filterForm.name"
                     multiple
                     allow-create
+                    remote
                     default-first-option
                     filterable />
                 </el-form-item>
@@ -27,6 +39,7 @@
                     v-model="filterForm.email"
                     multiple
                     allow-create
+                    remote
                     default-first-option
                     filterable />
                 </el-form-item>
@@ -37,6 +50,7 @@
                     v-model="filterForm.phone"
                     multiple
                     allow-create
+                    remote
                     default-first-option
                     filterable />
                 </el-form-item>
@@ -47,6 +61,7 @@
                     v-model="filterForm.wechat"
                     multiple
                     allow-create
+                    remote
                     default-first-option
                     filterable />
                 </el-form-item>
@@ -72,8 +87,9 @@
                     v-model="filterForm.comments"
                     multiple
                     allow-create
+                    remote
                     default-first-option
-                    filterable />
+                    filterable/>
                 </el-form-item>
               </el-col>
               <el-col v-bind="filterFormItemLayoutProps" >
@@ -88,6 +104,13 @@
                     align="right" />
                 </el-form-item>
               </el-col>
+              <el-col v-bind="{ span: 24 }" >
+                <el-form-item :label="$t('userComment.comeFrom')" >
+                  <el-checkbox v-for="(item,index) in services" :key="index" v-model="currServices" :label="item.id" border>
+                    {{ $t(item.name) }}
+                  </el-checkbox>
+                </el-form-item>
+              </el-col>
             </el-row>
           </el-form>
           <div class="user-comment-filter__form-actions" >
@@ -95,7 +118,7 @@
               {{ $t('reset') }}
             </el-button>
             &nbsp;&nbsp;
-            <el-button type="primary" >
+            <el-button type="primary" @click="handleQuery" >
               {{ $t('query') }}
             </el-button>
           </div>
@@ -107,7 +130,7 @@
 
 <script>
 import { createNamespacedHelpers } from 'vuex'
-const { mapState } = createNamespacedHelpers('userComment')
+const { mapState, mapMutations, mapActions } = createNamespacedHelpers('serviceMessage')
 export default {
   name: 'UserCommentFilter',
   data() {
@@ -144,7 +167,42 @@ export default {
     }
   },
   computed: {
-    ...mapState(['filterForm', 'availableIdentity'])
+    ...mapState([
+      'filterForm',
+      'availableIdentity',
+      'filterServices',
+      'services'
+    ]),
+    currServices: {
+      get() {
+        return this.filterServices
+      },
+      set(val) {
+        this.setFilterServices(val)
+      }
+    }
+  },
+  methods: {
+    ...mapMutations([
+      'setFilterServices',
+      'setTableLoading'
+    ]),
+    ...mapActions([
+      'fetchServices',
+      'fetchMessages'
+    ]),
+    handleQuery() {
+      this.setTableLoading(true)
+      this.fetchMessages().finally(() => {
+        this.setTableLoading(false)
+      })
+    },
+    handleQueryServiceMessages() {
+      this.setTableLoading(true)
+      this.fetchMessages().finally(() => {
+        this.setTableLoading(false)
+      })
+    }
   }
 }
 </script>
@@ -156,6 +214,20 @@ export default {
       justify-content: center;
       margin-top: 20px;
     }
+    &__select-from {
+      padding-top: 15px;
+      &-query {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+      }
+    }
+  }
+  .el-collapse-item {
+    &:first-of-type {
+      border-top: none;
+    }
+    border-top: 1px solid #F0F0F0;
   }
 </style>
 

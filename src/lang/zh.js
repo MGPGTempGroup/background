@@ -344,7 +344,9 @@ export default {
     comment: '留言',
     createdAt: '创建时间',
     conditionalFiltering: '条件筛选',
-    confirmDeleteTip: '你确定要删除此条留言吗？'
+    comeFrom: '来自于',
+    confirmDeleteTip: '你确定要删除此条留言吗？',
+    page: '页面'
   },
   contentMGT: {
     historicalContent: '历史内容',
@@ -391,6 +393,7 @@ export default {
     socialNetworkingSiteHomepageFormTips: '如果您不填写输入框，网站前台将不显示。',
     companyContactInfo: '公司联系信息'
   },
+  all: '全部',
   id: '编号',
   submit: '提交',
   reset: '重置',
@@ -411,9 +414,10 @@ export default {
   createdAt: '创建于',
   updatedAt: '修改于',
   publish: '发表',
+  surname: '姓',
   phone: '手机号码',
   email: '邮箱',
-  name: '名称',
+  name: '名',
   uploadPhoto: '上传照片',
   telephone: '电话',
   facsimile: '传真',
@@ -432,5 +436,18 @@ export default {
   deleteSuccess: '删除成功',
   deleteFailed: '删除失败',
   noData: '无数据',
-  deleteDataTips: '您确定要删除此条数据吗？'
+  deleteDataTips: '您确定要删除此条数据吗？',
+  landlords: '房东',
+  prospectiveTenants: '潜在租户',
+  currentTenants: '当前租户',
+  projectMarketing: '项目营销',
+  projectLeasing: '项目租赁',
+  commercial: '商业/广告',
+  sell: '出售',
+  careers: '招纳贤士',
+  areasWeServe: '服务领域',
+  headquarters: '总部介绍',
+  // 身份相关
+  landlord: '业主',
+  vendor: '卖主'
 }

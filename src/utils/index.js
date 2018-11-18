@@ -301,6 +301,18 @@ export function isExternal(path) {
   return /^(https?:|mailto:|tel:)/.test(path)
 }
 
+export function snakeCase2CamelCase(str) {
+  return str.split('_').map((fragment, index) => {
+    return index === 0 ? fragment : fragment.substring(0, 1).toUpperCase() + fragment.substring(1)
+  }).join('')
+}
+
+export function snakeCase2Normal(str) {
+  return str.split('_').map((fragment, index) => {
+    return index === 0 ? fragment.substring(0, 1).toUpperCase() + fragment.substring(1) : fragment
+  }).join(' ')
+}
+
 export function filterObjEmptyVal(data, condition = [null, '', undefined]) {
   const filteredData = {}
   Object.keys(data).forEach(key => {

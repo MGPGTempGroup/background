@@ -342,7 +342,9 @@ export default {
     comment: 'Comment',
     createdAt: 'Created At',
     conditionalFiltering: 'Conditional filtering',
-    confirmDeleteTip: 'Are you sure you want to delete this message?'
+    comeFrom: 'Come from',
+    confirmDeleteTip: 'Are you sure you want to delete this message?',
+    page: 'Page'
   },
   contentMGT: {
     historicalContent: 'Historical content',
@@ -389,6 +391,7 @@ export default {
     socialNetworkingSiteHomepageFormTips: 'If you do not fill in the input box, the front desk will not be displayed.',
     companyContactInfo: 'Company contact information'
   },
+  all: 'ALL',
   id: 'ID',
   submit: 'Submit',
   reset: 'Reset',
@@ -411,6 +414,7 @@ export default {
   actions: 'Actions',
   publish: 'Publish',
   phone: 'Phone',
+  surname: 'Surname',
   email: 'Email',
   name: 'Name',
   uploadPhoto: 'Upload photo',
@@ -431,5 +435,18 @@ export default {
   deleteSuccess: 'Delete Success',
   deleteFailed: 'Delete failed',
   noData: 'No data',
-  deleteDataTips: 'Are you sure you want to delete this data?'
+  deleteDataTips: 'Are you sure you want to delete this data?',
+  landlords: 'Landlords',
+  prospectiveTenants: 'Prospective Tenants',
+  currentTenants: 'Current Tenants',
+  projectMarketing: 'Project Marketing',
+  projectLeasing: 'Project Leasing',
+  commercial: 'Commercial',
+  sell: 'Sell',
+  careers: 'Careers',
+  areasWeServe: 'Area We Serve',
+  headquarters: 'Headquarters',
+  // 身份相关
+  landlord: 'Landlord',
+  vendor: 'Vendor'
 }

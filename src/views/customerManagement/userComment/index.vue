@@ -8,7 +8,9 @@
           &nbsp;{{ $t('userComment.userCommentsList') }}
         </h2>
       </div>
-      <el-table :data="comments" >
+      <el-table
+        v-loading="tableLoading"
+        :data="messages.data">
         <el-table-column
           :label="$t('userComment.id')"
           prop="id"
@@ -37,7 +39,7 @@
           :label="$t('userComment.identity')"
           align="center">
           <template slot-scope="scope" >
-            <el-tag> {{ $t(`userComment.${scope.row.identity}`) }} </el-tag>
+            <el-tag> {{ $t(`${scope.row.identity.name}`) }} </el-tag>
           </template>
         </el-table-column>
         <el-table-column
@@ -56,48 +58,36 @@
         </el-table-column>
         <el-table-column
           :label="$t('userComment.createdAt')"
-          prop="createdAt"
+          prop="created_at"
           align="center" />
+        <el-table-column
+          :label="$t('userComment.comeFrom')"
+          align="center">
+          <template slot-scope="scope" >
+            <el-tag> {{ $t(`${scope.row.service.name}`) }} </el-tag>
+          </template>
+        </el-table-column>
         <el-table-column
           fixed="right"
           align="center"
           label="操作"
           width="100">
           <template slot-scope="scope">
-            <el-button type="danger" size="small" @click="deleteComment(scope.row)">{{ $t('delete') }}</el-button>
+            <el-button type="text" size="small" @click="deleteComment(scope.row)">{{ $t('delete') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
-      <div class="user-comment__paginator-wrapper" >
+      <div v-if="messages.meta" class="user-comment__paginator-wrapper" >
         <el-pagination
-          :current-page="currCommentsPage"
+          :current-page="tablePage"
           :page-sizes="[10, 30, 50, 100]"
-          :page-size="10"
-          :total="100"
+          :page-size="tablePageSize"
+          :total="messages.meta.pagination.total"
           layout="total, sizes, prev, pager, next, jumper"
           @size-change="onPaginatorSizeChange"
           @current-change="onPaginatorChange"/>
       </div>
     </el-card>
-    <!-- 删除确认Dialog -->
-    <el-dialog
-      :visible.sync="deleteConfirmationDialogVisible"
-      :title="$t('userComment.confirmDeleteTip')"
-      width="35%"
-      center>
-      <dl class="user-comment-delete-dialog__info" >
-        <dt>{{ $t('userComment.id') }}</dt>
-        <dd>{{ messageForCurrOperation.id }}</dd>
-        <dt>{{ $t('userComment.name') }}</dt>
-        <dd>{{ messageForCurrOperation.name }}</dd>
-        <dt>{{ $t('userComment.comment') }}</dt>
-        <dd>{{ messageForCurrOperation.comments }}</dd>
-      </dl>
-      <span slot="footer" class="dialog-footer">
-        <el-button type="warning" @click="deleteConfirmationDialogVisible = false">{{ $t('confirm') }}</el-button>
-        <el-button type="info" @click="deleteConfirmationDialogVisible = false">{{ $t('cancel') }}</el-button>
-      </span>
-    </el-dialog>
   </div>
 </template>
 
@@ -105,33 +95,55 @@
 import 'font-awesome/css/font-awesome.min.css'
 import { createNamespacedHelpers } from 'vuex'
 import filterForm from './form/filter'
-const { mapState, mapMutations } = createNamespacedHelpers('userComment')
+const { mapState, mapMutations, mapActions } = createNamespacedHelpers('serviceMessage')
 
 export default {
   name: 'UserComment',
   components: { filterForm },
-  data() {
-    return { }
-  },
   computed: {
-    ...mapState(['comments', 'currCommentsPage', 'messageForCurrOperation']),
-    deleteConfirmationDialogVisible: {
-      get() {
-        return this.$store.state.userComment.deleteConfirmationDialogVisible
-      },
-      set(visible) {
-        this.updateDeleteConfirmationDialogVisible(visible)
-      }
-    }
+    ...mapState([
+      'messages',
+      'currCommentsPage',
+      'messageForCurrOperation',
+      'tablePage',
+      'tablePageSize',
+      'tableLoading'
+    ])
+  },
+  created() {
+    this.setTableLoading(true)
+    this.fetchServices().then(() => {
+      return this.fetchMessages()
+    }).finally(() => {
+      this.setTableLoading(false)
+    })
   },
   methods: {
-    ...mapMutations(['updateDeleteConfirmationDialogVisible', 'updateMessageForCurrOperation']),
+    ...mapMutations([
+      'seTablePage', 'setTablePageSize', 'setTableLoading',
+      'updateMessageForCurrOperation'
+    ]),
+    ...mapActions([
+      'fetchServices', 'fetchMessages', 'deleteMessage'
+    ]),
     deleteComment(row) {
-      this.updateMessageForCurrOperation(row)
-      this.deleteConfirmationDialogVisible = true
+      this.$confirm(this.$t('deleteDataTips'), this.$t('tips'), {
+        confirmButtonText: this.$t('confirm'),
+        cancelButtonText: this.$t('cancel'),
+        type: 'warning'
+      }).then(() => {
+        this.setTableLoading(true)
+        return this.deleteMessage(row.id)
+      }).finally(() => {
+        this.setTableLoading(false)
+      })
     },
-    onPaginatorSizeChange() {},
-    onPaginatorChange() {}
+    onPaginatorSizeChange(pageSize) {
+      this.setTablePageSize(pageSize)
+    },
+    onPaginatorChange(page) {
+      this.setTablePage(page)
+    }
   }
 }
 </script>

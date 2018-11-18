@@ -20,9 +20,7 @@
                 <el-select
                   v-model="filterForm.surname"
                   :placeholder="$t('owner.searchBySurnamePlaceholder')"
-                  :remote-method="() => null"
                   multiple
-                  filterable
                   remote
                   allow-create
                   default-first-option
@@ -229,17 +227,11 @@ export default {
       }))
     },
     handleReset() {
-      this.updateFilterForm({
-        name: [],
-        phone: [],
-        email: [],
-        wechat: [],
-        address: [],
-        identity_id: [],
-        id_card: [],
-        createdDateRange: [],
-        updatedDateRange: []
+      const emptyFilterForm = {}
+      Object.keys(this.filterForm).forEach(key => {
+        emptyFilterForm[key] = []
       })
+      this.updateFilterForm(emptyFilterForm)
     }
   }
 }

@@ -7,7 +7,7 @@ import tagsView from './modules/tagsView'
 import user from './modules/user'
 import housing from './modules/housing'
 import propertyOwner from './modules/propertyOwner'
-import userComment from './modules/userComment'
+import serviceMessage from './modules/serviceMessage'
 import content from './modules/content'
 import industryUpdates from './modules/industryUpdates'
 import company from './modules/company'
@@ -25,7 +25,7 @@ const store = new Vuex.Store({
     housing,
     propertyOwner,
     content,
-    userComment,
+    serviceMessage,
     company,
     industryUpdates
   },
