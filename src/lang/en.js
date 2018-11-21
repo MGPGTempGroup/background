@@ -389,7 +389,8 @@ export default {
     companyInformationEditor: 'Company information editor',
     socialNetworkingSiteHomepage: 'Social networking site Homepage',
     socialNetworkingSiteHomepageFormTips: 'If you do not fill in the input box, the front desk will not be displayed.',
-    companyContactInfo: 'Company contact information'
+    companyContactInfo: 'Company contact information',
+    detailedAddress: 'Detailed Address'
   },
   all: 'ALL',
   id: 'ID',

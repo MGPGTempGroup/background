@@ -103,7 +103,6 @@ export default {
   computed: {
     ...mapState([
       'messages',
-      'currCommentsPage',
       'messageForCurrOperation',
       'tablePage',
       'tablePageSize',

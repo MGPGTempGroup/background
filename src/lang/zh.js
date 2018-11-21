@@ -391,7 +391,8 @@ export default {
     companyInformationEditor: '公司信息编辑',
     socialNetworkingSiteHomepage: '社交网站主页',
     socialNetworkingSiteHomepageFormTips: '如果您不填写输入框，网站前台将不显示。',
-    companyContactInfo: '公司联系信息'
+    companyContactInfo: '公司联系信息',
+    detailedAddress: '详细地址'
   },
   all: '全部',
   id: '编号',

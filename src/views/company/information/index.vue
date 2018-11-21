@@ -5,7 +5,7 @@
         <h2 style="margin: 0;" >{{ $t('company.companyInformationEditor') }}</h2>
         <p style="margin: 0px; margin-top: 15px;" >{{ $t('company.socialNetworkingSiteHomepageFormTips') }}</p>
       </div>
-      <el-form :model="form" label-position="top" >
+      <el-form v-if="form" :model="form" label-position="top" >
         <h3>{{ $t('company.companyContactInfo') }}</h3>
         <el-row :gutter="48" >
           <el-col v-bind="formItemLayoutProps" >
@@ -23,13 +23,18 @@
               <el-input v-model="form.post_code" />
             </el-form-item>
           </el-col>
-          <el-col v-bind="formItemLargerLayoutProps" >
+          <el-col v-bind="formItemLayoutProps" >
             <el-form-item :label="$t('address')" >
               <el-cascader
-                :options="addressOpts"
+                :options="areaData"
                 v-model="form.address"
                 expand-trigger="hover"
                 @change="() => null"/>
+            </el-form-item>
+          </el-col>
+          <el-col v-bind="formItemLayoutProps" >
+            <el-form-item :label="$t('company.detailedAddress')" >
+              <el-input v-model="form.detailed_address" />
             </el-form-item>
           </el-col>
         </el-row>
@@ -59,7 +64,7 @@
           <el-col v-bind="formItemLayoutProps" >
             <el-form-item :label="$t('tuesday')">
               <el-time-select
-                v-model="form.opening_hours.monday.start_time"
+                v-model="form.opening_hours.tuesday.start_time"
                 :picker-options="{
                   start: '00:00',
                   step: '00:15',
@@ -67,12 +72,12 @@
                 }"
                 placeholder="起始时间"/>
               <el-time-select
-                v-model="form.opening_hours.monday.end_time"
+                v-model="form.opening_hours.tuesday.end_time"
                 :picker-options="{
                   start: '00:00',
                   step: '00:15',
                   end: '24:00',
-                  minTime: form.opening_hours.monday.start_time
+                  minTime: form.opening_hours.tuesday.start_time
                 }"
                 placeholder="结束时间"/>
             </el-form-item>
@@ -80,7 +85,7 @@
           <el-col v-bind="formItemLayoutProps" >
             <el-form-item :label="$t('wednesday')" >
               <el-time-select
-                v-model="form.opening_hours.monday.start_time"
+                v-model="form.opening_hours.thursday.start_time"
                 :picker-options="{
                   start: '00:00',
                   step: '00:15',
@@ -88,12 +93,12 @@
                 }"
                 placeholder="起始时间"/>
               <el-time-select
-                v-model="form.opening_hours.monday.end_time"
+                v-model="form.opening_hours.wednesday.end_time"
                 :picker-options="{
                   start: '00:00',
                   step: '00:15',
                   end: '24:00',
-                  minTime: form.opening_hours.monday.start_time
+                  minTime: form.opening_hours.wednesday.start_time
                 }"
                 placeholder="结束时间"/>
             </el-form-item>
@@ -101,7 +106,7 @@
           <el-col v-bind="formItemLayoutProps" >
             <el-form-item :label="$t('thursday')" >
               <el-time-select
-                v-model="form.opening_hours.monday.start_time"
+                v-model="form.opening_hours.thursday.start_time"
                 :picker-options="{
                   start: '00:00',
                   step: '00:15',
@@ -109,12 +114,12 @@
                 }"
                 placeholder="起始时间"/>
               <el-time-select
-                v-model="form.opening_hours.monday.end_time"
+                v-model="form.opening_hours.thursday.end_time"
                 :picker-options="{
                   start: '00:00',
                   step: '00:15',
                   end: '24:00',
-                  minTime: form.opening_hours.monday.start_time
+                  minTime: form.opening_hours.thursday.start_time
                 }"
                 placeholder="结束时间"/>
             </el-form-item>
@@ -122,7 +127,7 @@
           <el-col v-bind="formItemLayoutProps" >
             <el-form-item :label="$t('friday')" >
               <el-time-select
-                v-model="form.opening_hours.monday.start_time"
+                v-model="form.opening_hours.friday.start_time"
                 :picker-options="{
                   start: '00:00',
                   step: '00:15',
@@ -130,12 +135,12 @@
                 }"
                 placeholder="起始时间"/>
               <el-time-select
-                v-model="form.opening_hours.monday.end_time"
+                v-model="form.opening_hours.friday.end_time"
                 :picker-options="{
                   start: '00:00',
                   step: '00:15',
                   end: '24:00',
-                  minTime: form.opening_hours.monday.start_time
+                  minTime: form.opening_hours.friday.start_time
                 }"
                 placeholder="结束时间"/>
             </el-form-item>
@@ -143,7 +148,7 @@
           <el-col v-bind="formItemLayoutProps" >
             <el-form-item :label="$t('saturday')" >
               <el-time-select
-                v-model="form.opening_hours.monday.start_time"
+                v-model="form.opening_hours.saturday.start_time"
                 :picker-options="{
                   start: '00:00',
                   step: '00:15',
@@ -151,12 +156,12 @@
                 }"
                 placeholder="起始时间"/>
               <el-time-select
-                v-model="form.opening_hours.monday.end_time"
+                v-model="form.opening_hours.saturday.end_time"
                 :picker-options="{
                   start: '00:00',
                   step: '00:15',
                   end: '24:00',
-                  minTime: form.opening_hours.monday.start_time
+                  minTime: form.opening_hours.saturday.start_time
                 }"
                 placeholder="结束时间"/>
             </el-form-item>
@@ -164,7 +169,7 @@
           <el-col v-bind="formItemLayoutProps" >
             <el-form-item :label="$t('sunday')" >
               <el-time-select
-                v-model="form.opening_hours.monday.start_time"
+                v-model="form.opening_hours.sunday.start_time"
                 :picker-options="{
                   start: '00:00',
                   step: '00:15',
@@ -172,12 +177,12 @@
                 }"
                 placeholder="起始时间"/>
               <el-time-select
-                v-model="form.opening_hours.monday.end_time"
+                v-model="form.opening_hours.sunday.end_time"
                 :picker-options="{
                   start: '00:00',
                   step: '00:15',
                   end: '24:00',
-                  minTime: form.opening_hours.monday.start_time
+                  minTime: form.opening_hours.sunday.start_time
                 }"
                 placeholder="结束时间"/>
             </el-form-item>
@@ -187,38 +192,38 @@
         <el-row :gutter="48" >
           <el-col v-bind="formItemLayoutProps" >
             <el-form-item :label="$t('company.googlePlusHomePage')">
-              <el-input v-model="form.googleplus" />
+              <el-input v-model="form.google_plus_homepage" />
             </el-form-item>
           </el-col>
           <el-col v-bind="formItemLayoutProps" >
             <el-form-item :label="$t('company.linkinHomePage')">
-              <el-input v-model="form.linkin" />
+              <el-input v-model="form.linkin_homepage" />
             </el-form-item>
           </el-col>
           <el-col v-bind="formItemLayoutProps" >
             <el-form-item :label="$t('company.youtubeHomePaeg')">
-              <el-input v-model="form.youtube" />
+              <el-input v-model="form.youtube_homepage" />
             </el-form-item>
           </el-col>
           <el-col v-bind="formItemLayoutProps" >
             <el-form-item :label="$t('company.facebookHomePage')">
-              <el-input v-model="form.facebook" />
+              <el-input v-model="form.facebook_homepage" />
             </el-form-item>
           </el-col>
           <el-col v-bind="formItemLayoutProps" >
             <el-form-item :label="$t('company.twitterHomePage')">
-              <el-input v-model="form.twitter" />
+              <el-input v-model="form.twitter_homepage" />
             </el-form-item>
           </el-col>
           <el-col v-bind="formItemLayoutProps" >
             <el-form-item :label="$t('company.instagram')">
-              <el-input v-model="form.instagram" />
+              <el-input v-model="form.instagram_homepage" />
             </el-form-item>
           </el-col>
         </el-row>
         <div class="company-info__form-actions" >
-          <el-button type="info" >{{ $t('reset') }}</el-button>
-          <el-button type="primary" >{{ $t('update') }}</el-button>
+          <el-button type="info" @click="handleReset" >{{ $t('reset') }}</el-button>
+          <el-button type="primary" @click="handleUpdate" >{{ $t('update') }}</el-button>
         </div>
       </el-form>
     </el-card>
@@ -226,63 +231,54 @@
 </template>
 
 <script>
+import { createNamespacedHelpers } from 'vuex'
+import { deepClone } from '@/utils'
+const { mapState, mapActions } = createNamespacedHelpers('company')
+import areaDataStorage from '@/utils/areaDataStorage'
 export default {
   name: 'CompanyInfo',
   data() {
     return {
-      form: {
-        opening_hours: {
-          monday: {},
-          tuesday: {},
-          wednesday: {},
-          thursday: {},
-          firday: {},
-          saturday: {},
-          sunday: {}
-        }
-      },
+      areaData: areaDataStorage(),
+      form: null,
       formItemLayoutProps: { xs: 24, sm: 12, md: 12, lg: 8, xl: 8 },
       formItemLargerLayoutProps: { xs: 24, sm: 12, md: 24, lg: 16, xl: 16 }
     }
   },
-  watch: {
-    '$store.state.app.language': function() {
-      this.setOpts()
-    }
+  computed: {
+    ...mapState({
+      originForm: state => state.companyInfo
+    })
   },
   created() {
-    this.setOpts()
+    this.fetchCompanyInfo().then(data => {
+      this.form = data
+    })
   },
   methods: {
-    setOpts() {
-      this.addressOpts = [{
-        label: this.$t('addressList.australia'),
-        value: 'australia',
-        children: [
-          {
-            label: this.$t('addressList.vic'),
-            value: 'vic',
-            children: [
-              {
-                label: this.$t('addressList.melbourne'),
-                value: 'melbourne',
-                children: [
-                  {
-                    label: this.$t('addressList.mooneePonds'),
-                    value: 'mooneePonds',
-                    children: [
-                      {
-                        label: this.$t('addressList.margaretStreet'),
-                        value: 'Margaret Street'
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      }]
+    ...mapActions([
+      'fetchCompanyInfo',
+      'updateCompanyInfo'
+    ]),
+    handleUpdate() {
+      const loading = this.$loading({
+        lock: true,
+        text: 'Loading',
+        spinner: 'el-icon-loading',
+        background: 'rgba(0, 0, 0, 0.7)'
+      })
+      this.updateCompanyInfo(this.form).then(data => {
+        this.form = data
+        this.$message({
+          message: this.$t('updateSuccess'),
+          type: 'success'
+        })
+      }).finally(() => {
+        loading.close()
+      })
+    },
+    handleReset() {
+      this.form = deepClone(this.originForm)
     }
   }
 }

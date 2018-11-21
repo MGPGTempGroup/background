@@ -20,7 +20,9 @@
                 <el-select
                   v-model="filterForm.surname"
                   :placeholder="$t('owner.searchBySurnamePlaceholder')"
+                  :remote-method="() => null"
                   multiple
+                  filterable
                   remote
                   allow-create
                   default-first-option
@@ -172,8 +174,6 @@
 
 <script>
 import { createNamespacedHelpers } from 'vuex'
-import { param } from '@/utils'
-import filterData2ConditionalParams from '@/utils/filterData2ConditionalParams'
 const {
   mapState,
   mapMutations,
@@ -204,27 +204,7 @@ export default {
       'updateFilterForm'
     ]),
     handleQuery() {
-      const filterForm = this.filterForm
-      const params = filterData2ConditionalParams({
-        fuzzy: {
-          phone: filterForm.phone,
-          name: filterForm.name,
-          surname: filterForm.surname,
-          email: filterForm.email,
-          wechat: filterForm.wechat,
-          id_card: filterForm.id_card
-        },
-        dateRange: {
-          created_at: filterForm.createdDateRange,
-          updated_at: filterForm.updatedDateRange
-        },
-        contains: {
-          identity_id: filterForm.identity_id
-        }
-      })
-      this.fetchOwners(params + '&' + param({
-        pageSize: this.ownersTablePageSize
-      }))
+      this.fetchOwners()
     },
     handleReset() {
       const emptyFilterForm = {}

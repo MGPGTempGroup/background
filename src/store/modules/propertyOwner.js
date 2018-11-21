@@ -5,6 +5,7 @@ import {
   deleteOwner
 } from '@/api/propertyOwner'
 import { Loading } from 'element-ui'
+import filterData2ConditionalParams from '@/utils/filterData2ConditionalParams'
 
 const propertyOwner = {
   namespaced: true,
@@ -12,7 +13,7 @@ const propertyOwner = {
     owners: {},
     ownersTableLoading: false,
     ownersTablePage: 1,
-    ownersTablePageSize: 15,
+    ownersTablePageSize: 10,
     filterForm: {
       name: [],
       surname: [],
@@ -52,11 +53,11 @@ const propertyOwner = {
     updateTableLoading(state, payload) {
       state.ownersTableLoading = payload.loading
     },
-    setCurrTablePage(state, payload) {
-      state.ownersTablePage = payload.page
+    setTablePage(state, payload) {
+      state.ownersTablePage = payload
     },
     setTablePageSize(state, payload) {
-      state.ownersTablePageSize = payload.pageSize
+      state.ownersTablePageSize = payload
     },
     addOwnerData(state, payload) {
       state.owners.data.push(payload)
@@ -90,8 +91,31 @@ const propertyOwner = {
     }
   },
   actions: {
-    async fetchOwners({ commit }, params) {
+    async fetchOwners({ commit, state }) {
       commit('updateTableLoading', { loading: true })
+      const filterForm = state.filterForm
+      const conditionalParams = filterData2ConditionalParams({
+        fuzzy: {
+          phone: filterForm.phone,
+          name: filterForm.name,
+          surname: filterForm.surname,
+          email: filterForm.email,
+          wechat: filterForm.wechat,
+          id_card: filterForm.id_card
+        },
+        dateRange: {
+          created_at: filterForm.createdDateRange,
+          updated_at: filterForm.updatedDateRange
+        },
+        contains: {
+          identity_id: filterForm.identity_id
+        }
+      })
+      const params = [
+        conditionalParams,
+        'page=' + state.ownersTablePage,
+        'pageSize=' + state.ownersTablePageSize
+      ].join('&')
       const owners = (await fetchOwners(params)).data
       commit('resetOwnersData', owners)
       commit('updateTableLoading', { loading: false })
@@ -132,14 +156,6 @@ const propertyOwner = {
       await deleteOwner(ownerId)
       commit('deleteOwnerData', { id: ownerId })
       loading.close()
-    },
-    async updateOwnersTablePage({ commit, dispatch }, page) {
-      await dispatch('fetchOwnersData', { page })
-      commit('setCurrTablePage', page)
-    },
-    async updateOwnersTablePageSize({ commit, dispatch }, params) {
-      await dispatch('fetchOwners', 'pageSize=' + params.pageSize)
-      commit('setTablePageSize', params.pageSize)
     }
   }
 }

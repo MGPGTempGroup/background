@@ -1,3 +1,10 @@
+import {
+  fetchInfo,
+  updateInfo
+} from '@/api/company'
+import { deepClone } from '@/utils'
+import { Loading } from 'element-ui'
+
 const company = {
   namespaced: true,
   state: {
@@ -25,6 +32,21 @@ const company = {
         updated_at: '3 days ago'
       }
     ],
+    companyInfo: {
+      telephone: '',
+      facsimile: '',
+      post_code: '',
+      address: [],
+      opening_hours: {
+        monday: [],
+        tuesday: [],
+        wednesday: [],
+        thursday: [],
+        friday: [],
+        saturday: [],
+        sunday: []
+      }
+    },
     createMembersDialogVisible: false,
     editMembersDialogVisible: false
   },
@@ -34,6 +56,28 @@ const company = {
     },
     toggleEditMembersDialogVisible(state, payload) {
       state.editMembersDialogVisible = payload.visible
+    },
+    setCompanyInfo(state, payload) {
+      state.companyInfo = payload
+    }
+  },
+  actions: {
+    async fetchCompanyInfo({ commit }, payload) {
+      const loading = Loading.service({
+        lock: true,
+        text: 'Loading',
+        spinner: 'el-icon-loading',
+        background: 'rgba(0, 0, 0, 0.7)'
+      })
+      const data = (await fetchInfo(payload)).data
+      commit('setCompanyInfo', data)
+      loading.close()
+      return deepClone(data)
+    },
+    async updateCompanyInfo({ commit }, payload) {
+      const data = (await updateInfo(payload)).data
+      commit('setCompanyInfo', data)
+      return deepClone(data)
     }
   }
 }

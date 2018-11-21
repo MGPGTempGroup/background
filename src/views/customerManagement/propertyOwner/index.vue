@@ -124,9 +124,7 @@ export default {
   },
   created() {
     // 拉取业主列表数据
-    this.fetchOwners({
-      page: this.currTablePage
-    })
+    this.fetchOwners()
   },
   methods: {
     ...mapMutations([
@@ -134,12 +132,12 @@ export default {
       'setDetailsDialogVisible',
       'setDetailsData',
       'setDataEditionDialogVisible',
-      'setDataEditionForm'
+      'setDataEditionForm',
+      'setTablePage',
+      'setTablePageSize'
     ]),
     ...mapActions([
       'fetchOwners',
-      'updateOwnersTablePage',
-      'updateOwnersTablePageSize',
       'deleteOwner'
     ]),
     handleDetailsClick(row) {
@@ -170,10 +168,10 @@ export default {
       })
     },
     onPaginatorSizeChange(pageSize) {
-      this.updateOwnersTablePageSize({ pageSize })
+      this.setTablePageSize(pageSize)
     },
     onPaginatorChange(page) {
-      this.updateOwnersTablePage(page)
+      this.setTablePage(page)
     }
   }
 }

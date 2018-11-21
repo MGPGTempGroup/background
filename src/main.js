@@ -18,6 +18,8 @@ import './icons' // icon
 import './errorLog' // error log
 import './permission' // permission control
 
+import './utils/areaDataStorage'
+
 import * as filters from './filters' // global filters
 
 Vue.use(Element, {
@@ -39,4 +41,3 @@ new Vue({
   i18n,
   render: h => h(App)
 })
-
