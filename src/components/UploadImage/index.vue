@@ -13,7 +13,7 @@
         <div class="upload-image__list-item-mask" dragable="false" >
           <el-button type="danger" size="mini" @click="del(item, index)" ><i class="fa fa-trash" /></el-button>
           <el-button type="primary" size="mini" @click="preview(item.dataURL)" ><i class="fa fa-eye" /></el-button>
-          <el-button type="primary" size="mini" ><i class="fa fa-edit" /></el-button>
+          <el-button type="primary" size="mini" @click="openCropper(item.dataURL, index)" ><i class="fa fa-edit" /></el-button>
         </div>
       </li>
       <li class="upload-image__btn" >
@@ -24,16 +24,38 @@
         </div>
       </li>
     </ul>
-    <el-dialog :visible.sync="visible" :title="$t('preview')" height="600px" append-to-body >
+    <el-dialog
+      :visible.sync="visible"
+      :title="$t('preview')"
+      height="600px"
+      append-to-body >
       <img :src="currPreviewImgSrc" style="width: 100%;" alt="">
+    </el-dialog>
+    <el-dialog
+      :visible.sync="cropperDialogVisible"
+      :title="$t('imgCropper')"
+      height="500px"
+      append-to-body >
+      <div class="upload-image__cropper-wrapper" >
+        <vue-cropper
+          ref="cropper"
+          v-bind="cropperOpts" />
+      </div>
+      <div class="upload-image__cropper-control" >
+        <el-button type="primary" @click="crop" >{{ $t('confirm') }}</el-button>
+      </div>
     </el-dialog>
   </div>
 </template>
 
 <script>
+import { VueCropper } from 'vue-cropper'
 import 'font-awesome/css/font-awesome.min.css'
 export default {
   name: 'UploadImage',
+  components: {
+    VueCropper
+  },
   props: {
     imageList: {
       type: Array,
@@ -46,11 +68,26 @@ export default {
       willDragToBeforeIndex: null,
       currPreviewImgSrc: '',
       availableTypes: ['image/jpg', 'image/jpeg', 'images/png', 'image/gif'],
-      visible: false
+      visible: false,
+      cropperDialogVisible: false,
+      currCopperImageIndex: null,
+      cropperOpts: {
+        img: '', // 图片资源：dataURL or Blob or URL
+        outputType: 'jpeg', // 剪裁后输出的图片文件类型
+        size: 1, // 比例
+        // 自动开启剪裁
+        autoCrop: true,
+        // 按照比例剪裁
+        fixed: true,
+        fixedNumber: [260, 200]
+      }
     }
   },
   methods: {
     readAsDataURL(file) {},
+    /**
+     * 文件选择时（通过file input），转码所有图片文件为Base64
+     */
     onFileChange(event) {
       const files = event.target.files
       const promises = Object.values(files).map(function(file) {
@@ -67,13 +104,44 @@ export default {
         this.$emit('update:imageList', this.imageList.concat(res))
       })
     },
+    /**
+     * 删除图片
+     */
     del(item, index) {
       this.$emit('update:imageList', this.imageList.filter((v, i) => i !== index))
     },
-    preview(src) {
-      this.currPreviewImgSrc = src
+    /**
+     * 图片预览
+     */
+    preview(dataURL) {
+      this.currPreviewImgSrc = dataURL
       this.visible = true
     },
+    /**
+     * 开始剪裁
+     */
+    openCropper(dataURL, index) {
+      this.cropperDialogVisible = true
+      this.currCopperImageIndex = index
+      this.cropperOpts.img = dataURL
+    },
+    /**
+     * 确认剪裁
+     */
+    crop() {
+      this.$refs.cropper.getCropBlob(blob => {
+        this.imageList[this.currCopperImageIndex].file = new File([blob], this.currCopperImageIndex, {
+          type: 'image/jpeg'
+        })
+      })
+      this.$refs.cropper.getCropData(dataURL => {
+        this.imageList[this.currCopperImageIndex].dataURL = dataURL
+      })
+      this.cropperDialogVisible = false
+    },
+    /**
+     * 拖拽相关事件处理
+     */
     dragStart(event) {
       this.currDragIndex = [].indexOf.call(this.$refs.list.children, event.target)
     },
@@ -145,6 +213,15 @@ export default {
           opacity: 0;
         }
       }
+    }
+    &__cropper-wrapper {
+      width: 100%;
+      height: 500px;
+    }
+    &__cropper-control {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 20px;
     }
     &__btn {
       display: inline-flex;
