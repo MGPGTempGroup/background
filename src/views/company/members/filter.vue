@@ -40,7 +40,7 @@
                   default-first-option />
               </el-form-item>
             </el-col>
-            <el-col v-bind="biggerFormItemLayoutProps" >
+            <el-col v-bind="formItemLayoutProps" >
               <el-form-item :label="$t('company.position')">
                 <el-select v-model="form.position" multiple >
                   <el-option-group
@@ -74,7 +74,7 @@ export default {
   data() {
     return {
       collapseActiveNames: ['1'],
-      formItemLayoutProps: { xs: 24, sm: 24, md: 12, lg: 8, xl: 6 },
+      formItemLayoutProps: { xs: 24, sm: 24, md: 12, lg: 8, xl: 8 },
       biggerFormItemLayoutProps: { xs: 24, sm: 24, md: 24, lg: 16, xl: 18 },
       form: {},
       positionDivision: [

@@ -8,10 +8,34 @@ export function fetchInfo(params) {
   })
 }
 
+export function fetchMembers(params) {
+  let url = 'company/members'
+  params && (url += '?' + params)
+  return request({
+    url,
+    method: 'GET'
+  })
+}
+
+export function fetchDepartments(params) {
+  return request({
+    method: 'GET',
+    url: 'company/departments'
+  })
+}
+
 export function updateInfo(data) {
   return request({
     url: 'company/info',
     method: 'PATCH',
+    data
+  })
+}
+
+export function createMember(data) {
+  return request({
+    method: 'POST',
+    url: 'company/members',
     data
   })
 }

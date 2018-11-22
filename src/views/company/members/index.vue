@@ -4,11 +4,14 @@
     <el-card shadow="never" style="margin-top: 20px;" >
       <div slot="header" class="company-members__list-header" >
         <h2 style="margin: 0px;" >{{ $t('company.memberList') }}</h2>
-        <el-button type="primary" class="company-members__create-btn" @click="toggleCreateMembersDialogVisible({ visible: true })" >
+        <el-button type="primary" class="company-members__create-btn" @click="setCreateMemberDialogVisible(true)" >
           {{ $t('create') }}
         </el-button>
       </div>
-      <el-table :data="members" >
+      <el-table
+        v-loading="membersTableLoading"
+        v-if="members.data"
+        :data="members.data">
         <el-table-column :label="$t('id')" prop="id" align="center" min-width="20" />
         <el-table-column :label="$t('name')" prop="name" align="center" min-width="30" />
         <el-table-column :label="$t('phone')" prop="phone" align="center" min-width="30" />
@@ -83,7 +86,7 @@ import CreateMembersDialog from './create'
 import EditMembersDialog from './edit'
 import FilterForm from './filter'
 import { createNamespacedHelpers } from 'vuex'
-const { mapState, mapMutations } = createNamespacedHelpers('company')
+const { mapState, mapMutations, mapActions } = createNamespacedHelpers('company')
 export default {
   name: 'CompanyMembersPage',
   components: {
@@ -96,13 +99,35 @@ export default {
   },
   computed: {
     ...mapState([
-      'members'
+      'members',
+      'membersTableLoading'
     ])
+  },
+  created() {
+    // 拉取公司部门职位数据
+    const loading = this.$loading({
+      lock: true,
+      text: 'Loading',
+      spinner: 'el-icon-loading',
+      background: 'rgba(0, 0, 0, 0.7)'
+    })
+    this.fetchCompanyDepartments().finally(() => loading.close())
+
+    // 拉取公司成员数据
+    this.setMembersTableLoading(true)
+    this.fetchCompanyMembers().finally(() => {
+      this.setMembersTableLoading(false)
+    })
   },
   methods: {
     ...mapMutations([
-      'toggleCreateMembersDialogVisible',
+      'setMembersTablePage', 'setMembersTablePageSize', 'setMembersTableLoading',
+      'setCreateMemberDialogVisible',
       'toggleEditMembersDialogVisible'
+    ]),
+    ...mapActions([
+      'fetchCompanyMembers',
+      'fetchCompanyDepartments'
     ]),
     handleMemberDelete() {
       this.$confirm(this.$t('company.confirmDeleteMemberTips'), this.$t('tips'), {
@@ -111,8 +136,12 @@ export default {
         cancelButtonText: this.$t('cancel')
       }).then(() => {}).catch(action => { })
     },
-    handlePaginatorSizeChange() {},
-    handlePaginatorChange() {}
+    handlePaginatorSizeChange(pageSize) {
+      this.setMembersTablePageSize = pageSize
+    },
+    handlePaginatorChange(page) {
+      this.setMembersTablePage = page
+    }
   }
 }
 </script>

@@ -1,6 +1,9 @@
 import {
   fetchInfo,
-  updateInfo
+  fetchMembers,
+  fetchDepartments,
+  updateInfo,
+  createMember
 } from '@/api/company'
 import { deepClone } from '@/utils'
 import { Loading } from 'element-ui'
@@ -8,6 +11,7 @@ import { Loading } from 'element-ui'
 const company = {
   namespaced: true,
   state: {
+    // 公司成员相关数据
     members: [
       {
         id: 1,
@@ -32,6 +36,12 @@ const company = {
         updated_at: '3 days ago'
       }
     ],
+    membersTablePage: 1,
+    membersTablePageSize: 10,
+    membersTableLoading: false,
+    membersFilterForm: {},
+    // 公司相关数据
+    companyDepartments: [],
     companyInfo: {
       telephone: '',
       facsimile: '',
@@ -59,6 +69,27 @@ const company = {
     },
     setCompanyInfo(state, payload) {
       state.companyInfo = payload
+    },
+    setCreateMemberDialogVisible(state, payload) {
+      state.createMembersDialogVisible = payload
+    },
+    setMembers(state, payload) {
+      state.members = payload
+    },
+    setMembersTableLoading(state, payload) {
+      state.membersTableLoading = payload
+    },
+    setMembersTablePage(state, payload) {
+      state.membersTablePage = payload
+    },
+    setMembersTablePageSize(state, payload) {
+      state.membersTablePageSize = payload
+    },
+    setCompanyDepartments(state, payload) {
+      state.companyDepartments = payload
+    },
+    addMemberData(state, payload) {
+      state.members.data.push(payload)
     }
   },
   actions: {
@@ -74,10 +105,25 @@ const company = {
       loading.close()
       return deepClone(data)
     },
+    async fetchCompanyMembers({ commit }, payload) {
+      const members = (await fetchMembers()).data
+      commit('setMembers', members)
+      return deepClone(members)
+    },
+    async fetchCompanyDepartments({ commit }, payload) {
+      const response = (await fetchDepartments()).data
+      commit('setCompanyDepartments', response.data || [])
+      return response.data
+    },
     async updateCompanyInfo({ commit }, payload) {
       const data = (await updateInfo(payload)).data
       commit('setCompanyInfo', data)
       return deepClone(data)
+    },
+    async createCompanyMember({ commit }, payload) {
+      const memberData = (await createMember(payload)).data
+      commit('addMemberData', memberData)
+      return memberData
     }
   }
 }

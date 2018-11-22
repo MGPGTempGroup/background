@@ -450,5 +450,6 @@ export default {
   headquarters: '总部介绍',
   // 身份相关
   landlord: '业主',
-  vendor: '卖主'
+  vendor: '卖主',
+  imgCropper: '图片裁剪器'
 }

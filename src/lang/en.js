@@ -449,5 +449,6 @@ export default {
   headquarters: 'Headquarters',
   // 身份相关
   landlord: 'Landlord',
-  vendor: 'Vendor'
+  vendor: 'Vendor',
+  imgCropper: 'Image cropper'
 }
