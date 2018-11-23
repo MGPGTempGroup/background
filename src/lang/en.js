@@ -390,7 +390,8 @@ export default {
     socialNetworkingSiteHomepage: 'Social networking site Homepage',
     socialNetworkingSiteHomepageFormTips: 'If you do not fill in the input box, the front desk will not be displayed.',
     companyContactInfo: 'Company contact information',
-    detailedAddress: 'Detailed Address'
+    detailedAddress: 'Detailed Address',
+    introduction: 'Introduction'
   },
   all: 'ALL',
   id: 'ID',

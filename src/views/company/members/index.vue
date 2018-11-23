@@ -13,19 +13,39 @@
         v-if="members.data"
         :data="members.data">
         <el-table-column :label="$t('id')" prop="id" align="center" min-width="20" />
+        <el-table-column :label="$t('surname')" prop="surname" align="center" min-width="30" />
         <el-table-column :label="$t('name')" prop="name" align="center" min-width="30" />
         <el-table-column :label="$t('phone')" prop="phone" align="center" min-width="30" />
         <el-table-column :label="$t('email')" prop="email" align="center" min-width="30" />
-        <el-table-column :label="$t('company.position')" prop="job" align="center" min-width="30" />
-        <el-table-column :label="$t('company.department')" prop="branch" align="center" min-width="30" />
-        <el-table-column :label="$t('company.description')" align="center">
+        <el-table-column :label="$t('company.position')" prop="positions" align="center" min-width="30">
           <template slot-scope="scope" >
             <el-popover
-              placement="bottom-end"
-              width="350"
+              placement="right-start"
               trigger="hover">
-              {{ scope.row.description }}
-              <el-button slot="reference">{{ scope.row.description | textTruncate(30) }}</el-button>
+              <div style="margin-bottom: -5px; margin-right: -5px;" >
+                <el-tag
+                  v-for="(position, index) in scope.row.positions.data"
+                  :key="index"
+                  style="margin-bottom: 5px; margin-right: 5px;" >
+                  {{ position.name }}
+                </el-tag>
+              </div>
+              <el-button slot="reference">{{ $t('details') }}</el-button>
+            </el-popover>
+          </template>
+        </el-table-column>
+        <el-table-column
+          :label="$t('company.introduction')"
+          align="center"
+          min-width="30">
+          <template slot-scope="scope" >
+            <el-popover
+              placement="right-start"
+              trigger="hover">
+              <div v-html="scope.row.introduction || $t('noData')">
+                {{ $t('noData') }}
+              </div>
+              <el-button slot="reference">{{ $t('details') }}</el-button>
             </el-popover>
           </template>
         </el-table-column>
@@ -35,8 +55,8 @@
           align="center"
           min-width="40">
           <template slot-scope="scope" >
-            <a :href="scope.row.personal_homepage.google_plus" target="_blank" >
-              {{ scope.row.personal_homepage.google_plus }}
+            <a :href="scope.row.google_plus_homepage" target="_blank" >
+              {{ scope.row.google_plus_homepage || $t('noData') }}
             </a>
           </template>
         </el-table-column>
@@ -46,13 +66,13 @@
           align="center"
           min-width="40">
           <template slot-scope="scope" >
-            <a :href="scope.row.personal_homepage.linkin" target="_blank" >
-              {{ scope.row.personal_homepage.linkin }}
+            <a :href="scope.row.linkin_homepage" target="_blank" >
+              {{ scope.row.linkin_homepage || $t('noData') }}
             </a>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('createdAt')" prop="created_at" align="center" min-width="30" />
-        <el-table-column :label="$t('updatedAt')" prop="updated_at" align="center" min-width="30" />
+        <el-table-column :label="$t('createdAt')" prop="created_at" align="center" min-width="35" />
+        <el-table-column :label="$t('updatedAt')" prop="updated_at" align="center" min-width="35" />
         <el-table-column
           :label="$t('actions')"
           align="center"
@@ -63,12 +83,12 @@
           </template>
         </el-table-column>
       </el-table>
-      <div class="company-members__paginator" >
+      <div v-if="members.meta" class="company-members__paginator" >
         <el-pagination
-          :current-page="currPage"
-          :page-sizes="[100, 200, 300, 400]"
-          :page-size="100"
-          :total="400"
+          :current-page="membersTablePage"
+          :page-sizes="[10, 30, 50, 100]"
+          :page-size="membersTablePageSize"
+          :total="members.meta.pagination.total"
           layout="total, sizes, prev, pager, next, jumper"
           @size-change="handlePaginatorSizeChange"
           @current-change="handlePaginatorChange"/>
@@ -93,14 +113,14 @@ export default {
     CreateMembersDialog, EditMembersDialog, FilterForm
   },
   data() {
-    return {
-      currPage: 1
-    }
+    return {}
   },
   computed: {
     ...mapState([
       'members',
-      'membersTableLoading'
+      'membersTableLoading',
+      'membersTablePage',
+      'membersTablePageSize'
     ])
   },
   created() {
@@ -117,11 +137,14 @@ export default {
     this.setMembersTableLoading(true)
     this.fetchCompanyMembers().finally(() => {
       this.setMembersTableLoading(false)
+      console.log(this.members)
     })
   },
   methods: {
     ...mapMutations([
-      'setMembersTablePage', 'setMembersTablePageSize', 'setMembersTableLoading',
+      'setMembersTablePage',
+      'setMembersTablePageSize',
+      'setMembersTableLoading',
       'setCreateMemberDialogVisible',
       'toggleEditMembersDialogVisible'
     ]),
@@ -137,10 +160,10 @@ export default {
       }).then(() => {}).catch(action => { })
     },
     handlePaginatorSizeChange(pageSize) {
-      this.setMembersTablePageSize = pageSize
+      this.setMembersTablePageSize(pageSize)
     },
     handlePaginatorChange(page) {
-      this.setMembersTablePage = page
+      this.setMembersTablePage(page)
     }
   }
 }

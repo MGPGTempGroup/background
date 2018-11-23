@@ -8,7 +8,7 @@ const arrayIsEmpty = arr => !(arr instanceof Array) || arr.length === 0
 /**
  * 这段代码为后端条件查询接口所编写：将表单对象数据转换为条件查询字符串（url参数）
  */
-export default function filterData2ConditionalParams({ fuzzy = {}, dateRange = {}, contains = {}}) {
+export default function parseData2ConditionalParams({ fuzzy = {}, dateRange = {}, contains = {}}) {
   const paramsArr = []
   // 转换模糊查询参数
   paramsArr.push(

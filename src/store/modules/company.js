@@ -5,6 +5,7 @@ import {
   updateInfo,
   createMember
 } from '@/api/company'
+import parseData2conditionalParams from '@/utils/parseData2conditionalParams'
 import { deepClone } from '@/utils'
 import { Loading } from 'element-ui'
 
@@ -39,7 +40,13 @@ const company = {
     membersTablePage: 1,
     membersTablePageSize: 10,
     membersTableLoading: false,
-    membersFilterForm: {},
+    membersFilterForm: {
+      surname: [],
+      name: [],
+      phone: [],
+      email: [],
+      positions: []
+    },
     // 公司相关数据
     companyDepartments: [],
     companyInfo: {
@@ -82,6 +89,9 @@ const company = {
     setMembersTablePageSize(state, payload) {
       state.membersTablePageSize = payload
     },
+    setMembersFilterForm(state, payload) {
+      state.membersFilterForm = payload
+    },
     setCompanyDepartments(state, payload) {
       state.companyDepartments = payload
     },
@@ -97,13 +107,28 @@ const company = {
         spinner: 'el-icon-loading',
         background: 'rgba(0, 0, 0, 0.7)'
       })
-      const data = (await fetchInfo(payload)).data
+
+      const data = (await fetchInfo()).data
       commit('setCompanyInfo', data)
       loading.close()
       return deepClone(data)
     },
-    async fetchCompanyMembers({ commit }, payload) {
-      const members = (await fetchMembers()).data
+    async fetchCompanyMembers({ commit, state }, payload) {
+      // 解析条件查询参数
+      const filterForm = state.membersFilterForm
+      const conditionalParams = parseData2conditionalParams({
+        fuzzy: {
+          surname: filterForm.surname,
+          name: filterForm.name,
+          email: filterForm.email,
+          phone: filterForm.phone
+        }
+      })
+      const positionParams = filterForm.positions.map(id => {
+        return 'positions[]=' + id
+      }).join('&')
+      const params = `${conditionalParams}&pagesize=${state.membersTablePageSize}&${positionParams}`
+      const members = (await fetchMembers(params)).data
       commit('setMembers', members)
       return deepClone(members)
     },

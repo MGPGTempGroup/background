@@ -11,11 +11,23 @@
         <el-form :model="form" >
           <el-row :gutter="48" >
             <el-col v-bind="formItemLayoutProps" >
+              <el-form-item :label="$t('surname')" >
+                <el-select
+                  v-model="form.surname"
+                  multiple
+                  filterable
+                  remote
+                  allow-create
+                  default-first-option />
+              </el-form-item>
+            </el-col>
+            <el-col v-bind="formItemLayoutProps" >
               <el-form-item :label="$t('name')" >
                 <el-select
                   v-model="form.name"
                   multiple
                   filterable
+                  remote
                   allow-create
                   default-first-option />
               </el-form-item>
@@ -26,6 +38,7 @@
                   v-model="form.phone"
                   multiple
                   filterable
+                  remote
                   allow-create
                   default-first-option />
               </el-form-item>
@@ -36,32 +49,32 @@
                   v-model="form.email"
                   multiple
                   filterable
+                  remote
                   allow-create
                   default-first-option />
               </el-form-item>
             </el-col>
             <el-col v-bind="formItemLayoutProps" >
               <el-form-item :label="$t('company.position')">
-                <el-select v-model="form.position" multiple >
+                <el-select v-model="form.positions" multiple >
                   <el-option-group
-                    v-for="(item, index) in positionDivision"
+                    v-for="(item, index) in companyDepartments"
                     :key="index"
-                    :label="item.department">
+                    :label="item.name">
                     <el-option
-                      v-for="(position, index) in item.positions"
+                      v-for="(position, index) in item.positions.data"
                       :key="index"
                       :label="position.name"
-                      :value="position.name"/>
+                      :value="position.id"/>
                   </el-option-group>
                 </el-select>
               </el-form-item>
             </el-col>
           </el-row>
           <div class="members-filter-form__actions" >
-            <el-button type="info" >{{ $t('reset') }}</el-button>
-            <el-button type="primary">{{ $t('query') }}</el-button>
+            <el-button type="info" @click="handleReset" >{{ $t('reset') }}</el-button>
+            <el-button type="primary" @click="handleQuery" >{{ $t('query') }}</el-button>
           </div>
-          <!-- <el-form-item :label="$t('phone')"> -->
         </el-form>
       </el-collapse-item>
     </el-collapse>
@@ -69,44 +82,61 @@
 </template>
 
 <script>
+import { createNamespacedHelpers } from 'vuex'
+import { deepClone } from '@/utils'
+const { mapState, mapMutations, mapActions } = createNamespacedHelpers('company')
 export default {
   name: 'CompanyMembersListFilterForm',
   data() {
     return {
-      collapseActiveNames: ['1'],
+      collapseActiveNames: [],
       formItemLayoutProps: { xs: 24, sm: 24, md: 12, lg: 8, xl: 8 },
       biggerFormItemLayoutProps: { xs: 24, sm: 24, md: 24, lg: 16, xl: 18 },
-      form: {},
-      positionDivision: [
-        {
-          id: 1,
-          department: 'Project Sales',
-          positions: [
-            {
-              id: 1,
-              name: 'Project Sales Director'
-            },
-            {
-              id: 2,
-              name: 'Project Sales Coordinator'
-            }
-          ]
-        },
-        {
-          id: 2,
-          department: 'Property Management',
-          positions: [
-            {
-              id: 1,
-              name: 'Property Management Operations Manager'
-            },
-            {
-              id: 2,
-              name: 'Team Leader'
-            }
-          ]
-        }
-      ]
+      form: {}
+    }
+  },
+  computed: {
+    ...mapState([
+      'companyDepartments',
+      'membersFilterForm'
+    ])
+  },
+  created() {
+    // vuex中深拷贝一份过滤表单数据到当前组件中，进行v-model绑定
+    // 点击query查询时，再将当前组件的filterForm的数据同步到Vuex
+    this.form = deepClone(this.membersFilterForm)
+  },
+  methods: {
+    ...mapMutations([
+      'setMembersFilterForm',
+      'setMembersTableLoading'
+    ]),
+    ...mapActions([
+      'fetchCompanyMembers'
+    ]),
+    /**
+     * 表单重置方法
+     */
+    handleReset() {
+      const newForm = {}
+      Object.keys(this.form).forEach(key => {
+        newForm[key] = []
+      })
+      this.form = newForm
+    },
+    /**
+     * 确认查询
+     */
+    handleQuery() {
+      // 同步当前过滤表单数据到Vuex
+      this.setMembersFilterForm(
+        deepClone(this.form)
+      )
+      // 重新拉取Members数据
+      this.setMembersTableLoading(true)
+      this.fetchCompanyMembers().finally(() => {
+        this.setMembersTableLoading(false)
+      })
     }
   }
 }
