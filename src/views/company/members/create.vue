@@ -1,6 +1,6 @@
 <template>
   <div class="create-members-dialog" >
-    <el-dialog :title="$t('company.createMembersData')" :visible.sync="visible" >
+    <el-dialog :title="$t('company.createMembersData')" :visible.sync="dialogVisible" >
       <el-form :model="form" label-position="top" >
         <el-row :gutter="24" >
           <el-col v-bind="formItemLayoutProps" >
@@ -102,18 +102,17 @@ export default {
     ...mapState([
       'companyDepartments'
     ]),
-    visible: {
+    dialogVisible: {
       get() {
         return this.$store.state.company.createMembersDialogVisible
       },
       set(visible) {
-        this.toggleCreateMembersDialogVisible({ visible })
+        this.setCreateMemberDialogVisible(visible)
       }
     }
   },
   methods: {
     ...mapMutations([
-      'toggleCreateMembersDialogVisible',
       'setCreateMemberDialogVisible'
     ]),
     ...mapActions([
@@ -132,9 +131,10 @@ export default {
       }).then(photo => {
         this.form.photo = photo
         const form = filterObjEmptyVal(this.form)
+        // 创建公司成员
         return this.createCompanyMember(form)
       }).then(() => {
-        this.setCreateMemberDialogVisible(false)
+        this.dialogVisible = false
         this.$message({
           type: 'success',
           message: this.$t('createSuccess')

@@ -60,6 +60,10 @@ export default {
     imageList: {
       type: Array,
       required: true
+    },
+    maxCount: {
+      type: Number,
+      default: 1
     }
   },
   data() {
@@ -84,13 +88,12 @@ export default {
     }
   },
   methods: {
-    readAsDataURL(file) {},
     /**
      * 文件选择时（通过file input），转码所有图片文件为Base64
      */
     onFileChange(event) {
       const files = event.target.files
-      const promises = Object.values(files).map(function(file) {
+      const promises = Object.values(files).filter((item, index) => index < this.maxCount).map(function(file) {
         return new Promise((resolve, reject) => {
           const fr = new FileReader()
           fr.readAsDataURL(file)
@@ -101,7 +104,7 @@ export default {
         })
       })
       Promise.all(promises).then(res => {
-        this.$emit('update:imageList', this.imageList.concat(res))
+        this.$emit('update:imageList', res)
       })
     },
     /**

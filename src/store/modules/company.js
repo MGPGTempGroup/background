@@ -61,9 +61,6 @@ const company = {
     editMembersDialogVisible: false
   },
   mutations: {
-    toggleCreateMembersDialogVisible(state, payload) {
-      state.createMembersDialogVisible = payload.visible
-    },
     toggleEditMembersDialogVisible(state, payload) {
       state.editMembersDialogVisible = payload.visible
     },
