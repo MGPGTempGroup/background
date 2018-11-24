@@ -32,6 +32,14 @@ export function updateInfo(data) {
   })
 }
 
+export function updateMember(data) {
+  return request({
+    method: 'PATCH',
+    url: 'company/members/' + data.id,
+    data
+  })
+}
+
 export function createMember(data) {
   return request({
     method: 'POST',

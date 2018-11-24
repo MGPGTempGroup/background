@@ -436,6 +436,7 @@ export default {
   updateSuccess: 'Update Success',
   deleteSuccess: 'Delete Success',
   deleteFailed: 'Delete failed',
+  uploadFailed: 'Upload failed.',
   noData: 'No data',
   deleteDataTips: 'Are you sure you want to delete this data?',
   landlords: 'Landlords',

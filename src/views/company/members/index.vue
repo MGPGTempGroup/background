@@ -78,7 +78,7 @@
           align="center"
           min-width="60">
           <template slot-scope="scope" >
-            <el-button type="primary" @click="toggleEditMembersDialogVisible({ visible: true })" >{{ $t('edit') }}</el-button>
+            <el-button type="primary" @click="handleMemberEdit(scope.row)" >{{ $t('edit') }}</el-button>
             <el-button type="danger" @click="handleMemberDelete" >{{ $t('delete') }}</el-button>
           </template>
         </el-table-column>
@@ -105,6 +105,7 @@
 import CreateMembersDialog from './create'
 import EditMembersDialog from './edit'
 import FilterForm from './filter'
+import { deepClone } from '@/utils'
 import { createNamespacedHelpers } from 'vuex'
 const { mapState, mapMutations, mapActions } = createNamespacedHelpers('company')
 export default {
@@ -137,7 +138,6 @@ export default {
     this.setMembersTableLoading(true)
     this.fetchCompanyMembers().finally(() => {
       this.setMembersTableLoading(false)
-      console.log(this.members)
     })
   },
   methods: {
@@ -146,12 +146,25 @@ export default {
       'setMembersTablePageSize',
       'setMembersTableLoading',
       'setCreateMemberDialogVisible',
-      'toggleEditMembersDialogVisible'
+      'setEditMemberDialogVisible',
+      'setEditMembersForm'
     ]),
     ...mapActions([
       'fetchCompanyMembers',
       'fetchCompanyDepartments'
     ]),
+    /**
+     * 处理成员编辑
+     */
+    handleMemberEdit(memberData) {
+      this.setEditMemberDialogVisible(true)
+      memberData = deepClone(memberData)
+      memberData.positions = memberData.positions.data.map(item => item.id)
+      this.setEditMembersForm(memberData)
+    },
+    /**
+     * 处理成员删除
+     */
     handleMemberDelete() {
       this.$confirm(this.$t('company.confirmDeleteMemberTips'), this.$t('tips'), {
         distinguishCancelAndClose: true,
@@ -159,9 +172,15 @@ export default {
         cancelButtonText: this.$t('cancel')
       }).then(() => {}).catch(action => { })
     },
+    /**
+     * 处理分页大小修改
+     */
     handlePaginatorSizeChange(pageSize) {
       this.setMembersTablePageSize(pageSize)
     },
+    /**
+     * 处理分页页数修改
+     */
     handlePaginatorChange(page) {
       this.setMembersTablePage(page)
     }

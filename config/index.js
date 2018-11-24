@@ -16,6 +16,10 @@ module.exports = {
         bypass: function(req, res, proxyOptions) {
           if (req.url.indexOf('/static') !== -1)
             return req.url
+          if (/\.(jpg|jpeg|png|gif)$/.test(req.url)) {
+            console.log(req.url)
+            return req.url
+          }
         }
       }
     },

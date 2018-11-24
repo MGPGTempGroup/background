@@ -437,6 +437,7 @@ export default {
   updateSuccess: '修改成功',
   deleteSuccess: '删除成功',
   deleteFailed: '删除失败',
+  uploadFailed: '上传失败',
   noData: '无数据',
   deleteDataTips: '您确定要删除此条数据吗？',
   landlords: '房东',
