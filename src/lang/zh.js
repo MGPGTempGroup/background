@@ -417,6 +417,7 @@ export default {
   updatedAt: '修改于',
   publish: '发表',
   surname: '姓',
+  photo: '照片',
   phone: '手机号码',
   email: '邮箱',
   name: '名',

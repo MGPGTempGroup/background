@@ -50,6 +50,19 @@
           </template>
         </el-table-column>
         <el-table-column
+          :label="$t('company.photo')"
+          align="center"
+          min-width="30">
+          <template slot-scope="scope" >
+            <el-popover
+              placement="right-start"
+              trigger="hover">
+              <img :src="scope.row.photo" style="max-width: 400px;" >
+              <el-button slot="reference">{{ $t('details') }}</el-button>
+            </el-popover>
+          </template>
+        </el-table-column>
+        <el-table-column
           :label="$t('company.googlePlusHomePage')"
           prop="branch"
           align="center"
@@ -230,4 +243,3 @@ export default {
     }
   }
 </style>
-

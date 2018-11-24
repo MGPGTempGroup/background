@@ -161,6 +161,7 @@ export default {
     confirm: 'Confirm',
     name: 'Name',
     surname: 'Surname',
+    photo: 'Photo',
     phone: 'Phone',
     email: 'Email',
     source: 'source',

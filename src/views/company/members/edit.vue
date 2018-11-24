@@ -61,7 +61,7 @@
           </el-col>
         </el-row>
         <div class="create-members-dialog__form-actions" >
-          <el-button @click="handleReset" >{{ $t('reset') }}</el-button>
+          <el-button type="info" @click="handleReset" >{{ $t('reset') }}</el-button>
           <el-button type="primary" @click="handleUpdateMember" >{{ $t('update') }}</el-button>
         </div>
       </el-form>
@@ -186,4 +186,3 @@ export default {
     width: 100%;
   }
 </style>
-
