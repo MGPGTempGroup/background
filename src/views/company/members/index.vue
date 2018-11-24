@@ -79,7 +79,7 @@
           min-width="60">
           <template slot-scope="scope" >
             <el-button type="primary" @click="handleMemberEdit(scope.row)" >{{ $t('edit') }}</el-button>
-            <el-button type="danger" @click="handleMemberDelete" >{{ $t('delete') }}</el-button>
+            <el-button type="danger" @click="handleMemberDelete(scope.row.id)" >{{ $t('delete') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -151,7 +151,8 @@ export default {
     ]),
     ...mapActions([
       'fetchCompanyMembers',
-      'fetchCompanyDepartments'
+      'fetchCompanyDepartments',
+      'deleteCompanyMember'
     ]),
     /**
      * 处理成员编辑
@@ -165,12 +166,32 @@ export default {
     /**
      * 处理成员删除
      */
-    handleMemberDelete() {
+    handleMemberDelete(id) {
       this.$confirm(this.$t('company.confirmDeleteMemberTips'), this.$t('tips'), {
         distinguishCancelAndClose: true,
         confirmButtonText: this.$t('confirm'),
         cancelButtonText: this.$t('cancel')
-      }).then(() => {}).catch(action => { })
+      }).then(() => {
+        const loading = this.$loading({
+          lock: true,
+          text: 'Loading',
+          spinner: 'el-icon-loading',
+          background: 'rgba(0, 0, 0, 0.7)'
+        })
+        this.deleteCompanyMember(id).then(() => {
+          this.$message({
+            type: 'success',
+            message: this.$t('deleteSuccess')
+          })
+        }).catch(() => {
+          this.$message({
+            type: 'error',
+            message: this.$t('deleteFailed')
+          })
+        }).finally(() => {
+          loading.close()
+        })
+      })
     },
     /**
      * 处理分页大小修改

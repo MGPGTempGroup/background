@@ -40,6 +40,13 @@ export function updateMember(data) {
   })
 }
 
+export function deleteMember(id) {
+  return request({
+    method: 'DELETE',
+    url: 'company/members/' + id
+  })
+}
+
 export function createMember(data) {
   return request({
     method: 'POST',

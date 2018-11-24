@@ -4,6 +4,7 @@ import {
   fetchDepartments,
   updateInfo,
   updateMember,
+  deleteMember,
   createMember
 } from '@/api/company'
 import parseData2conditionalParams from '@/utils/parseData2conditionalParams'
@@ -80,6 +81,11 @@ const company = {
     addMemberData(state, payload) {
       state.members.data.push(payload)
     },
+    deleteMember(state, payload) {
+      state.members.data = state.members.data.filter(item => {
+        return item.id !== payload
+      })
+    },
     updateMemberData(state, payload) {
       state.members.data = state.members.data.map(item => {
         return item.id === payload.id ? payload : item
@@ -138,6 +144,10 @@ const company = {
       const memberData = (await createMember(payload)).data
       commit('addMemberData', memberData)
       return memberData
+    },
+    async deleteCompanyMember({ commit }, payload) {
+      await deleteMember(payload)
+      commit('deleteMember', payload)
     }
   }
 }
