@@ -7,6 +7,13 @@ export function fetchOwners(params) {
   })
 }
 
+export function searchOwnersByFullName(fullName) {
+  return request({
+    method: 'GET',
+    url: 'property-owners?searchByFullName=' + fullName
+  })
+}
+
 export function createOwner(data) {
   return request({
     method: 'POST',

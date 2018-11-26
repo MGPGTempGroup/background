@@ -60,7 +60,7 @@
             </el-form-item>
           </el-col>
         </el-row>
-        <div class="create-members-dialog__form-actions" >
+        <div class="edit-members-dialog__form-actions" >
           <el-button type="info" @click="handleReset" >{{ $t('reset') }}</el-button>
           <el-button type="primary" @click="handleUpdateMember" >{{ $t('update') }}</el-button>
         </div>
@@ -179,7 +179,7 @@ export default {
     &__form-actions {
       display: flex;
       justify-content: flex-end;
-      margin-top: 30px;
+      margin-top: 10px;
     }
   }
   .el-select {

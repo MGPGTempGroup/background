@@ -94,6 +94,7 @@ export default {
     onFileChange(event) {
       const files = event.target.files
       const promises = Object.values(files).filter((item, index) => index < this.maxCount).map(function(file) {
+        console.log(123)
         return new Promise((resolve, reject) => {
           const fr = new FileReader()
           fr.readAsDataURL(file)

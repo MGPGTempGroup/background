@@ -184,7 +184,7 @@ import rentalHousingEditForm from './edit'
 import createRentalHousingData from './create'
 import 'font-awesome/css/font-awesome.min.css'
 import { createNamespacedHelpers } from 'vuex'
-const { mapState, mapMutations } = createNamespacedHelpers('housing')
+const { mapState, mapMutations, mapActions } = createNamespacedHelpers('housing')
 
 export default {
   name: 'RentalHousing',
@@ -214,18 +214,31 @@ export default {
   computed: {
     ...mapState({
       // 租赁房屋列表数据
-      rentalHousingList: function(state) {
-        return state.rentalHousingList.map(item => ({
-          ...item,
-          currState: this.$t(`house.${item.currState}`)
-        }))
-      }
+      // rentalHousingList: function(state) {
+      //   return state.rentalHousingList.map(item => ({
+      //     ...item,
+      //     currState: this.$t(`house.${item.currState}`)
+      //   }))
+      // }
     })
   },
-  created() {},
+  created() {
+    const loading = this.$loading({
+      lock: true,
+      text: 'Loading',
+      spinner: 'el-icon-loading',
+      background: 'rgba(0, 0, 0, 0.7)'
+    })
+    this.fetchInitData().finally(() => {
+      loading.close()
+    })
+  },
   methods: {
     ...mapMutations([
       'toggleCreateRentalHousingDialogVisible'
+    ]),
+    ...mapActions([
+      'fetchInitData'
     ]),
     handleDetailsClick(rowData) {
       this.detailDialogVisible = true

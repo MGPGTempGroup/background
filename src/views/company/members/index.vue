@@ -13,11 +13,11 @@
         v-if="members.data"
         :data="members.data">
         <el-table-column :label="$t('id')" prop="id" align="center" min-width="20" />
-        <el-table-column :label="$t('surname')" prop="surname" align="center" min-width="30" />
-        <el-table-column :label="$t('name')" prop="name" align="center" min-width="30" />
+        <el-table-column :label="$t('surname')" prop="surname" align="center" min-width="20" />
+        <el-table-column :label="$t('name')" prop="name" align="center" min-width="25" />
         <el-table-column :label="$t('phone')" prop="phone" align="center" min-width="30" />
         <el-table-column :label="$t('email')" prop="email" align="center" min-width="30" />
-        <el-table-column :label="$t('company.position')" prop="positions" align="center" min-width="30">
+        <el-table-column :label="$t('company.position')" prop="positions" align="center" min-width="25">
           <template slot-scope="scope" >
             <el-popover
               placement="right-start"
@@ -37,7 +37,7 @@
         <el-table-column
           :label="$t('company.introduction')"
           align="center"
-          min-width="30">
+          min-width="25">
           <template slot-scope="scope" >
             <el-popover
               placement="right-start"
@@ -50,9 +50,9 @@
           </template>
         </el-table-column>
         <el-table-column
-          :label="$t('company.photo')"
+          :label="$t('photo')"
           align="center"
-          min-width="30">
+          min-width="25">
           <template slot-scope="scope" >
             <el-popover
               placement="right-start"
@@ -89,10 +89,10 @@
         <el-table-column
           :label="$t('actions')"
           align="center"
-          min-width="60">
+          min-width="50">
           <template slot-scope="scope" >
-            <el-button type="primary" @click="handleMemberEdit(scope.row)" >{{ $t('edit') }}</el-button>
-            <el-button type="danger" @click="handleMemberDelete(scope.row.id)" >{{ $t('delete') }}</el-button>
+            <el-button type="text" @click="handleMemberEdit(scope.row)" >{{ $t('edit') }}</el-button>
+            <el-button type="text" @click="handleMemberDelete(scope.row.id)" >{{ $t('delete') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
