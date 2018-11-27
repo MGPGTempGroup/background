@@ -11,44 +11,87 @@
           {{ $t('create') }}
         </el-button>
       </div>
-      <el-table :data="rentalHousingList" >
-        <el-table-column :label="$t('house.id')" prop="id" min-width="35px" />
-        <el-table-column :label="$t('house.aState')" prop="state" min-width="50px" />
-        <el-table-column :label="$t('house.suburb')" prop="suburb" />
-        <el-table-column :label="$t('house.streetName')" prop="street_name" />
-        <el-table-column :label="$t('house.streetCode')" prop="street_code" min-width="60px" />
-        <el-table-column :label="$t('house.postCode')" prop="post_code" />
-        <el-table-column :label="$t('house.beds')" prop="beds" min-width="60px" />
-        <el-table-column :label="$t('house.showers')" prop="showers" min-width="60px" />
-        <el-table-column :label="$t('house.carSpaces')" prop="car_spaces" min-width="60px" />
-        <el-table-column :label="$t('house.rent')" prop="rent" />
-        <el-table-column :label="$t('house.agent')" prop="agent" />
-        <el-table-column :label="$t('house.owner')" prop="owner" />
-        <el-table-column :label="$t('house.availableDate')" prop="available_date" />
-        <el-table-column :label="$t('house.currState')" prop="currState" min-width="55px" >
-          <template slot-scope="scope">
-            <el-tag type="warning" size="mini" > {{ scope.row.currState }} </el-tag>
+      <el-table v-loading="leasesTableLoading" :data="leases.data" >
+        <el-table-column :label="$t('id')" prop="id" min-width="20px" align="center" />
+        <el-table-column :label="$t('house.name')" prop="name" min-width="50px" align="center" />
+        <el-table-column :label="$t('house.suburbName')" prop="suburb_name" min-width="30px" align="center" />
+        <el-table-column :label="$t('house.streetName')" prop="street_name" min-width="30px" align="center" />
+        <el-table-column :label="$t('house.postCode')" prop="post_code" min-width="40px" align="center" />
+        <el-table-column :label="$t('house.rent')" min-width="30px" align="center" >
+          <template slot-scope="scope" >
+            <el-popover
+              placement="top-start"
+              trigger="hover">
+              <div v-if="scope.row.per_day_min_price" >
+                {{ $t('house.dailyRent') }}：${{ scope.row.per_day_min_price }} ~ ${{ scope.row.per_day_max_price }}
+              </div>
+              <div v-if="scope.row.per_week_min_price" >
+                {{ $t('house.weeklyRent') }}：${{ scope.row.per_week_min_price }} ~ ${{ scope.row.per_week_max_price }}
+              </div>
+              <div v-if="scope.row.per_month_min_price" >
+                {{ $t('house.monthlyRent') }}：${{ scope.row.per_month_min_price }} ~ ${{ scope.row.per_month_max_price }}
+              </div>
+              <el-button slot="reference">{{ $t('details') }}</el-button>
+            </el-popover>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('house.updatedAt')" prop="updated_at" />
-        <el-table-column :label="$t('house.createdAt')" prop="created_at" />
+        <el-table-column :label="$t('house.agent')" prop="agent" min-width="40px" align="center">
+          <template slot-scope="scope" >
+            <template v-if="scope.row.agents.data.length" >
+              <el-tag
+                v-for="(item, index) in scope.row.agents.data"
+                :key="index">
+                {{ item.name }}
+              </el-tag>
+            </template>
+            <template v-else >
+              {{ $t('noData') }}
+            </template>
+          </template>
+        </el-table-column>
+        <el-table-column :label="$t('house.owner')" prop="owner" min-width="35px" align="center">
+          <template slot-scope="scope" >
+            <el-popover
+              placement="top-start"
+              trigger="hover">
+              <el-button slot="reference" >{{ scope.row.owner.name }}</el-button>
+            </el-popover>
+          </template>
+        </el-table-column>
+        <el-table-column :label="$t('house.availableDate')" min-width="60px" align="center" >
+          <template slot-scope="scope" >
+            {{ scope.row.available_start_date ?
+              scope.row.available_start_date + ' ~ ' + scope.row.available_end_date :
+              $t('noData')
+            }}
+          </template>
+        </el-table-column>
+        <el-table-column :label="$t('show')" min-width="35px" align="center" >
+          <template slot-scope="scope">
+            <el-tag type="warning" size="mini" >
+              {{ [$t('hide'), $t('show')][scope.row.show] }}
+            </el-tag>
+          </template>
+        </el-table-column>
+        <el-table-column :label="$t('house.createdAt')" prop="created_at" min-width="50px" align="center" />
         <el-table-column
           :label="$t('house.actions')"
           fixed="right"
-          width="100">
+          width="100"
+          align="center">
           <template slot-scope="scope">
             <el-button type="text" size="small" @click="handleDetailsClick(scope.row)">{{ $t('house.details') }}</el-button>
             <el-button type="text" size="small" @click="editDialogVisible = true" >{{ $t('house.edit') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
-      <el-row type="flex" justify="center" >
+      <el-row v-if="leases.meta" type="flex" justify="center" >
         <el-col :span="7" >
           <el-pagination
-            :current-page="currPage"
+            :current-page="leasesTablePage"
             :page-sizes="[10, 20, 30, 50]"
-            :page-size="10"
-            :total="40"
+            :page-size="leasesTablePageSize"
+            :total="leases.meta.pagination.total"
             style="margin-top: 15px"
             layout="total, sizes, prev, pager, next, jumper"
             @size-change="handlePaginatorSizeChange"
@@ -212,15 +255,12 @@ export default {
     }
   },
   computed: {
-    ...mapState({
-      // 租赁房屋列表数据
-      // rentalHousingList: function(state) {
-      //   return state.rentalHousingList.map(item => ({
-      //     ...item,
-      //     currState: this.$t(`house.${item.currState}`)
-      //   }))
-      // }
-    })
+    ...mapState([
+      'leases',
+      'leasesTableLoading',
+      'leasesTablePage',
+      'leasesTablePageSize'
+    ])
   },
   created() {
     const loading = this.$loading({
@@ -232,19 +272,27 @@ export default {
     this.fetchInitData().finally(() => {
       loading.close()
     })
+    this.fetchLeasesHouse()
   },
   methods: {
     ...mapMutations([
-      'toggleCreateRentalHousingDialogVisible'
+      'toggleCreateRentalHousingDialogVisible',
+      'setLeasesTablePage',
+      'setLeasesTablePageSize'
     ]),
     ...mapActions([
-      'fetchInitData'
+      'fetchInitData',
+      'fetchLeasesHouse'
     ]),
     handleDetailsClick(rowData) {
       this.detailDialogVisible = true
     },
-    handlePaginatorSizeChange() {},
-    handlePaginatorChange() {}
+    handlePaginatorSizeChange(pageSize) {
+      this.setLeasesTablePageSize(pageSize)
+    },
+    handlePaginatorChange(page) {
+      this.setLeasesTablePage(page)
+    }
   }
 }
 </script>

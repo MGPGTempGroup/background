@@ -161,9 +161,8 @@
             </el-row>
             <el-row :gutter="24" >
               <el-col v-bind="{ xs: 24, sm: 24, md: 24, lg: 12, xl: 12 }" >
-                <!-- 目前状态 -->
+                <!-- 物业类型 -->
                 <el-form-item :label="$t('house.propertyTypes')" >
-                  <!-- 物业类型 -->
                   <el-select
                     v-model="form.property_type"
                     :placeholder="$t('house.propertyTypes')"

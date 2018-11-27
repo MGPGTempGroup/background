@@ -1,4 +1,5 @@
 import {
+  fetchLeases,
   fetchPropertyTypes,
   createLeaseHouse
 } from '@/api/house'
@@ -11,6 +12,9 @@ const housing = {
       data: [],
       meta: {}
     },
+    leasesTableLoading: false,
+    leasesTablePage: 1,
+    leasesTablePageSize: 10,
     // 出售房屋列表
     saleHousingList: [],
     createRentalHousingDialogVisible: false,
@@ -27,14 +31,31 @@ const housing = {
     setAvailablePropertyType(state, payload) {
       state.availablePropertyType = payload
     },
+    setLeases(state, payload) {
+      state.leases = payload
+    },
+    setLeasesTableLoading(state, payload) {
+      state.leasesTableLoading = payload
+    },
+    setLeasesTablePage(state, payload) {
+      state.leasesTablePage = payload
+    },
+    setLeasesTablePageSize(state, payload) {
+      state.leasesTablePageSize = payload
+    },
     addLease(state, payload) {
       state.leases.data.push(payload)
     }
   },
   actions: {
     async fetchInitData({ dispatch }) {
-      // 派遣拉取物业类型Action
       await dispatch('fetchPropertyTypes')
+    },
+    async fetchLeasesHouse({ commit }, payload) {
+      commit('setLeasesTableLoading', true)
+      const leasesData = (await fetchLeases()).data
+      commit('setLeases', leasesData)
+      commit('setLeasesTableLoading', false)
     },
     async fetchPropertyTypes({ commit }, payload) {
       const propertyTypes = (await fetchPropertyTypes()).data.data
