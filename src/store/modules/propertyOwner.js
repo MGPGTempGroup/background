@@ -128,11 +128,14 @@ const propertyOwner = {
         spinner: 'el-icon-loading',
         background: 'rgba(0, 0, 0, 0.7)'
       })
-      const data = (await createOwner(ownerData)).data
-      commit('addOwnerData', data)
-      commit('updateDataCreationDialogVisible', false)
-      loading.close()
-      return data
+      try {
+        const data = (await createOwner(ownerData)).data
+        commit('addOwnerData', data)
+        commit('updateDataCreationDialogVisible', false)
+        return data
+      } finally {
+        loading.close()
+      }
     },
     async updateOwner({ commit }, ownerData) {
       const loading = Loading.service({

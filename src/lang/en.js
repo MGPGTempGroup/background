@@ -228,6 +228,8 @@ export default {
     monthlyRent: 'Monthly rent',
     agent: 'Agent',
     availableDate: 'Available Date',
+    availableStartDate: 'Available start date',
+    availableEndDate: 'Available end date',
     createdAt: 'Created At',
     updatedAt: 'Updated At',
     owner: 'Owner',
@@ -471,5 +473,6 @@ export default {
   imgCropper: 'Image cropper',
   show: 'Show',
   hide: 'Hide',
-  whetherToDisplay: 'Whether to display'
+  whetherToDisplay: 'Whether to display',
+  displayState: 'Display state'
 }

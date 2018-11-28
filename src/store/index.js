@@ -5,7 +5,7 @@ import errorLog from './modules/errorLog'
 import permission from './modules/permission'
 import tagsView from './modules/tagsView'
 import user from './modules/user'
-import housing from './modules/housing'
+import house from './modules/house'
 import propertyOwner from './modules/propertyOwner'
 import serviceMessage from './modules/serviceMessage'
 import content from './modules/content'
@@ -22,7 +22,7 @@ const store = new Vuex.Store({
     permission,
     tagsView,
     user,
-    housing,
+    house,
     propertyOwner,
     content,
     serviceMessage,

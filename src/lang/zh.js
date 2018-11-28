@@ -230,6 +230,8 @@ export default {
     monthlyRent: '每月租金',
     agent: '代理人',
     availableDate: '可用时间',
+    availableStartDate: '可用开始时间',
+    availableEndDate: '可用结束时间',
     createdAt: '创建于',
     updatedAt: '修改于',
     owner: '物主',
@@ -472,5 +474,6 @@ export default {
   imgCropper: '图片裁剪器',
   show: '展示',
   hide: '隐藏',
-  whetherToDisplay: '是否显示'
+  whetherToDisplay: '是否显示',
+  displayState: '显示状态'
 }

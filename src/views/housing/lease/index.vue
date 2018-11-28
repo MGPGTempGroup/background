@@ -7,7 +7,7 @@
           <i class="fa fa-list" />
           &nbsp;{{ $t('house.houseList') }}
         </h2>
-        <el-button type="primary" class="rental-housing__add-btn" @click="toggleCreateRentalHousingDialogVisible({ visible: true })" >
+        <el-button type="primary" class="rental-housing__add-btn" @click="setCreateRentalHousingDialogVisible(true)" >
           {{ $t('create') }}
         </el-button>
       </div>
@@ -85,7 +85,7 @@
           </template>
         </el-table-column>
       </el-table>
-      <el-row v-if="leases.meta" type="flex" justify="center" >
+      <el-row v-if="leases.meta.pagination" type="flex" justify="center" >
         <el-col :span="7" >
           <el-pagination
             :current-page="leasesTablePage"
@@ -227,10 +227,10 @@ import rentalHousingEditForm from './edit'
 import createRentalHousingData from './create'
 import 'font-awesome/css/font-awesome.min.css'
 import { createNamespacedHelpers } from 'vuex'
-const { mapState, mapMutations, mapActions } = createNamespacedHelpers('housing')
+const { mapState, mapMutations, mapActions } = createNamespacedHelpers('house')
 
 export default {
-  name: 'RentalHousing',
+  name: 'LeaseHouse',
   components: { rentalHousingFilter, rentalHousingEditForm, createRentalHousingData },
   data() {
     return {
@@ -276,7 +276,7 @@ export default {
   },
   methods: {
     ...mapMutations([
-      'toggleCreateRentalHousingDialogVisible',
+      'setCreateRentalHousingDialogVisible',
       'setLeasesTablePage',
       'setLeasesTablePageSize'
     ]),

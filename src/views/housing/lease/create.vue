@@ -153,7 +153,7 @@
                     <el-option
                       v-for="(item, index) in searchedListOfMembers"
                       :key="index"
-                      :label="item.label"
+                      :label="item.lable"
                       :value="item.value"/>
                   </el-select>
                 </el-form-item>
@@ -223,9 +223,9 @@ import { searchMembersByFullName } from '@/api/company'
 import { uploadImage } from '@/api/upload'
 
 import { createNamespacedHelpers } from 'vuex'
-const { mapState, mapMutations, mapActions } = createNamespacedHelpers('housing')
+const { mapState, mapMutations, mapActions } = createNamespacedHelpers('house')
 export default {
-  name: 'CreateRentalHousing',
+  name: 'CreateLeaseHouse',
   components: {
     tinymce, UploadImage
   },
@@ -263,16 +263,16 @@ export default {
     ]),
     visible: {
       get() {
-        return this.$store.state.housing.createRentalHousingDialogVisible
+        return this.$store.state.house.createRentalHousingDialogVisible
       },
       set(visible) {
-        this.toggleCreateRentalHousingDialogVisible({ visible })
+        this.setCreateRentalHousingDialogVisible(visible)
       }
     }
   },
   methods: {
     ...mapMutations([
-      'toggleCreateRentalHousingDialogVisible'
+      'setCreateRentalHousingDialogVisible'
     ]),
     ...mapActions([
       'createLeaseHouse'
@@ -300,8 +300,8 @@ export default {
       searchMembersByFullName(keyWord).then(res => {
         const members = res.data.data
         const results = members.map(item => ({
-          value: item.surname + ' ' + item.name,
-          id: item.id
+          lable: item.name + ' ' + item.surname,
+          value: item.id
         }))
         this.searchedListOfMembers = results
       }).catch(err => {
