@@ -21,3 +21,10 @@ export function createLeaseHouse(data) {
     data
   })
 }
+
+export function deleteLeaseHouse(id) {
+  return request({
+    method: 'DELETE',
+    url: 'leases/' + id
+  })
+}

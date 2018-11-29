@@ -155,7 +155,7 @@
           <el-row
             :gutter="24"
             class="rental-housing-details__tab-content-inner rental-housing-details__photo-and-video" >
-            <template v-if="formattedData.broadcast_pictures.length" >
+            <template v-if="formattedData.broadcast_pictures && formattedData.broadcast_pictures.length" >
               <el-col
                 v-for="item in formattedData.broadcast_pictures"
                 v-bind="{ xs: 24, sm: 12, md: 8, lg: 6, xl: 6 }"

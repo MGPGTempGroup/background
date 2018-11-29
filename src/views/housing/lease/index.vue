@@ -78,6 +78,7 @@
           <template slot-scope="scope">
             <el-button type="text" size="small" @click="handleDetailsClick(scope.row)">{{ $t('house.details') }}</el-button>
             <el-button type="text" size="small" @click="setLeaseEditDialogVisible(true)" >{{ $t('house.edit') }}</el-button>
+            <el-button type="text" size="small" @click="handleDelete(scope.row.id)" >{{ $t('delete') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -181,17 +182,62 @@ export default {
     ]),
     ...mapActions([
       'fetchInitData',
-      'fetchLeasesHouse'
+      'fetchLeasesHouse',
+      'deleteLeaseHouse'
     ]),
+    /**
+     * 改变分页大小
+     */
     handlePaginatorSizeChange(pageSize) {
       this.setLeasesTablePageSize(pageSize)
+      this.fetchLeasesHouse()
     },
+    /**
+     * 改变分页
+     */
     handlePaginatorChange(page) {
       this.setLeasesTablePage(page)
+      this.fetchLeasesHouse()
     },
+    /**
+     * 详情
+     */
     handleDetailsClick(data) {
       this.setLeaseDetailsData(data)
       this.setLeaseDetailsDialogVisible(true)
+    },
+    /**
+     * 删除
+     */
+    handleDelete(id) {
+      this.$confirm(this.$t('deleteDataTips'), this.$t('tips'), {
+        confirmButtonText: this.$t('confirm'),
+        cancelButtonText: this.$t('cancel'),
+        type: 'warning'
+      }).then(() => {
+        const loading = this.$loading({
+          lock: true,
+          text: 'Loading',
+          spinner: 'el-icon-loading',
+          background: 'rgba(0, 0, 0, 0.7)'
+        })
+        this.deleteLeaseHouse({ id })
+          .then(() => {
+            this.$message({
+              type: 'success',
+              message: this.$t('deleteSuccess')
+            })
+          })
+          .catch(() => {
+            this.$message({
+              type: 'error',
+              message: this.$t('deleteFailed')
+            })
+          })
+          .finally(() => {
+            loading.close()
+          })
+      })
     }
   }
 }

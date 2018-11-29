@@ -1,7 +1,8 @@
 import {
   fetchLeases,
   fetchPropertyTypes,
-  createLeaseHouse
+  createLeaseHouse,
+  deleteLeaseHouse
 } from '@/api/house'
 import parseData2ConditionalParams from '@/utils/parseData2ConditionalParams'
 import { param } from '@/utils'
@@ -61,6 +62,11 @@ const house = {
     },
     setLeasesTablePageSize(state, payload) {
       state.leasesTablePageSize = payload
+    },
+    deleteLease(state, payload) {
+      state.leases.data = state.leases.data.filter(item => {
+        return item.id !== payload
+      })
     },
     addLease(state, payload) {
       state.leases.data.push(payload)
@@ -153,6 +159,10 @@ const house = {
     async createLeaseHouse({ commit }, payload) {
       const leaseHouseData = (await createLeaseHouse(payload)).data
       commit('addLease', leaseHouseData)
+    },
+    async deleteLeaseHouse({ commit }, payload) {
+      await deleteLeaseHouse(payload.id)
+      commit('deleteLease', payload.id)
     }
   }
 }
