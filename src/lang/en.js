@@ -474,5 +474,7 @@ export default {
   show: 'Show',
   hide: 'Hide',
   whetherToDisplay: 'Whether to display',
-  displayState: 'Display state'
+  displayState: 'Display state',
+  creator: 'Creator',
+  nothing: 'Nothing'
 }

@@ -475,5 +475,7 @@ export default {
   show: '展示',
   hide: '隐藏',
   whetherToDisplay: '是否显示',
-  displayState: '显示状态'
+  displayState: '显示状态',
+  creator: '创建者',
+  nothing: '无'
 }

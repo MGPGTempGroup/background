@@ -18,6 +18,10 @@ const house = {
     leasesTablePage: 1,
     leasesTablePageSize: 10,
     leasesFilterForm: {},
+    leaseDetailsDialogVisible: false,
+    leaseDetailsData: {},
+    leaseEditDialogVisible: false,
+    leaseEditForm: {},
     // 出售房屋列表
     saleHousingList: [],
     createRentalHousingDialogVisible: false,
@@ -36,6 +40,15 @@ const house = {
     },
     setLeases(state, payload) {
       state.leases = payload
+    },
+    setLeaseDetailsDialogVisible(state, payload) {
+      state.leaseDetailsDialogVisible = payload
+    },
+    setLeaseDetailsData(state, payload) {
+      state.leaseDetailsData = payload
+    },
+    setLeaseEditFormDialogVisible(state, payload) {
+      state.leaseEditDialogVisible = payload
     },
     setLeasesFilterForm(state, payload) {
       state.leasesFilterForm = payload
