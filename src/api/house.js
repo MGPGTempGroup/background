@@ -22,6 +22,14 @@ export function createLeaseHouse(data) {
   })
 }
 
+export function updateLeaseHouse(data) {
+  return request({
+    method: 'PATCH',
+    url: 'leases/' + data.id,
+    data
+  })
+}
+
 export function deleteLeaseHouse(id) {
   return request({
     method: 'DELETE',

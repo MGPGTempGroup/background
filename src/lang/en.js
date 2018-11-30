@@ -276,7 +276,8 @@ export default {
     update: 'Update',
     uploadImgTip: 'Click here to upload pictures.',
     stateSelectionPlaceholder: 'Please select the current state',
-    createRentalHousingData: 'Create rental housing data',
+    createRentalHousingData: 'Create rental house data',
+    editRentalHousingData: 'Edit rental house data',
     createSaleHousingData: 'Create sale housing data',
     housingPicture: 'Housing picture',
     notFillSomeFieldTips: 'If you do not fill in some fields, the front desk will not show them.'
@@ -453,6 +454,7 @@ export default {
   deleteSuccess: 'Delete Success.',
   createFailed: 'Create failed.',
   deleteFailed: 'Delete failed.',
+  updateFailed: 'Update failed.',
   uploadFailed: 'Upload failed.',
   searchFailed: 'Search failed.',
   noData: 'No data',

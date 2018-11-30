@@ -278,6 +278,7 @@ export default {
     uploadImgTip: '点击此处上传照片',
     stateSelectionPlaceholder: '请选择当前状态',
     createRentalHousingData: '创建租赁房屋数据',
+    editRentalHousingData: '编辑租赁房屋数据',
     createSaleHousingData: '创建销售房屋数据',
     housingPicture: '房屋图片',
     notFillSomeFieldTips: '如果你不填写某些字段，前台不会显示它们。'

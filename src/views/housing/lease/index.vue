@@ -7,13 +7,26 @@
           <i class="fa fa-list" />
           &nbsp;{{ $t('house.houseList') }}
         </h2>
-        <el-button type="primary" class="rental-housing__add-btn" @click="setCreateRentalHousingDialogVisible(true)" >
+        <el-button type="primary" class="rental-housing__add-btn" @click="setLeaseCreateDialogVisible(true)" >
           {{ $t('create') }}
         </el-button>
       </div>
       <el-table v-loading="leasesTableLoading" :data="leases.data" >
         <el-table-column :label="$t('id')" prop="id" min-width="20px" align="center" />
         <el-table-column :label="$t('house.name')" prop="name" min-width="50px" align="center" />
+        <el-table-column
+          :label="$t('house.address')"
+          min-width="60px"
+          align="center">
+          <template slot-scope="scope" >
+            <template v-if="scope.row.address.length" >
+              {{ scope.row.address.join('/') }}
+            </template>
+            <template v-else >
+              {{ $t('noData') }}
+            </template>
+          </template>
+        </el-table-column>
         <el-table-column :label="$t('house.suburbName')" prop="suburb_name" min-width="30px" align="center" />
         <el-table-column :label="$t('house.streetName')" prop="street_name" min-width="30px" align="center" />
         <el-table-column :label="$t('house.postCode')" prop="post_code" min-width="40px" align="center" />
@@ -41,7 +54,7 @@
               <el-tag
                 v-for="(item, index) in scope.row.agents.data"
                 :key="index">
-                {{ item.name }}
+                {{ item.name + ' ' + item.surname }}
               </el-tag>
             </template>
             <template v-else >
@@ -51,7 +64,7 @@
         </el-table-column>
         <el-table-column :label="$t('house.owner')" prop="owner" min-width="35px" align="center">
           <template slot-scope="scope" >
-            <el-tag>{{ scope.row.owner.name }}</el-tag>
+            <el-tag>{{ scope.row.owner.name + ' ' + scope.row.owner.surname }}</el-tag>
           </template>
         </el-table-column>
         <el-table-column :label="$t('house.availableDate')" min-width="60px" align="center" >
@@ -62,7 +75,7 @@
             }}
           </template>
         </el-table-column>
-        <el-table-column :label="$t('show')" min-width="35px" align="center" >
+        <el-table-column :label="$t('displayState')" min-width="35px" align="center" >
           <template slot-scope="scope">
             <el-tag type="warning" size="mini" >
               {{ [$t('hide'), $t('show')][scope.row.show] }}
@@ -77,7 +90,7 @@
           align="center">
           <template slot-scope="scope">
             <el-button type="text" size="small" @click="handleDetailsClick(scope.row)">{{ $t('house.details') }}</el-button>
-            <el-button type="text" size="small" @click="setLeaseEditDialogVisible(true)" >{{ $t('house.edit') }}</el-button>
+            <el-button type="text" size="small" @click="handleEdit(scope.row)" >{{ $t('house.edit') }}</el-button>
             <el-button type="text" size="small" @click="handleDelete(scope.row.id)" >{{ $t('delete') }}</el-button>
           </template>
         </el-table-column>
@@ -97,15 +110,11 @@
       </el-row>
     </el-card>
 
-    <!-- 编辑 -->
-    <el-dialog
-      :title="$t('house.edit')"
-      width="65%">
-      <rental-housing-edit-form />
-    </el-dialog>
-
     <!-- Create -->
-    <create-rental-housing-data />
+    <lease-housing-create-dialog />
+
+    <!-- edit -->
+    <lease-housing-edit-dialog />
 
     <!-- Details -->
     <details-dialog />
@@ -116,8 +125,8 @@
 <script>
 
 import rentalHousingFilter from './filter'
-import rentalHousingEditForm from './edit'
-import createRentalHousingData from './create'
+import leaseHousingEditDialog from './edit'
+import leaseHousingCreateDialog from './create'
 import detailsDialog from './details'
 import 'font-awesome/css/font-awesome.min.css'
 import { createNamespacedHelpers } from 'vuex'
@@ -127,8 +136,8 @@ export default {
   name: 'LeaseHouse',
   components: {
     rentalHousingFilter,
-    rentalHousingEditForm,
-    createRentalHousingData,
+    leaseHousingEditDialog,
+    leaseHousingCreateDialog,
     detailsDialog
   },
   data() {
@@ -173,12 +182,13 @@ export default {
   },
   methods: {
     ...mapMutations([
-      'setCreateRentalHousingDialogVisible',
+      'setLeaseCreateDialogVisible',
       'setLeasesTablePage',
       'setLeasesTablePageSize',
       'setLeaseDetailsDialogVisible',
       'setLeaseDetailsData',
-      'setLeaseEditDialogVisible'
+      'setLeaseEditDialogVisible',
+      'setLeaseEditForm'
     ]),
     ...mapActions([
       'fetchInitData',
@@ -205,6 +215,17 @@ export default {
     handleDetailsClick(data) {
       this.setLeaseDetailsData(data)
       this.setLeaseDetailsDialogVisible(true)
+    },
+    /**
+     * 编辑
+     */
+    handleEdit(data) {
+      this.setLeaseEditForm(
+        JSON.parse(
+          JSON.stringify(data)
+        )
+      )
+      this.setLeaseEditDialogVisible(true)
     },
     /**
      * 删除

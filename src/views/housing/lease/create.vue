@@ -142,7 +142,7 @@
                 <!-- 成员代理 -->
                 <el-form-item :label="$t('house.agent')" >
                   <el-select
-                    v-model="form.members"
+                    v-model="form.agents"
                     :remote-method="searchMembers"
                     :loading="searchMembersLoading"
                     multiple
@@ -240,7 +240,7 @@ export default {
         address: [],
         property_type: [],
         available_date_range: [],
-        members: [],
+        agents: [],
         show: 1
       },
       houseStatus: [
@@ -263,16 +263,16 @@ export default {
     ]),
     visible: {
       get() {
-        return this.$store.state.house.createRentalHousingDialogVisible
+        return this.$store.state.house.leaseCreateDialogVisible
       },
       set(visible) {
-        this.setCreateRentalHousingDialogVisible(visible)
+        this.setLeaseCreateDialogVisible(visible)
       }
     }
   },
   methods: {
     ...mapMutations([
-      'setCreateRentalHousingDialogVisible'
+      'setLeaseCreateDialogVisible'
     ]),
     ...mapActions([
       'createLeaseHouse'

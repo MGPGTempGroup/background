@@ -2,6 +2,7 @@ import {
   fetchLeases,
   fetchPropertyTypes,
   createLeaseHouse,
+  updateLeaseHouse,
   deleteLeaseHouse
 } from '@/api/house'
 import parseData2ConditionalParams from '@/utils/parseData2ConditionalParams'
@@ -23,18 +24,21 @@ const house = {
     leaseDetailsData: {},
     leaseEditDialogVisible: false,
     leaseEditForm: {},
+    leaseCreateDialogVisible: false,
     // 出售房屋列表
     saleHousingList: [],
-    createRentalHousingDialogVisible: false,
     createSaleHousingDialogVisible: false,
     availablePropertyType: []
   },
   mutations: {
-    setCreateRentalHousingDialogVisible(state, payload) {
-      state.createRentalHousingDialogVisible = payload
+    setLeaseCreateDialogVisible(state, payload) {
+      state.leaseCreateDialogVisible = payload
     },
     setCreateSaleHousingDialogVisible(state, payload) {
-      state.createSaleHousingDialogVisible = payload.visible
+      state.saleCreateHousingDialogVisible = payload.visible
+    },
+    setLeaseEditDialogVisible(state, payload) {
+      state.leaseEditDialogVisible = payload
     },
     setAvailablePropertyType(state, payload) {
       state.availablePropertyType = payload
@@ -48,8 +52,8 @@ const house = {
     setLeaseDetailsData(state, payload) {
       state.leaseDetailsData = payload
     },
-    setLeaseEditFormDialogVisible(state, payload) {
-      state.leaseEditDialogVisible = payload
+    setLeaseEditForm(state, payload) {
+      state.leaseEditForm = payload
     },
     setLeasesFilterForm(state, payload) {
       state.leasesFilterForm = payload
@@ -70,6 +74,11 @@ const house = {
     },
     addLease(state, payload) {
       state.leases.data.push(payload)
+    },
+    setLease(state, payload) {
+      state.leases.data = state.leases.data.map(item => {
+        return item.id === payload.id ? payload : item
+      })
     }
   },
   actions: {
@@ -96,13 +105,6 @@ const house = {
         contains: {
           owner_id: filterForm.owner_id,
           show: filterForm.show
-        },
-        between: {
-          // floor_space: [filterForm.min_floor_space, filterForm.max_floor_space],
-          // bedrooms: [filterForm.min_bedrooms, filterForm.max_bedrooms],
-          // bathrooms: [filterForm.min_bathrooms, filterForm.max_bathroom],
-          // car_spaces: [filterForm.min_car_spaces, filterForm.max_car_spaces],
-          // lockup_garages: [filterForm.min_lockup_garages, filterForm.max_lockup_garages]
         },
         basics: {
           egt: {
@@ -159,6 +161,10 @@ const house = {
     async createLeaseHouse({ commit }, payload) {
       const leaseHouseData = (await createLeaseHouse(payload)).data
       commit('addLease', leaseHouseData)
+    },
+    async updateLeaseHouse({ commit }, payload) {
+      const data = (await updateLeaseHouse(payload)).data
+      commit('setLease', data)
     },
     async deleteLeaseHouse({ commit }, payload) {
       await deleteLeaseHouse(payload.id)
