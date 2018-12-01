@@ -2,6 +2,7 @@ import {
   fetchLeases,
   fetchPropertyTypes,
   createLeaseHouse,
+  createSaleHouse,
   updateLeaseHouse,
   deleteLeaseHouse
 } from '@/api/house'
@@ -25,8 +26,12 @@ const house = {
     leaseEditDialogVisible: false,
     leaseEditForm: {},
     leaseCreateDialogVisible: false,
+    saleCreateDialogVisible: false,
     // 出售房屋列表
-    saleHousingList: [],
+    sales: {
+      data: [],
+      meta: {}
+    },
     createSaleHousingDialogVisible: false,
     availablePropertyType: []
   },
@@ -34,8 +39,8 @@ const house = {
     setLeaseCreateDialogVisible(state, payload) {
       state.leaseCreateDialogVisible = payload
     },
-    setCreateSaleHousingDialogVisible(state, payload) {
-      state.saleCreateHousingDialogVisible = payload.visible
+    setSaleCreateDialogVisible(state, payload) {
+      state.saleCreateDialogVisible = payload
     },
     setLeaseEditDialogVisible(state, payload) {
       state.leaseEditDialogVisible = payload
@@ -74,6 +79,9 @@ const house = {
     },
     addLease(state, payload) {
       state.leases.data.push(payload)
+    },
+    addSale(state, payload) {
+      state.sales.data.push(payload)
     },
     setLease(state, payload) {
       state.leases.data = state.leases.data.map(item => {
@@ -161,6 +169,10 @@ const house = {
     async createLeaseHouse({ commit }, payload) {
       const leaseHouseData = (await createLeaseHouse(payload)).data
       commit('addLease', leaseHouseData)
+    },
+    async createSaleHouse({ commit }, payload) {
+      const saleHouseData = (await createSaleHouse(payload)).data
+      commit('addSale', saleHouseData)
     },
     async updateLeaseHouse({ commit }, payload) {
       const data = (await updateLeaseHouse(payload)).data

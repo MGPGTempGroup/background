@@ -259,6 +259,8 @@ export default {
     semi: '半独立式住宅',
     duplex: '复式住宅',
     penthouse: '阁楼',
+    constructedIn: '修建时间',
+    built_in: '建成时间',
     preciseCoordinates: '精确坐标',
     coordinateHints: '（用于谷歌地图显示）',
     conditionalFiltering: '条件筛选',
@@ -275,12 +277,14 @@ export default {
     already: '已入住',
     address: '地址',
     update: '更新',
+    price: '价格',
     uploadImgTip: '点击此处上传照片',
     stateSelectionPlaceholder: '请选择当前状态',
     createRentalHousingData: '创建租赁房屋数据',
     editRentalHousingData: '编辑租赁房屋数据',
     createSaleHousingData: '创建销售房屋数据',
     housingPicture: '房屋图片',
+    isNewDevelopment: '是否为最新开发房产？',
     notFillSomeFieldTips: '如果你不填写某些字段，前台不会显示它们。'
   },
   addressList: {
@@ -478,5 +482,7 @@ export default {
   whetherToDisplay: '是否显示',
   displayState: '显示状态',
   creator: '创建者',
-  nothing: '无'
+  nothing: '无',
+  yes: '是',
+  no: '否'
 }

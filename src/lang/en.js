@@ -258,11 +258,13 @@ export default {
     semi: 'Semi',
     duplex: 'Duplex',
     penthouse: 'Penthouse',
+    constructedIn: 'Constructed in',
+    built_in: 'Built in',
     preciseCoordinates: 'Precise coordinates',
     coordinateHints: '(For Google map display)',
     conditionalFiltering: 'Conditional filtering',
     query: 'Query',
-    startDate: 'Sqtart date',
+    startDate: 'Start date',
     endDate: 'End date',
     regionSelection: 'Region selection',
     regionSelectionPlaceholder: 'Please select one or more regions',
@@ -274,12 +276,14 @@ export default {
     already: 'Already',
     address: 'Address',
     update: 'Update',
+    price: 'Price',
     uploadImgTip: 'Click here to upload pictures.',
     stateSelectionPlaceholder: 'Please select the current state',
     createRentalHousingData: 'Create rental house data',
     editRentalHousingData: 'Edit rental house data',
     createSaleHousingData: 'Create sale housing data',
     housingPicture: 'Housing picture',
+    isNewDevelopment: 'Is it the latest property development?',
     notFillSomeFieldTips: 'If you do not fill in some fields, the front desk will not show them.'
   },
   addressList: {
@@ -478,5 +482,7 @@ export default {
   whetherToDisplay: 'Whether to display',
   displayState: 'Display state',
   creator: 'Creator',
-  nothing: 'Nothing'
+  nothing: 'Nothing',
+  yes: 'Yes',
+  no: 'No'
 }

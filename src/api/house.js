@@ -22,6 +22,14 @@ export function createLeaseHouse(data) {
   })
 }
 
+export function createSaleHouse(data) {
+  return request({
+    method: 'POST',
+    url: 'residences',
+    data
+  })
+}
+
 export function updateLeaseHouse(data) {
   return request({
     method: 'PATCH',
