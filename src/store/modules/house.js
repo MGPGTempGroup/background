@@ -1,5 +1,6 @@
 import {
   fetchLeases,
+  fetchSales,
   fetchPropertyTypes,
   createLeaseHouse,
   createSaleHouse,
@@ -32,6 +33,9 @@ const house = {
       data: [],
       meta: {}
     },
+    salesTableLoading: false,
+    salesTablePage: 1,
+    salesTablePageSize: 10,
     createSaleHousingDialogVisible: false,
     availablePropertyType: []
   },
@@ -51,6 +55,9 @@ const house = {
     setLeases(state, payload) {
       state.leases = payload
     },
+    setSales(state, payload) {
+      state.sales = payload
+    },
     setLeaseDetailsDialogVisible(state, payload) {
       state.leaseDetailsDialogVisible = payload
     },
@@ -66,11 +73,20 @@ const house = {
     setLeasesTableLoading(state, payload) {
       state.leasesTableLoading = payload
     },
+    setSalesTableLoading(state, payload) {
+      state.salesTableLoading = payload
+    },
     setLeasesTablePage(state, payload) {
       state.leasesTablePage = payload
     },
+    setSalesTablePage(state, payload) {
+      state.salesTablePage = payload
+    },
     setLeasesTablePageSize(state, payload) {
       state.leasesTablePageSize = payload
+    },
+    setSalesTablePageSize(state, payload) {
+      state.salesTablePageSize = payload
     },
     deleteLease(state, payload) {
       state.leases.data = state.leases.data.filter(item => {
@@ -161,6 +177,12 @@ const house = {
       const leasesData = (await fetchLeases(params)).data
       commit('setLeases', leasesData)
       commit('setLeasesTableLoading', false)
+    },
+    async fetchSalesHouse({ commit, state }, payload = {}) {
+      commit('setSalesTableLoading', true)
+      const sales = (await fetchSales()).data
+      commit('setSales', sales)
+      commit('setSalesTableLoading', false)
     },
     async fetchPropertyTypes({ commit }, payload) {
       const propertyTypes = (await fetchPropertyTypes()).data.data

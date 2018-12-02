@@ -11,22 +11,58 @@
           {{ $t('create') }}
         </el-button>
       </div>
-      <el-table :data="saleHousingList" >
-        <el-table-column :label="$t('house.id')" prop="id" min-width="35px" />
-        <el-table-column :label="$t('house.address')" prop="state" min-width="50px">
+      <el-table v-loading="salesTableLoading" :data="sales.data" >
+        <el-table-column
+          :label="$t('house.id')"
+          prop="id"
+          min-width="35px"
+          align="center" />
+        <el-table-column
+          :label="$t('house.name')"
+          min-width="50px"
+          prop="name"
+          align="center">
+          <template slot-scope="scope" >
+            {{ scope.row.name || $t('noData') }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          :label="$t('house.address')"
+          prop="state"
+          min-width="50px"
+          align="center">
           <template slot-scope="scope" >
             {{ scope.row.address.length ? scope.row.address.join('/') : $t('noData') }}
           </template>
         </el-table-column>
-        <el-table-column :label="$t('house.suburbName')" prop="suburb_mame" min-width="30px" />
-        <el-table-column :label="$t('house.streetName')" prop="street_name" min-width="30px" />
-        <el-table-column :label="$t('house.streetCode')" prop="street_code" min-width="30px" />
-        <el-table-column :label="$t('house.postCode')" prop="post_code" min-width="30px">
+        <el-table-column
+          :label="$t('house.suburbName')"
+          prop="suburb_name"
+          min-width="50px"
+          align="center"/>
+        <el-table-column
+          :label="$t('house.streetName')"
+          prop="street_name"
+          min-width="50px"
+          align="center" />
+        <el-table-column
+          :label="$t('house.streetCode')"
+          prop="street_code"
+          min-width="45px"
+          align="center" />
+        <el-table-column
+          :label="$t('house.postCode')"
+          prop="post_code"
+          min-width="40px"
+          align="center" >
           <template slot-scope="scope" >
             {{ scope.row.post_code || $t('noData') }}
           </template>
         </el-table-column>
-        <el-table-column :label="$t('house.price')" >
+        <el-table-column
+          :label="$t('house.price')"
+          min-width="40px"
+          align="center">
           <template slot-scope="scope" >
             <template v-if="scope.row.min_price && scope.row.max_price" >
               ${{ scope.row.min_price }} ~ ${{ scope.row.max_price }}
@@ -42,42 +78,98 @@
         <el-table-column
           :label="$t('house.agent')"
           prop="agent"
-          style="margin-right: -10px;">
+          min-width="50px"
+          style="margin-right: -10px;"
+          align="center">
           <template slot-scope="scope" >
-            <el-tag
-              v-for="item in scope.row"
-              :key="item.id"
-              style="margin-right: 10px;" >
-              {{ item.name }}
+            <template v-if="scope.row.agents.data.length" >
+              <el-tag
+                v-for="item in scope.row.agents.data"
+                :key="item.id"
+                style="margin-right: 10px;" >
+                {{ item.name }}
+              </el-tag>
+            </template>
+            <template v-else >
+              {{ $t('noData') }}
+            </template>
+          </template>
+        </el-table-column>
+        <el-table-column
+          :label="$t('house.owner')"
+          prop="owner"
+          min-width="35px"
+          align="center">
+          <template slot-scope="scope" >
+            <el-tag>
+              {{ scope.row.owner.name + ' ' + scope.row.owner.surname || $t('noData') }}
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('house.owner')" prop="owner" />
-        <el-table-column :label="$t('house.availableDate')" prop="available_date" />
-        <el-table-column :label="$t('house.currState')" prop="currState" min-width="55px" >
-          <template slot-scope="scope">
-            <el-tag type="warning" size="mini" > {{ scope.row.currState }} </el-tag>
+        <el-table-column
+          :label="$t('house.availableDate')"
+          prop="available_date"
+          align="center">
+          <template slot-scope="scope" >
+            <template v-if="scope.row.available_start_date && scope.row.available_end_date" >
+              {{ scope.row.available_start_date }} ~ {{ scope.row.available_end_date }}
+            </template>
+            <template v-else-if="scope.row.available_start_date || scope.row.available_end_date" >
+              {{ scope.row.available_start_date || scope.row.available_end_date }}
+            </template>
+            <template v-else >
+              {{ $t('noData') }}
+            </template>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('house.updatedAt')" prop="updated_at" />
-        <el-table-column :label="$t('house.createdAt')" prop="created_at" />
+        <el-table-column
+          :label="$t('displayState')"
+          prop="currState"
+          min-width="55px"
+          align="center">
+          <template slot-scope="scope">
+            <el-tag
+              v-if="scope.row.show == 1"
+              type="success"
+              size="mini" >
+              {{ $t('show') }}
+            </el-tag>
+            <el-tag
+              v-if="scope.row.show == 0"
+              type="danger"
+              size="mini" >
+              {{ $t('hide') }}
+            </el-tag>
+          </template>
+        </el-table-column>
+        <el-table-column
+          :label="$t('house.updatedAt')"
+          prop="updated_at"
+          min-width="38px"
+          align="center" />
+        <el-table-column
+          :label="$t('house.createdAt')"
+          prop="created_at"
+          min-width="38px"
+          align="center" />
         <el-table-column
           :label="$t('house.actions')"
           fixed="right"
-          width="100">
+          width="100"
+          align="center">
           <template slot-scope="scope">
             <el-button type="text" size="small" @click="handleDetailsClick(scope.row)">{{ $t('house.details') }}</el-button>
             <el-button type="text" size="small" @click="editDialogVisible = true" >{{ $t('house.edit') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
-      <el-row type="flex" justify="center" >
+      <el-row v-if="Object.getOwnPropertyNames(sales.meta).length" type="flex" justify="center" >
         <el-col :span="7" >
           <el-pagination
-            :current-page="currPage"
+            :current-page="salesTablePage"
             :page-sizes="[10, 20, 30, 50]"
-            :page-size="10"
-            :total="40"
+            :page-size="salesTablePageSize"
+            :total="sales.meta.pagination.total"
             style="margin-top: 15px"
             layout="total, sizes, prev, pager, next, jumper"
             @size-change="handlePaginatorSizeChange"
@@ -242,7 +334,10 @@ export default {
   },
   computed: {
     ...mapState([
-      'sales'
+      'sales',
+      'salesTableLoading',
+      'salesTablePage',
+      'salesTablePageSize'
     ])
   },
   created() {
@@ -255,13 +350,17 @@ export default {
     this.fetchInitData().finally(() => {
       loading.close()
     })
+    this.fetchSalesHouse()
   },
   methods: {
     ...mapMutations([
-      'setSaleCreateDialogVisible'
+      'setSaleCreateDialogVisible',
+      'setSalesTablePageSize',
+      'setSalesTablePage'
     ]),
     ...mapActions([
-      'fetchInitData'
+      'fetchInitData',
+      'fetchSalesHouse'
     ]),
     handleDetailsClick(rowData) {
       this.detailDialogVisible = true
@@ -269,8 +368,12 @@ export default {
     handleCreate() {
       this.setSaleCreateDialogVisible(true)
     },
-    handlePaginatorSizeChange() {},
-    handlePaginatorChange() {}
+    handlePaginatorSizeChange(pageSize) {
+      this.setSalesTablePageSize(pageSize)
+    },
+    handlePaginatorChange(page) {
+      this.setSalesTablePage(page)
+    }
   }
 }
 </script>

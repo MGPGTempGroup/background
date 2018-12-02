@@ -7,6 +7,13 @@ export function fetchLeases(params) {
   })
 }
 
+export function fetchSales(params) {
+  return request({
+    method: 'GET',
+    url: 'residences?' + params
+  })
+}
+
 export function fetchPropertyTypes() {
   return request({
     method: 'GET',
