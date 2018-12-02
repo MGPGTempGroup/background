@@ -9,6 +9,7 @@ import {
 } from '@/api/house'
 import parseData2ConditionalParams from '@/utils/parseData2ConditionalParams'
 import { param } from '@/utils'
+import i18n from '@/lang'
 
 const house = {
   namespaced: true,
@@ -36,8 +37,18 @@ const house = {
     salesTableLoading: false,
     salesTablePage: 1,
     salesTablePageSize: 10,
+    salesFilterForm: {},
     createSaleHousingDialogVisible: false,
-    availablePropertyType: []
+    availablePropertyType: [],
+    houseStatus: [
+      {
+        label: i18n.t('house.saleOut'),
+        value: 3
+      },
+      {
+        label: i18n.t('house.')
+      }
+    ]
   },
   mutations: {
     setLeaseCreateDialogVisible(state, payload) {
@@ -69,6 +80,9 @@ const house = {
     },
     setLeasesFilterForm(state, payload) {
       state.leasesFilterForm = payload
+    },
+    setSalesFilterForm(state, payload) {
+      state.salesFilterForm = payload
     },
     setLeasesTableLoading(state, payload) {
       state.leasesTableLoading = payload
@@ -180,7 +194,66 @@ const house = {
     },
     async fetchSalesHouse({ commit, state }, payload = {}) {
       commit('setSalesTableLoading', true)
-      const sales = (await fetchSales()).data
+      const filterForm = state.salesFilterForm
+      const conditionalParams = parseData2ConditionalParams({
+        fuzzy: {
+          name: filterForm.name,
+          address: filterForm.address,
+          suburb_name: filterForm.suburb_name,
+          street_name: filterForm.street_name,
+          address_description: filterForm.address_description
+        },
+        dateRange: {
+          created_at: filterForm.created_at_range,
+          updated_at: filterForm.updated_at_range
+        },
+        contains: {
+          owner_id: filterForm.owner_id,
+          show: filterForm.show
+        },
+        basics: {
+          egt: {
+            floor_space: filterForm.min_floor_space,
+            bedrooms: filterForm.min_bedrooms,
+            bathrooms: filterForm.min_bathrooms,
+            car_spaces: filterForm.min_car_spaces,
+            lockup_garages: filterForm.min_lockup_garages,
+            min_price: filterForm.min_price,
+            available_start_date: Array.isArray(filterForm.available_date_range) ? filterForm.available_date_range[0] : undefined
+          },
+          elt: {
+            floor_space: filterForm.max_floor_space,
+            bedrooms: filterForm.max_bedrooms,
+            bathrooms: filterForm.max_bathrooms,
+            car_spaces: filterForm.max_car_spaces,
+            lockup_garages: filterForm.max_lockup_garages,
+            max_price: filterForm.max_price,
+            available_end_date: Array.isArray(filterForm.available_date_range) ? filterForm.available_date_range[1] : undefined
+          }
+        }
+      })
+      let params = [
+        conditionalParams,
+        'pageSize=' + state.salesTablePageSize,
+        'page=' + state.salesTablePage
+      ]
+
+      if (Array.isArray(filterForm.agents) && filterForm.agents.length) {
+        params.push(
+          filterForm.agents.map(id => 'members[]=' + id).join('&')
+        )
+      }
+
+      if (Array.isArray(filterForm.property_type) && filterForm.property_type.length) {
+        params.push(
+          filterForm.property_type.map(id => 'property_type[]=' + id).join('&')
+        )
+      }
+
+      const extraParams = param(payload.params)
+      if (extraParams) params.push(extraParams)
+      params = params.join('&')
+      const sales = (await fetchSales(params)).data
       commit('setSales', sales)
       commit('setSalesTableLoading', false)
     },

@@ -163,7 +163,7 @@
           </template>
         </el-table-column>
       </el-table>
-      <el-row v-if="Object.getOwnPropertyNames(sales.meta).length" type="flex" justify="center" >
+      <el-row v-if="sales.meta.pagination" type="flex" justify="center" >
         <el-col :span="7" >
           <el-pagination
             :current-page="salesTablePage"

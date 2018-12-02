@@ -260,7 +260,7 @@ export default {
     duplex: '复式住宅',
     penthouse: '阁楼',
     constructedIn: '修建时间',
-    built_in: '建成时间',
+    builtIn: '建成于',
     preciseCoordinates: '精确坐标',
     coordinateHints: '（用于谷歌地图显示）',
     conditionalFiltering: '条件筛选',

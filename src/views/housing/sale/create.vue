@@ -115,7 +115,7 @@
               </el-input>
             </el-form-item>
             <el-row :gutter="24" >
-              <el-col v-bind="{ xs:24, sm: 24, md: 24, lg: 12, xl: 12 }" >
+              <el-col v-bind="{ xs:24, sm: 24, md: 12, lg: 12, xl: 12 }" >
                 <!-- 物主 -->
                 <el-form-item :label="$t('house.owner')" >
                   <el-autocomplete
@@ -161,7 +161,7 @@
                   </el-select>
                 </el-form-item>
               </el-col>
-              <el-col v-bind="{ xs: 24, sm: 24, md: 24, lg: 12, xl: 12 }" >
+              <el-col v-bind="{ xs: 24, sm: 24, md: 12, lg: 12, xl: 12 }" >
                 <!-- 目前状态 -->
                 <el-form-item :label="$t('whetherToDisplay')" >
                   <el-select v-model="form.show">
@@ -175,7 +175,7 @@
               </el-col>
             </el-row>
             <el-row :gutter="24" >
-              <el-col v-bind="{ xs: 24, sm: 24, md: 24, lg: 12, xl: 12 }" >
+              <el-col v-bind="{ xs: 24, sm: 24, md: 12, lg: 12, xl: 12 }" >
                 <el-form-item :label="$t('house.constructedIn')" >
                   <el-date-picker
                     v-model="form.constructed_in"
@@ -184,10 +184,10 @@
                     style="width: 100%;" />
                 </el-form-item>
               </el-col>
-              <el-col v-bind="{ xs: 24, sm: 24, md: 24, lg: 12, xl: 12 }" >
-                <el-form-item :label="$t('house.built_in')" >
+              <el-col v-bind="{ xs: 24, sm: 24, md: 12, lg: 12, xl: 12 }" >
+                <el-form-item :label="$t('house.builtIn')" >
                   <el-date-picker
-                    v-model="form.build_in"
+                    v-model="form.built_in"
                     type="datetime"
                     value-format="yyyy-MM-dd hh:mm:ss"
                     style="width: 100%;" />
