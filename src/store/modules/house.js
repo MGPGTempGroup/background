@@ -6,7 +6,8 @@ import {
   createSaleHouse,
   updateLeaseHouse,
   updateSaleHouse,
-  deleteLeaseHouse
+  deleteLeaseHouse,
+  deleteSaleHouse
 } from '@/api/house'
 import parseData2ConditionalParams from '@/utils/parseData2ConditionalParams'
 import { param } from '@/utils'
@@ -120,9 +121,10 @@ const house = {
       state.salesTablePageSize = payload
     },
     deleteLease(state, payload) {
-      state.leases.data = state.leases.data.filter(item => {
-        return item.id !== payload
-      })
+      state.leases.data = state.leases.data.filter(item => item.id !== payload)
+    },
+    deleteSale(state, payload) {
+      state.sales.data = state.sales.data.filter(item => item.id !== payload)
     },
     addLease(state, payload) {
       state.leases.data.push(payload)
@@ -304,6 +306,23 @@ const house = {
     async deleteLeaseHouse({ commit }, payload) {
       await deleteLeaseHouse(payload.id)
       commit('deleteLease', payload.id)
+    },
+    async deleteSaleHouse({ commit, dispatch, state }, payload) {
+      await deleteSaleHouse(payload.id)
+      commit('deleteSale', payload.id)
+      commit('setSales', {
+        data: state.sales.data,
+        meta: {
+          ...state.sales.meta,
+          pagination: {
+            ...state.sales.pagination,
+            total: state.sales.meta.pagination.total - 1
+          }
+        }
+      })
+      if (state.sales.data.length === 0 && state.salesTablePage !== 1) {
+        await dispatch('changeSalesTablePage', state.salesTablePage - 1)
+      }
     },
     async changeSalesTablePage({ commit, dispatch }, payload) {
       commit('setSalesTablePage', payload)

@@ -59,3 +59,10 @@ export function deleteLeaseHouse(id) {
     url: 'leases/' + id
   })
 }
+
+export function deleteSaleHouse(id) {
+  return request({
+    method: 'DELETE',
+    url: 'residences/' + id
+  })
+}

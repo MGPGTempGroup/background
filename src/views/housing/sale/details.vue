@@ -187,15 +187,20 @@ export default {
       'saleDetailsData'
     ]),
     formattedData() {
-      const formatted = JSON.parse(JSON.stringify(this.saleDetailsData))
-      const numberFormatter = val => val !== null ? String(val) : null
-      formatted.floor_spaces = numberFormatter(formatted.floor_spaces)
-      formatted.car_spaces = numberFormatter(formatted.car_spaces)
-      formatted.bedrooms = numberFormatter(formatted.bedrooms)
-      formatted.bathrooms = numberFormatter(formatted.bathrooms)
-      formatted.lockup_garages = numberFormatter(formatted.lockup_garages)
-      formatted.owner_name = [formatted.owner.name, formatted.owner.surname].filter(Boolean).join(' ')
-      return formatted
+      if (Object.getOwnPropertyNames(this.saleDetailsData).length) {
+        const formatted = JSON.parse(JSON.stringify(this.saleDetailsData))
+        const numberFormatter = val => val !== null ? String(val) : null
+        formatted.floor_spaces = numberFormatter(formatted.floor_spaces)
+        formatted.car_spaces = numberFormatter(formatted.car_spaces)
+        formatted.bedrooms = numberFormatter(formatted.bedrooms)
+        formatted.bathrooms = numberFormatter(formatted.bathrooms)
+        formatted.lockup_garages = numberFormatter(formatted.lockup_garages)
+        if (typeof formatted.owner === 'object') {
+          formatted.owner_name = [formatted.owner.name, formatted.owner.surname].filter(Boolean).join(' ')
+        }
+        return formatted
+      }
+      return {}
     },
     visible: {
       get() {
