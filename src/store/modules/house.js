@@ -39,6 +39,8 @@ const house = {
     salesTablePage: 1,
     salesTablePageSize: 10,
     salesFilterForm: {},
+    saleDetailsDialogVisible: false,
+    saleDetailsData: {},
     saleEditDialogVisible: false,
     saleEditForm: {},
     createSaleHousingDialogVisible: false,
@@ -49,7 +51,7 @@ const house = {
         value: 3
       },
       {
-        label: i18n.t('house.')
+        label: i18n.t('house.saleOut')
       }
     ]
   },
@@ -78,8 +80,14 @@ const house = {
     setLeaseDetailsDialogVisible(state, payload) {
       state.leaseDetailsDialogVisible = payload
     },
+    setSaleDetailsDialogVisible(state, payload) {
+      state.saleDetailsDialogVisible = payload
+    },
     setLeaseDetailsData(state, payload) {
       state.leaseDetailsData = payload
+    },
+    setSaleDetailsData(state, payload) {
+      state.saleDetailsData = payload
     },
     setLeaseEditForm(state, payload) {
       state.leaseEditForm = payload
@@ -118,9 +126,11 @@ const house = {
     },
     addLease(state, payload) {
       state.leases.data.push(payload)
+      state.leases.pagination.total += 1
     },
     addSale(state, payload) {
       state.sales.data.push(payload)
+      state.sales.pagination.total += 1
     },
     setLease(state, payload) {
       state.leases.data = state.leases.data.map(item => {
@@ -294,6 +304,14 @@ const house = {
     async deleteLeaseHouse({ commit }, payload) {
       await deleteLeaseHouse(payload.id)
       commit('deleteLease', payload.id)
+    },
+    async changeSalesTablePage({ commit, dispatch }, payload) {
+      commit('setSalesTablePage', payload)
+      await dispatch('fetchSalesHouse')
+    },
+    async changeSalesTablePageSize({ commit, dispatch }, payload) {
+      commit('setSalesTablePageSize', payload)
+      await dispatch('fetchSalesHouse')
     }
   }
 }
