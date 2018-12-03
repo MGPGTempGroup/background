@@ -33,14 +33,15 @@
             <el-form-item :label="$t('house.postCode')">
               <el-input v-model="form.post_code" type="number" />
             </el-form-item>
-            <el-form-item :label="$t('house.isNewDevelopment')" >
+            <!-- 是否为最新开发房产 -->
+            <!-- <el-form-item :label="$t('house.isNewDevelopment')" >
               <el-radio v-model="form.is_new_development" label="1">
                 {{ $t('yes') }}
               </el-radio>
               <el-radio v-model="form.is_new_development" label="0">
                 {{ $t('no') }}
               </el-radio>
-            </el-form-item>
+            </el-form-item> -->
           </el-col>
           <el-col v-bind="formChunkLayoutProp" >
             <!-- 街道名称 -->
@@ -174,7 +175,7 @@
                 </el-form-item>
               </el-col>
             </el-row>
-            <el-row :gutter="24" >
+            <!-- <el-row :gutter="24" >
               <el-col v-bind="{ xs: 24, sm: 24, md: 12, lg: 12, xl: 12 }" >
                 <el-form-item :label="$t('house.constructedIn')" >
                   <el-date-picker
@@ -193,8 +194,8 @@
                     style="width: 100%;" />
                 </el-form-item>
               </el-col>
-            </el-row>
-            <el-form-item :label="$t('house.upcomingInspections')" >
+            </el-row> -->
+            <!-- <el-form-item :label="$t('house.upcomingInspections')" >
               <el-date-picker
                 v-model="form.upcoming_inspections_date_range"
                 :start-placeholder="$t('house.startDate')"
@@ -202,7 +203,7 @@
                 :default-time="['12:00:00']"
                 value-format="yyyy-MM-dd hh:mm:ss"
                 type="datetimerange"/>
-            </el-form-item>
+            </el-form-item> -->
           </el-col>
         </el-row>
         <div class="create-sale-housing__details-editor" >
@@ -258,7 +259,7 @@ export default {
         available_date_range: [],
         constructed_in: null,
         build_in: null,
-        is_new_development: '1',
+        // is_new_development: '1',
         owner: '',
         upcoming_inspections_date_range: []
       },

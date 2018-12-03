@@ -236,6 +236,7 @@ export default {
     updatedAt: '修改于',
     owner: '物主',
     detailsOfRentalHousing: '租赁房屋详情',
+    detailsOfSaleHousing: '销售房屋详情',
     floorSpace: '房屋面积',
     basicInformation: '基本信息',
     housingBasicInformation: '房屋基本信息',
