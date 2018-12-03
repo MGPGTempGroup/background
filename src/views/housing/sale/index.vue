@@ -158,8 +158,8 @@
           width="100"
           align="center">
           <template slot-scope="scope">
-            <el-button type="text" size="small" @click="handleDetailsClick(scope.row)">{{ $t('house.details') }}</el-button>
-            <el-button type="text" size="small" @click="editDialogVisible = true" >{{ $t('house.edit') }}</el-button>
+            <el-button type="text" size="small" @click="handleDetails(scope.row)">{{ $t('house.details') }}</el-button>
+            <el-button type="text" size="small" @click="handleEdit(scope.row)" >{{ $t('house.edit') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -292,8 +292,11 @@
       <sale-house-edit-form />
     </el-dialog>
 
-    <!-- Create sale house data -->
+    <!-- Create sales data -->
     <create-sale-housing-dialog />
+
+    <!-- Edit sales data -->
+    <edit-sale-dialog />
 
   </div>
 </template>
@@ -301,15 +304,17 @@
 <script>
 
 import SaleHousingFilter from './filter'
-import SaleHouseEditForm from './edit'
+import editSaleDialog from './edit'
 import CreateSaleHousingDialog from './create'
-import 'font-awesome/css/font-awesome.min.css'
+
 import { createNamespacedHelpers } from 'vuex'
 const { mapState, mapMutations, mapActions } = createNamespacedHelpers('house')
 
+import 'font-awesome/css/font-awesome.min.css'
+
 export default {
   name: 'HouseSale',
-  components: { SaleHousingFilter, SaleHouseEditForm, CreateSaleHousingDialog },
+  components: { SaleHousingFilter, editSaleDialog, CreateSaleHousingDialog },
   data() {
     return {
       detailDialogVisible: false,
@@ -356,14 +361,20 @@ export default {
     ...mapMutations([
       'setSaleCreateDialogVisible',
       'setSalesTablePageSize',
-      'setSalesTablePage'
+      'setSalesTablePage',
+      'setSaleEditDialogVisible',
+      'setSaleEditForm'
     ]),
     ...mapActions([
       'fetchInitData',
       'fetchSalesHouse'
     ]),
-    handleDetailsClick(rowData) {
+    handleDetails(rowData) {
       this.detailDialogVisible = true
+    },
+    handleEdit(rowData) {
+      this.setSaleEditForm(rowData)
+      this.setSaleEditDialogVisible(true)
     },
     handleCreate() {
       this.setSaleCreateDialogVisible(true)

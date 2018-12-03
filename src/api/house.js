@@ -45,6 +45,14 @@ export function updateLeaseHouse(data) {
   })
 }
 
+export function updateSaleHouse(data) {
+  return request({
+    method: 'PATCH',
+    url: 'residences/' + data.id,
+    data
+  })
+}
+
 export function deleteLeaseHouse(id) {
   return request({
     method: 'DELETE',

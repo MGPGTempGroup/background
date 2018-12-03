@@ -282,7 +282,6 @@ export default {
       'setLeaseEditDialogVisible'
     ]),
     ...mapActions([
-      'createLeaseHouse',
       'updateLeaseHouse'
     ]),
     /**
@@ -325,7 +324,7 @@ export default {
       this.form.owner_id = item.id
     },
     /**
-     * 租赁房屋创建
+     * 更改租赁房屋数据
      */
     async handleUpdate() {
       const loading = this.$loading({
@@ -375,7 +374,6 @@ export default {
       }
       form = filterObjEmptyVal(form) // 清空无效参数
 
-      // 派遣createLeaseHouse Action，进行创建
       try {
         await this.updateLeaseHouse(form)
         this.visible = false

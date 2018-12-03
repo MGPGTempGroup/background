@@ -283,6 +283,7 @@ export default {
     createRentalHousingData: '创建租赁房屋数据',
     editRentalHousingData: '编辑租赁房屋数据',
     createSaleHousingData: '创建销售房屋数据',
+    editSaleHousingData: '编辑出售房屋数据',
     housingPicture: '房屋图片',
     isNewDevelopment: '是否为最新开发房产？',
     notFillSomeFieldTips: '如果你不填写某些字段，前台不会显示它们。'

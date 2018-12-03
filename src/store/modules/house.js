@@ -5,6 +5,7 @@ import {
   createLeaseHouse,
   createSaleHouse,
   updateLeaseHouse,
+  updateSaleHouse,
   deleteLeaseHouse
 } from '@/api/house'
 import parseData2ConditionalParams from '@/utils/parseData2ConditionalParams'
@@ -38,6 +39,8 @@ const house = {
     salesTablePage: 1,
     salesTablePageSize: 10,
     salesFilterForm: {},
+    saleEditDialogVisible: false,
+    saleEditForm: {},
     createSaleHousingDialogVisible: false,
     availablePropertyType: [],
     houseStatus: [
@@ -60,6 +63,9 @@ const house = {
     setLeaseEditDialogVisible(state, payload) {
       state.leaseEditDialogVisible = payload
     },
+    setSaleEditDialogVisible(state, payload) {
+      state.saleEditDialogVisible = payload
+    },
     setAvailablePropertyType(state, payload) {
       state.availablePropertyType = payload
     },
@@ -77,6 +83,9 @@ const house = {
     },
     setLeaseEditForm(state, payload) {
       state.leaseEditForm = payload
+    },
+    setSaleEditForm(state, payload) {
+      state.saleEditForm = payload
     },
     setLeasesFilterForm(state, payload) {
       state.leasesFilterForm = payload
@@ -115,6 +124,11 @@ const house = {
     },
     setLease(state, payload) {
       state.leases.data = state.leases.data.map(item => {
+        return item.id === payload.id ? payload : item
+      })
+    },
+    setSale(state, payload) {
+      state.sales.data = state.sales.data.map(item => {
         return item.id === payload.id ? payload : item
       })
     }
@@ -272,6 +286,10 @@ const house = {
     async updateLeaseHouse({ commit }, payload) {
       const data = (await updateLeaseHouse(payload)).data
       commit('setLease', data)
+    },
+    async updateSaleHouse({ commit }, payload) {
+      const data = (await updateSaleHouse(payload)).data
+      commit('setSale', data)
     },
     async deleteLeaseHouse({ commit }, payload) {
       await deleteLeaseHouse(payload.id)

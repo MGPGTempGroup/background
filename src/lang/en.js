@@ -282,7 +282,8 @@ export default {
     stateSelectionPlaceholder: 'Please select the current state',
     createRentalHousingData: 'Create rental house data',
     editRentalHousingData: 'Edit rental house data',
-    createSaleHousingData: 'Create sale housing data',
+    createSaleHousingData: 'Create sale house data',
+    editSaleHousingData: 'Edit Sales data',
     housingPicture: 'Housing picture',
     isNewDevelopment: 'Is it the latest property development?',
     notFillSomeFieldTips: 'If you do not fill in some fields, the front desk will not show them.'
