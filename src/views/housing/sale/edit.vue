@@ -267,7 +267,7 @@ export default {
       searchOwnersByFullName(keyWord).then(res => {
         const owners = res.data.data
         const results = owners.map(item => ({
-          value: item.surname + ' ' + item.name,
+          value: item.name + ' ' + item.surname,
           id: item.id
         }))
         callback(results)

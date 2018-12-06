@@ -8,3 +8,18 @@ export function fetchProjects(params) {
     url
   })
 }
+
+export function fetchProductTypes() {
+  return request({
+    method: 'GET',
+    url: 'product-types'
+  })
+}
+
+export function createProject(data) {
+  return request({
+    method: 'POST',
+    url: 'projects',
+    data
+  })
+}

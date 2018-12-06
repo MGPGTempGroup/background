@@ -1,6 +1,9 @@
 import {
-  fetchProjects
+  fetchProjects,
+  fetchProductTypes,
+  createProject
 } from '@/api/project'
+import i18n from '@/lang'
 
 const project = {
   namespaced: true,
@@ -11,11 +14,21 @@ const project = {
     },
     tableLoading: false,
     tablePage: 1,
-    tablePageSize: 10
+    tablePageSize: 10,
+    productTypes: {
+      data: []
+    },
+    createProjectDialogVisible: false,
+    projectStatus: [
+      { label: i18n.t('projectStatus.soldOut'), value: 3 }
+    ]
   },
   mutations: {
     setProjects(state, payload) {
       state.projects = payload
+    },
+    addProject(state, payload) {
+      state.projects.data.push(payload)
     },
     setTableLoading(state, payload) {
       state.tableLoading = payload
@@ -25,9 +38,19 @@ const project = {
     },
     setTablePageSize(state, payload) {
       state.tablePageSize = payload
+    },
+    setCreateProjectDialogVisible(state, payload) {
+      state.createProjectDialogVisible = payload
+    },
+    setProductTypes(state, payload) {
+      state.productTypes = payload
     }
   },
   actions: {
+    async fetchProductTypes({ commit }, payload) {
+      const productTypes = (await fetchProductTypes()).data
+      commit('setProductTypes', productTypes)
+    },
     async fetchProjects({ commit, state }, payload) {
       commit('setTableLoading', true)
       const pageParams = [
@@ -46,6 +69,10 @@ const project = {
     async changeTablePageSize({ commit, dispatch }, payload) {
       commit('setTablePageSize', payload)
       await dispatch('fetchProjects')
+    },
+    async createProject({ commit }, payload) {
+      const project = (await createProject(payload)).data
+      commit('addProject', project)
     }
   }
 }

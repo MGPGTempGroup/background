@@ -432,7 +432,14 @@ export default {
     isPastSuccess: '是否过去的成功',
     agents: '代理',
     productType: '产品类别',
-    creator: '创建者'
+    creator: '创建者',
+    createProject: '创建项目',
+    owner: '业主',
+    pictures: '图片',
+    status: '状态'
+  },
+  projectStatus: {
+    soldOut: '已售罄'
   },
   all: '全部',
   id: '编号',

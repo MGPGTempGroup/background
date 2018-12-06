@@ -431,7 +431,14 @@ export default {
     isPastSuccess: 'Past success',
     agents: 'Agents',
     productType: 'Product Type',
-    creator: 'Creator'
+    creator: 'Creator',
+    createProject: 'Create project',
+    owner: 'Owner',
+    pictures: 'Pictures',
+    status: 'Status'
+  },
+  projectStatus: {
+    soldOut: 'Sold out'
   },
   all: 'ALL',
   id: 'ID',

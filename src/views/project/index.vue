@@ -99,7 +99,7 @@
           <template slot-scope="scope" >
             <template v-if="scope.row.agents.data.length" >
               <el-tag
-                v-for="item in scope.row.agents"
+                v-for="item in scope.row.agents.data"
                 :key="item.id"
                 style="margin-right: 3px;">
                 {{ item.name + ' ' + item.surname }}
@@ -182,18 +182,25 @@
         </el-col>
       </el-row>
     </el-card>
+
+    <create-project-dialog />
   </div>
 </template>
 
 <script>
 
 import { createNamespacedHelpers } from 'vuex'
-const { mapState, mapActions } = createNamespacedHelpers('project')
+const { mapState, mapMutations, mapActions } = createNamespacedHelpers('project')
+
+import CreateProjectDialog from './create'
 
 import 'font-awesome/css/font-awesome.min.css'
 
 export default {
   name: 'Projects',
+  components: {
+    CreateProjectDialog
+  },
   computed: {
     ...mapState([
       'projects',
@@ -210,10 +217,21 @@ export default {
           message: this.$t('pullingDataFailed')
         })
       })
+    this.fetchProductTypes()
+      .catch(() => {
+        this.$message({
+          type: 'error',
+          message: this.$t('pullingDataFailed')
+        })
+      })
   },
   methods: {
+    ...mapMutations([
+      'setCreateProjectDialogVisible'
+    ]),
     ...mapActions([
       'fetchProjects',
+      'fetchProductTypes',
       'changeTablePage',
       'changeTablePageSize'
     ]),
@@ -221,7 +239,7 @@ export default {
      * 创建项目数据
      */
     handleCreate() {
-
+      this.setCreateProjectDialogVisible(true)
     },
     /**
      * 查看详情

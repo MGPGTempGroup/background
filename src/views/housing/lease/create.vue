@@ -134,8 +134,7 @@
                     v-model="form.owner"
                     :fetch-suggestions="searchOwners"
                     style="width: 100%;"
-                    @select="handleOwnerSelect"
-                  />
+                    @select="handleOwnerSelect" />
                 </el-form-item>
               </el-col>
               <el-col v-bind="{ xs:24, sm: 24, md: 24, lg: 12, xl: 12 }" >
@@ -148,8 +147,7 @@
                     multiple
                     filterable
                     remote
-                    reserve-keyword
-                    placeholder="请输入关键词">
+                    reserve-keyword>
                     <el-option
                       v-for="(item, index) in searchedListOfMembers"
                       :key="index"
@@ -284,7 +282,7 @@ export default {
       searchOwnersByFullName(keyWord).then(res => {
         const owners = res.data.data
         const results = owners.map(item => ({
-          value: item.surname + ' ' + item.name,
+          value: item.name + ' ' + item.surname,
           id: item.id
         }))
         callback(results)
