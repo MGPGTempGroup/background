@@ -168,6 +168,19 @@
           </template>
         </el-table-column>
       </el-table>
+      <el-row v-if="projects.meta.pagination" type="flex" justify="center" >
+        <el-col :span="7" >
+          <el-pagination
+            :current-page="tablePage"
+            :page-sizes="[10, 20, 30, 50]"
+            :page-size="tablePageSize"
+            :total="projects.meta.pagination.total"
+            style="margin-top: 15px"
+            layout="total, sizes, prev, pager, next, jumper"
+            @size-change="handlePaginatorSizeChange"
+            @current-change="handlePaginatorChange" />
+        </el-col>
+      </el-row>
     </el-card>
   </div>
 </template>
@@ -200,7 +213,9 @@ export default {
   },
   methods: {
     ...mapActions([
-      'fetchProjects'
+      'fetchProjects',
+      'changeTablePage',
+      'changeTablePageSize'
     ]),
     /**
      * 创建项目数据
@@ -225,6 +240,18 @@ export default {
      */
     handleDelete() {
 
+    },
+    /**
+     * 分页大小改变
+     */
+    handlePaginatorSizeChange(pageSize) {
+      this.changeTablePageSize(pageSize)
+    },
+    /**
+     * 分页页数改变
+     */
+    handlePaginatorChange(page) {
+      this.changeTablePage(page)
     }
   }
 }

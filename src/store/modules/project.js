@@ -19,15 +19,33 @@ const project = {
     },
     setTableLoading(state, payload) {
       state.tableLoading = payload
+    },
+    setTablePage(state, payload) {
+      state.tablePage = payload
+    },
+    setTablePageSize(state, payload) {
+      state.tablePageSize = payload
     }
   },
   actions: {
-    async fetchProjects({ commit }, payload) {
+    async fetchProjects({ commit, state }, payload) {
       commit('setTableLoading', true)
-      const projects = (await fetchProjects()).data
+      const pageParams = [
+        'page=' + state.tablePage,
+        'pageSize=' + state.tablePageSize
+      ].join('&')
+      const projects = (await fetchProjects(pageParams)).data
       commit('setProjects', projects)
       commit('setTableLoading', false)
       return projects
+    },
+    async changeTablePage({ commit, dispatch }, payload) {
+      commit('setTablePage', payload)
+      await dispatch('fetchProjects')
+    },
+    async changeTablePageSize({ commit, dispatch }, payload) {
+      commit('setTablePageSize', payload)
+      await dispatch('fetchProjects')
     }
   }
 }
