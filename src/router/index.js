@@ -116,37 +116,6 @@ export const asyncRouterMap = [
     ]
   },
   {
-    path: '/company-info-management',
-    component: Layout,
-    redirect: '/company-info-management/index',
-    alwaysShow: true,
-    meta: {
-      title: 'companyInfo',
-      icon: 'company',
-      roles: ['admin']
-    },
-    children: [
-      {
-        path: 'information',
-        component: () => import('@/views/company/information'),
-        name: 'information',
-        meta: {
-          title: 'information',
-          roles: ['admin']
-        }
-      },
-      {
-        path: 'members',
-        component: () => import('@/views/company/members/index'),
-        name: 'members',
-        meta: {
-          title: 'members',
-          roles: ['admin'] // or you can only set roles in sub nav
-        }
-      }
-    ]
-  },
-  {
     path: '/housing-management',
     component: Layout,
     redirect: 'noredirect',
@@ -174,6 +143,23 @@ export const asyncRouterMap = [
         meta: {
           title: 'sale',
           roles: ['admin'] // or you can only set roles in sub nav
+        }
+      }
+    ]
+  },
+  {
+    path: '/projects',
+    component: Layout,
+    // redirect: 'noredirect',
+    // alwaysShow: true,
+    children: [
+      {
+        path: '',
+        component: () => import('@/views/project'),
+        name: 'projects',
+        meta: {
+          title: 'projects',
+          icon: 'project'
         }
       }
     ]
@@ -268,6 +254,37 @@ export const asyncRouterMap = [
         meta: {
           title: 'careers',
           roles: ['admin']
+        }
+      }
+    ]
+  },
+  {
+    path: '/company-info-management',
+    component: Layout,
+    redirect: '/company-info-management/index',
+    alwaysShow: true,
+    meta: {
+      title: 'companyInfo',
+      icon: 'company',
+      roles: ['admin']
+    },
+    children: [
+      {
+        path: 'information',
+        component: () => import('@/views/company/information'),
+        name: 'information',
+        meta: {
+          title: 'information',
+          roles: ['admin']
+        }
+      },
+      {
+        path: 'members',
+        component: () => import('@/views/company/members/index'),
+        name: 'members',
+        meta: {
+          title: 'members',
+          roles: ['admin'] // or you can only set roles in sub nav
         }
       }
     ]

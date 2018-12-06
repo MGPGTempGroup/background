@@ -11,6 +11,7 @@ import serviceMessage from './modules/serviceMessage'
 import content from './modules/content'
 import industryUpdates from './modules/industryUpdates'
 import company from './modules/company'
+import project from './modules/project'
 import getters from './getters'
 
 Vue.use(Vuex)
@@ -27,7 +28,8 @@ const store = new Vuex.Store({
     content,
     serviceMessage,
     company,
-    industryUpdates
+    industryUpdates,
+    project
   },
   getters
 })

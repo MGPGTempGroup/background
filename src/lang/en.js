@@ -88,7 +88,8 @@ export default {
     articleList: 'Article list',
     saleHouse: 'Sale house',
     members: 'Members',
-    information: 'Information'
+    information: 'Information',
+    projects: 'Projects'
   },
   navbar: {
     logOut: 'Log Out',
@@ -416,6 +417,22 @@ export default {
     detailedAddress: 'Detailed Address',
     introduction: 'Introduction'
   },
+  project: {
+    list: 'List of projects',
+    name: 'Project name',
+    location: 'Location',
+    address: 'Address',
+    introduction: 'Introduction',
+    description: 'Description',
+    yearBuilt: 'Year built',
+    minPrice: 'Min price',
+    maxPrice: 'Max price',
+    isNewDevelopment: 'New development',
+    isPastSuccess: 'Past success',
+    agents: 'Agents',
+    productType: 'Product Type',
+    creator: 'Creator'
+  },
   all: 'ALL',
   id: 'ID',
   submit: 'Submit',
@@ -460,10 +477,11 @@ export default {
   updateSuccess: 'Update Success.',
   deleteSuccess: 'Delete Success.',
   createFailed: 'Create failed.',
-  deleteFailed: 'Delete failed.',
+  deleteFailed: 'Deleteall failed.',
   updateFailed: 'Update failed.',
   uploadFailed: 'Upload failed.',
   searchFailed: 'Search failed.',
+  pullingDataFailed: 'Pulling data failed.',
   noData: 'No data',
   deleteDataTips: 'Are you sure you want to delete this data?',
   landlords: 'Landlords',

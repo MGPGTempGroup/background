@@ -89,7 +89,8 @@ export default {
     saleHouse: '出售房屋',
     members: '成员',
     information: '信息',
-    companyContactInfo: '公司联系信息'
+    // companyContactInfo: '公司联系信息',
+    projects: '项目'
   },
   navbar: {
     logOut: '退出登录',
@@ -417,6 +418,22 @@ export default {
     detailedAddress: '详细地址',
     introduction: '介绍'
   },
+  project: {
+    list: '项目列表',
+    name: '项目名称',
+    location: '位置',
+    address: '地址',
+    introduction: '介绍',
+    description: '描述',
+    yearBuilt: '建造年份',
+    minPrice: '最少价格',
+    maxPrice: '最高价格',
+    isNewDevelopment: '是否最新开发',
+    isPastSuccess: '是否过去的成功',
+    agents: '代理',
+    productType: '产品类别',
+    creator: '创建者'
+  },
   all: '全部',
   id: '编号',
   submit: '提交',
@@ -463,6 +480,7 @@ export default {
   deleteFailed: '删除失败',
   uploadFailed: '上传失败',
   searchFailed: '搜索失败',
+  pullingDataFailed: '数据拉取失败',
   noData: '无数据',
   deleteDataTips: '您确定要删除此条数据吗？',
   landlords: '房东',
