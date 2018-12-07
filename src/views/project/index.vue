@@ -188,6 +188,9 @@
 
     <!-- 项目详情 -->
     <project-details-dialog />
+
+    <!-- 项目编辑 -->
+    <edit-project-dialog />
   </div>
 </template>
 
@@ -198,13 +201,14 @@ const { mapState, mapMutations, mapActions } = createNamespacedHelpers('project'
 
 import CreateProjectDialog from './create'
 import ProjectDetailsDialog from './details'
+import EditProjectDialog from './edit'
 
 import 'font-awesome/css/font-awesome.min.css'
 
 export default {
   name: 'Projects',
   components: {
-    CreateProjectDialog, ProjectDetailsDialog
+    CreateProjectDialog, ProjectDetailsDialog, EditProjectDialog
   },
   computed: {
     ...mapState([
@@ -234,7 +238,9 @@ export default {
     ...mapMutations([
       'setCreateProjectDialogVisible',
       'setProjectDetailsDialogVisible',
-      'setProjectDetailsData'
+      'setProjectDetailsData',
+      'setEditProjectData',
+      'setEditProjectDialogVisible'
     ]),
     ...mapActions([
       'fetchProjects',
@@ -258,8 +264,9 @@ export default {
     /**
      * 编辑数据
      */
-    handleEdit() {
-
+    handleEdit(rowData) {
+      this.setEditProjectData(rowData)
+      this.setEditProjectDialogVisible(true)
     },
     /**
      * 删除数据

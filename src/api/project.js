@@ -23,3 +23,11 @@ export function createProject(data) {
     data
   })
 }
+
+export function updateProject(data) {
+  return request({
+    method: 'PATCH',
+    url: 'projects/' + data.id,
+    data
+  })
+}

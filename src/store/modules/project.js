@@ -1,7 +1,8 @@
 import {
   fetchProjects,
   fetchProductTypes,
-  createProject
+  createProject,
+  updateProject
 } from '@/api/project'
 import i18n from '@/lang'
 
@@ -19,6 +20,8 @@ const project = {
       data: []
     },
     createProjectDialogVisible: false,
+    editProjectDialogVisible: false,
+    editProjectData: {},
     projectDetailsDialogVisible: false,
     projectDetailsData: {},
     projectStatus: [
@@ -28,6 +31,11 @@ const project = {
   mutations: {
     setProjects(state, payload) {
       state.projects = payload
+    },
+    setProject(state, payload) {
+      state.projects.data = state.projects.data.map(item => {
+        return item.id === payload.id ? payload : item
+      })
     },
     addProject(state, payload) {
       state.projects.data.push(payload)
@@ -43,6 +51,12 @@ const project = {
     },
     setCreateProjectDialogVisible(state, payload) {
       state.createProjectDialogVisible = payload
+    },
+    setEditProjectDialogVisible(state, payload) {
+      state.editProjectDialogVisible = payload
+    },
+    setEditProjectData(state, payload) {
+      state.editProjectData = payload
     },
     setProjectDetailsDialogVisible(state, payload) {
       state.projectDetailsDialogVisible = payload
@@ -81,6 +95,10 @@ const project = {
     async createProject({ commit }, payload) {
       const project = (await createProject(payload)).data
       commit('addProject', project)
+    },
+    async updateProject({ commit }, payload) {
+      const project = (await updateProject(payload)).data
+      commit('setProject', project)
     }
   }
 }
