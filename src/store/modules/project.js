@@ -19,6 +19,8 @@ const project = {
       data: []
     },
     createProjectDialogVisible: false,
+    projectDetailsDialogVisible: false,
+    projectDetailsData: {},
     projectStatus: [
       { label: i18n.t('projectStatus.soldOut'), value: 3 }
     ]
@@ -41,6 +43,12 @@ const project = {
     },
     setCreateProjectDialogVisible(state, payload) {
       state.createProjectDialogVisible = payload
+    },
+    setProjectDetailsDialogVisible(state, payload) {
+      state.projectDetailsDialogVisible = payload
+    },
+    setProjectDetailsData(state, payload) {
+      state.projectDetailsData = payload
     },
     setProductTypes(state, payload) {
       state.productTypes = payload

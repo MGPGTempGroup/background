@@ -183,7 +183,11 @@
       </el-row>
     </el-card>
 
+    <!-- 创建项目 -->
     <create-project-dialog />
+
+    <!-- 项目详情 -->
+    <project-details-dialog />
   </div>
 </template>
 
@@ -193,13 +197,14 @@ import { createNamespacedHelpers } from 'vuex'
 const { mapState, mapMutations, mapActions } = createNamespacedHelpers('project')
 
 import CreateProjectDialog from './create'
+import ProjectDetailsDialog from './details'
 
 import 'font-awesome/css/font-awesome.min.css'
 
 export default {
   name: 'Projects',
   components: {
-    CreateProjectDialog
+    CreateProjectDialog, ProjectDetailsDialog
   },
   computed: {
     ...mapState([
@@ -227,7 +232,9 @@ export default {
   },
   methods: {
     ...mapMutations([
-      'setCreateProjectDialogVisible'
+      'setCreateProjectDialogVisible',
+      'setProjectDetailsDialogVisible',
+      'setProjectDetailsData'
     ]),
     ...mapActions([
       'fetchProjects',
@@ -244,8 +251,9 @@ export default {
     /**
      * 查看详情
      */
-    handleDetails() {
-
+    handleDetails(rowData) {
+      this.setProjectDetailsData(rowData)
+      this.setProjectDetailsDialogVisible(true)
     },
     /**
      * 编辑数据

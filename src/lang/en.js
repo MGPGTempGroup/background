@@ -427,6 +427,7 @@ export default {
     yearBuilt: 'Year built',
     minPrice: 'Min price',
     maxPrice: 'Max price',
+    price: 'Price',
     isNewDevelopment: 'New development',
     isPastSuccess: 'Past success',
     agents: 'Agents',
@@ -435,7 +436,9 @@ export default {
     createProject: 'Create project',
     owner: 'Owner',
     pictures: 'Pictures',
-    status: 'Status'
+    status: 'Status',
+    details: 'Project details',
+    basicInformation: 'Basic information'
   },
   projectStatus: {
     soldOut: 'Sold out'

@@ -428,6 +428,7 @@ export default {
     yearBuilt: '建造年份',
     minPrice: '最少价格',
     maxPrice: '最高价格',
+    price: '价格',
     isNewDevelopment: '是否最新开发',
     isPastSuccess: '是否过去的成功',
     agents: '代理',
@@ -436,7 +437,9 @@ export default {
     createProject: '创建项目',
     owner: '业主',
     pictures: '图片',
-    status: '状态'
+    status: '状态',
+    details: '项目详情',
+    basicInformation: '基本信息'
   },
   projectStatus: {
     soldOut: '已售罄'
