@@ -5,6 +5,7 @@ import {
   updateProject,
   deleteProject
 } from '@/api/project'
+import parseData2ConditionalParams from '@/utils/parseData2ConditionalParams'
 import i18n from '@/lang'
 
 const project = {
@@ -25,6 +26,7 @@ const project = {
     editProjectData: {},
     projectDetailsDialogVisible: false,
     projectDetailsData: {},
+    projectFilterForm: {},
     projectStatus: [
       { label: i18n.t('projectStatus.soldOut'), value: 3 }
     ]
@@ -62,6 +64,9 @@ const project = {
     setEditProjectData(state, payload) {
       state.editProjectData = payload
     },
+    setProjectFilterForm(state, payload) {
+      state.projectFilterForm = payload
+    },
     setProjectDetailsDialogVisible(state, payload) {
       state.projectDetailsDialogVisible = payload
     },
@@ -79,11 +84,55 @@ const project = {
     },
     async fetchProjects({ commit, state }, payload) {
       commit('setTableLoading', true)
-      const pageParams = [
+      const params = []
+      // 分页参数
+      params.push([
         'page=' + state.tablePage,
         'pageSize=' + state.tablePageSize
-      ].join('&')
-      const projects = (await fetchProjects(pageParams)).data
+      ].join('&'))
+      // 条件筛选参数
+      const filterForm = state.projectFilterForm
+      params.push(parseData2ConditionalParams({
+        fuzzy: {
+          name: filterForm.name,
+          location: filterForm.location,
+          description: filterForm.description,
+          address: filterForm.address
+        },
+        contains: {
+          is_new_development: filterForm.is_new_development,
+          is_past_success: filterForm.is_past_success,
+          status: filterForm.status,
+          owner_id: filterForm.owner_id
+        },
+        basics: {
+          egt: {
+            min_price: filterForm.min_price
+          },
+          elt: {
+            max_price: filterForm.max_price
+          }
+        },
+        dateRange: {
+          created_at: filterForm.created_at_range,
+          updated_at: filterForm.updated_at_range,
+          year_built: filterForm.year_built_range
+        }
+      }))
+      if (Array.isArray(filterForm.agents) && filterForm.agents.length) {
+        params.push(
+          filterForm.agents.map(id => 'agents[]=' + id).join('&')
+        )
+      }
+
+      if (Array.isArray(filterForm.product_type) && filterForm.product_type.length) {
+        params.push(
+          filterForm.product_type.map(id => 'product_types[]=' + id).join('&')
+        )
+      }
+      const projects = (await fetchProjects(
+        params.filter(Boolean).join('&')
+      )).data
       commit('setProjects', projects)
       commit('setTableLoading', false)
       return projects

@@ -1,5 +1,6 @@
 <template>
   <div class="project__container" >
+    <project-filter />
     <el-card style="margin-top: 20px;" shadow="never" >
       <div slot="header" class="project__list-header" >
         <h2 style="margin: 0;" >
@@ -202,13 +203,14 @@ const { mapState, mapMutations, mapActions } = createNamespacedHelpers('project'
 import CreateProjectDialog from './create'
 import ProjectDetailsDialog from './details'
 import EditProjectDialog from './edit'
+import ProjectFilter from './filter'
 
 import 'font-awesome/css/font-awesome.min.css'
 
 export default {
   name: 'Projects',
   components: {
-    CreateProjectDialog, ProjectDetailsDialog, EditProjectDialog
+    CreateProjectDialog, ProjectDetailsDialog, EditProjectDialog, ProjectFilter
   },
   computed: {
     ...mapState([
@@ -219,6 +221,12 @@ export default {
     ])
   },
   created() {
+    const loading = this.$loading({
+      lock: true,
+      text: 'Loading',
+      spinner: 'el-icon-loading',
+      background: 'rgba(0, 0, 0, 0.7)'
+    })
     this.fetchProjects()
       .catch(() => {
         this.$message({
@@ -232,6 +240,9 @@ export default {
           type: 'error',
           message: this.$t('pullingDataFailed')
         })
+      })
+      .finally(() => {
+        loading.close()
       })
   },
   methods: {

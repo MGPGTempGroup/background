@@ -440,7 +440,8 @@ export default {
     pictures: '图片',
     status: '状态',
     details: '项目详情',
-    basicInformation: '基本信息'
+    basicInformation: '基本信息',
+    conditionalFiltering: '条件筛选'
   },
   projectStatus: {
     soldOut: '已售罄'
@@ -504,6 +505,8 @@ export default {
   careers: '招纳贤士',
   areasWeServe: '服务领域',
   headquarters: '总部介绍',
+  startDate: '开始日期',
+  endDate: '结束日期',
   // 身份相关
   landlord: '业主',
   vendor: '卖主',

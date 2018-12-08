@@ -439,7 +439,8 @@ export default {
     pictures: 'Pictures',
     status: 'Status',
     details: 'Project details',
-    basicInformation: 'Basic information'
+    basicInformation: 'Basic information',
+    conditionalFiltering: 'Conditional filtering'
   },
   projectStatus: {
     soldOut: 'Sold out'
@@ -516,5 +517,7 @@ export default {
   creator: 'Creator',
   nothing: 'Nothing',
   yes: 'Yes',
-  no: 'No'
+  no: 'No',
+  startDate: 'Start date',
+  endDate: 'End date'
 }
