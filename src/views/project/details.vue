@@ -53,9 +53,12 @@
               </dd>
               <dt>{{ $t('project.owner') }}</dt>
               <dd>
-                <el-tag>
+                <el-tag v-if="projectDetailsData.owner" >
                   {{ projectDetailsData.owner.name + ' ' + projectDetailsData.owner.surname }}
                 </el-tag>
+                <template v-else >
+                  {{ $t('noData') }}
+                </template>
               </dd>
             </el-col>
             <el-col v-bind="layoutItemProps" tag="dl" >
