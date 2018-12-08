@@ -31,3 +31,10 @@ export function updateProject(data) {
     data
   })
 }
+
+export function deleteProject(id) {
+  return request({
+    method: 'DELETE',
+    url: 'projects/' + id
+  })
+}

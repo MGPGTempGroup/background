@@ -435,6 +435,7 @@ export default {
     productType: '产品类别',
     creator: '创建者',
     createProject: '创建项目',
+    editProject: '编辑项目',
     owner: '业主',
     pictures: '图片',
     status: '状态',

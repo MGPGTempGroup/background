@@ -246,7 +246,8 @@ export default {
       'fetchProjects',
       'fetchProductTypes',
       'changeTablePage',
-      'changeTablePageSize'
+      'changeTablePageSize',
+      'deleteProject'
     ]),
     /**
      * 创建项目数据
@@ -271,8 +272,35 @@ export default {
     /**
      * 删除数据
      */
-    handleDelete() {
-
+    handleDelete(id) {
+      this.$confirm(this.$t('deleteDataTips'), this.$t('tips'), {
+        confirmButtonText: this.$t('confirm'),
+        cancelButtonText: this.$t('cancel'),
+        type: 'warning'
+      }).then(() => {
+        const loading = this.$loading({
+          lock: true,
+          text: 'Loading',
+          spinner: 'el-icon-loading',
+          background: 'rgba(0, 0, 0, 0.7)'
+        })
+        this.deleteProject({ id })
+          .then(() => {
+            this.$message({
+              type: 'success',
+              message: this.$t('deleteSuccess')
+            })
+          })
+          .catch(() => {
+            this.$message({
+              type: 'error',
+              message: this.$t('deleteFailed')
+            })
+          })
+          .finally(() => {
+            loading.close()
+          })
+      })
     },
     /**
      * 分页大小改变

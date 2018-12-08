@@ -2,7 +2,8 @@ import {
   fetchProjects,
   fetchProductTypes,
   createProject,
-  updateProject
+  updateProject,
+  deleteProject
 } from '@/api/project'
 import i18n from '@/lang'
 
@@ -39,6 +40,9 @@ const project = {
     },
     addProject(state, payload) {
       state.projects.data.push(payload)
+    },
+    deleteProject(state, payload) {
+      state.projects.data = state.projects.data.filter(item => item.id !== payload.id)
     },
     setTableLoading(state, payload) {
       state.tableLoading = payload
@@ -99,6 +103,15 @@ const project = {
     async updateProject({ commit }, payload) {
       const project = (await updateProject(payload)).data
       commit('setProject', project)
+    },
+    async deleteProject({ commit, state, dispatch }, payload) {
+      await deleteProject(payload.id)
+      commit('deleteProject', {
+        id: payload.id
+      })
+      if (state.projects.data.length === 0 && state.tablePage !== 1) {
+        dispatch('changeTablePage', state.tablePage - 1)
+      }
     }
   }
 }
