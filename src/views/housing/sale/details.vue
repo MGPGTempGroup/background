@@ -30,17 +30,17 @@
                 </template>
               </dd>
               <dt>{{ $t('house.suburbName') }}</dt>
-              <dd>{{ formattedData.suburb_name }}</dd>
+              <dd>{{ formattedData.suburb_name || $t('noData') }}</dd>
               <dt>{{ $t('house.streetName') }}</dt>
-              <dd>{{ formattedData.street_name }}</dd>
+              <dd>{{ formattedData.street_name || $t('noData') }}</dd>
               <dt>{{ $t('house.streetCode') }}</dt>
-              <dd>{{ formattedData.street_code }}</dd>
+              <dd>{{ formattedData.street_code || $t('noData') }}</dd>
               <dt>{{ $t('house.postCode') }}</dt>
-              <dd>{{ formattedData.post_code }}</dd>
+              <dd>{{ formattedData.post_code || $t('noData') }}</dd>
               <dt>{{ $t('house.houseNumber') }}</dt>
-              <dd>{{ formattedData.house_number }}</dd>
+              <dd>{{ formattedData.house_number || $t('noData') }}</dd>
               <dt>{{ $t('house.addressDescription') }}</dt>
-              <dd>{{ formattedData.address_description }}</dd>
+              <dd>{{ formattedData.address_description || $t('noData') }}</dd>
               <dt>{{ $t('house.briefIntroduction') }}</dt>
               <dd>
                 {{ formattedData.brief_introduction || $t('noData') }}
@@ -125,6 +125,17 @@
                 ~
                 {{ formattedData.available_end_date || $t('noData') }}
               </dd>
+              <dt>{{ $t('house.infomationStatement') }}</dt>
+              <dd>
+                <template v-if="formattedData.information_statement" >
+                  <el-tag>
+                    <a :href="formattedData.information_statement" target="_blank" >{{ $t('preview') }}</a>
+                  </el-tag>
+                </template>
+                <template v-else >
+                  {{ $t('noData') }}
+                </template>
+              </dd>
               <dt>{{ $t('house.createdAt') }}</dt>
               <dd>{{ formattedData.created_at || $t('noData') }}</dd>
               <dt>{{ $t('house.updatedAt') }}</dt>
@@ -166,7 +177,7 @@
       </el-tabs>
     </div>
     <span slot="footer" class="dialog-footer">
-      <el-button type="primary" @click="visible = false">确 定</el-button>
+      <el-button type="primary" @click="visible = false">{{ $t('confirm') }}</el-button>
     </span>
   </el-dialog>
 </template>
