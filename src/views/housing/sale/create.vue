@@ -426,8 +426,10 @@ export default {
       // 上传所有图片
       const uploadPromises = this.imageList.map(item => {
         const imgFile = item.file
+        const dataURL = item.dataURL
         return new Promise(async(resolve, reject) => {
           try {
+            if (/^http/.test(dataURL)) resolve(dataURL)
             const imgURL = (await UploadImageAPI(imgFile)).headers.location
             resolve(imgURL)
           } catch (err) {
