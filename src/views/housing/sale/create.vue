@@ -280,12 +280,10 @@ export default {
         details: '',
         brief_introduction: '',
         address: [],
+        agents: [],
         owner_name: '',
         property_type: [],
         available_date_range: [],
-        constructed_in: null,
-        build_in: null,
-        // is_new_development: '1',
         upcoming_inspections_date_range: []
       },
       searchedListOfMembers: [],
@@ -377,8 +375,23 @@ export default {
         message: this.$t('uploadFailed')
       })
     },
+    /**
+     * 表单重置
+     */
     handleReset() {
-      // ...
+      this.form = {
+        details: '',
+        brief_introduction: '',
+        address: [],
+        agents: [],
+        owner_name: '',
+        property_type: [],
+        available_date_range: [],
+        upcoming_inspections_date_range: []
+      }
+      this.$refs.tinymce.setContent('')
+      this.imageList = []
+      this.pdfList = []
     },
     /**
      * 创建数据
