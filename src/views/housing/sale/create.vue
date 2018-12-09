@@ -218,21 +218,7 @@
               {{ $t('house.infomationStatement') }}
             </strong>
           </p>
-          <el-upload
-            ref="upload"
-            :action="uploadPDFAction"
-            :on-preview="handlePDFPreview"
-            :on-remove="handlePDFRemove"
-            :on-success="handleUploadPDFSuccess"
-            :on-error="handleUploadPDFError"
-            :headers="uploadPDFHeaders"
-            :file-list="pdfList"
-            :auto-upload="true"
-            :limit="1"
-            name="pdf"
-            accept="application/pdf">
-            <el-button slot="trigger" size="small" type="primary">{{ $t('selectFile') }}</el-button>
-          </el-upload>
+          <upload-PDF :pdf-list.sync="pdfList"/>
         </div>
         <div class="create-sale-housing__form-actions" >
           <el-button type="info" @click="handleReset" >
@@ -250,6 +236,7 @@
 <script>
 import tinymce from '@/components/Tinymce'
 import UploadImage from '@/components/UploadImage'
+import UploadPDF from '@/components/UploadPDF'
 
 import { searchOwnersByFullName } from '@/api/propertyOwner'
 import { searchMembersByFullName } from '@/api/company'
@@ -260,11 +247,10 @@ const { mapState, mapMutations, mapActions } = createNamespacedHelpers('house')
 
 import { filterObjEmptyVal } from '@/utils'
 import areaDataStorage from '@/utils/areaDataStorage'
-import { getToken } from '@/utils/auth'
 export default {
   name: 'CreateSaleHouse',
   components: {
-    tinymce, UploadImage
+    tinymce, UploadImage, UploadPDF
   },
   data() {
     return {
@@ -272,10 +258,6 @@ export default {
       formChunkLayoutProp: { xs: 24, sm: 24, md: 12, lg: 8, xl: 8 },
       imageList: [],
       pdfList: [],
-      uploadPDFHeaders: {
-        'Authorization': getToken()
-      },
-      uploadPDFAction: `${process.env.BASE_API}/pdfs`,
       form: {
         details: '',
         brief_introduction: '',
@@ -352,30 +334,6 @@ export default {
       this.form.owner_id = data.id
     },
     /**
-     * 预览上传的pdf文件
-     */
-    handlePDFPreview(file) {
-      window.open(file.url, 'Preview')
-    },
-    /**
-     * 删除上传的pdf文件
-     */
-    handlePDFRemove(a) {
-      this.form.information_statement = undefined
-    },
-    /**
-     * pdf文件上传成功时的钩子
-     */
-    handleUploadPDFSuccess(response) {
-      this.form.information_statement = response.url
-    },
-    handleUploadPDFError() {
-      this.$message({
-        type: 'error',
-        message: this.$t('uploadFailed')
-      })
-    },
-    /**
      * 表单重置
      */
     handleReset() {
@@ -422,6 +380,13 @@ export default {
             break
         }
       })
+      if (this.pdfList.length) {
+        try {
+          formData.information_statement = this.pdfList[0].response.url
+        } catch (err) {
+          // ...
+        }
+      }
 
       // 上传所有图片
       const uploadPromises = this.imageList.map(item => {
