@@ -520,5 +520,6 @@ export default {
   nothing: '无',
   yes: '是',
   no: '否',
-  selectFile: '选择文件'
+  selectFile: '选择文件',
+  currentFile: '当前文件'
 }

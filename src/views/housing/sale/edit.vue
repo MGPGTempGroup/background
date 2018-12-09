@@ -172,6 +172,14 @@
           <p><strong>{{ $t('house.housingPicture') }}</strong></p>
           <upload-image :image-list.sync="imageList" :max-count="10" />
         </div>
+        <div class="create-sale-housing__upload-pdf-wrapper" >
+          <p>
+            <strong>
+              {{ $t('house.infomationStatement') }}
+            </strong>
+          </p>
+          <upload-PDF :pdf-list.sync="pdfList"/>
+        </div>
         <div class="edit-sale-house__form-actions" >
           <el-button type="info" @click="handleReset" >
             {{ $t('reset') }}
@@ -188,6 +196,7 @@
 <script>
 import tinymce from '@/components/Tinymce'
 import UploadImage from '@/components/UploadImage'
+import UploadPDF from '@/components/UploadPDF'
 
 import { parseTime, filterObjEmptyVal } from '@/utils'
 import areaDataStorage from '@/utils/areaDataStorage'
@@ -201,13 +210,14 @@ const { mapState, mapMutations, mapActions } = createNamespacedHelpers('house')
 export default {
   name: 'EditSaleHouse',
   components: {
-    tinymce, UploadImage
+    tinymce, UploadImage, UploadPDF
   },
   data() {
     return {
       areaData: areaDataStorage(),
       formChunkLayoutProp: { xs: 24, sm: 24, md: 12, lg: 8, xl: 8 },
       imageList: [],
+      pdfList: [],
       owner: null,
       form: {
         details: '',
@@ -348,6 +358,18 @@ export default {
         form['available_start_date'] = parseTime(originForm.available_date_range[0])
         form['available_end_date'] = parseTime(originForm.available_date_range[1])
       }
+      if (this.pdfList.length) {
+        try {
+          const pdf = this.pdfList[0]
+          if (/^http/.test(this.pdfList[0].url)) {
+            form.information_statement = pdf.url
+          } else {
+            form.information_statement = pdf.response.url
+          }
+        } catch (err) {
+          // ...
+        }
+      }
       form = filterObjEmptyVal(form) // 清空无效参数
 
       try {
@@ -394,6 +416,14 @@ export default {
           dataURL: item.url
         }
       })
+      if (form.information_statement) {
+        this.pdfList = [
+          {
+            name: this.$t('currentFile'),
+            url: form.information_statement
+          }
+        ]
+      }
       this.owner = form.owner.name + ' ' + form.owner.surname
       if (this.$refs.tinymce) {
         this.$refs.tinymce.setContent(form.details)
@@ -411,6 +441,10 @@ export default {
       margin-top: 35px;
     }
     &__details-editor {
+      margin-top: 22px;
+    }
+    &__upload-pdf-wrapper {
+      padding-top: 1px;
       margin-top: 22px;
     }
   }

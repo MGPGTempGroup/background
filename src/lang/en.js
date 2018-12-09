@@ -521,5 +521,6 @@ export default {
   no: 'No',
   startDate: 'Start date',
   endDate: 'End date',
-  selectFile: 'Select file'
+  selectFile: 'Select file',
+  currentFile: 'Current file'
 }
