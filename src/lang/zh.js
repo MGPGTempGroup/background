@@ -280,6 +280,7 @@ export default {
     address: '地址',
     update: '更新',
     price: '价格',
+    infomationStatement: '信息陈述文件（pdf）',
     uploadImgTip: '点击此处上传照片',
     stateSelectionPlaceholder: '请选择当前状态',
     createRentalHousingData: '创建租赁房屋数据',
@@ -518,5 +519,6 @@ export default {
   creator: '创建者',
   nothing: '无',
   yes: '是',
-  no: '否'
+  no: '否',
+  selectFile: '选择文件'
 }

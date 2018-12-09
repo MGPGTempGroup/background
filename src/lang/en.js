@@ -280,6 +280,7 @@ export default {
     address: 'Address',
     update: 'Update',
     price: 'Price',
+    infomationStatement: 'Statement of information（pdf）',
     uploadImgTip: 'Click here to upload pictures.',
     stateSelectionPlaceholder: 'Please select the current state',
     createRentalHousingData: 'Create rental house data',
@@ -519,5 +520,6 @@ export default {
   yes: 'Yes',
   no: 'No',
   startDate: 'Start date',
-  endDate: 'End date'
+  endDate: 'End date',
+  selectFile: 'Select file'
 }

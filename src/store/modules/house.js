@@ -128,11 +128,11 @@ const house = {
     },
     addLease(state, payload) {
       state.leases.data.push(payload)
-      state.leases.pagination.total += 1
+      state.leases.meta.pagination.total += 1
     },
     addSale(state, payload) {
       state.sales.data.push(payload)
-      state.sales.pagination.total += 1
+      state.sales.meta.pagination.total += 1
     },
     setLease(state, payload) {
       state.leases.data = state.leases.data.map(item => {

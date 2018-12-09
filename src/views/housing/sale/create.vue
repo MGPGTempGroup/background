@@ -22,8 +22,7 @@
                 v-model="form.address"
                 expand-trigger="hover"
                 popper-class="address-selector"
-                style="width: 100%"
-                @change="handleAddressSelect" />
+                style="width: 100%"/>
             </el-form-item>
             <!-- 郊区名称 -->
             <el-form-item :label="$t('house.suburbName')">
@@ -78,27 +77,27 @@
           <el-col v-bind="formChunkLayoutProp" >
             <!-- 相关属性：卧室、卫生间、车库、车位数量等... -->
             <el-row>
-              <el-col v-bind="{ xs: 24, sm: 12, md: 12, lg: 8, xl: 8 }" >
+              <el-col v-bind="{ xs: 24, sm: 12, md: 12, lg: 12, xl: 8 }" >
                 <el-form-item :label="$t('house.bedrooms')" >
                   <el-input-number v-model="form.bedrooms" controls-position="right" />
                 </el-form-item>
               </el-col>
-              <el-col v-bind="{ xs: 24, sm: 12, md: 12, lg: 8, xl: 8 }" >
+              <el-col v-bind="{ xs: 24, sm: 12, md: 12, lg: 12, xl: 8 }" >
                 <el-form-item :label="$t('house.bathrooms')" >
                   <el-input-number v-model="form.bathrooms" controls-position="right" />
                 </el-form-item>
               </el-col>
-              <el-col v-bind="{ xs: 24, sm: 12, md: 12, lg: 8, xl: 8 }" >
+              <el-col v-bind="{ xs: 24, sm: 12, md: 12, lg: 12, xl: 8 }" >
                 <el-form-item :label="$t('house.carSpaces')" >
                   <el-input-number v-model="form.car_spaces" controls-position="right" />
                 </el-form-item>
               </el-col>
-              <el-col v-bind="{ xs: 24, sm: 12, md: 12, lg: 8, xl: 8 }" >
+              <el-col v-bind="{ xs: 24, sm: 12, md: 12, lg: 12, xl: 8 }" >
                 <el-form-item :label="$t('house.lockupGarages')" >
                   <el-input-number v-model="form.lockup_garages" controls-position="right" />
                 </el-form-item>
               </el-col>
-              <el-col v-bind="{ xs:24, sm: 12, md: 12, lg: 8, xl: 8 }" >
+              <el-col v-bind="{ xs:24, sm: 12, md: 12, lg: 12, xl: 8 }" >
                 <el-form-item :label="$t('house.floorSpace')" >
                   <el-input v-model="form.floor_space" type="number" style="width: 100px;" />
                   &nbsp;m<sup>2</sup>
@@ -120,7 +119,7 @@
                 <!-- 物主 -->
                 <el-form-item :label="$t('house.owner')" >
                   <el-autocomplete
-                    v-model="ownerName"
+                    v-model="form.owner_name"
                     :fetch-suggestions="searchOwners"
                     style="width: 100%;"
                     @select="handleOwnerSelect"
@@ -165,13 +164,8 @@
               <el-col v-bind="{ xs: 24, sm: 24, md: 12, lg: 12, xl: 12 }" >
                 <!-- 目前状态 -->
                 <el-form-item :label="$t('whetherToDisplay')" >
-                  <el-select v-model="form.show">
-                    <el-option
-                      v-for="(item, index) in houseStatus"
-                      :key="index"
-                      :label="item.label"
-                      :value="item.value" />
-                  </el-select>
+                  <el-radio v-model="form.show" :label="1" >{{ $t('show') }}</el-radio>
+                  <el-radio v-model="form.show" :label="0" >{{ $t('hide') }}</el-radio>
                 </el-form-item>
               </el-col>
             </el-row>
@@ -211,8 +205,34 @@
           <tinymce ref="tinymce" v-model="form.details" />
         </div>
         <div class="create-sale-housing__upload-image-wrapper" >
-          <p><strong>{{ $t('house.housingPicture') }}</strong></p>
+          <p>
+            <strong>
+              {{ $t('house.housingPicture') }}
+            </strong>
+          </p>
           <upload-image :image-list.sync="imageList" :max-count="10" />
+        </div>
+        <div class="create-sale-housing__upload-pdf-wrapper" >
+          <p>
+            <strong>
+              {{ $t('house.infomationStatement') }}
+            </strong>
+          </p>
+          <el-upload
+            ref="upload"
+            :action="uploadPDFAction"
+            :on-preview="handlePDFPreview"
+            :on-remove="handlePDFRemove"
+            :on-success="handleUploadPDFSuccess"
+            :on-error="handleUploadPDFError"
+            :headers="uploadPDFHeaders"
+            :file-list="pdfList"
+            :auto-upload="true"
+            :limit="1"
+            name="pdf"
+            accept="application/pdf">
+            <el-button slot="trigger" size="small" type="primary">{{ $t('selectFile') }}</el-button>
+          </el-upload>
         </div>
         <div class="create-sale-housing__form-actions" >
           <el-button type="info" @click="handleReset" >
@@ -240,6 +260,7 @@ const { mapState, mapMutations, mapActions } = createNamespacedHelpers('house')
 
 import { filterObjEmptyVal } from '@/utils'
 import areaDataStorage from '@/utils/areaDataStorage'
+import { getToken } from '@/utils/auth'
 export default {
   name: 'CreateSaleHouse',
   components: {
@@ -250,29 +271,23 @@ export default {
       areaData: areaDataStorage(),
       formChunkLayoutProp: { xs: 24, sm: 24, md: 12, lg: 8, xl: 8 },
       imageList: [],
-      ownerName: '',
+      pdfList: [],
+      uploadPDFHeaders: {
+        'Authorization': getToken()
+      },
+      uploadPDFAction: `${process.env.BASE_API}/pdfs`,
       form: {
         details: '',
         brief_introduction: '',
         address: [],
+        owner_name: '',
         property_type: [],
         available_date_range: [],
         constructed_in: null,
         build_in: null,
         // is_new_development: '1',
-        owner: '',
         upcoming_inspections_date_range: []
       },
-      houseStatus: [
-        {
-          label: this.$t('show'),
-          value: 1
-        },
-        {
-          label: this.$t('hide'),
-          value: 0
-        }
-      ],
       searchedListOfMembers: [],
       searchMembersLoading: false
     }
@@ -335,18 +350,33 @@ export default {
      * 物业业主选择后的回调
      */
     handleOwnerSelect(data) {
-      this.ownerName = data.value
+      this.form.owner_name = data.value
       this.form.owner_id = data.id
     },
     /**
-     * 地址选择后的回调
+     * 预览上传的pdf文件
      */
-    handleAddressSelect() {
-      //
+    handlePDFPreview(file) {
+      window.open(file.url, 'Preview')
     },
     /**
-     * 表单重置
+     * 删除上传的pdf文件
      */
+    handlePDFRemove(a) {
+      this.form.information_statement = undefined
+    },
+    /**
+     * pdf文件上传成功时的钩子
+     */
+    handleUploadPDFSuccess(response) {
+      this.form.information_statement = response.url
+    },
+    handleUploadPDFError() {
+      this.$message({
+        type: 'error',
+        message: this.$t('uploadFailed')
+      })
+    },
     handleReset() {
       // ...
     },
@@ -407,24 +437,25 @@ export default {
         return
       }
 
-      try {
-        await this.createSaleHouse(
-          filterObjEmptyVal(formData)
-        )
-        this.visible = false
-        this.handleReset()
-        this.$message({
-          type: 'success',
-          message: this.$t('createSuccess')
+      // 调用创建Action
+      this.createSaleHouse(filterObjEmptyVal(formData))
+        .then(() => {
+          this.visible = false
+          this.handleReset()
+          this.$message({
+            type: 'success',
+            message: this.$t('createSuccess')
+          })
         })
-      } catch (err) {
-        this.$message({
-          type: 'error',
-          message: this.$t('createFailed')
+        .catch(() => {
+          this.$message({
+            type: 'error',
+            message: this.$t('createFailed')
+          })
         })
-      } finally {
-        loading.close()
-      }
+        .finally(() => {
+          loading.close()
+        })
     }
   }
 }
@@ -439,6 +470,14 @@ export default {
     }
     &__details-editor {
       margin-top: 22px;
+    }
+    &__upload-pdf-wrapper {
+      padding-top: 1px;
+      margin-top: 22px;
+    }
+    // rewrite
+    .el-input_prefix {
+      left: 12px;
     }
   }
 </style>
