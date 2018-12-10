@@ -34,6 +34,13 @@
             <el-form-item :label="$t('house.postCode')">
               <el-input v-model="form.post_code" type="number" />
             </el-form-item>
+            <!-- 视频嵌入代码 -->
+            <el-form-item :label="$t('house.videoEmbeddedCode')">
+              <el-input
+                :rows="4"
+                v-model="form.video_embedded_code"
+                type="textarea" />
+            </el-form-item>
           </el-col>
           <el-col v-bind="formChunkLayoutProp" >
             <!-- 街道名称 -->
@@ -239,7 +246,8 @@ export default {
         property_type: [],
         available_date_range: [],
         agents: [],
-        show: 1
+        show: 1,
+        video_embedded_code: ''
       },
       houseStatus: [
         {
@@ -389,11 +397,13 @@ export default {
         details: '',
         brief_introduction: '',
         address: [],
+        agents: [],
         available_date_range: [],
         property_type: [],
         show: 1,
         owner_id: null,
-        members: []
+        members: [],
+        video_embedded_code: ''
       }
       this.imageList = []
       this.$refs.tinymce.setContent('')

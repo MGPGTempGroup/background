@@ -34,6 +34,13 @@
             <el-form-item :label="$t('house.postCode')">
               <el-input v-model="form.post_code" type="number" />
             </el-form-item>
+            <!-- 视频嵌入代码 -->
+            <el-form-item :label="$t('house.videoEmbeddedCode')">
+              <el-input
+                :rows="4"
+                v-model="form.video_embedded_code"
+                type="textarea" />
+            </el-form-item>
           </el-col>
           <el-col v-bind="formChunkLayoutProp" >
             <!-- 街道名称 -->
@@ -63,6 +70,7 @@
                 :start-placeholder="$t('house.startDate')"
                 :end-placeholder="$t('house.endDate')"
                 :default-time="['12:00:00']"
+                value-format="yyyy-MM-dd hh:mm:ss"
                 type="datetimerange"/>
             </el-form-item>
           </el-col>
@@ -213,7 +221,7 @@
 import tinymce from '@/components/Tinymce'
 import UploadImage from '@/components/UploadImage'
 
-import { parseTime, filterObjEmptyVal } from '@/utils'
+import { filterObjEmptyVal } from '@/utils'
 import areaDataStorage from '@/utils/areaDataStorage'
 
 import { searchOwnersByFullName } from '@/api/propertyOwner'
@@ -240,7 +248,8 @@ export default {
         property_type: [],
         available_date_range: [],
         members: [],
-        show: 1
+        show: 1,
+        video_embedded_code: ''
       },
       houseStatus: [
         {
@@ -369,8 +378,8 @@ export default {
         broadcast_pictures: imageUrls.map((url, index) => ({ url, index }))
       }
       if (Array.isArray(originForm.available_date_range) && originForm.available_date_range.length === 2) {
-        form['available_start_date'] = parseTime(originForm.available_date_range[0])
-        form['available_end_date'] = parseTime(originForm.available_date_range[1])
+        form['available_start_date'] = originForm.available_date_range[0]
+        form['available_end_date'] = originForm.available_date_range[1]
       }
       form = filterObjEmptyVal(form) // 清空无效参数
 
@@ -413,11 +422,13 @@ export default {
         lable: item.name + ' ' + item.surname,
         value: item.id
       }))
-      this.imageList = form.broadcast_pictures.map(item => {
-        return {
-          dataURL: item.url
-        }
-      })
+      if (Array.isArray(form.broadcast_pictures)) {
+        this.imageList = form.broadcast_pictures.map(item => {
+          return {
+            dataURL: item.url
+          }
+        })
+      }
       this.owner = form.owner.name + ' ' + form.owner.surname
       if (this.$refs.tinymce) {
         this.$refs.tinymce.setContent(form.details)

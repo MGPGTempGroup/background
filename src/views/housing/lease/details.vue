@@ -23,7 +23,7 @@
               <dt>{{ $t('house.address') }}</dt>
               <dd>
                 <template v-if="Array.isArray(leaseDetailsData.address)" >
-                  {{ formattedData.address.map(item => item.name).join('/') }}
+                  {{ formattedData.address.join('/') }}
                 </template>
                 <template v-else >
                   {{ $t('noData') }}
@@ -73,19 +73,19 @@
               <dd>{{ formattedData.lockup_garages || $t('noData') }}</dd>
               <dt>{{ $t('house.preciseCoordinates') }}</dt>
               <dd>{{ formattedData.map_coordinates || $t('noData') }}</dd>
-              <dt>{{ $t('house.dailyRent') }}($)</dt>
+              <dt>{{ $t('house.dailyRent') }} ($)</dt>
               <dd>
                 {{ formattedData.per_day_min_price || $t('noData') }}
                 ~
                 {{ formattedData.per_day_max_price || $t('noData') }}
               </dd>
-              <dt>{{ $t('house.weeklyRent') }}($)</dt>
+              <dt>{{ $t('house.weeklyRent') }} ($)</dt>
               <dd>
                 {{ formattedData.per_week_min_price || $t('noData') }}
                 ~
                 {{ formattedData.per_week_max_price || $t('noData') }}
               </dd>
-              <dt>{{ $t('house.monthlyRent') }}($)</dt>
+              <dt>{{ $t('house.monthlyRent') }} ($)</dt>
               <dd>
                 {{ formattedData.per_monthly_min_price || $t('noData') }}
                 ~
@@ -139,6 +139,18 @@
               <dd>{{ formattedData.created_at || $t('noData') }}</dd>
               <dt>{{ $t('house.updatedAt') }}</dt>
               <dd>{{ formattedData.updated_at || $t('noData') }}</dd>
+              <dt>{{ $t('house.videoEmbeddedCode') }}</dt>
+              <dd>
+                <template v-if="formattedData.video_src" >
+                  {{ formattedData.video_embedded_code }}
+                  <br>
+                  <el-tag>
+                    <a :href="formattedData.video_src" target="_blank" >
+                      {{ $t('view') }}
+                    </a>
+                  </el-tag>
+                </template>
+              </dd>
             </el-col>
           </el-row>
         </el-tab-pane>
@@ -204,6 +216,11 @@ export default {
       formatted.bedrooms = numberFormatter(formatted.bedrooms)
       formatted.bathrooms = numberFormatter(formatted.bathrooms)
       formatted.lockup_garages = numberFormatter(formatted.lockup_garages)
+      try {
+        formatted.video_src = /src=\"(.*?)\"/.exec(formatted.video_embedded_code)[1]
+      } catch (err) {
+        // ...
+      }
       return formatted
     },
     visible: {

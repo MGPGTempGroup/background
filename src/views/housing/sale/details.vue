@@ -140,6 +140,18 @@
               <dd>{{ formattedData.created_at || $t('noData') }}</dd>
               <dt>{{ $t('house.updatedAt') }}</dt>
               <dd>{{ formattedData.updated_at || $t('noData') }}</dd>
+              <dt>{{ $t('house.videoEmbeddedCode') }}</dt>
+              <dd>
+                <template v-if="formattedData.video_src" >
+                  {{ formattedData.video_embedded_code }}
+                  <br>
+                  <el-tag>
+                    <a :href="formattedData.video_src" target="_blank" >
+                      {{ $t('view') }}
+                    </a>
+                  </el-tag>
+                </template>
+              </dd>
             </el-col>
           </el-row>
         </el-tab-pane>
@@ -208,6 +220,11 @@ export default {
         formatted.lockup_garages = numberFormatter(formatted.lockup_garages)
         if (typeof formatted.owner === 'object') {
           formatted.owner_name = [formatted.owner.name, formatted.owner.surname].filter(Boolean).join(' ')
+        }
+        try {
+          formatted.video_src = /src=\"(.*?)\"/.exec(formatted.video_embedded_code)[1]
+        } catch (err) {
+        // ...
         }
         return formatted
       }

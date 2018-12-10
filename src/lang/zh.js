@@ -289,7 +289,8 @@ export default {
     editSaleHousingData: '编辑出售房屋数据',
     housingPicture: '房屋图片',
     isNewDevelopment: '是否为最新开发房产？',
-    notFillSomeFieldTips: '如果你不填写某些字段，前台不会显示它们。'
+    notFillSomeFieldTips: '如果你不填写某些字段，前台不会显示它们。',
+    videoEmbeddedCode: '视频嵌入代码'
   },
   addressList: {
     australia: '澳大利亚',

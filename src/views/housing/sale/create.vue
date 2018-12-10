@@ -41,6 +41,13 @@
                 {{ $t('no') }}
               </el-radio>
             </el-form-item> -->
+            <!-- 视频嵌入代码 -->
+            <el-form-item :label="$t('house.videoEmbeddedCode')">
+              <el-input
+                :rows="4"
+                v-model="form.video_embedded_code"
+                type="textarea" />
+            </el-form-item>
           </el-col>
           <el-col v-bind="formChunkLayoutProp" >
             <!-- 街道名称 -->
@@ -266,7 +273,8 @@ export default {
         owner_name: '',
         property_type: [],
         available_date_range: [],
-        upcoming_inspections_date_range: []
+        upcoming_inspections_date_range: [],
+        video_embedded_code: ''
       },
       searchedListOfMembers: [],
       searchMembersLoading: false
@@ -345,7 +353,8 @@ export default {
         owner_name: '',
         property_type: [],
         available_date_range: [],
-        upcoming_inspections_date_range: []
+        upcoming_inspections_date_range: [],
+        video_embedded_code: ''
       }
       this.$refs.tinymce.setContent('')
       this.imageList = []
