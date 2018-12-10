@@ -415,7 +415,7 @@ export default {
         ...form,
         owner_id: form.owner.id,
         property_type: form.property_type.map(item => item.id),
-        available_date_range: [form.available_start_date, form.available_end_date],
+        available_date_range: [form.available_start_date, form.available_end_date].filter(Boolean),
         agents: form.agents.data.map(item => item.id)
       }
       this.searchedListOfMembers = form.agents.data.map(item => ({
