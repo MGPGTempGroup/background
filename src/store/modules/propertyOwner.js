@@ -5,7 +5,7 @@ import {
   deleteOwner
 } from '@/api/propertyOwner'
 import { Loading } from 'element-ui'
-import parseData2ConditionalParams from '@/utils/parseData2ConditionalParams'
+import parseDataToConditionalParams from '@/utils/parseDataToConditionalParams'
 
 const propertyOwner = {
   namespaced: true,
@@ -94,7 +94,7 @@ const propertyOwner = {
     async fetchOwners({ commit, state }) {
       commit('updateTableLoading', { loading: true })
       const filterForm = state.filterForm
-      const conditionalParams = parseData2ConditionalParams({
+      const conditionalParams = parseDataToConditionalParams({
         fuzzy: {
           phone: filterForm.phone,
           name: filterForm.name,

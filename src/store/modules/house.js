@@ -9,7 +9,7 @@ import {
   deleteLeaseHouse,
   deleteSaleHouse
 } from '@/api/house'
-import parseData2ConditionalParams from '@/utils/parseData2ConditionalParams'
+import parseDataToConditionalParams from '@/utils/parseDataToConditionalParams'
 import { param } from '@/utils'
 import i18n from '@/lang'
 
@@ -152,7 +152,7 @@ const house = {
     async fetchLeasesHouse({ commit, state }, payload = {}) {
       commit('setLeasesTableLoading', true)
       const filterForm = state.leasesFilterForm
-      const conditionalParams = parseData2ConditionalParams({
+      const conditionalParams = parseDataToConditionalParams({
         fuzzy: {
           name: filterForm.name,
           address: filterForm.address,
@@ -221,7 +221,7 @@ const house = {
     async fetchSalesHouse({ commit, state }, payload = {}) {
       commit('setSalesTableLoading', true)
       const filterForm = state.salesFilterForm
-      const conditionalParams = parseData2ConditionalParams({
+      const conditionalParams = parseDataToConditionalParams({
         fuzzy: {
           name: filterForm.name,
           address: filterForm.address,

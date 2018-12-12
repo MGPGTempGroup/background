@@ -11,7 +11,6 @@
 import editorImage from './components/editorImage'
 import plugins from './plugins'
 import toolbar from './toolbar'
-
 export default {
   name: 'Tinymce',
   components: { editorImage },

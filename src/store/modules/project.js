@@ -5,7 +5,7 @@ import {
   updateProject,
   deleteProject
 } from '@/api/project'
-import parseData2ConditionalParams from '@/utils/parseData2ConditionalParams'
+import parseDataToConditionalParams from '@/utils/parseDataToConditionalParams'
 import i18n from '@/lang'
 
 const project = {
@@ -92,7 +92,7 @@ const project = {
       ].join('&'))
       // 条件筛选参数
       const filterForm = state.projectFilterForm
-      params.push(parseData2ConditionalParams({
+      params.push(parseDataToConditionalParams({
         fuzzy: {
           name: filterForm.name,
           location: filterForm.location,

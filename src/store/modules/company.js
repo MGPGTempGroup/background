@@ -7,7 +7,7 @@ import {
   deleteMember,
   createMember
 } from '@/api/company'
-import parseData2conditionalParams from '@/utils/parseData2conditionalParams'
+import parseDataToConditionalParams from '@/utils/parseDataToConditionalParams'
 import { deepClone } from '@/utils'
 import { Loading } from 'element-ui'
 
@@ -109,7 +109,7 @@ const company = {
     async fetchCompanyMembers({ commit, state }, payload) {
       // 解析条件查询参数
       const filterForm = state.membersFilterForm
-      const conditionalParams = parseData2conditionalParams({
+      const conditionalParams = parseDataToConditionalParams({
         fuzzy: {
           surname: filterForm.surname,
           name: filterForm.name,

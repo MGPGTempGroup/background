@@ -5,7 +5,7 @@ import {
 } from '@/api/service'
 import { Loading } from 'element-ui'
 import { snakeCase2CamelCase } from '@/utils'
-import parseData2ConditionalParams from '@/utils/parseData2ConditionalParams'
+import parseDataToConditionalParams from '@/utils/parseDataToConditionalParams'
 
 const serviceMessage = {
   namespaced: true,
@@ -74,7 +74,7 @@ const serviceMessage = {
       loading.close()
     },
     async fetchMessages({ commit, state }, payload) {
-      let params = parseData2ConditionalParams({
+      let params = parseDataToConditionalParams({
         contains: {
           service_id: state.filterServices,
           identity_id: state.filterForm.identity
