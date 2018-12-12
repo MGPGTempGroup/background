@@ -532,5 +532,6 @@ export default {
   startDate: 'Start date',
   endDate: 'End date',
   selectFile: 'Select file',
-  currentFile: 'Current file'
+  currentFile: 'Current file',
+  to: 'To'
 }

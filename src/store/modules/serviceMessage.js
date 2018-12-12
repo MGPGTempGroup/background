@@ -24,8 +24,7 @@ const serviceMessage = {
       wechat: [],
       identity: [],
       comments: [],
-      createdAt: [],
-      updatedAt: []
+      created_at_range: []
     },
     // 可用身份
     availableIdentity: [
@@ -88,7 +87,7 @@ const serviceMessage = {
           comments: state.filterForm.comments
         },
         dateRange: {
-          created_at: state.filterForm.createdAtRange
+          created_at: state.filterForm.created_at_range
         }
       })
       params += '&pagesize=' + state.tablePageSize

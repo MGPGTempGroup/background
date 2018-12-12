@@ -531,5 +531,6 @@ export default {
   yes: '是',
   no: '否',
   selectFile: '选择文件',
-  currentFile: '当前文件'
+  currentFile: '当前文件',
+  to: '至'
 }

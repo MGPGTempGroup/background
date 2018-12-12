@@ -95,12 +95,13 @@
               <el-col v-bind="filterFormItemLayoutProps" >
                 <el-form-item :label="$t('userComment.createdAt')" >
                   <el-date-picker
-                    v-model="filterForm.createdAtRange"
+                    v-model="filterForm.created_at_range"
                     :picker-options="pickerOptions"
+                    :range-separator="$t('to')"
+                    :start-placeholder="$t('startDate')"
+                    :end-placeholder="$t('endDate')"
                     type="datetimerange"
-                    range-separator="至"
-                    start-placeholder="开始日期"
-                    end-placeholder="结束日期"
+                    value-format="yyyy-MM-dd hh:mm:ss"
                     align="right" />
                 </el-form-item>
               </el-col>
