@@ -438,21 +438,7 @@ export default {
 </style>
 
 <style lang="scss" >
-  @import '@/styles/filter-form.scss';
-  @import '@/styles/text.scss';
-  .el-select {
-    width: 100%;
-  }
-  .el-input__prefix {
-    left: 12px;
-  }
-  input[type=number] {
-    -moz-appearance:textfield;
-  }
-  input[type=number]::-webkit-inner-spin-button,
-  input[type=number]::-webkit-outer-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
+  .rental-housing-filter {
+    @import '@/styles/filter-form.scss';
   }
 </style>
-

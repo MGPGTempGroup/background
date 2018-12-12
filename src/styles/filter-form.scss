@@ -4,6 +4,9 @@
 .el-select {
   width: 100%;
 }
+.el-collapse-item__header {
+  border: none !important;
+}
 .el-date-editor--datetimerange {
   width: 100% !important;
 }

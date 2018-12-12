@@ -21,6 +21,13 @@ export function fetchPropertyTypes() {
   })
 }
 
+export function fetchInspections(params = '') {
+  return request({
+    method: 'GET',
+    url: 'inspections?' + params
+  })
+}
+
 export function createLeaseHouse(data) {
   return request({
     method: 'POST',

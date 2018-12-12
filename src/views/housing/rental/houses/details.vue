@@ -135,6 +135,20 @@
                 ~
                 {{ formattedData.available_end_date || $t('noData') }}
               </dd>
+              <dt>{{ $t('house.upcomingInspectionDatetime') }}</dt>
+              <dd>
+                <template v-if="formattedData.upcoming_inspection_datetime" >
+                  <el-tag
+                    v-for="(item, index) in formattedData.upcoming_inspection_datetime"
+                    :key="index"
+                    style="margin-bottom: 5px;">
+                    {{ item[0] }} ~ {{ item[1] }}
+                  </el-tag>
+                </template>
+                <template v-else >
+                  {{ $t('noData') }}
+                </template>
+              </dd>
               <dt>{{ $t('house.createdAt') }}</dt>
               <dd>{{ formattedData.created_at || $t('noData') }}</dd>
               <dt>{{ $t('house.updatedAt') }}</dt>
@@ -149,6 +163,9 @@
                       {{ $t('view') }}
                     </a>
                   </el-tag>
+                </template>
+                <template v-else >
+                  {{ $t('noData') }}
                 </template>
               </dd>
             </el-col>

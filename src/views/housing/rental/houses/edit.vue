@@ -1,7 +1,7 @@
 <template>
-  <div class="create-rental-housing">
+  <div class="edit-rental-housing">
     <el-dialog
-      :title="$t('house.createRentalHousingData')"
+      :title="$t('house.editRentalHousingData')"
       :visible.sync="visible"
       fullscreen>
       <h3>{{ $t('house.notFillSomeFieldTips') }}</h3>
@@ -70,7 +70,11 @@
                 :start-placeholder="$t('house.startDate')"
                 :end-placeholder="$t('house.endDate')"
                 :default-time="['12:00:00']"
+                value-format="yyyy-MM-dd hh:mm:ss"
                 type="datetimerange"/>
+            </el-form-item>
+            <el-form-item :label="$t('house.upcomingInspectionDatetime')" >
+              <multiple-date-picker v-model="form.upcoming_inspection_datetime" />
             </el-form-item>
           </el-col>
           <el-col v-bind="formChunkLayoutProp" >
@@ -138,10 +142,11 @@
                 <!-- 物主 -->
                 <el-form-item :label="$t('house.owner')" >
                   <el-autocomplete
-                    v-model="form.owner"
+                    v-model="owner"
                     :fetch-suggestions="searchOwners"
                     style="width: 100%;"
-                    @select="handleOwnerSelect" />
+                    @select="handleOwnerSelect"
+                  />
                 </el-form-item>
               </el-col>
               <el-col v-bind="{ xs:24, sm: 24, md: 24, lg: 12, xl: 12 }" >
@@ -170,11 +175,10 @@
                 <el-form-item :label="$t('house.propertyTypes')" >
                   <el-select
                     v-model="form.property_type"
-                    :placeholder="$t('house.propertyTypes')"
                     multiple >
                     <el-option
-                      v-for="(item, index) in availablePropertyType"
-                      :key="index"
+                      v-for="item in availablePropertyType"
+                      :key="item.id"
                       :label="item.name"
                       :value="item.id" />
                   </el-select>
@@ -183,10 +187,10 @@
               <el-col v-bind="{ xs: 24, sm: 24, md: 24, lg: 12, xl: 12 }" >
                 <!-- 目前状态 -->
                 <el-form-item :label="$t('whetherToDisplay')" >
-                  <el-select v-model="form.show" :placeholder="$t('house.stateSelectionPlaceholder')">
+                  <el-select v-model="form.show">
                     <el-option
-                      v-for="item in houseStatus"
-                      :key="item.value"
+                      v-for="(item, index) in houseStatus"
+                      :key="index"
                       :label="item.label"
                       :value="item.value" />
                   </el-select>
@@ -195,20 +199,20 @@
             </el-row>
           </el-col>
         </el-row>
-        <div class="create-rental-housing__details-editor" >
+        <div class="edit-rental-housing__details-editor" >
           <p><strong>{{ $t('details') }}</strong></p>
           <tinymce ref="tinymce" v-model="form.details" />
         </div>
-        <div class="create-rental-housing__upload-image-wrapper" >
+        <div class="edit-rental-housing__upload-image-wrapper" >
           <p><strong>{{ $t('house.housingPicture') }}</strong></p>
           <upload-image :image-list.sync="imageList" :max-count="10" />
         </div>
-        <div class="create-rental-housing__form-actions" >
+        <div class="edit-rental-housing__form-actions" >
           <el-button type="info" @click="handleReset" >
             {{ $t('reset') }}
           </el-button>
-          <el-button type="primary" @click="handleCreate" >
-            {{ $t('create') }}
+          <el-button type="primary" @click="handleUpdate" >
+            {{ $t('update') }}
           </el-button>
         </div>
       </el-form>
@@ -219,8 +223,9 @@
 <script>
 import tinymce from '@/components/Tinymce'
 import UploadImage from '@/components/UploadImage'
+import MultipleDatePicker from '@/components/MultipleDatePicker'
 
-import { parseTime, filterObjEmptyVal } from '@/utils'
+import { filterObjEmptyVal } from '@/utils'
 import areaDataStorage from '@/utils/areaDataStorage'
 
 import { searchOwnersByFullName } from '@/api/propertyOwner'
@@ -230,22 +235,23 @@ import { uploadImage } from '@/api/upload'
 import { createNamespacedHelpers } from 'vuex'
 const { mapState, mapMutations, mapActions } = createNamespacedHelpers('house')
 export default {
-  name: 'CreateLeaseHouse',
+  name: 'EditLeaseHouse',
   components: {
-    tinymce, UploadImage
+    tinymce, UploadImage, MultipleDatePicker
   },
   data() {
     return {
       areaData: areaDataStorage(),
       formChunkLayoutProp: { xs: 24, sm: 24, md: 12, lg: 8, xl: 8 },
       imageList: [],
+      owner: null,
       form: {
         details: '',
         brief_introduction: '',
         address: [],
         property_type: [],
         available_date_range: [],
-        agents: [],
+        members: [],
         show: 1,
         video_embedded_code: ''
       },
@@ -265,23 +271,31 @@ export default {
   },
   computed: {
     ...mapState([
-      'availablePropertyType'
+      'availablePropertyType',
+      'leaseEditDialogVisible',
+      'leaseEditForm'
     ]),
     visible: {
       get() {
-        return this.$store.state.house.leaseCreateDialogVisible
+        return this.leaseEditDialogVisible
       },
       set(visible) {
-        this.setLeaseCreateDialogVisible(visible)
+        this.setLeaseEditDialogVisible(visible)
       }
+    }
+  },
+  watch: {
+    // 数据格式化，将当前编辑数据格式化适用于表单绑定的数据
+    leaseEditForm(form) {
+      this.dataFormatter(form)
     }
   },
   methods: {
     ...mapMutations([
-      'setLeaseCreateDialogVisible'
+      'setLeaseEditDialogVisible'
     ]),
     ...mapActions([
-      'createLeaseHouse'
+      'updateLeaseHouse'
     ]),
     /**
      * 搜索物业业主
@@ -323,9 +337,9 @@ export default {
       this.form.owner_id = item.id
     },
     /**
-     * 租赁房屋创建
+     * 更改租赁房屋数据
      */
-    async handleCreate() {
+    async handleUpdate() {
       const loading = this.$loading({
         lock: true,
         text: 'Loading',
@@ -336,7 +350,9 @@ export default {
       // 上传所有图片，返回一个Promises数组
       let imageUrls = []
       const uploadPromises = this.imageList.map(item => {
-        console.log(item)
+        if (/^http/.test(item.dataURL)) {
+          return item.dataURL
+        }
         return new Promise(async(resolve, reject) => {
           try {
             const imgURL = (await uploadImage(item.file)).headers.location
@@ -366,24 +382,23 @@ export default {
         broadcast_pictures: imageUrls.map((url, index) => ({ url, index }))
       }
       if (Array.isArray(originForm.available_date_range) && originForm.available_date_range.length === 2) {
-        form['available_start_date'] = parseTime(originForm.available_date_range[0])
-        form['available_end_date'] = parseTime(originForm.available_date_range[1])
+        form['available_start_date'] = originForm.available_date_range[0]
+        form['available_end_date'] = originForm.available_date_range[1]
       }
       form = filterObjEmptyVal(form) // 清空无效参数
 
-      // 派遣createLeaseHouse Action，进行创建
       try {
-        await this.createLeaseHouse(form)
+        await this.updateLeaseHouse(form)
         this.visible = false
         this.$message({
           type: 'success',
-          message: this.$t('createSuccess')
+          message: this.$t('updateSuccess')
         })
         this.handleReset()
       } catch (err) {
         this.$message({
           type: 'error',
-          message: this.$t('createFailed')
+          message: this.$t('updateFailed')
         })
       } finally {
         loading.close()
@@ -393,27 +408,42 @@ export default {
      * 重置表单
      */
     handleReset() {
+      this.dataFormatter(this.leaseEditForm)
+    },
+    /**
+     * 数据格式化，将当前编辑数据格式化适用于表单绑定的数据
+     */
+    dataFormatter(form) {
+      // Formatting Data
       this.form = {
-        details: '',
-        brief_introduction: '',
-        address: [],
-        agents: [],
-        available_date_range: [],
-        property_type: [],
-        show: 1,
-        owner_id: null,
-        members: [],
-        video_embedded_code: ''
+        ...form,
+        owner_id: form.owner.id,
+        property_type: form.property_type.map(item => item.id),
+        available_date_range: [form.available_start_date, form.available_end_date].filter(Boolean),
+        agents: form.agents.data.map(item => item.id)
       }
-      this.imageList = []
-      this.$refs.tinymce.setContent('')
+      this.searchedListOfMembers = form.agents.data.map(item => ({
+        lable: item.name + ' ' + item.surname,
+        value: item.id
+      }))
+      if (Array.isArray(form.broadcast_pictures)) {
+        this.imageList = form.broadcast_pictures.map(item => {
+          return {
+            dataURL: item.url
+          }
+        })
+      }
+      this.owner = form.owner.name + ' ' + form.owner.surname
+      if (this.$refs.tinymce) {
+        this.$refs.tinymce.setContent(form.details)
+      }
     }
   }
 }
 </script>
 
 <style scoped lang="scss" >
-  .create-rental-housing {
+  .edit-rental-housing {
     &__form-actions {
       display: flex;
       justify-content: flex-end;
@@ -421,6 +451,17 @@ export default {
     }
     &__details-editor {
       margin-top: 22px;
+    }
+  }
+</style>
+
+<style lang="scss" >
+  .edit-rental-housing {
+    .el-input__prefix {
+      left: 12px;
+    }
+    .el-select {
+      width: 100%;
     }
   }
 </style>

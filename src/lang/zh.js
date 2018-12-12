@@ -70,6 +70,7 @@ export default {
     companyInfo: '公司信息',
     rentalHousing: '租赁房屋',
     lease: '租赁',
+    rental: '租赁',
     sale: '出售',
     customer: '客户',
     userComment: '用户留言',
@@ -201,6 +202,7 @@ export default {
     closeAll: '关闭所有'
   },
   house: {
+    houseManagement: '房屋管理',
     confirm: '确定',
     id: '序号',
     edit: '编辑',
@@ -233,6 +235,7 @@ export default {
     availableDate: '可用时间',
     availableStartDate: '可用开始时间',
     availableEndDate: '可用结束时间',
+    inspectionDatetime: '预约时间',
     createdAt: '创建于',
     updatedAt: '修改于',
     owner: '物主',
@@ -247,7 +250,8 @@ export default {
     housingIntroduction: '房屋介绍',
     rentalRecords: '租赁记录',
     aState: '国家/州',
-    upcomingInspections: '即将到来的检查',
+    upcomingInspection: '即将到来的检查',
+    upcomingInspectionDatetime: '即将到来的检查日期时间',
     dataCreator: '数据创建者',
     currState: '目前状态',
     reserved: '已预订',
@@ -290,7 +294,9 @@ export default {
     housingPicture: '房屋图片',
     isNewDevelopment: '是否为最新开发房产？',
     notFillSomeFieldTips: '如果你不填写某些字段，前台不会显示它们。',
-    videoEmbeddedCode: '视频嵌入代码'
+    videoEmbeddedCode: '视频嵌入代码',
+    inspections: '预约检查',
+    saleOut: '售罄'
   },
   addressList: {
     australia: '澳大利亚',

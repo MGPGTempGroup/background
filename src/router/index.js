@@ -128,11 +128,11 @@ export const asyncRouterMap = [
     },
     children: [
       {
-        path: 'lease',
-        component: () => import('@/views/housing/lease'),
-        name: 'house-lease',
+        path: 'rental-house',
+        component: () => import('@/views/housing/rental'),
+        name: 'rental-house',
         meta: {
-          title: 'lease',
+          title: 'rental',
           roles: ['admin'] // or you can only set roles in sub nav
         }
       },
@@ -304,7 +304,7 @@ export const asyncRouterMap = [
       {
         path: 'articles',
         component: () => import('@/views/industryUpdates'),
-        name: 'industryUpdates',
+        name: 'articles',
         meta: {
           title: 'articleList',
           roles: ['admin'] // or you can only set roles in sub nav

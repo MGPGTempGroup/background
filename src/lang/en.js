@@ -70,6 +70,7 @@ export default {
     companyInfo: 'Company info',
     rentalHousing: 'Rental housing',
     lease: 'Lease',
+    rental: 'Rental',
     sale: 'Sale',
     customer: 'Customer',
     userComment: 'User comment',
@@ -200,6 +201,7 @@ export default {
     closeAll: 'Close All'
   },
   house: {
+    houseManagement: 'Houses management',
     id: 'ID',
     edit: 'Edit',
     details: 'Details',
@@ -245,7 +247,9 @@ export default {
     housingIntroduction: 'House introduction',
     rentalRecords: 'Rental records',
     aState: 'State',
-    upcomingInspections: 'Upcoming Inspections',
+    upcomingInspection: 'Upcoming inspection',
+    upcomingInspectionDatetime: 'Upcoming inspection datetime',
+    inspectionDatetime: 'Inspection datetime',
     dataCreator: 'Date creator',
     currState: 'Current state',
     reserved: 'Reserved',
@@ -290,7 +294,9 @@ export default {
     housingPicture: 'Housing picture',
     isNewDevelopment: 'Is it the latest property development?',
     notFillSomeFieldTips: 'If you do not fill in some fields, the front desk will not show them.',
-    videoEmbeddedCode: 'Video embedded code'
+    videoEmbeddedCode: 'Video embedded code',
+    inspections: 'Inspections',
+    saleOut: 'Sale out'
   },
   addressList: {
     australia: 'Australia',

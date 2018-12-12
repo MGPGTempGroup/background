@@ -1,6 +1,6 @@
 <template>
   <div class="rental-housing-container" >
-    <rental-housing-filter :form.sync="filterForm" />
+    <rental-house-filter />
     <el-card style="margin-top: 20px;" shadow="never" >
       <div slot="header" class="rental-housing__list-header" >
         <h2 style="margin: 0;" >
@@ -111,54 +111,34 @@
     </el-card>
 
     <!-- Create -->
-    <lease-housing-create-dialog />
+    <rental-house-create-dialog />
 
-    <!-- edit -->
-    <lease-housing-edit-dialog />
+    <!-- Edit -->
+    <rental-house-edit-dialog />
 
     <!-- Details -->
-    <details-dialog />
+    <rental-house-details-dialog />
 
   </div>
 </template>
 
 <script>
 
-import rentalHousingFilter from './filter'
-import leaseHousingEditDialog from './edit'
-import leaseHousingCreateDialog from './create'
-import detailsDialog from './details'
+import rentalHouseFilter from './filter'
+import rentalHouseEditDialog from './edit'
+import rentalHouseCreateDialog from './create'
+import rentalHouseDetailsDialog from './details'
 import 'font-awesome/css/font-awesome.min.css'
 import { createNamespacedHelpers } from 'vuex'
 const { mapState, mapMutations, mapActions } = createNamespacedHelpers('house')
 
 export default {
-  name: 'LeaseHouse',
+  name: 'RentalHouses',
   components: {
-    rentalHousingFilter,
-    leaseHousingEditDialog,
-    leaseHousingCreateDialog,
-    detailsDialog
-  },
-  data() {
-    return {
-      filterForm: {
-        propertyType: '',
-        region: '',
-        minPrice: 0,
-        maxPrice: 10000,
-        agent: '',
-        owner: '',
-        currState: '',
-        availableDateRange: '',
-        createdAtRange: '',
-        updatedAtRange: '',
-        beds: 1,
-        showers: 2,
-        carSpaces: 1
-      },
-      currPage: 1
-    }
+    rentalHouseFilter,
+    rentalHouseEditDialog,
+    rentalHouseCreateDialog,
+    rentalHouseDetailsDialog
   },
   computed: {
     ...mapState([
@@ -265,9 +245,6 @@ export default {
 </script>
 
 <style lang="scss" scoped >
-  .rental-housing-container {
-    padding: 20px;
-  }
   .rental-housing {
     &__list-header {
       position: relative;

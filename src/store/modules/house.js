@@ -2,6 +2,7 @@ import {
   fetchLeases,
   fetchSales,
   fetchPropertyTypes,
+  fetchInspections,
   createLeaseHouse,
   createSaleHouse,
   updateLeaseHouse,
@@ -30,6 +31,10 @@ const house = {
     leaseEditDialogVisible: false,
     leaseEditForm: {},
     leaseCreateDialogVisible: false,
+    leaseInspections: {
+      data: [],
+      meta: {}
+    },
     saleCreateDialogVisible: false,
     // 出售房屋列表
     sales: {
@@ -77,6 +82,9 @@ const house = {
     },
     setSales(state, payload) {
       state.sales = payload
+    },
+    setLeaseInspections(state, payload) {
+      state.leaseInspections = payload
     },
     setLeaseDetailsDialogVisible(state, payload) {
       state.leaseDetailsDialogVisible = payload
@@ -286,6 +294,10 @@ const house = {
     async fetchPropertyTypes({ commit }, payload) {
       const propertyTypes = (await fetchPropertyTypes()).data.data
       commit('setAvailablePropertyType', propertyTypes)
+    },
+    async fetchLeaseInspections({ commit }, payload) {
+      const inspections = (await fetchInspections('type=lease&include=house')).data
+      commit('setLeaseInspections', inspections)
     },
     async createLeaseHouse({ commit }, payload) {
       const leaseHouseData = (await createLeaseHouse(payload)).data
