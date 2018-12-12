@@ -169,9 +169,11 @@ export default {
     },
     onPaginatorSizeChange(pageSize) {
       this.setTablePageSize(pageSize)
+      this.fetchOwners()
     },
     onPaginatorChange(page) {
       this.setTablePage(page)
+      this.fetchOwners()
     }
   }
 }
