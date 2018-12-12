@@ -46,7 +46,7 @@
           <dd>{{ detailsData.identity && detailsData.identity.name }}</dd>
         </dl>
       </el-col>
-      <el-col v-bind="infoLargeLayoutProps" >
+      <el-col v-bind="infoLayoutProps" >
         <dl>
           <dt>{{ $t('owner.address') }}</dt>
           <dd>{{ detailsData.address.join('/') || $t('noData') }}</dd>
@@ -80,9 +80,6 @@ export default {
     return {
       infoLayoutProps: {
         xs: 24, sm: 12, md: 12, lg: 8, xl: 6
-      },
-      infoLargeLayoutProps: {
-        xs: 24, sm: 16, md: 16, lg: 12, xl: 12
       }
     }
   },
