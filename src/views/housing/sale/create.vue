@@ -80,6 +80,9 @@
                 value-format="yyyy-MM-dd hh:mm:ss"
                 type="datetimerange"/>
             </el-form-item>
+            <el-form-item :label="$t('house.upcomingInspectionDatetime')" >
+              <multiple-date-picker v-model="form.upcoming_inspection_datetime" />
+            </el-form-item>
           </el-col>
           <el-col v-bind="formChunkLayoutProp" >
             <!-- 相关属性：卧室、卫生间、车库、车位数量等... -->
@@ -244,6 +247,7 @@
 import tinymce from '@/components/Tinymce'
 import UploadImage from '@/components/UploadImage'
 import UploadPDF from '@/components/UploadPDF'
+import MultipleDatePicker from '@/components/MultipleDatePicker'
 
 import { searchOwnersByFullName } from '@/api/propertyOwner'
 import { searchMembersByFullName } from '@/api/company'
@@ -257,7 +261,7 @@ import areaDataStorage from '@/utils/areaDataStorage'
 export default {
   name: 'CreateSaleHouse',
   components: {
-    tinymce, UploadImage, UploadPDF
+    tinymce, UploadImage, UploadPDF, MultipleDatePicker
   },
   data() {
     return {
@@ -273,8 +277,9 @@ export default {
         owner_name: '',
         property_type: [],
         available_date_range: [],
-        upcoming_inspections_date_range: [],
-        video_embedded_code: ''
+        upcoming_inspection_datetime: [],
+        video_embedded_code: '',
+        show: 1
       },
       searchedListOfMembers: [],
       searchMembersLoading: false
@@ -353,8 +358,9 @@ export default {
         owner_name: '',
         property_type: [],
         available_date_range: [],
-        upcoming_inspections_date_range: [],
-        video_embedded_code: ''
+        upcoming_inspection_datetime: [],
+        video_embedded_code: '',
+        show: 1
       }
       this.$refs.tinymce.setContent('')
       this.imageList = []
@@ -464,9 +470,17 @@ export default {
       padding-top: 1px;
       margin-top: 22px;
     }
-    // rewrite
-    .el-input_prefix {
+  }
+</style>
+
+<style lang="scss" >
+  .create-sale-housing {
+   .el-input__prefix {
       left: 12px;
+    }
+    .el-select {
+      width: 100%;
     }
   }
 </style>
+

@@ -137,7 +137,7 @@
               </dd>
               <dt>{{ $t('house.upcomingInspectionDatetime') }}</dt>
               <dd>
-                <template v-if="formattedData.upcoming_inspection_datetime" >
+                <template v-if="formattedData.upcoming_inspection_datetime.length" >
                   <el-tag
                     v-for="(item, index) in formattedData.upcoming_inspection_datetime"
                     :key="index"

@@ -73,6 +73,9 @@
                 value-format="yyyy-MM-dd hh:mm:ss"
                 type="datetimerange"/>
             </el-form-item>
+            <el-form-item :label="$t('house.upcomingInspectionDatetime')" >
+              <multiple-date-picker v-model="form.upcoming_inspection_datetime" />
+            </el-form-item>
           </el-col>
           <el-col v-bind="formChunkLayoutProp" >
             <!-- 相关属性：卧室、卫生间、车库、车位数量等... -->
@@ -205,6 +208,7 @@
 import tinymce from '@/components/Tinymce'
 import UploadImage from '@/components/UploadImage'
 import UploadPDF from '@/components/UploadPDF'
+import MultipleDatePicker from '@/components/MultipleDatePicker'
 
 import { filterObjEmptyVal } from '@/utils'
 import areaDataStorage from '@/utils/areaDataStorage'
@@ -218,7 +222,7 @@ const { mapState, mapMutations, mapActions } = createNamespacedHelpers('house')
 export default {
   name: 'EditSaleHouse',
   components: {
-    tinymce, UploadImage, UploadPDF
+    tinymce, UploadImage, UploadPDF, MultipleDatePicker
   },
   data() {
     return {
@@ -460,3 +464,15 @@ export default {
     }
   }
 </style>
+
+<style lang="scss" >
+  .edit-sale-house {
+    .el-input__prefix {
+      left: 12px;
+    }
+    .el-select {
+      width: 100%;
+    }
+  }
+</style>
+

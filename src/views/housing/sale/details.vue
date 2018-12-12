@@ -93,7 +93,8 @@
                 <template v-if="formattedData.agents && formattedData.agents.data.length" >
                   <el-tag
                     v-for="(item, index) in formattedData.agents.data"
-                    :key="index">
+                    :key="index"
+                    style="margin-left: 3px;">
                     {{ item.name + ' ' + item.surname }}
                   </el-tag>
                 </template>
@@ -125,6 +126,20 @@
                 ~
                 {{ formattedData.available_end_date || $t('noData') }}
               </dd>
+              <dt>{{ $t('house.upcomingInspectionDatetime') }}</dt>
+              <dd>
+                <template v-if="formattedData.upcoming_inspection_datetime.length" >
+                  <el-tag
+                    v-for="(item, index) in formattedData.upcoming_inspection_datetime"
+                    :key="index"
+                    style="margin-bottom: 5px;">
+                    {{ item[0] }} ~ {{ item[1] }}
+                  </el-tag>
+                </template>
+                <template v-else >
+                  {{ $t('noData') }}
+                </template>
+              </dd>
               <dt>{{ $t('house.infomationStatement') }}</dt>
               <dd>
                 <template v-if="formattedData.information_statement" >
@@ -150,6 +165,9 @@
                       {{ $t('view') }}
                     </a>
                   </el-tag>
+                </template>
+                <template v-else >
+                  {{ $t('noData') }}
                 </template>
               </dd>
             </el-col>
