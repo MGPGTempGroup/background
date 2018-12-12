@@ -73,7 +73,7 @@
 import { uploadImage } from '@/api/upload'
 import { deepClone, filterObjEmptyVal } from '@/utils'
 import UploadImage from '@/components/UploadImage'
-import Tinymce from '@/components/tinymce'
+import Tinymce from '@/components/Tinymce'
 import { createNamespacedHelpers } from 'vuex'
 const { mapState, mapMutations, mapActions } = createNamespacedHelpers('company')
 export default {

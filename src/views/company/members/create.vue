@@ -73,7 +73,7 @@ import { createNamespacedHelpers } from 'vuex'
 import UploadImage from '@/components/UploadImage'
 import { uploadImage as uploadImageAPI } from '@/api/upload'
 import { filterObjEmptyVal } from '@/utils'
-import Tinymce from '@/components/tinymce'
+import Tinymce from '@/components/Tinymce'
 const { mapState, mapMutations, mapActions } = createNamespacedHelpers('company')
 export default {
   name: 'CreateMembersDialog',
