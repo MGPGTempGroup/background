@@ -39,7 +39,7 @@
         <el-col v-bind="layoutProps" >
           <el-form-item :label="$t('owner.address')" prop="address" >
             <el-cascader
-              :options="addressOpts"
+              :options="areaData"
               v-model="dataEditionForm.address"
               expand-trigger="hover"
               @change="() => null"/>
@@ -49,8 +49,8 @@
           <el-form-item :label="$t('owner.identity')" prop="identity_id" >
             <el-select v-model="dataEditionForm.identity_id" >
               <el-option
-                v-for="(item, index) in availableIdentity"
-                :key="index"
+                v-for="(item) in availableIdentity"
+                :key="item.id"
                 :label="$t(`owner.${item.label}`)"
                 :value="item.value"
               />
@@ -76,6 +76,7 @@
 import { validateEmail, requiredWithoutAll } from '@/utils/validate'
 import { filterObjEmptyVal } from '@/utils'
 import { createNamespacedHelpers } from 'vuex'
+import areaDataStorage from '@/utils/areaDataStorage'
 const { mapState, mapActions, mapMutations } = createNamespacedHelpers('propertyOwner')
 export default {
   name: 'PropertyOwnersEditForm',
@@ -140,17 +141,12 @@ export default {
             }
           }
         ]
-      }
+      },
+      areaData: areaDataStorage()
     }
   },
   computed: {
     ...mapState(['dataEditionForm', 'availableIdentity'])
-  },
-  '$store.state.app.language': function() {
-    this.setOpts()
-  },
-  created() {
-    this.setOpts()
   },
   methods: {
     ...mapActions([
@@ -160,36 +156,6 @@ export default {
       'setDataEditionDialogVisible',
       'setDataEditionForm'
     ]),
-    setOpts() {
-      this.addressOpts = [{
-        label: this.$t('addressList.australia'),
-        value: 'australia',
-        children: [
-          {
-            label: this.$t('addressList.vic'),
-            value: 'vic',
-            children: [
-              {
-                label: this.$t('addressList.melbourne'),
-                value: 'melbourne',
-                children: [
-                  {
-                    label: this.$t('addressList.mooneePonds'),
-                    value: 'mooneePonds',
-                    children: [
-                      {
-                        label: this.$t('addressList.margaretStreet'),
-                        value: 'Margaret Street'
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      }]
-    },
     handleReset() {
       // this.$refs.form.resetFields()
       const originOwnerData = this.$store.state.propertyOwner.owners.data.find(item => {

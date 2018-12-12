@@ -43,7 +43,10 @@ const propertyOwner = {
     detailsData: {},
     availableIdentity: [
       { label: 'landlord', value: 1 },
-      { label: 'vendor', value: 2 }
+      { label: 'vendor', value: 4 },
+      { label: 'other', value: 5 },
+      { label: 'tenant', value: 2 },
+      { label: 'purchaser', value: 3 }
     ]
   },
   mutations: {

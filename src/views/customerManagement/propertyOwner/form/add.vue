@@ -40,7 +40,7 @@
         <el-col v-bind="formItemLayoutProps" >
           <el-form-item :label="$t('owner.address')" prop="address" >
             <el-cascader
-              :options="addressOpts"
+              :options="areaData"
               v-model="dataCreationForm.address"
               change-on-select
               expand-trigger="hover" />
@@ -50,8 +50,8 @@
           <el-form-item :label="$t('owner.identity')" prop="identity" >
             <el-select v-model="dataCreationForm.identity_id" >
               <el-option
-                v-for="(item, index) in availableIdentity"
-                :key="index"
+                v-for="(item) in availableIdentity"
+                :key="item.id"
                 :label="$t(`owner.${item.label}`)"
                 :value="item.value" />
             </el-select>
@@ -75,6 +75,9 @@
 <script>
 import { filterObjEmptyVal } from '@/utils'
 import { validateEmail, requiredWithoutAll } from '@/utils/validate'
+
+import areaDataStorage from '@/utils/areaDataStorage'
+
 import { createNamespacedHelpers } from 'vuex'
 const { mapState, mapActions } = createNamespacedHelpers('propertyOwner')
 
@@ -84,6 +87,7 @@ export default {
   data() {
     return {
       formItemLayoutProps: { xs: 24, sm: 12, md: 12, lg: 8, xl: 8 },
+      areaData: areaDataStorage(),
       formRules: {
         surname: [
           {
@@ -148,48 +152,10 @@ export default {
   computed: {
     ...mapState(['dataCreationForm', 'availableIdentity'])
   },
-  watch: {
-    '$store.state.app.language': function() {
-      this.setOpts()
-    }
-  },
-  created() {
-    this.setOpts()
-  },
   methods: {
     ...mapActions([
       'createOwner'
     ]),
-    setOpts() {
-      this.addressOpts = [{
-        label: this.$t('addressList.australia'),
-        value: 'australia',
-        children: [
-          {
-            label: this.$t('addressList.vic'),
-            value: 'vic',
-            children: [
-              {
-                label: this.$t('addressList.melbourne'),
-                value: 'melbourne',
-                children: [
-                  {
-                    label: this.$t('addressList.mooneePonds'),
-                    value: 'mooneePonds',
-                    children: [
-                      {
-                        label: this.$t('addressList.margaretStreet'),
-                        value: 'Margaret Street'
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      }]
-    },
     handleSubmit() {
       this.$refs.form.validate(valid => {
         if (valid) {
