@@ -295,8 +295,11 @@ const house = {
       const propertyTypes = (await fetchPropertyTypes()).data.data
       commit('setAvailablePropertyType', propertyTypes)
     },
-    async fetchLeaseInspections({ commit }, payload) {
-      const inspections = (await fetchInspections('type=lease&include=house')).data
+    async fetchLeaseInspections({ commit }, payload = {}) {
+      let params = 'type=lease&include=house,followUp'
+      if (payload.page) params += '&page=' + payload.page
+      if (payload.pageSize) params += '&pageSize=' + payload.pageSize
+      const inspections = (await fetchInspections(params)).data
       commit('setLeaseInspections', inspections)
     },
     async createLeaseHouse({ commit }, payload) {

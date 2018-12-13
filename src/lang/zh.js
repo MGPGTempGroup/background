@@ -296,7 +296,11 @@ export default {
     notFillSomeFieldTips: '如果你不填写某些字段，前台不会显示它们。',
     videoEmbeddedCode: '视频嵌入代码',
     inspections: '预约检查',
-    saleOut: '售罄'
+    saleOut: '售罄',
+    preferredInspectionDatetime: '期待检查时间',
+    preferredMoveInDate: '期待搬入时间',
+    followUpState: '跟进状态',
+    comment: '留言'
   },
   addressList: {
     australia: '澳大利亚',
@@ -532,5 +536,7 @@ export default {
   no: '否',
   selectFile: '选择文件',
   currentFile: '当前文件',
-  to: '至'
+  to: '至',
+  mobile: '联系方式',
+  getDataError: '数据获取失败'
 }

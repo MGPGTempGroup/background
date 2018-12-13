@@ -25,14 +25,102 @@
         </template>
       </el-table-column>
       <el-table-column
-        :label="$t('house.inspectionDatetime')"
+        :label="$t('mobile')"
         min-width="40px"
         align="center">
         <template slot-scope="scope" >
-          {{ scope.row.name || $t('noData') }}
+          {{ scope.row.mobile || $t('noData') }}
+        </template>
+      </el-table-column>
+      <el-table-column
+        :label="$t('email')"
+        min-width="40px"
+        align="center">
+        <template slot-scope="scope" >
+          {{ scope.row.email || $t('noData') }}
+        </template>
+      </el-table-column>
+      <el-table-column
+        :label="$t('house.preferredInspectionDatetime')"
+        min-width="60px"
+        align="center">
+        <template slot-scope="scope" >
+          {{ scope.row.preferred_inspection_datetime || $t('noData') }}
+        </template>
+      </el-table-column>
+      <el-table-column
+        :label="$t('house.preferredMoveInDate')"
+        min-width="60px"
+        align="center">
+        <template slot-scope="scope" >
+          {{ scope.row.preferred_move_in_date || $t('noData') }}
+        </template>
+      </el-table-column>
+      <!-- <el-table-column
+        :label="$t('house.followUpState')"
+        min-width="60px"
+        align="center">
+        <template slot-scope="scope" >
+          <template v-if="scope.row.followUp" >
+            {{ scope.row.followUp.name }}
+          </template>
+          <template v-else >
+            {{ $t('noData') }}
+          </template>
+        </template>
+      </el-table-column> -->
+      <el-table-column
+        :label="$t('house.comment')"
+        min-width="100px"
+        align="center">
+        <template slot-scope="scope" >
+          <template v-if="scope.row.comment" >
+            <el-popover
+              placement="right-end"
+              width="300"
+              trigger="hover">
+              <div style="word-wrap: break-word;" >
+                {{ scope.row.comment }}
+              </div>
+              <div slot="reference" >
+                {{ scope.row.comment | textTruncate(30) }}
+              </div>
+            </el-popover>
+          </template>
+          <template v-else >
+            {{ $t('noData') }}
+          </template>
+        </template>
+      </el-table-column>
+      <el-table-column
+        :label="$t('house.createdAt')"
+        min-width="60px"
+        align="center">
+        <template slot-scope="scope" >
+          {{ scope.row.created_at || $t('noData') }}
+        </template>
+      </el-table-column>
+      <el-table-column
+        :label="$t('house.actions')"
+        fixed="right"
+        align="center"
+        min-width="40px;">
+        <template slot-scope="scope">
+          <el-button type="text" size="small" @click="handleDelete(scope.row.id)" >{{ $t('delete') }}</el-button>
         </template>
       </el-table-column>
     </el-table>
+    <!-- Paginator -->
+    <div v-if="leaseInspections.meta.pagination" class="rental-house-inspections__table-pagination" >
+      <el-pagination
+        :current-page="tablePage"
+        :page-sizes="[10, 30, 50, 100]"
+        :page-size="tablePageSize"
+        :total="leaseInspections.meta.pagination.total"
+        layout="total, sizes, prev, pager, next, jumper"
+        @size-change="onPaginatorSizeChange"
+        @current-change="onPaginatorChange"/>
+    </div>
   </div>
 </template>
 
@@ -43,7 +131,9 @@ export default {
   name: 'RentalHouseInspections',
   data() {
     return {
-      tableLoading: false
+      tableLoading: false,
+      tablePage: 1,
+      tablePageSize: 10
     }
   },
   computed: {
@@ -53,7 +143,10 @@ export default {
   },
   created() {
     this.tableLoading = true
-    this.fetchLeaseInspections()
+    this.fetchLeaseInspections({
+      page: this.tablePage,
+      pageSize: this.tablePageSize
+    })
       .catch(() => {
         this.$message({
           type: 'error',
@@ -67,12 +160,65 @@ export default {
   methods: {
     ...mapActions([
       'fetchLeaseInspections'
-    ])
+    ]),
+    /**
+     * 分页相关
+     */
+    onPaginatorSizeChange(pageSize) {
+      this.tableLoading = true
+      this.fetchLeaseInspections({
+        page: this.tablePage,
+        pageSize: pageSize
+      })
+        .then(() => {
+          this.tablePageSize = pageSize
+        })
+        .catch(() => {
+          this.$message({
+            type: 'error',
+            message: this.$t('getDataError')
+          })
+        })
+        .finally(() => {
+          this.tableLoading = false
+        })
+    },
+    onPaginatorChange(page) {
+      this.tableLoading = true
+      this.fetchLeaseInspections({
+        page: page,
+        pageSize: this.tablePageSize
+      })
+        .then(() => {
+          this.tablePage = page
+        })
+        .catch(() => {
+          this.$message({
+            type: 'error',
+            message: this.$t('getDataError')
+          })
+        })
+        .finally(() => {
+          this.tableLoading = false
+        })
+    },
+    /**
+     * 删除数据
+     */
+    handleDelete(id) {
+
+    }
   }
 }
 </script>
 
-<style>
+<style scoped lang="scss" >
   .rental-house-inspections {
+    &__table-pagination {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 20px;
+    }
   }
 </style>

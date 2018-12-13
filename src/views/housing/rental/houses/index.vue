@@ -27,8 +27,24 @@
             </template>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('house.suburbName')" prop="suburb_name" min-width="30px" align="center" />
-        <el-table-column :label="$t('house.streetName')" prop="street_name" min-width="30px" align="center" />
+        <el-table-column
+          :label="$t('house.suburbName')"
+          prop="suburb_name"
+          min-width="30px"
+          align="center">
+          <template slot-scope="scope" >
+            {{ scope.row.suburb_name || $t('noData') }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          :label="$t('house.streetName')"
+          prop="street_name"
+          min-width="30px"
+          align="center">
+          <template slot-scope="scope" >
+            {{ scope.row.street_name || $t('noData') }}
+          </template>
+        </el-table-column>
         <el-table-column :label="$t('house.postCode')" prop="post_code" min-width="40px" align="center" />
         <el-table-column :label="$t('house.rent')" min-width="30px" align="center" >
           <template slot-scope="scope" >

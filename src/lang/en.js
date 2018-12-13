@@ -296,7 +296,11 @@ export default {
     notFillSomeFieldTips: 'If you do not fill in some fields, the front desk will not show them.',
     videoEmbeddedCode: 'Video embedded code',
     inspections: 'Inspections',
-    saleOut: 'Sale out'
+    saleOut: 'Sale out',
+    preferredInspectionDatetime: 'Preferred inspection datetime',
+    preferredMoveInDate: 'Preferred move in date',
+    followUpState: 'Follow up state',
+    comment: 'Commnet'
   },
   addressList: {
     australia: 'Australia',
@@ -533,5 +537,7 @@ export default {
   endDate: 'End date',
   selectFile: 'Select file',
   currentFile: 'Current file',
-  to: 'To'
+  to: 'To',
+  mobile: 'Mobile',
+  getDataError: 'Failed to get data'
 }
