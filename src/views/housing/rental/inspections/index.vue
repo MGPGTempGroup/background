@@ -159,7 +159,8 @@ export default {
   },
   methods: {
     ...mapActions([
-      'fetchLeaseInspections'
+      'fetchLeaseInspections',
+      'deleteLeaseInspection'
     ]),
     /**
      * 分页相关
@@ -206,7 +207,26 @@ export default {
      * 删除数据
      */
     handleDelete(id) {
-
+      this.$confirm(this.$t('deleteDataTips'), this.$t('tips'), {
+        confirmButtonText: this.$t('confirm'),
+        cancelButtonText: this.$t('cancel'),
+        type: 'warning'
+      }).then(() => {
+        this.tableLoading = true
+        this.deleteLeaseInspection({ id }).then(res => {
+          this.$message({
+            message: this.$t('deleteSuccess'),
+            type: 'success'
+          })
+        }).catch(() => {
+          this.$message({
+            message: this.$t('deleteFailed'),
+            type: 'error'
+          })
+        }).finally(() => {
+          this.tableLoading = false
+        })
+      })
     }
   }
 }

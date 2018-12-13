@@ -73,3 +73,10 @@ export function deleteSaleHouse(id) {
     url: 'residences/' + id
   })
 }
+
+export function deleteInspection(id) {
+  return request({
+    method: 'DELETE',
+    url: 'inspections/' + id
+  })
+}

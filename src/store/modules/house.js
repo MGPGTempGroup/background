@@ -8,7 +8,8 @@ import {
   updateLeaseHouse,
   updateSaleHouse,
   deleteLeaseHouse,
-  deleteSaleHouse
+  deleteSaleHouse,
+  deleteInspection
 } from '@/api/house'
 import parseDataToConditionalParams from '@/utils/parseDataToConditionalParams'
 import { param } from '@/utils'
@@ -130,6 +131,9 @@ const house = {
     },
     deleteLease(state, payload) {
       state.leases.data = state.leases.data.filter(item => item.id !== payload)
+    },
+    deleteLeaseInspection(state, payload) {
+      state.leaseInspections.data = state.leaseInspections.data.filter(item => item.id !== payload)
     },
     deleteSale(state, payload) {
       state.sales.data = state.sales.data.filter(item => item.id !== payload)
@@ -321,6 +325,10 @@ const house = {
     async deleteLeaseHouse({ commit }, payload) {
       await deleteLeaseHouse(payload.id)
       commit('deleteLease', payload.id)
+    },
+    async deleteLeaseInspection({ commit }, payload) {
+      await deleteInspection(payload.id)
+      commit('deleteLeaseInspection', payload.id)
     },
     async deleteSaleHouse({ commit, dispatch, state }, payload) {
       await deleteSaleHouse(payload.id)
