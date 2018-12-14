@@ -102,7 +102,7 @@
         <el-table-column
           :label="$t('house.actions')"
           fixed="right"
-          width="100"
+          width="150px"
           align="center">
           <template slot-scope="scope">
             <el-button type="text" size="small" @click="handleDetailsClick(scope.row)">{{ $t('house.details') }}</el-button>
