@@ -140,6 +140,7 @@
                 <template v-if="formattedData.upcoming_inspection_datetime && formattedData.upcoming_inspection_datetime.length" >
                   <el-tag
                     v-for="(item, index) in formattedData.upcoming_inspection_datetime"
+                    v-if="item[0] && item[1]"
                     :key="index"
                     style="margin-bottom: 5px;">
                     {{ item[0] }} ~ {{ item[1] }}
@@ -160,7 +161,7 @@
                   <br>
                   <el-tag>
                     <a :href="formattedData.video_src" target="_blank" >
-                      {{ $t('view') }}
+                      {{ $t('preview') }}
                     </a>
                   </el-tag>
                 </template>
