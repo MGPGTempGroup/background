@@ -8,17 +8,20 @@
         <rental-house-inspections />
       </el-tab-pane>
     </el-tabs>
+    <rental-house-details-dialog/>
   </div>
 </template>
 
 <script>
 import RentalHouses from './houses/index'
 import RentalHouseInspections from './inspections'
+import RentalHouseDetailsDialog from './houses/details'
 export default {
   name: 'Lease',
   components: {
     RentalHouses,
-    RentalHouseInspections
+    RentalHouseInspections,
+    RentalHouseDetailsDialog
   }
 }
 </script>

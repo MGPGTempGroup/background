@@ -132,9 +132,6 @@
     <!-- Edit -->
     <rental-house-edit-dialog />
 
-    <!-- Details -->
-    <rental-house-details-dialog />
-
   </div>
 </template>
 
@@ -143,7 +140,6 @@
 import rentalHouseFilter from './filter'
 import rentalHouseEditDialog from './edit'
 import rentalHouseCreateDialog from './create'
-import rentalHouseDetailsDialog from './details'
 import 'font-awesome/css/font-awesome.min.css'
 import { createNamespacedHelpers } from 'vuex'
 const { mapState, mapMutations, mapActions } = createNamespacedHelpers('house')
@@ -153,8 +149,7 @@ export default {
   components: {
     rentalHouseFilter,
     rentalHouseEditDialog,
-    rentalHouseCreateDialog,
-    rentalHouseDetailsDialog
+    rentalHouseCreateDialog
   },
   computed: {
     ...mapState([
