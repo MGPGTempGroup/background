@@ -300,7 +300,8 @@ export default {
     preferredInspectionDatetime: 'Preferred inspection datetime',
     preferredMoveInDate: 'Preferred move in date',
     followUpState: 'Follow up state',
-    comment: 'Commnet'
+    comment: 'Commnet',
+    belongTo: 'Belong to'
   },
   addressList: {
     australia: 'Australia',

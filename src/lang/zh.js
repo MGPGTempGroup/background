@@ -255,7 +255,7 @@ export default {
     dataCreator: '数据创建者',
     currState: '目前状态',
     reserved: '已预订',
-    house: '住宅',
+    house: '房屋',
     studio: '工作室',
     unit: '单位',
     apartment: '公寓',
@@ -300,7 +300,8 @@ export default {
     preferredInspectionDatetime: '期待检查时间',
     preferredMoveInDate: '期待搬入时间',
     followUpState: '跟进状态',
-    comment: '留言'
+    comment: '留言',
+    belongTo: '属于'
   },
   addressList: {
     australia: '澳大利亚',

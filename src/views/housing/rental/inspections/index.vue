@@ -71,7 +71,7 @@
       </el-table-column> -->
       <el-table-column
         :label="$t('house.comment')"
-        min-width="100px"
+        min-width="30px"
         align="center">
         <template slot-scope="scope" >
           <template v-if="scope.row.comment" >
@@ -90,6 +90,18 @@
           <template v-else >
             {{ $t('noData') }}
           </template>
+        </template>
+      </el-table-column>
+      <el-table-column
+        :label="$t('house.house')"
+        min-width="100px"
+        align="center">
+        <template slot-scope="scope" >
+          <el-button @click="previewHouseDetails(scope.row.house)" >
+            <el-button type="text" @click="previewHouseDetails(scope.row.house)" >
+              {{ scope.row.house.name | textTruncate(10) }}
+            </el-button>
+          </el-button>
         </template>
       </el-table-column>
       <el-table-column
@@ -126,7 +138,7 @@
 
 <script>
 import { createNamespacedHelpers } from 'vuex'
-const { mapState, mapActions } = createNamespacedHelpers('house')
+const { mapState, mapMutations, mapActions } = createNamespacedHelpers('house')
 export default {
   name: 'RentalHouseInspections',
   data() {
@@ -158,6 +170,10 @@ export default {
       })
   },
   methods: {
+    ...mapMutations([
+      'setLeaseDetailsDialogVisible',
+      'setLeaseDetailsData'
+    ]),
     ...mapActions([
       'fetchLeaseInspections',
       'deleteLeaseInspection'
@@ -202,6 +218,13 @@ export default {
         .finally(() => {
           this.tableLoading = false
         })
+    },
+    /**
+     * 展示房屋详情
+     */
+    previewHouseDetails(houseData) {
+      this.setLeaseDetailsData(houseData)
+      this.setLeaseDetailsDialogVisible(true)
     },
     /**
      * 删除数据
