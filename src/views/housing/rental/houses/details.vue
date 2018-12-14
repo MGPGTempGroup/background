@@ -157,13 +157,12 @@
               <dt>{{ $t('house.videoEmbeddedCode') }}</dt>
               <dd>
                 <template v-if="formattedData.video_src" >
-                  {{ formattedData.video_embedded_code }}
-                  <br>
-                  <el-tag>
-                    <a :href="formattedData.video_src" target="_blank" >
-                      {{ $t('preview') }}
-                    </a>
-                  </el-tag>
+                  <a
+                    :href="formattedData.video_src"
+                    target="_blank"
+                    style="word-break: break-all;">
+                    {{ formattedData.video_embedded_code }}
+                  </a>
                 </template>
                 <template v-else >
                   {{ $t('noData') }}
