@@ -180,7 +180,7 @@
           <tinymce ref="tinymce" v-model="form.details" />
         </div>
         <div class="edit-sale-house__upload-image-wrapper" >
-          <p><strong>{{ $t('house.housingPicture') }}</strong></p>
+          <p><strong>{{ $t('house.housingPictureUpload') }}</strong></p>
           <upload-image :image-list.sync="imageList" :max-count="10" />
         </div>
         <div class="create-sale-housing__upload-pdf-wrapper" >

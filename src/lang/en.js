@@ -292,6 +292,7 @@ export default {
     createSaleHousingData: 'Create sale house data',
     editSaleHousingData: 'Edit Sales data',
     housingPicture: 'Housing picture',
+    housingPictureUpload: 'House Pictures (Drag Pictures to Change Display Order)',
     isNewDevelopment: 'Is it the latest property development?',
     notFillSomeFieldTips: 'If you do not fill in some fields, the front desk will not show them.',
     videoEmbeddedCode: 'Video embedded code',

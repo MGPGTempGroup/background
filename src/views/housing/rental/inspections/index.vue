@@ -97,11 +97,14 @@
         min-width="100px"
         align="center">
         <template slot-scope="scope" >
-          <el-button @click="previewHouseDetails(scope.row.house)" >
-            <el-button type="text" @click="previewHouseDetails(scope.row.house)" >
+          <template v-if="scope.row.house" >
+            <el-button @click="previewHouseDetails(scope.row.house)" >
               {{ scope.row.house.name | textTruncate(10) }}
             </el-button>
-          </el-button>
+          </template>
+          <template v-else >
+            {{ $t('noData') }}
+          </template>
         </template>
       </el-table-column>
       <el-table-column

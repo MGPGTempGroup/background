@@ -217,7 +217,7 @@
         <div class="create-sale-housing__upload-image-wrapper" >
           <p>
             <strong>
-              {{ $t('house.housingPicture') }}
+              {{ $t('house.housingPictureUpload') }}
             </strong>
           </p>
           <upload-image :image-list.sync="imageList" :max-count="10" />
