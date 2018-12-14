@@ -19,7 +19,7 @@
               <dt>{{ $t('house.id') }}</dt>
               <dd>{{ formattedData.id }}</dd>
               <dt>{{ $t('house.name') }}</dt>
-              <dd>{{ formattedData.name }}</dd>
+              <dd>{{ formattedData.name || $t('noData') }}</dd>
               <dt>{{ $t('house.address') }}</dt>
               <dd>
                 <template v-if="Array.isArray(leaseDetailsData.address)" >
@@ -30,17 +30,17 @@
                 </template>
               </dd>
               <dt>{{ $t('house.suburbName') }}</dt>
-              <dd>{{ formattedData.suburb_name }}</dd>
+              <dd>{{ formattedData.suburb_name || $t('noData') }}</dd>
               <dt>{{ $t('house.streetName') }}</dt>
-              <dd>{{ formattedData.street_name }}</dd>
+              <dd>{{ formattedData.street_name || $t('noData') }}</dd>
               <dt>{{ $t('house.streetCode') }}</dt>
-              <dd>{{ formattedData.street_code }}</dd>
+              <dd>{{ formattedData.street_code || $t('noData') }}</dd>
               <dt>{{ $t('house.postCode') }}</dt>
-              <dd>{{ formattedData.post_code }}</dd>
+              <dd>{{ formattedData.post_code || $t('noData') }}</dd>
               <dt>{{ $t('house.houseNumber') }}</dt>
-              <dd>{{ formattedData.house_number }}</dd>
+              <dd>{{ formattedData.house_number || $t('noData') }}</dd>
               <dt>{{ $t('house.addressDescription') }}</dt>
-              <dd>{{ formattedData.address_description }}</dd>
+              <dd>{{ formattedData.address_description || $t('noData') }}</dd>
               <dt>{{ $t('house.briefIntroduction') }}</dt>
               <dd>
                 {{ formattedData.brief_introduction || $t('noData') }}
