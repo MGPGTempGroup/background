@@ -36,7 +36,6 @@ const house = {
       data: [],
       meta: {}
     },
-    saleCreateDialogVisible: false,
     // 出售房屋列表
     sales: {
       data: [],
@@ -50,7 +49,11 @@ const house = {
     saleDetailsData: {},
     saleEditDialogVisible: false,
     saleEditForm: {},
-    createSaleHousingDialogVisible: false,
+    saleCreateDialogVisible: false,
+    saleInspections: {
+      data: [],
+      meta: {}
+    },
     availablePropertyType: [],
     houseStatus: [
       {
@@ -86,6 +89,9 @@ const house = {
     },
     setLeaseInspections(state, payload) {
       state.leaseInspections = payload
+    },
+    setSaleInspections(state, payload) {
+      state.saleInspections = payload
     },
     setLeaseDetailsDialogVisible(state, payload) {
       state.leaseDetailsDialogVisible = payload
@@ -134,6 +140,9 @@ const house = {
     },
     deleteLeaseInspection(state, payload) {
       state.leaseInspections.data = state.leaseInspections.data.filter(item => item.id !== payload)
+    },
+    deleteSaleInspection(state, payload) {
+      state.saleInspections.data = state.saleInspections.data.filter(item => item.id !== payload)
     },
     deleteSale(state, payload) {
       state.sales.data = state.sales.data.filter(item => item.id !== payload)
@@ -306,6 +315,13 @@ const house = {
       const inspections = (await fetchInspections(params)).data
       commit('setLeaseInspections', inspections)
     },
+    async fetchSaleInspections({ commit }, payload = {}) {
+      let params = 'type=sale&include=house,followUp'
+      if (payload.page) params += '&page=' + payload.page
+      if (payload.pageSize) params += '&pageSize=' + payload.pageSize
+      const inspections = (await fetchInspections(params)).data
+      commit('setSaleInspections', inspections)
+    },
     async createLeaseHouse({ commit }, payload) {
       const leaseHouseData = (await createLeaseHouse(payload)).data
       commit('addLease', leaseHouseData)
@@ -329,6 +345,10 @@ const house = {
     async deleteLeaseInspection({ commit }, payload) {
       await deleteInspection(payload.id)
       commit('deleteLeaseInspection', payload.id)
+    },
+    async deleteSaleInspection({ commit }, payload) {
+      await deleteInspection(payload.id)
+      commit('deleteSaleInspection', payload.id)
     },
     async deleteSaleHouse({ commit, dispatch, state }, payload) {
       await deleteSaleHouse(payload.id)
