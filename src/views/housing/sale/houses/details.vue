@@ -19,7 +19,7 @@
               <dt>{{ $t('house.id') }}</dt>
               <dd>{{ formattedData.id }}</dd>
               <dt>{{ $t('house.name') }}</dt>
-              <dd>{{ formattedData.name }}</dd>
+              <dd>{{ formattedData.name || $t('noData') }}</dd>
               <dt>{{ $t('house.address') }}</dt>
               <dd>
                 <template v-if="Array.isArray(formattedData.address)" >
@@ -158,13 +158,12 @@
               <dt>{{ $t('house.videoEmbeddedCode') }}</dt>
               <dd>
                 <template v-if="formattedData.video_src" >
-                  {{ formattedData.video_embedded_code }}
-                  <br>
-                  <el-tag>
-                    <a :href="formattedData.video_src" target="_blank" >
-                      {{ $t('view') }}
-                    </a>
-                  </el-tag>
+                  <a
+                    :href="formattedData.video_src"
+                    target="_blank"
+                    style="word-break: break-all;">
+                    {{ formattedData.video_embedded_code }}
+                  </a>
                 </template>
                 <template v-else >
                   {{ $t('noData') }}
