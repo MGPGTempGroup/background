@@ -159,6 +159,7 @@ export default {
      * 处理更新
      */
     handleUpdate() {
+      // 确认提示
       this.$confirm(this.$t('contentMGT.confirmUpdateTips'), this.$t('tips'), {
         distinguishCancelAndClose: true,
         confirmButtonText: this.$t('confirm'),
@@ -170,61 +171,73 @@ export default {
           spinner: 'el-icon-loading',
           background: 'rgba(0, 0, 0, 0.7)'
         })
-        const uploadPromises = this.imageList.map((item, index) => {
-          if (/^http/.test(item.dataURL)) {
-            return {
-              index,
-              url: item.dataURL
-            }
+
+        // 组装表单数据
+        const formData = {
+          service: {
+            members: this.selectedMembersId
+          },
+          content: {
+            content: this.content
           }
-          return new Promise((resolve, reject) => {
-            uploadImageAPI(
-              item.file
-            ).then(res => {
-              resolve({
-                index,
-                url: res.headers.location
-              })
-            }).catch(res => {
-              reject()
-            })
-          })
-        })
-        let broadcastPictures = []
+        }
+
+        // 轮播图片上传
         try {
-          broadcastPictures = await Promise.all(uploadPromises)
+          formData['content']['broadcast_pictures'] = await this.uploadBroadcastPictures()
         } catch (err) {
+          loading.close()
           this.$message({
             type: 'error',
             message: this.$t('uploadFailed')
           })
-          loading.close()
-          return
         }
-        this.updateService(
-          {
-            service: {
-              members: this.selectedMembersId
-            },
-            content: {
-              broadcast_pictures: broadcastPictures,
-              content: this.content
-            }
-          }
-        ).then(() => {
-          this.$message({
-            type: 'success',
-            message: this.$t('updateSuccess')
+
+        // 调用修改Action
+        this.updateService(formData)
+          .then(() => {
+            this.$message({
+              type: 'success',
+              message: this.$t('updateSuccess')
+            })
           })
-        }).catch(() => {
-          this.$message({
-            type: 'error',
-            message: this.$t('updateFailed')
+          .catch(() => {
+            this.$message({
+              type: 'error',
+              message: this.$t('updateFailed')
+            })
           })
-        }).finally(() => {
-          loading.close()
-        })
+          .finally(() => {
+            loading.close()
+          })
       }).catch(action => {})
+    },
+    /**
+     * 上传所有轮播图片
+     */
+    uploadBroadcastPictures() {
+      // 上传所有轮播图片，返回Promise数组
+      const uploadPromises = this.imageList.map((item, index) => {
+        if (/^http/.test(item.dataURL)) {
+          return {
+            index,
+            url: item.dataURL
+          }
+        }
+        return new Promise((resolve, reject) => {
+          uploadImageAPI(
+            item.file
+          ).then(res => {
+            resolve({
+              index,
+              url: res.headers.location
+            })
+          }).catch(res => {
+            reject()
+          })
+        })
+      })
+      return Promise.all(uploadPromises)
     },
     /**
      * 处理表单重置
