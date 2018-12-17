@@ -64,6 +64,10 @@ export default {
     maxCount: {
       type: Number,
       default: 1
+    },
+    cropperRatio: {
+      type: Array,
+      default: () => [260, 200]
     }
   },
   data() {
@@ -83,7 +87,7 @@ export default {
         autoCrop: true,
         // 按照比例剪裁
         fixed: true,
-        fixedNumber: [260, 200]
+        fixedNumber: this.cropperRatio
       }
     }
   },

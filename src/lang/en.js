@@ -66,6 +66,7 @@ export default {
     propertyOwner: 'Property owner',
     content: 'Content',
     serviceAndContent: 'Service & Content',
+    contentManagement: 'Content Management',
     housing: 'Housing',
     companyInfo: 'Company info',
     rentalHousing: 'Rental housing',
@@ -541,5 +542,6 @@ export default {
   currentFile: 'Current file',
   to: 'To',
   mobile: 'Mobile',
-  getDataError: 'Failed to get data'
+  getDataError: 'Failed to get data',
+  selectPage: 'Select page'
 }

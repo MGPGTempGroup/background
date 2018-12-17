@@ -24,10 +24,11 @@ export function fetchDepartments(params) {
   })
 }
 
-export function searchMembersByFullName(fullName) {
+export function searchMembersByFullName(fullName, params = {}) {
   return request({
     method: 'GET',
-    url: 'company/members?searchByFullName=' + fullName
+    url: 'company/members?searchByFullName=' + fullName,
+    params
   })
 }
 

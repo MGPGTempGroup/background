@@ -176,83 +176,11 @@ export const asyncRouterMap = [
     },
     children: [
       {
-        path: 'landlord-support',
-        component: () => import('@/views/contentManagement/landlordSupport'),
-        name: 'landlordSupport',
+        path: 'content',
+        component: () => import('@/views/contentManagement'),
+        name: 'contentManagement',
         meta: {
-          title: 'landlordSupport',
-          roles: ['admin']
-        }
-      },
-      {
-        path: 'prospective-tenants',
-        component: () => import('@/views/contentManagement/prospectiveTenants'),
-        name: 'prospectiveTenants',
-        meta: {
-          title: 'prospectiveTenants',
-          roles: ['admin']
-        }
-      },
-      {
-        path: 'current-tenants',
-        component: () => import('@/views/contentManagement/currentTenants'),
-        name: 'currentTenants',
-        meta: {
-          title: 'currentTenants',
-          roles: ['admin']
-        }
-      },
-      {
-        path: 'areas-we-serve',
-        component: () => import('@/views/contentManagement/areasWeServe'),
-        name: 'areasWeServe',
-        meta: {
-          title: 'areasWeServe',
-          roles: ['admin']
-        }
-      },
-      {
-        path: 'project-marketing',
-        component: () => import('@/views/contentManagement/projectMarketing'),
-        name: 'projectMarketing',
-        meta: {
-          title: 'projectMarketing',
-          roles: ['admin']
-        }
-      },
-      {
-        path: 'project-leasing',
-        component: () => import('@/views/contentManagement/projectLeasing'),
-        name: 'projectLeasing',
-        meta: {
-          title: 'projectLeasing',
-          roles: ['admin']
-        }
-      },
-      {
-        path: 'commercial',
-        component: () => import('@/views/contentManagement/commercial'),
-        name: 'commercial',
-        meta: {
-          title: 'commercial',
-          roles: ['admin']
-        }
-      },
-      {
-        path: 'sell',
-        component: () => import('@/views/contentManagement/sell'),
-        name: 'sell',
-        meta: {
-          title: 'sell',
-          roles: ['admin']
-        }
-      },
-      {
-        path: '/careers',
-        component: () => import('@/views/contentManagement/careers'),
-        name: 'careers',
-        meta: {
-          title: 'careers',
+          title: 'contentManagement',
           roles: ['admin']
         }
       }

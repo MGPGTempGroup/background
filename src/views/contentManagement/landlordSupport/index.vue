@@ -2,7 +2,10 @@
   <div class="content" >
     <h2>{{ $t('contentMGT.editImage') }}</h2>
     <div class="content__upload-image-wrapper" >
-      <upload-image :image-list="imageList" />
+      <upload-image
+        :image-list.sync="imageList"
+        :max-count="10"
+        :cropper-ratio="[1200, 588]" />
     </div>
     <h2 style="margin-top: 30px;" >{{ $t('contentMGT.editMainContent') }}</h2>
     <div class="content__rich-editor-wrapper" >
@@ -23,7 +26,7 @@ import Tinymce from '@/components/Tinymce'
 import UploadImage from '@/components/UploadImage'
 import historicalContentDialog from '../historicalContentDialog'
 import { createNamespacedHelpers } from 'vuex'
-const { mapMutations } = createNamespacedHelpers('content')
+const { mapMutations, mapActions } = createNamespacedHelpers('content')
 export default {
   name: 'LandlordSupport',
   components: { Tinymce, UploadImage, historicalContentDialog },
@@ -33,9 +36,21 @@ export default {
       imageList: []
     }
   },
+  created() {
+    this.fetchService({
+      params: {
+        include: 'content'
+      },
+      service_name: 'landlords'
+    })
+  },
   methods: {
     ...mapMutations([
-      'updateLandlordSupportEditorContent', 'updateHistoricalContent'
+      'updateLandlordSupportEditorContent',
+      'updateHistoricalContent'
+    ]),
+    ...mapActions([
+      'fetchService'
     ]),
     onUpdate() {
       this.$confirm(this.$t('contentMGT.confirmUpdateTips'), this.$t('tips'), {

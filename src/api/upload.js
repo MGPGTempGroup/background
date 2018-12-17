@@ -1,8 +1,9 @@
 import request from '@/utils/request'
 
-export function uploadImage(images) {
+export function uploadImage(image) {
+  console.log(image)
   const formData = new FormData()
-  formData.append('images', images)
+  formData.append('images', image)
   return request({
     method: 'POST',
     url: 'images',

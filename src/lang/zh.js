@@ -66,6 +66,7 @@ export default {
     propertyOwner: '物业业主',
     content: '内容',
     serviceAndContent: '服务 & 内容',
+    contentManagement: '内容管理',
     housing: '房屋管理',
     companyInfo: '公司信息',
     rentalHousing: '租赁房屋',
@@ -540,5 +541,6 @@ export default {
   currentFile: '当前文件',
   to: '至',
   mobile: '联系方式',
-  getDataError: '数据获取失败'
+  getDataError: '数据获取失败',
+  selectPage: '选择页面'
 }
