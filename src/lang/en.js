@@ -395,6 +395,7 @@ export default {
     confirmUpdateTips: 'Are you sure you want to update the content? Landlord support page will use your latest changes.',
     editImage: 'Edit the data of the broadcast chart',
     editMainContent: 'Edit main content',
+    mainContent: 'Main content',
     editServiceAreas: 'Edit service areas',
     editServiceAreaDetails: 'Edit service area details',
     createServiceArea: 'Create service area',

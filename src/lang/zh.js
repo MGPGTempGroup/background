@@ -396,6 +396,7 @@ export default {
     confirmUpdateTips: '你确认要更新内容吗？房东支持页面将会应用您最新修改的内容。',
     editImage: '编辑轮播图数据',
     editMainContent: '编辑主体内容',
+    mainContent: '主体内容',
     editServiceAreas: '编辑服务地区',
     editServiceAreaDetails: '编辑服务地区详情',
     createServiceArea: '创建服务地区',

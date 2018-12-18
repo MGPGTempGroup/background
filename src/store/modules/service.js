@@ -1,6 +1,7 @@
 import {
   fetchService,
   fetchAreasWeServe,
+  createAreaWeServe,
   updateService,
   updateServiceContent,
   updateServiceArea
@@ -26,7 +27,8 @@ const service = {
     serviceAreaDetailsDialogVisible: false,
     serviceAreaDetailsData: {},
     editServiceAreaDialogVisible: false,
-    editServiceAreaDialogData: {}
+    editServiceAreaDialogData: {},
+    createServiceAreaDialogVisible: false
   },
   mutations: {
     setAreasWeServe(state, payload) {
@@ -42,6 +44,9 @@ const service = {
         [payload.name]: payload
       })
     },
+    addAreaWeServe(state, payload) {
+      state.areasWeServe.push(payload)
+    },
     setCurrentServiceName(state, payload) {
       state.currentServiceName = payload
     },
@@ -53,6 +58,9 @@ const service = {
     },
     setEditServiceAreaDialogVisible(state, payload) {
       state.editServiceAreaDialogVisible = payload
+    },
+    setCreateServiceAreaDialogVisible(state, payload) {
+      state.createServiceAreaDialogVisible = payload
     },
     setEditServiceAreaData(state, payload) {
       state.editServiceAreaDialogData = payload
@@ -75,6 +83,10 @@ const service = {
         include: 'content'
       })).data
       commit('setServiceData', serviceData)
+    },
+    async createServiceArea({ commit }, payload) {
+      await createAreaWeServe(payload)
+      commit('addAreaWeServe', payload)
     },
     async updateServiceArea({ commit }, payload) {
       const area = (await updateServiceArea(payload)).data

@@ -2,7 +2,7 @@
   <div class="areas" >
     <div class="areas__header" >
       <h2 class="areas__title" >{{ $t('contentMGT.editServiceAreas') }}</h2>
-      <el-button type="primary" class="areas__add-btn" @click="createAreaDialogVisible = true" >
+      <el-button type="primary" class="areas__add-btn" @click="createArea" >
         {{ $t('create') }}
       </el-button>
     </div>
@@ -46,46 +46,28 @@
       style="text-align: center; letter-spacing: 1px; margin-top: 30px; color: rgba(0,0,0,.3)">
       {{ $t('noData') }}
     </h3>
-    <!-- 创建Dialog -->
-    <el-dialog
-      :title="$t('contentMGT.createServiceArea')"
-      :visible.sync="createAreaDialogVisible"
-      fullscreen>
-      <h2>{{ $t('contentMGT.areaName') }}</h2>
-      <el-input style="width: 200px;" />
-      <h2 style="margin-top: 20px;" >{{ $t('contentMGT.editImage') }}</h2>
-      <div class="content__upload-img-wrapper" >
-        <upload-image :image-list.sync="imageList" />
-      </div>
-      <h2 style="margin-top: 30px;" >{{ $t('contentMGT.editMainContent') }}</h2>
-      <div class="content__editor-wrapper" >
-        <tinymce :height="600" v-model="createAreaContent" />
-      </div>
-      <div class="content__actions" >
-        <el-button type="primary" >
-          {{ $t('create') }}
-        </el-button>
-      </div>
-    </el-dialog>
     <!-- 详情 dialog -->
     <details-dialog/>
     <!-- 编辑 dialog -->
     <edit-dialog/>
+    <!-- 创建dialog -->
+    <create-dialog/>
   </div>
 </template>
 
 <script>
 import Tinymce from '@/components/Tinymce'
 import UploadImage from '@/components/UploadImage'
-import detailsDialog from './details'
-import editDialog from './edit'
+import DetailsDialog from './details'
+import EditDialog from './edit'
+import CreateDialog from './create'
 
 import { createNamespacedHelpers } from 'vuex'
 const { mapState, mapMutations, mapActions } = createNamespacedHelpers('service')
 export default {
   name: 'AreasList',
   components: {
-    Tinymce, UploadImage, detailsDialog, editDialog
+    Tinymce, UploadImage, DetailsDialog, EditDialog, CreateDialog
   },
   data() {
     return {
@@ -95,7 +77,6 @@ export default {
       imageList: [],
       createAreaContent: '',
       editAreaContent: '',
-      editAreaDialogVisible: false,
       createAreaDialogVisible: false
     }
   },
@@ -121,13 +102,14 @@ export default {
       'setServiceAreaDetailsDialogVisible',
       'setServiceAreaDetailsData',
       'setEditServiceAreaDialogVisible',
-      'setEditServiceAreaData'
+      'setEditServiceAreaData',
+      'setCreateServiceAreaDialogVisible'
     ]),
     ...mapActions([
       'fetchAreasWeServe'
     ]),
     createArea() {
-      this.createAreaDialogVisible = true
+      this.setCreateServiceAreaDialogVisible(true)
     },
     showEditDialog(areaData) {
       this.setEditServiceAreaData(areaData)

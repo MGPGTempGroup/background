@@ -38,6 +38,14 @@ export function fetchAreasWeServe(params = {}) {
   })
 }
 
+export function createAreaWeServe(data) {
+  return request({
+    method: 'POST',
+    url: 'service-areas',
+    data
+  })
+}
+
 export function updateService(serviceName, data, params = {}) {
   return request({
     method: 'PATCH',
