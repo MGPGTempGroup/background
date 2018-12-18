@@ -170,7 +170,7 @@ export const asyncRouterMap = [
     redirect: '/service-management/index',
     alwaysShow: true,
     meta: {
-      title: 'serviceManagement',
+      title: 'service',
       icon: 'content_mgt',
       roles: ['admin']
     },
