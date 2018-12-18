@@ -177,7 +177,7 @@ export default {
     &__list {
       display: inline-block;
       margin: 0px;
-      margin-bottom: -15px;
+      margin-top: -15px;
       padding: 0px;
       min-height: 120px;
       list-style: none;
@@ -237,6 +237,7 @@ export default {
       align-items: center;
       flex-wrap: wrap;
       position: relative;
+      margin-bottom: 15px;
       width: 200px;
       height: 120px;
       font-size: 14px;
