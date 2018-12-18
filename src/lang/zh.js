@@ -513,6 +513,7 @@ export default {
   updateSuccess: '修改成功',
   deleteSuccess: '删除成功',
   createFailed: '创建失败',
+  updateFailed: '更新失败',
   deleteFailed: '删除失败',
   uploadFailed: '上传失败',
   searchFailed: '搜索失败',

@@ -56,6 +56,14 @@ export function updateServiceContent(serviceName, data, params = {}) {
   })
 }
 
+export function updateServiceArea(data) {
+  return request({
+    method: 'PATCH',
+    url: `service-areas/${data.id}`,
+    data
+  })
+}
+
 export function deleteServiceMessage(id) {
   return request({
     url: 'service-messages/' + id,

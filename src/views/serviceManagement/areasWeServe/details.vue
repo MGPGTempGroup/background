@@ -5,6 +5,7 @@
     top="40px"
     append-to-body
     class="area-details-dialog">
+    <!-- 基本信息展示 -->
     <el-row>
       <el-col v-bind="{ xs: 12, sm: 12, md: 8, lg: 8, xl: 8 }" >
         <dl>

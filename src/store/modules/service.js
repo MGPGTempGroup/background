@@ -2,7 +2,8 @@ import {
   fetchService,
   fetchAreasWeServe,
   updateService,
-  updateServiceContent
+  updateServiceContent,
+  updateServiceArea
 } from '@/api/service'
 
 const service = {
@@ -23,11 +24,18 @@ const service = {
     servicesData: {},
     areasWeServe: [],
     serviceAreaDetailsDialogVisible: false,
-    serviceAreaDetailsData: {}
+    serviceAreaDetailsData: {},
+    editServiceAreaDialogVisible: false,
+    editServiceAreaDialogData: {}
   },
   mutations: {
     setAreasWeServe(state, payload) {
       state.areasWeServe = payload
+    },
+    setAreaWeServe(state, payload) {
+      state.areasWeServe = state.areasWeServe.map(item => {
+        return item.id !== payload.id ? item : payload
+      })
     },
     setServiceData(state, payload) {
       state.servicesData = Object.assign({}, state.servicesData, {
@@ -42,6 +50,12 @@ const service = {
     },
     setServiceAreaDetailsData(state, payload) {
       state.serviceAreaDetailsData = payload
+    },
+    setEditServiceAreaDialogVisible(state, payload) {
+      state.editServiceAreaDialogVisible = payload
+    },
+    setEditServiceAreaData(state, payload) {
+      state.editServiceAreaDialogData = payload
     }
   },
   actions: {
@@ -61,6 +75,10 @@ const service = {
         include: 'content'
       })).data
       commit('setServiceData', serviceData)
+    },
+    async updateServiceArea({ commit }, payload) {
+      const area = (await updateServiceArea(payload)).data
+      commit('setAreaWeServe', area)
     }
   },
   getters: {

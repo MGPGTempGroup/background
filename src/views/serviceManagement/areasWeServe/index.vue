@@ -28,7 +28,7 @@
             <div class="areas__item-actions" >
               <el-button
                 type="text"
-                @click="handleEditArea(item)">
+                @click="showEditDialog(item)">
                 {{ $t('edit') }}
               </el-button>
               <el-button
@@ -67,27 +67,10 @@
         </el-button>
       </div>
     </el-dialog>
-    <!-- 编辑 dialog -->
-    <el-dialog
-      :visible.sync="editAreaDialogVisible"
-      :title="$t('contentMGT.editServiceAreaDetails')"
-      fullscreen>
-      <h2>{{ $t('contentMGT.editImage') }}</h2>
-      <div class="content__upload-img-wrapper" >
-        <upload-image :image-list.sync="imageList" />
-      </div>
-      <h2 style="margin-top: 30px;" >{{ $t('contentMGT.editMainContent') }}</h2>
-      <div class="areas__editor-wrapper" >
-        <tinymce :height="600" v-model="content" />
-      </div>
-      &nbsp;&nbsp;
-      <!-- <div class="areas__item-actions" >
-        <el-button type="info" >{{ $t('reset') }}</el-button>
-        <el-button type="primary" @click="onUpdate" >{{ $t('update') }}</el-button>
-      </div> -->
-    </el-dialog>
     <!-- 详情 dialog -->
     <details-dialog/>
+    <!-- 编辑 dialog -->
+    <edit-dialog/>
   </div>
 </template>
 
@@ -95,13 +78,14 @@
 import Tinymce from '@/components/Tinymce'
 import UploadImage from '@/components/UploadImage'
 import detailsDialog from './details'
+import editDialog from './edit'
 
 import { createNamespacedHelpers } from 'vuex'
 const { mapState, mapMutations, mapActions } = createNamespacedHelpers('service')
 export default {
   name: 'AreasList',
   components: {
-    Tinymce, UploadImage, detailsDialog
+    Tinymce, UploadImage, detailsDialog, editDialog
   },
   data() {
     return {
@@ -135,24 +119,19 @@ export default {
   methods: {
     ...mapMutations([
       'setServiceAreaDetailsDialogVisible',
-      'setServiceAreaDetailsData'
+      'setServiceAreaDetailsData',
+      'setEditServiceAreaDialogVisible',
+      'setEditServiceAreaData'
     ]),
     ...mapActions([
       'fetchAreasWeServe'
     ]),
-    handleEditArea(id) {
-      this.editAreaContent = ''
-      this.editAreaDialogVisible = true
-    },
-    onUpdate() {
-      this.$confirm(this.$t('contentMGT.confirmUpdateTips'), this.$t('tips'), {
-        distinguishCancelAndClose: true,
-        confirmButtonText: this.$t('confirm'),
-        cancelButtonText: this.$t('cancel')
-      }).then(() => {}).catch(action => { })
-    },
     createArea() {
       this.createAreaDialogVisible = true
+    },
+    showEditDialog(areaData) {
+      this.setEditServiceAreaData(areaData)
+      this.setEditServiceAreaDialogVisible(true)
     },
     showDetails(areaData) {
       console.log(areaData)
@@ -169,9 +148,6 @@ export default {
   padding: 20px;
   &__header {
     position: relative;
-  }
-  &__select-contacts-wrapper {
-    margin-top: 30px;
   }
   &__actions {
     display: flex;
