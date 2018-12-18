@@ -66,6 +66,7 @@ export default {
     propertyOwner: '物业业主',
     content: '内容',
     serviceAndContent: '服务 & 内容',
+    serviceManagement: '服务管理',
     contentManagement: '内容管理',
     housing: '房屋管理',
     companyInfo: '公司信息',

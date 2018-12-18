@@ -165,19 +165,19 @@ export const asyncRouterMap = [
     ]
   },
   {
-    path: '/content-management',
+    path: '/service-management',
     component: Layout,
-    redirect: '/content-management/index',
+    redirect: '/service-management/index',
     alwaysShow: true,
     meta: {
-      title: 'serviceAndContent',
+      title: 'serviceManagement',
       icon: 'content_mgt',
       roles: ['admin']
     },
     children: [
       {
         path: 'content',
-        component: () => import('@/views/contentManagement'),
+        component: () => import('@/views/serviceManagement/content'),
         name: 'contentManagement',
         meta: {
           title: 'contentManagement',

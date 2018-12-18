@@ -66,6 +66,7 @@ export default {
     propertyOwner: 'Property owner',
     content: 'Content',
     serviceAndContent: 'Service & Content',
+    serviceManagement: 'Service Management',
     contentManagement: 'Content Management',
     housing: 'Housing',
     companyInfo: 'Company info',
