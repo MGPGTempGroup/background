@@ -550,5 +550,6 @@ export default {
   to: 'To',
   mobile: 'Mobile',
   getDataError: 'Failed to get data',
-  selectPage: 'Select page'
+  selectPage: 'Select page',
+  noPicture: 'No picture'
 }

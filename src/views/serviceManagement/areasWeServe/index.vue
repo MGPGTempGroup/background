@@ -7,22 +7,21 @@
       </el-button>
     </div>
     <!-- 列表 -->
-    <el-row
+    <ul
       v-if="areasWeServe.length"
-      :gutter="12"
-      tag="ul"
-      class="areas__list" >
-      <el-col
+      class="areas__list">
+      <li
         v-for="(item, index) in areasWeServe"
         :key="index"
-        v-bind="itemLayoutProps"
-        tag="li"
         class="areas__item">
         <el-card
           class="areas__item-card"
           shadow="hover"
           body-style="padding: 0px;">
-          <img :src="item.picture" class="areas__item-img" alt="">
+          <img v-if="item.picture" :src="item.picture" class="areas__item-img" alt="">
+          <div v-else class="areas__item-img--nothing" style="width: 200px;" >
+            {{ $t('noPicture') }}
+          </div>
           <div style="padding: 14px;" >
             <p style="margin: 5px; display: inline-block; vertical-align: center;" >{{ item.name }}</p>
             <div class="areas__item-actions" >
@@ -39,8 +38,8 @@
             </div>
           </div>
         </el-card>
-      </el-col>
-    </el-row>
+      </li>
+    </ul>
     <h3
       v-else
       style="text-align: center; letter-spacing: 1px; margin-top: 30px; color: rgba(0,0,0,.3)">
@@ -71,7 +70,6 @@ export default {
   },
   data() {
     return {
-      itemLayoutProps: { xs: 12, sm: 12, md: 8, lg: 6, xl: 4 },
       areaDetailsCurrEditId: null,
       content: this.editorContent,
       imageList: [],
@@ -145,9 +143,12 @@ export default {
   &__list {
     list-style: none;
     margin: 0px;
+    margin-left: -20px;
     padding: 0px;
   }
   &__item {
+    display: inline-block;
+    margin-left: 20px;
     margin-bottom: 30px;
     cursor: pointer;
     &-actions {
@@ -156,7 +157,14 @@ export default {
     }
   }
   &__item-img {
-    width: 100%;
+    height: 266px;
+  }
+  &__item-img--nothing {
+    width: 200px;
+    height: 266px;
+    text-align: center;
+    line-height: 266px;
+    background-color: #C0C0C0;
   }
 }
 </style>

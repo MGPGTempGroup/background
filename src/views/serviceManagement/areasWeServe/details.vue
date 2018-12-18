@@ -51,7 +51,7 @@
       <el-col v-bind="{ xs: 24, sm: 24, md: 24, lg: 24, xl: 24 }" >
         <h3 style="margin-top: 20px;" >{{ $t('contentMGT.topPicture') }}</h3>
         <template v-if="serviceAreaDetailsData.top_picture" >
-          <img :src="serviceAreaDetailsData.top_picture" alt="">
+          <img :src="serviceAreaDetailsData.top_picture" style="width: 100%;" alt="">
         </template>
         <template v-else >
           {{ $t('noData') }}

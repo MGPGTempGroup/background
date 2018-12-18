@@ -550,5 +550,6 @@ export default {
   to: '至',
   mobile: '联系方式',
   getDataError: '数据获取失败',
-  selectPage: '选择页面'
+  selectPage: '选择页面',
+  noPicture: '无图片'
 }
