@@ -8,7 +8,7 @@ import user from './modules/user'
 import house from './modules/house'
 import propertyOwner from './modules/propertyOwner'
 import serviceMessage from './modules/serviceMessage'
-import content from './modules/content'
+import service from './modules/service'
 import industryUpdates from './modules/industryUpdates'
 import company from './modules/company'
 import project from './modules/project'
@@ -25,7 +25,7 @@ const store = new Vuex.Store({
     user,
     house,
     propertyOwner,
-    content,
+    service,
     serviceMessage,
     company,
     industryUpdates,

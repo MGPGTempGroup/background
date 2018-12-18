@@ -68,6 +68,7 @@ export default {
     serviceAndContent: '服务 & 内容',
     service: '服务',
     contentManagement: '内容管理',
+    areasWeServeManagement: '服务地区管理',
     housing: '房屋管理',
     companyInfo: '公司信息',
     rentalHousing: '租赁房屋',
@@ -401,7 +402,11 @@ export default {
     areaName: '区域名称',
     selectContacts: '选择联系人',
     searchContacts: '搜索联系人',
-    searchAgents: '搜索代理'
+    searchAgents: '搜索代理',
+    firstPicture: '首图',
+    topPicture: '顶部图片',
+    detailsOfServiceArea: '服务地区详情',
+    introduction: '介绍'
   },
   industryUpdates: {
     articleList: '文章列表',

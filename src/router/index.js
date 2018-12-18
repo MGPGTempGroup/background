@@ -183,6 +183,15 @@ export const asyncRouterMap = [
           title: 'contentManagement',
           roles: ['admin']
         }
+      },
+      {
+        path: 'areas-we-serve',
+        component: () => import('@/views/serviceManagement/areasWeServe'),
+        name: 'areasWeServeManagement',
+        meta: {
+          title: 'areasWeServe',
+          roles: ['admin']
+        }
       }
     ]
   },

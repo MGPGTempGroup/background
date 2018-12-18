@@ -46,12 +46,9 @@
       <!-- 动作 -->
       <div class="service__actions" >
         <el-button type="info" @click="handleReset" >{{ $t('reset') }}</el-button>
-        <!-- <el-button type="info" @click="updateHistoricalContent({ dialogVisible: true })" >{{ $t('contentMGT.historicalContent') }}</el-button> -->
         &nbsp;
         <el-button type="primary" @click="handleUpdate" >{{ $t('update') }}</el-button>
       </div>
-      <!-- 历史内容对话框 -->
-      <!-- <historical-content-dialog /> -->
     </div>
   </div>
 </template>
@@ -62,15 +59,14 @@ import { uploadImage as uploadImageAPI } from '@/api/upload'
 
 import UploadImage from '@/components/UploadImage'
 import Tinymce from '@/components/Tinymce'
-import HistoricalContentDialog from './historicalContentDialog'
 
 import { createNamespacedHelpers } from 'vuex'
-const { mapState, mapMutations, mapActions, mapGetters } = createNamespacedHelpers('content')
+const { mapState, mapMutations, mapActions, mapGetters } = createNamespacedHelpers('service')
 
 import { snakeCase2CamelCase } from '@/utils'
 export default {
   name: 'ServiceContent',
-  components: { UploadImage, Tinymce, HistoricalContentDialog },
+  components: { UploadImage, Tinymce },
   data() {
     return {
       content: '',
@@ -284,14 +280,26 @@ export default {
 </script>
 
 <style lang="scss" scoped >
-  @import './common.scss';
+.service {
+  &__container {
+    padding: 20px;
+  }
+  &__select-contacts-wrapper {
+    margin-top: 30px;
+  }
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+  }
+}
 </style>
 
 <style lang="scss" >
-  .service {
-    .el-select {
-      width: 50%;
-      min-width: 300px;
-    }
+.service {
+  .el-select {
+    width: 50%;
+    min-width: 300px;
   }
+}
 </style>

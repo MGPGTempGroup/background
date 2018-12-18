@@ -68,6 +68,7 @@ export default {
     serviceAndContent: 'Service & Content',
     service: 'Service',
     contentManagement: 'Content Management',
+    areasWeServeManagement: 'Area we serve Management',
     housing: 'Housing',
     companyInfo: 'Company info',
     rentalHousing: 'Rental housing',
@@ -400,7 +401,11 @@ export default {
     areaName: 'Area name',
     selectContacts: 'Select contacts',
     searchContacts: 'Search contacts',
-    searchAgents: 'Search sgents'
+    searchAgents: 'Search sgents',
+    firstPicture: 'First picture',
+    topPicture: 'Top picture',
+    detailsOfServiceAreas: 'Details of service area',
+    introduction: 'Introduction'
   },
   industryUpdates: {
     articleList: 'Article list',

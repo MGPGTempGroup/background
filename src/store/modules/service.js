@@ -1,10 +1,11 @@
 import {
   fetchService,
+  fetchAreasWeServe,
   updateService,
   updateServiceContent
 } from '@/api/service'
 
-const content = {
+const service = {
   namespaced: true,
   state: {
     availabelServiceNames: [
@@ -19,11 +20,14 @@ const content = {
       'careers'
     ],
     currentServiceName: 'landlords',
-    servicesData: {}
+    servicesData: {},
+    areasWeServe: [],
+    serviceAreaDetailsDialogVisible: false,
+    serviceAreaDetailsData: {}
   },
   mutations: {
-    setServicesData(state, payload) {
-      state.servicesData = payload
+    setAreasWeServe(state, payload) {
+      state.areasWeServe = payload
     },
     setServiceData(state, payload) {
       state.servicesData = Object.assign({}, state.servicesData, {
@@ -32,6 +36,12 @@ const content = {
     },
     setCurrentServiceName(state, payload) {
       state.currentServiceName = payload
+    },
+    setServiceAreaDetailsDialogVisible(state, payload) {
+      state.serviceAreaDetailsDialogVisible = payload
+    },
+    setServiceAreaDetailsData(state, payload) {
+      state.serviceAreaDetailsData = payload
     }
   },
   actions: {
@@ -39,6 +49,10 @@ const content = {
       const serviceData = (await fetchService(state.currentServiceName, payload)).data
       commit('setServiceData', serviceData)
       return serviceData
+    },
+    async fetchAreasWeServe({ commit }, { params = {}} = {}) {
+      const areas = (await fetchAreasWeServe(params)).data
+      commit('setAreasWeServe', areas.data)
     },
     async updateService({ commit, state }, { service, content }) {
       const currentServiceName = state.currentServiceName
@@ -56,4 +70,4 @@ const content = {
   }
 }
 
-export default content
+export default service

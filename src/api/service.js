@@ -30,6 +30,14 @@ export function fetchServiceContent(params) {
   })
 }
 
+export function fetchAreasWeServe(params = {}) {
+  return request({
+    method: 'GET',
+    url: 'service-areas',
+    params
+  })
+}
+
 export function updateService(serviceName, data, params = {}) {
   return request({
     method: 'PATCH',
