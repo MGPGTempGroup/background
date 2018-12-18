@@ -27,7 +27,7 @@
     <el-dialog
       :visible.sync="visible"
       :title="$t('preview')"
-      height="600px"
+      top="100px"
       append-to-body >
       <img :src="currPreviewImgSrc" style="width: 100%;" alt="">
     </el-dialog>
