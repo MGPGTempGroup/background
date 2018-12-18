@@ -4,7 +4,8 @@ import {
   createAreaWeServe,
   updateService,
   updateServiceContent,
-  updateServiceArea
+  updateServiceArea,
+  deleteServiceArea
 } from '@/api/service'
 
 const service = {
@@ -46,6 +47,9 @@ const service = {
     },
     addAreaWeServe(state, payload) {
       state.areasWeServe.push(payload)
+    },
+    deleteAreaWeServe(state, payload) {
+      state.areasWeServe = state.areasWeServe.filter(item => item.id !== payload)
     },
     setCurrentServiceName(state, payload) {
       state.currentServiceName = payload
@@ -91,6 +95,10 @@ const service = {
     async updateServiceArea({ commit }, payload) {
       const area = (await updateServiceArea(payload)).data
       commit('setAreaWeServe', area)
+    },
+    async deleteServiceArea({ commit }, { id }) {
+      await (deleteServiceArea(id))
+      commit('deleteAreaWeServe', id)
     }
   },
   getters: {

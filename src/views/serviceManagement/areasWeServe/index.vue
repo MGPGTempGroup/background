@@ -19,7 +19,7 @@
           shadow="hover"
           body-style="padding: 0px;">
           <img v-if="item.picture" :src="item.picture" class="areas__item-img" alt="">
-          <div v-else class="areas__item-img--nothing" style="width: 200px;" >
+          <div v-else class="areas__item-img--nothing">
             {{ $t('noPicture') }}
           </div>
           <div style="padding: 14px;" >
@@ -34,6 +34,11 @@
                 type="text"
                 @click="showDetails(item)">
                 {{ $t('details') }}
+              </el-button>
+              <el-button
+                type="text"
+                @click="deleteData(item.id)">
+                {{ $t('delete') }}
               </el-button>
             </div>
           </div>
@@ -104,7 +109,8 @@ export default {
       'setCreateServiceAreaDialogVisible'
     ]),
     ...mapActions([
-      'fetchAreasWeServe'
+      'fetchAreasWeServe',
+      'deleteServiceArea'
     ]),
     createArea() {
       this.setCreateServiceAreaDialogVisible(true)
@@ -117,6 +123,36 @@ export default {
       console.log(areaData)
       this.setServiceAreaDetailsData(areaData)
       this.setServiceAreaDetailsDialogVisible(true)
+    },
+    deleteData(id) {
+      this.$confirm(this.$t('deleteDataTips'), this.$t('tips'), {
+        confirmButtonText: this.$t('confirm'),
+        cancelButtonText: this.$t('cancel'),
+        type: 'warning'
+      }).then(() => {
+        const loading = this.$loading({
+          lock: true,
+          text: 'Loading',
+          spinner: 'el-icon-loading',
+          background: 'rgba(0, 0, 0, 0.7)'
+        })
+        this.deleteServiceArea({ id })
+          .then(() => {
+            this.$message({
+              type: 'success',
+              message: this.$t('deleteSuccess')
+            })
+          })
+          .catch(() => {
+            this.$message({
+              type: 'error',
+              message: this.$t('deleteFailed')
+            })
+          })
+          .finally(() => {
+            loading.close()
+          })
+      })
     }
   }
 }
@@ -160,7 +196,7 @@ export default {
     height: 266px;
   }
   &__item-img--nothing {
-    width: 200px;
+    width: 266px;
     height: 266px;
     text-align: center;
     line-height: 266px;

@@ -78,3 +78,10 @@ export function deleteServiceMessage(id) {
     method: 'DELETE'
   })
 }
+
+export function deleteServiceArea(id) {
+  return request({
+    method: 'DELETE',
+    url: 'service-areas/' + id
+  })
+}
