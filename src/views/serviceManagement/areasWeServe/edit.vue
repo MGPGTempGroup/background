@@ -30,7 +30,7 @@
         v-model="formData.introduction"/>
     </div>
     <div class="service-area-edit-dialog__actions" >
-      <el-button type="info" >{{ $t('reset') }}</el-button>
+      <el-button type="info" @click="reset" >{{ $t('reset') }}</el-button>
       <el-button type="primary" @click="updateData" >{{ $t('update') }}</el-button>
     </div>
   </el-dialog>
@@ -75,7 +75,13 @@ export default {
   },
   watch: {
     editServiceAreaDialogData(areaData) {
-      this.formatData(areaData)
+      this.formatData(
+        JSON.parse(
+          JSON.stringify(
+            areaData
+          )
+        )
+      )
     }
   },
   methods: {
@@ -85,6 +91,12 @@ export default {
     ...mapActions([
       'updateServiceArea'
     ]),
+    /**
+     * 重置表单
+     */
+    reset() {
+      this.formatData(this.editServiceAreaDialogData)
+    },
     /**
      * 更新
      */
@@ -159,12 +171,12 @@ export default {
     formatData(areaData) {
       this.formData = {
         id: areaData.id,
-        firstPic: [{
+        firstPic: areaData.picture ? [{
           dataURL: areaData.picture
-        }],
-        topPic: [{
+        }] : [],
+        topPic: areaData.top_picture ? [{
           dataURL: areaData.top_picture
-        }],
+        }] : [],
         introduction: areaData.introduction,
         name: areaData.name
       }
