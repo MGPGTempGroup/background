@@ -25,10 +25,36 @@ export function fetchDepartments(params = {}) {
   })
 }
 
+export function fetchPositions(params) {
+  return request({
+    method: 'GET',
+    url: 'company/positions',
+    params
+  })
+}
+
 export function searchMembersByFullName(fullName, params = {}) {
   return request({
     method: 'GET',
     url: 'company/members?searchByFullName=' + fullName,
+    params
+  })
+}
+
+export function createDepartment(data, params = {}) {
+  return request({
+    method: 'POST',
+    url: 'company/departments',
+    data,
+    params
+  })
+}
+
+export function createPositions(department_id, data, params = {}) {
+  return request({
+    method: 'POST',
+    url: 'company/departments/' + department_id + '/positions',
+    data,
     params
   })
 }

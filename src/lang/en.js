@@ -445,7 +445,8 @@ export default {
     introduction: 'Introduction',
     departmentList: 'Department list',
     positionsCount: 'Positions count',
-    membersCount: 'Members count'
+    membersCount: 'Members count',
+    createDepartment: 'Create department'
   },
   project: {
     list: 'List of projects',

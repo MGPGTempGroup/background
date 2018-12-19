@@ -2,6 +2,8 @@ import {
   fetchInfo,
   fetchMembers,
   fetchDepartments,
+  createDepartment,
+  createPositions,
   updateInfo,
   updateMember,
   deleteMember,
@@ -10,6 +12,7 @@ import {
 import parseDataToConditionalParams from '@/utils/parseDataToConditionalParams'
 import { deepClone } from '@/utils'
 import { Loading } from 'element-ui'
+import { fetchPositions } from '../../api/company'
 
 const company = {
   namespaced: true,
@@ -30,7 +33,6 @@ const company = {
     editMembersDialogVisible: false,
     memberEditForm: {},
     // 公司相关数据
-    companyDepartments: [],
     companyInfo: {
       telephone: '',
       facsimile: '',
@@ -45,7 +47,10 @@ const company = {
         saturday: [],
         sunday: []
       }
-    }
+    },
+    availablePositions: [],
+    companyDepartments: [],
+    createCompanyDepartmentDialogVisible: false
   },
   mutations: {
     setCompanyInfo(state, payload) {
@@ -78,8 +83,25 @@ const company = {
     setCompanyDepartments(state, payload) {
       state.companyDepartments = payload
     },
+    setAvailablePositions(state, payload) {
+      state.availablePositions = payload
+    },
+    setCreateCompanyDepartmentDialogVisible(state, payload) {
+      state.createCompanyDepartmentDialogVisible = payload
+    },
     addMemberData(state, payload) {
       state.members.data.push(payload)
+    },
+    addDepartment(state, payload) {
+      state.companyDepartments.push(payload)
+    },
+    addPositions(state, { department_id, positions }) {
+      state.companyDepartments.map(item => {
+        if (item.id === department_id) {
+          item.positions.data = item.positions.data.concat(positions)
+        }
+        return item
+      })
     },
     deleteMember(state, payload) {
       state.members.data = state.members.data.filter(item => {
@@ -129,6 +151,28 @@ const company = {
       const departments = (await fetchDepartments()).data
       commit('setCompanyDepartments', departments.data || [])
       return departments.data
+    },
+    async fetchCompanyPositions({ commit }, { params }) {
+      const positions = (await fetchPositions(params)).data
+      commit('setAvailablePositions', positions.data)
+    },
+    async createCompanyDepartment({ commit }, { data, params = {}}) {
+      const department = (await createDepartment(data, params)).data
+      if (!department.positions) {
+        department.positions = {
+          data: []
+        }
+      }
+      commit('addDepartment', department)
+      return department
+    },
+    async createCompanyPositions({ commit }, { department_id, data, params = {}}) {
+      const positions = (await createPositions(department_id, data, params)).data
+      commit('addPositions', {
+        department_id,
+        positions: positions.data
+      })
+      return positions
     },
     async updateCompanyInfo({ commit }, payload) {
       const data = (await updateInfo(payload)).data

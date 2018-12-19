@@ -3,7 +3,10 @@
     <el-card shadow="never">
       <div slot="header" class="departments-and-positions__list-header" >
         <h2 style="margin: 0px;" >{{ $t('company.departmentList') }}</h2>
-        <el-button type="primary" class="departments-and-positions__create-department-btn" >
+        <el-button
+          type="primary"
+          class="departments-and-positions__create-department-btn"
+          @click="openCreateDepartmentDialog">
           {{ $t('create') }}
         </el-button>
       </div>
@@ -73,14 +76,21 @@
         </el-table-column>
       </el-table>
     </el-card>
+    <!-- 创建部门表单 -->
+    <create-department-dialog/>
   </div>
 </template>
 
 <script>
+import CreateDepartmentDialog from './create'
+
 import { createNamespacedHelpers } from 'vuex'
-const { mapState, mapActions } = createNamespacedHelpers('company')
+const { mapState, mapMutations, mapActions } = createNamespacedHelpers('company')
 export default {
   name: 'DepartmentsAndPositions',
+  components: {
+    CreateDepartmentDialog
+  },
   data() {
     return {
       tableLoading: false
@@ -110,9 +120,15 @@ export default {
       })
   },
   methods: {
+    ...mapMutations([
+      'setCreateCompanyDepartmentDialogVisible'
+    ]),
     ...mapActions([
       'fetchCompanyDepartments'
-    ])
+    ]),
+    openCreateDepartmentDialog() {
+      this.setCreateCompanyDepartmentDialogVisible(true)
+    }
   }
 }
 </script>

@@ -446,7 +446,8 @@ export default {
     introduction: '介绍',
     departmentList: '部门列表',
     positionsCount: '职位数量',
-    membersCount: '成员数量'
+    membersCount: '成员数量',
+    createDepartment: '创建公司部门'
   },
   project: {
     list: '项目列表',
