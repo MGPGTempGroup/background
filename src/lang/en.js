@@ -93,7 +93,8 @@ export default {
     saleHouse: 'Sale house',
     members: 'Members',
     information: 'Information',
-    projects: 'Projects'
+    projects: 'Projects',
+    departmentsAndPositions: 'Department & Positions'
   },
   navbar: {
     logOut: 'Log Out',
@@ -433,6 +434,7 @@ export default {
     createMembersData: 'Create members data',
     editMembersData: 'Edit members data',
     department: 'Department',
+    departmentName: 'Department name',
     confirmDeleteMemberTips: 'Are you sure you want to delete the member data?',
     conditionalFiltering: 'Conditional filtering',
     companyInformationEditor: 'Company information editor',
@@ -440,7 +442,10 @@ export default {
     socialNetworkingSiteHomepageFormTips: 'If you do not fill in the input box, the front desk will not be displayed.',
     companyContactInfo: 'Company contact information',
     detailedAddress: 'Detailed Address',
-    introduction: 'Introduction'
+    introduction: 'Introduction',
+    departmentList: 'Department list',
+    positionsCount: 'Positions count',
+    membersCount: 'Members count'
   },
   project: {
     list: 'List of projects',

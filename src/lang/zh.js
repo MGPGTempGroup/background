@@ -94,7 +94,8 @@ export default {
     members: '成员',
     information: '信息',
     // companyContactInfo: '公司联系信息',
-    projects: '项目'
+    projects: '项目',
+    departmentsAndPositions: '部门 & 职位'
   },
   navbar: {
     logOut: '退出登录',
@@ -434,6 +435,7 @@ export default {
     createMembersData: '创建成员数据',
     editMembersData: '编辑成员数据',
     department: '部门',
+    departmentName: '部门名称',
     confirmDeleteMemberTips: '您确定要删除此成员的数据吗？',
     conditionalFiltering: '条件筛选',
     companyInformationEditor: '公司信息编辑',
@@ -441,7 +443,10 @@ export default {
     socialNetworkingSiteHomepageFormTips: '如果您不填写输入框，网站前台将不显示。',
     companyContactInfo: '公司联系信息',
     detailedAddress: '详细地址',
-    introduction: '介绍'
+    introduction: '介绍',
+    departmentList: '部门列表',
+    positionsCount: '职位数量',
+    membersCount: '成员数量'
   },
   project: {
     list: '项目列表',

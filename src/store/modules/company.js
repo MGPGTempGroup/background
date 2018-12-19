@@ -126,9 +126,9 @@ const company = {
       return deepClone(members)
     },
     async fetchCompanyDepartments({ commit }, payload) {
-      const response = (await fetchDepartments()).data
-      commit('setCompanyDepartments', response.data || [])
-      return response.data
+      const departments = (await fetchDepartments()).data
+      commit('setCompanyDepartments', departments.data || [])
+      return departments.data
     },
     async updateCompanyInfo({ commit }, payload) {
       const data = (await updateInfo(payload)).data

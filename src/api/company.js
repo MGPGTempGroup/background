@@ -17,10 +17,11 @@ export function fetchMembers(params) {
   })
 }
 
-export function fetchDepartments(params) {
+export function fetchDepartments(params = {}) {
   return request({
     method: 'GET',
-    url: 'company/departments'
+    url: 'company/departments',
+    params
   })
 }
 

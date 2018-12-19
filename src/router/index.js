@@ -223,6 +223,15 @@ export const asyncRouterMap = [
           title: 'members',
           roles: ['admin'] // or you can only set roles in sub nav
         }
+      },
+      {
+        path: 'department&positions',
+        component: () => import('@/views/company/departmentsAndPositions'),
+        name: 'departmentsAndPositions',
+        meta: {
+          title: 'departmentsAndPositions',
+          roles: ['admin']
+        }
       }
     ]
   },
