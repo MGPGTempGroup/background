@@ -50,6 +50,14 @@ export function createDepartment(data, params = {}) {
   })
 }
 
+export function createMember(data) {
+  return request({
+    method: 'POST',
+    url: 'company/members',
+    data
+  })
+}
+
 export function createPositions(department_id, data, params = {}) {
   return request({
     method: 'POST',
@@ -67,6 +75,30 @@ export function updateInfo(data) {
   })
 }
 
+export function updateDepartment(data, params = {}) {
+  return request({
+    method: 'PATCH',
+    url: 'company/departments/' + data.id,
+    data,
+    params
+  })
+}
+
+export function updatePosition(data) {
+  return request({
+    method: 'PATCH',
+    url: 'company/positions/' + data.id,
+    data
+  })
+}
+
+export function deletePosition(id) {
+  return request({
+    method: 'DELETE',
+    url: 'company/positions/' + id
+  })
+}
+
 export function updateMember(data) {
   return request({
     method: 'PATCH',
@@ -79,13 +111,5 @@ export function deleteMember(id) {
   return request({
     method: 'DELETE',
     url: 'company/members/' + id
-  })
-}
-
-export function createMember(data) {
-  return request({
-    method: 'POST',
-    url: 'company/members',
-    data
   })
 }

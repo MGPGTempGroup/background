@@ -426,6 +426,7 @@ export default {
     branch: '部门',
     position: '职位',
     positions: '职位',
+    positionName: '职位名称',
     description: '介绍',
     googlePlusHomePage: 'Google+ 主页',
     linkinHomePage: 'Linkin 主页',
@@ -448,7 +449,11 @@ export default {
     departmentList: '部门列表',
     positionsCount: '职位数量',
     membersCount: '成员数量',
-    createDepartment: '创建公司部门'
+    createDepartment: '创建公司部门',
+    departmentDetails: '部门详情',
+    editDepartment: '编辑部门',
+    editDepartmentName: '编辑部门名称',
+    editPositions: '编辑职位'
   },
   project: {
     list: '项目列表',

@@ -424,6 +424,7 @@ export default {
     memberList: 'Member list',
     position: 'Position',
     positions: 'Positions',
+    positionName: 'Position name',
     branch: 'Branch',
     description: 'Description',
     googlePlusHomePage: 'Google+ homepage',
@@ -447,7 +448,11 @@ export default {
     departmentList: 'Department list',
     positionsCount: 'Positions count',
     membersCount: 'Members count',
-    createDepartment: 'Create department'
+    createDepartment: 'Create department',
+    departmentDetails: 'Department details',
+    editDepartment: 'Edit department',
+    editDepartmentName: 'Edit department name',
+    editPositions: 'Edit positions'
   },
   project: {
     list: 'List of projects',

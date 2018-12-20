@@ -69,31 +69,57 @@
           align="center"
           min-width="50">
           <template slot-scope="scope" >
-            <el-button type="text">{{ $t('details') }}</el-button>
-            <el-button type="text">{{ $t('edit') }}</el-button>
+            <!-- <el-button type="text" @click="openDepartmentDetailsDialog(scope.row)" >{{ $t('details') }}</el-button> -->
+            <el-button type="text" @click="openEditDepartmentNameDialog(scope.row)" >{{ $t('company.editDepartmentName') }}</el-button>
+            <el-button type="text" @click="openEditDepartmentDialog(scope.row)" >{{ $t('company.editPositions') }}</el-button>
             <el-button type="text">{{ $t('delete') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
     </el-card>
-    <!-- 创建部门表单 -->
+
+    <!-- 编辑部门名称对话框 -->
+    <el-dialog
+      :title="$t('company.editDepartmentName')"
+      :visible.sync="editDepartmentNameDialogVisible"
+      width="400px">
+      <el-input v-model="editDepartmentNameDialogData.name" />
+      <div style="display: flex; justify-content: flex-end; margin-top: 15px;" >
+        <el-button type="primary" @click="updateDepartmentName" >{{ $t('update') }}</el-button>
+      </div>
+    </el-dialog>
+
+    <!-- 创建部门对话框 -->
     <create-department-dialog/>
+
+    <!-- 部门详情对话框 -->
+    <!-- <department-details-dialog/> -->
+
+    <!-- 编辑部门职位对话框 -->
+    <edit-department-dialog/>
+
   </div>
 </template>
 
 <script>
 import CreateDepartmentDialog from './create'
+// import DepartmentDetailsDialog from './details'
+import EditDepartmentDialog from './edit'
 
 import { createNamespacedHelpers } from 'vuex'
 const { mapState, mapMutations, mapActions } = createNamespacedHelpers('company')
 export default {
   name: 'DepartmentsAndPositions',
   components: {
-    CreateDepartmentDialog
+    CreateDepartmentDialog, EditDepartmentDialog
   },
   data() {
     return {
-      tableLoading: false
+      tableLoading: false,
+      editDepartmentNameDialogVisible: false,
+      editDepartmentNameDialogData: {
+        name: ''
+      }
     }
   },
   computed: {
@@ -122,16 +148,77 @@ export default {
   },
   methods: {
     ...mapMutations([
-      'setCreateDepartmentDialogVisible'
+      'setCreateDepartmentDialogVisible',
+      // 'setDepartmentDetailsDialogData',
+      // 'setDepartmentDetailsDialogVisible',
+      'setEditDepartmentDialogData',
+      'setEditDepartmentDialogVisible'
     ]),
     ...mapActions([
-      'fetchCompanyDepartments'
+      'fetchCompanyDepartments',
+      'updateCompanyDepartment'
     ]),
     /**
      * 打开创建部门对话框
      */
     openCreateDepartmentDialog() {
       this.setCreateDepartmentDialogVisible(true)
+    },
+    /**
+     * 打开部门详情对话框
+     */
+    // openDepartmentDetailsDialog(departmentData) {
+    //   this.setDepartmentDetailsDialogData(departmentData)
+    //   this.setDepartmentDetailsDialogVisible(true)
+    // }
+    /**
+     * 打开编辑部门对话框
+     */
+    openEditDepartmentNameDialog(departmentData) {
+      this.editDepartmentNameDialogData = JSON.parse(JSON.stringify(departmentData))
+      this.editDepartmentNameDialogVisible = true
+    },
+    /**
+     * 更新部门名称
+     */
+    updateDepartmentName() {
+      const loading = this.$loading({
+        lock: true,
+        text: 'Loading',
+        spinner: 'el-icon-loading',
+        background: 'rgba(0, 0, 0, 0.7)'
+      })
+      const {
+        id,
+        name
+      } = this.editDepartmentNameDialogData
+      this.updateCompanyDepartment({
+        data: { id, name }
+      }).then(() => {
+        this.editDepartmentNameDialogVisible = false
+        this.$message({
+          type: 'success',
+          message: this.$t('updateSuccess')
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'error',
+          message: this.$t('updateFailed')
+        })
+      }).finally(() => {
+        loading.close()
+      })
+    },
+    /**
+     * 打开编辑部门对话框
+     */
+    openEditDepartmentDialog(departmentData) {
+      this.setEditDepartmentDialogData(
+        JSON.parse(
+          JSON.stringify(departmentData)
+        )
+      )
+      this.setEditDepartmentDialogVisible(true)
     }
   }
 }
