@@ -102,6 +102,7 @@ export default {
     ])
   },
   created() {
+    // 拉取部门数据
     const loading = this.$loading({
       lock: true,
       text: 'Loading',
@@ -121,13 +122,16 @@ export default {
   },
   methods: {
     ...mapMutations([
-      'setCreateCompanyDepartmentDialogVisible'
+      'setCreateDepartmentDialogVisible'
     ]),
     ...mapActions([
       'fetchCompanyDepartments'
     ]),
+    /**
+     * 打开创建部门对话框
+     */
     openCreateDepartmentDialog() {
-      this.setCreateCompanyDepartmentDialogVisible(true)
+      this.setCreateDepartmentDialogVisible(true)
     }
   }
 }

@@ -50,7 +50,8 @@ const company = {
     },
     availablePositions: [],
     companyDepartments: [],
-    createCompanyDepartmentDialogVisible: false
+    createDepartmentDialogVisible: false,
+    departmentDetailsDialogVisible: false
   },
   mutations: {
     setCompanyInfo(state, payload) {
@@ -86,8 +87,8 @@ const company = {
     setAvailablePositions(state, payload) {
       state.availablePositions = payload
     },
-    setCreateCompanyDepartmentDialogVisible(state, payload) {
-      state.createCompanyDepartmentDialogVisible = payload
+    setCreateDepartmentDialogVisible(state, payload) {
+      state.createDepartmentDialogVisible = payload
     },
     addMemberData(state, payload) {
       state.members.data.push(payload)

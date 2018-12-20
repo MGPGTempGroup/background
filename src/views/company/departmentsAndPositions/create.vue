@@ -43,20 +43,20 @@ export default {
   },
   computed: {
     ...mapState([
-      'createCompanyDepartmentDialogVisible'
+      'createDepartmentDialogVisible'
     ]),
     dialogVisible: {
       get() {
-        return this.createCompanyDepartmentDialogVisible
+        return this.createDepartmentDialogVisible
       },
       set(visible) {
-        this.setCreateCompanyDepartmentDialogVisible(visible)
+        this.setCreateDepartmentDialogVisible(visible)
       }
     }
   },
   methods: {
     ...mapMutations([
-      'setCreateCompanyDepartmentDialogVisible'
+      'setCreateDepartmentDialogVisible'
     ]),
     ...mapActions([
       'createCompanyDepartment',
