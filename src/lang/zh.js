@@ -425,6 +425,7 @@ export default {
     memberList: '成员列表',
     branch: '部门',
     position: '职位',
+    positions: '职位',
     description: '介绍',
     googlePlusHomePage: 'Google+ 主页',
     linkinHomePage: 'Linkin 主页',

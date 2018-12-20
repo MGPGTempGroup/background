@@ -8,7 +8,7 @@
       <el-form-item :label="$t('company.departmentName')" style="width: 200px;" >
         <el-input v-model="form.name" />
       </el-form-item>
-      <el-form-item :label="$t('company.position')" >
+      <el-form-item :label="$t('company.positions')" >
         <el-select
           v-model="form.positions"
           multiple

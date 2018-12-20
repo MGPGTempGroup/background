@@ -423,6 +423,7 @@ export default {
   company: {
     memberList: 'Member list',
     position: 'Position',
+    positions: 'Positions',
     branch: 'Branch',
     description: 'Description',
     googlePlusHomePage: 'Google+ homepage',
