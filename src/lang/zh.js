@@ -454,7 +454,8 @@ export default {
     editDepartment: '编辑部门',
     editDepartmentName: '编辑部门名称',
     editPositions: '编辑职位',
-    deletePositionTips: '该职位下包含的成员将会被清除职位关系。'
+    deletePositionTips: '该职位下包含的成员将会被清除职位关系。',
+    inputPositionNameTips: '请输入职位名称'
   },
   project: {
     list: '项目列表',

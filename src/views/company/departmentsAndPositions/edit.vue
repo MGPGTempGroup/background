@@ -85,10 +85,50 @@ export default {
       'setEditDepartmentDialogVisible'
     ]),
     ...mapActions([
+      'createCompanyPositions',
       'updateCompanyDepartment',
       'updateCompanyPosition',
       'deletePosition'
     ]),
+    /**
+     * 创建职位
+     */
+    createPosition() {
+      // 弹出输入框
+      this.$prompt(this.$t('company.inputPositionNameTips'), this.$t('tips'), {
+        confirmButtonText: this.$t('confirm'),
+        cancelButtonText: this.$t('cancel')
+      }).then(({ value: positionName }) => {
+        console.log('Submit Name:', positionName)
+        const loading = this.$loading({
+          lock: true,
+          text: 'Loading',
+          spinner: 'el-icon-loading',
+          background: 'rgba(0, 0, 0, 0.7)'
+        })
+        // 调用职位创建Action
+        this.createCompanyPositions({
+          data: {
+            positions: [positionName]
+          },
+          department_id: this.editDepartmentDialogData.id
+        }).then(() => {
+          this.$message({
+            type: 'success',
+            message: this.$t('company.position') + ' ' + this.$t('createSuccess')
+          })
+        }).catch(() => {
+          this.$message({
+            type: 'error',
+            message: this.$t('comapny.position') + ' ' + this.$t('createFailed')
+          })
+        }).finally(() => {
+          loading.close()
+        })
+      }).catch(() => {
+        // ...
+      })
+    },
     /**
      * 更新部门名称
      */
@@ -105,12 +145,12 @@ export default {
       }).then(() => {
         this.$message({
           type: 'success',
-          message: this.$t('company.positionName') + this.$t('updateSuccess')
+          message: this.$t('company.positionName') + ' ' + this.$t('updateSuccess')
         })
       }).catch(() => {
         this.$message({
           type: 'error',
-          message: this.$t('company.positionName') + this.$t('updateFailed')
+          message: this.$t('company.positionName') + ' ' + this.$t('updateFailed')
         })
       }).finally(() => {
         loading.close()
@@ -166,12 +206,6 @@ export default {
             loading.close()
           })
       })
-    },
-    /**
-     * 创建职位
-     */
-    createPosition() {
-
     }
   }
 }
