@@ -455,6 +455,7 @@ export default {
     editDepartmentName: '编辑部门名称',
     editPositions: '编辑职位',
     deletePositionTips: '该职位下包含的成员将会被清除职位关系。',
+    deleteDepartmentTips: '您确认要删除该部门吗？删除后该部门对应职位以及职位与成员之间的关系也将会被删除。',
     inputPositionNameTips: '请输入职位名称',
     createPosition: '创建职位'
   },

@@ -454,6 +454,7 @@ export default {
     editDepartmentName: 'Edit department name',
     editPositions: 'Edit positions',
     deletePositionTips: 'The members included in the position will be removed from the position.',
+    deleteDepartmentTips: 'Are you sure you want to delete this department? After deletion, the corresponding positions in the Department and the relationship between positions and members will also be deleted.',
     inputPositionNameTips: 'Please input position name',
     createPosition: 'Create position'
   },

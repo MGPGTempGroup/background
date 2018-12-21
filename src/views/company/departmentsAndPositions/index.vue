@@ -72,7 +72,7 @@
             <!-- <el-button type="text" @click="openDepartmentDetailsDialog(scope.row)" >{{ $t('details') }}</el-button> -->
             <el-button type="text" @click="openEditDepartmentNameDialog(scope.row)" >{{ $t('company.editDepartmentName') }}</el-button>
             <el-button type="text" @click="openEditDepartmentDialog(scope.row)" >{{ $t('company.editPositions') }}</el-button>
-            <el-button type="text">{{ $t('delete') }}</el-button>
+            <el-button type="text" @click="deleteDepartment(scope.row.id)" >{{ $t('delete') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -156,7 +156,8 @@ export default {
     ]),
     ...mapActions([
       'fetchCompanyDepartments',
-      'updateCompanyDepartment'
+      'updateCompanyDepartment',
+      'deleteCompanyDepartment'
     ]),
     /**
      * 打开创建部门对话框
@@ -215,6 +216,36 @@ export default {
     openEditDepartmentDialog(departmentData) {
       this.setEditDepartmentDialogData(departmentData)
       this.setEditDepartmentDialogVisible(true)
+    },
+    /**
+     * 删除部门数据
+     */
+    deleteDepartment(id) {
+      this.$confirm(this.$t('company.deleteDepartmentTips'), this.$t('tips'), {
+        distinguishCancelAndClose: true,
+        confirmButtonText: this.$t('confirm'),
+        cancelButtonText: this.$t('cancel')
+      }).then(() => {
+        const loading = this.$loading({
+          lock: true,
+          text: 'Loading',
+          spinner: 'el-icon-loading',
+          background: 'rgba(0, 0, 0, 0.7)'
+        })
+        this.deleteCompanyDepartment({ id }).then(() => {
+          this.$message({
+            type: 'success',
+            message: this.$t('deleteSuccess')
+          })
+        }).catch(() => {
+          this.$message({
+            type: 'error',
+            message: this.$t('deleteFailed')
+          })
+        }).finally(() => {
+          loading.close()
+        })
+      })
     }
   }
 }

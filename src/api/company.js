@@ -92,13 +92,6 @@ export function updatePosition(data) {
   })
 }
 
-export function deletePosition(id) {
-  return request({
-    method: 'DELETE',
-    url: 'company/positions/' + id
-  })
-}
-
 export function updateMember(data) {
   return request({
     method: 'PATCH',
@@ -107,9 +100,23 @@ export function updateMember(data) {
   })
 }
 
+export function deletePosition(id) {
+  return request({
+    method: 'DELETE',
+    url: 'company/positions/' + id
+  })
+}
+
 export function deleteMember(id) {
   return request({
     method: 'DELETE',
     url: 'company/members/' + id
+  })
+}
+
+export function deleteDepartment(id) {
+  return request({
+    method: 'DELETE',
+    url: 'company/departments/' + id
   })
 }

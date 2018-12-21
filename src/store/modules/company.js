@@ -11,7 +11,8 @@ import {
   updateDepartment,
   updatePosition,
   deleteMember,
-  deletePosition
+  deletePosition,
+  deleteDepartment
 } from '@/api/company'
 import parseDataToConditionalParams from '@/utils/parseDataToConditionalParams'
 import { deepClone } from '@/utils'
@@ -157,6 +158,9 @@ const company = {
         }
         return department
       })
+    },
+    deleteDepartment(state, { id }) {
+      state.companyDepartments = state.companyDepartments.filter(department => department.id !== id)
     }
   },
   actions: {
@@ -248,6 +252,10 @@ const company = {
     async deleteCompanyMember({ commit }, payload) {
       await deleteMember(payload)
       commit('deleteMember', payload)
+    },
+    async deleteCompanyDepartment({ commit }, { id }) {
+      await deleteDepartment(id)
+      commit('deleteDepartment', { id })
     },
     async deletePosition({ commit }, { id, department_id }) {
       await deletePosition(id)
