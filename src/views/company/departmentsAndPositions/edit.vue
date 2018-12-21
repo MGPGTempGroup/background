@@ -6,24 +6,29 @@
     width="600px">
     <el-form :model="form" label-position="top">
       <el-form-item :label="$t('company.positions')">
-        <div
-          v-for="(item, index) in form.positions"
-          :key="index"
-          class="edit-department-dialog__positions">
-          <el-input v-model="form.positions[index].name" class="edit-department-dialog__positions-input" />
-          <template
-            v-if="form.positions[index].name !== editDepartmentDialogData.positions.data[index].name">
-            <el-button type="primary" @click="updatePosition(form.positions[index])" >
-              {{ $t('update') }}
+        <template v-if="form.positions.length" >
+          <div
+            v-for="(item, index) in form.positions"
+            :key="index"
+            class="edit-department-dialog__positions">
+            <el-input v-model="form.positions[index].name" class="edit-department-dialog__positions-input" />
+            <template
+              v-if="form.positions[index].name !== editDepartmentDialogData.positions.data[index].name">
+              <el-button type="primary" @click="updatePosition(form.positions[index])" >
+                {{ $t('update') }}
+              </el-button>
+              <el-button type="info" style="margin-left: 3px;" @click="resetPosition(item.id)">
+                {{ $t('reset') }}
+              </el-button>
+            </template>
+            <el-button type="danger" style="margin-left: 3px;" @click="wantDeletePosition(item.id)">
+              {{ $t('delete') }}
             </el-button>
-            <el-button type="info" style="margin-left: 3px;" @click="resetPosition(item.id)">
-              {{ $t('reset') }}
-            </el-button>
-          </template>
-          <el-button type="danger" style="margin-left: 3px;" @click="wantDeletePosition(item.id)">
-            {{ $t('delete') }}
-          </el-button>
-        </div>
+          </div>
+        </template>
+        <template v-else >
+          {{ $t('noData') }}
+        </template>
       </el-form-item>
       <div class="edit-department-dialog__actions" >
         <el-button type="primary" @click="createPosition" >
@@ -95,7 +100,7 @@ export default {
      */
     createPosition() {
       // 弹出输入框
-      this.$prompt(this.$t('company.inputPositionNameTips'), this.$t('tips'), {
+      this.$prompt(this.$t('company.inputPositionNameTips'), this.$t('company.createPosition'), {
         confirmButtonText: this.$t('confirm'),
         cancelButtonText: this.$t('cancel')
       }).then(({ value: positionName }) => {

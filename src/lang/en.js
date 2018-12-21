@@ -454,7 +454,8 @@ export default {
     editDepartmentName: 'Edit department name',
     editPositions: 'Edit positions',
     deletePositionTips: 'The members included in the position will be removed from the position.',
-    inputPositionNameTips: 'Please input position name'
+    inputPositionNameTips: 'Please input position name',
+    createPosition: 'Create position'
   },
   project: {
     list: 'List of projects',
