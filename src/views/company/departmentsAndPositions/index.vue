@@ -213,11 +213,7 @@ export default {
      * 打开编辑部门对话框
      */
     openEditDepartmentDialog(departmentData) {
-      this.setEditDepartmentDialogData(
-        JSON.parse(
-          JSON.stringify(departmentData)
-        )
-      )
+      this.setEditDepartmentDialogData(departmentData)
       this.setEditDepartmentDialogVisible(true)
     }
   }

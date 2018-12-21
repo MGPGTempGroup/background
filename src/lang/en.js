@@ -452,7 +452,8 @@ export default {
     departmentDetails: 'Department details',
     editDepartment: 'Edit department',
     editDepartmentName: 'Edit department name',
-    editPositions: 'Edit positions'
+    editPositions: 'Edit positions',
+    deletePositionTips: 'The members included in the position will be removed from the position.'
   },
   project: {
     list: 'List of projects',

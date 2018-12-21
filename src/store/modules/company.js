@@ -151,8 +151,12 @@ const company = {
       })
     },
     deletePosition(state, { department_id, position_id }) {
-      const department = state.companyDepartments.find(department => department.id === department_id)
-      department.positions.data = department.positions.data.filter(position => position.id !== position_id)
+      state.companyDepartments = state.companyDepartments.map(department => {
+        if (department.id === department_id) {
+          department.positions.data = department.positions.data.filter(position => position.id !== position_id)
+        }
+        return department
+      })
     }
   },
   actions: {

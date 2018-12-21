@@ -453,7 +453,8 @@ export default {
     departmentDetails: '部门详情',
     editDepartment: '编辑部门',
     editDepartmentName: '编辑部门名称',
-    editPositions: '编辑职位'
+    editPositions: '编辑职位',
+    deletePositionTips: '该职位下包含的成员将会被清除职位关系。'
   },
   project: {
     list: '项目列表',
