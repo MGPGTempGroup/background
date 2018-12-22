@@ -24,3 +24,10 @@ export function updateArticle(data) {
     data
   })
 }
+
+export function deleteArticle(id) {
+  return request({
+    method: 'DELETE',
+    url: 'industry-updates/' + id
+  })
+}

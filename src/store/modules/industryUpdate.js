@@ -1,7 +1,8 @@
 import {
   fetchArticles,
   createArticle,
-  updateArticle
+  updateArticle,
+  deleteArticle
 } from '@/api/industryUpdate'
 
 const industryUpdate = {
@@ -39,6 +40,9 @@ const industryUpdate = {
       state.articles.data = state.articles.data.map(article => {
         return article.id !== payload.id ? article : payload
       })
+    },
+    deleteArticle(state, payload) {
+      state.articles.data = state.articles.data.filter(article => article.id !== payload)
     }
   },
   actions: {
@@ -55,6 +59,10 @@ const industryUpdate = {
     async updateArticle({ commit }, { data }) {
       const article = (await updateArticle(data)).data
       commit('setArticle', article)
+    },
+    async deleteArticle({ commit }, { id }) {
+      await deleteArticle(id)
+      commit('deleteArticle', id)
     }
   }
 }

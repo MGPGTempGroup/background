@@ -49,8 +49,8 @@
           min-width="50">
           <template slot-scope="scope">
             <!-- <el-button type="success" size="small" @click="handleDetailsClick(scope.row)">{{ $t('details') }}</el-button> -->
-            <el-button type="primary" size="small" @click="openEditDialog(scope.row)" >{{ $t('edit') }}</el-button>
-            <el-button type="danger" size="small" @click="handleDeleteArticle(scope.row)" >{{ $t('delete') }}</el-button>
+            <el-button type="text" @click="openEditDialog(scope.row)" >{{ $t('edit') }}</el-button>
+            <el-button type="text" @click="deleteIndustryUpdate(scope.row.id)" >{{ $t('delete') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -119,20 +119,11 @@ export default {
       'setEditIndustryUpdateDialogData'
     ]),
     ...mapActions([
-      'fetchArticles'
+      'fetchArticles',
+      'deleteArticle'
     ]),
     handlePaginatorSizeChange() {},
     handlePaginatorChange() {},
-    handleEditArticle(rowData) {
-      this.editArticleDialogVisible = true
-    },
-    handleDeleteArticle(rowData) {
-      this.$confirm(this.$t('industryUpdates.confirmDeleteTips'), this.$t('tips'), {
-        distinguishCancelAndClose: true,
-        confirmButtonText: this.$t('confirm'),
-        cancelButtonText: this.$t('cancel')
-      }).then(() => {}).catch(action => { })
-    },
     /**
      * 打开文章创建对话框
      */
@@ -145,6 +136,39 @@ export default {
     openEditDialog(articleData) {
       this.setEditIndustryUpdateDialogData(articleData)
       this.setEditIndustryUpdateDialogVisible(true)
+    },
+    /**
+     * 删除文章数据
+     */
+    deleteIndustryUpdate(id) {
+      this.$confirm(this.$t('deleteDataTips'), this.$t('tips'), {
+        confirmButtonText: this.$t('confirm'),
+        cancelButtonText: this.$t('cancel'),
+        type: 'warning'
+      }).then(() => {
+        const loading = this.$loading({
+          lock: true,
+          text: 'Loading',
+          spinner: 'el-icon-loading',
+          background: 'rgba(0, 0, 0, 0.7)'
+        })
+        this.deleteArticle({ id })
+          .then(() => {
+            this.$message({
+              type: 'success',
+              message: this.$t('deleteSuccess')
+            })
+          })
+          .catch(() => {
+            this.$message({
+              type: 'error',
+              message: this.$t('deleteFailed')
+            })
+          })
+          .finally(() => {
+            loading.close()
+          })
+      })
     }
   }
 }
