@@ -16,3 +16,11 @@ export function createArticle(data) {
     data
   })
 }
+
+export function updateArticle(data) {
+  return request({
+    method: 'PATCH',
+    url: 'industry-updates/' + data.id,
+    data
+  })
+}

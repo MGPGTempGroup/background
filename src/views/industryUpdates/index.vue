@@ -49,7 +49,7 @@
           min-width="50">
           <template slot-scope="scope">
             <!-- <el-button type="success" size="small" @click="handleDetailsClick(scope.row)">{{ $t('details') }}</el-button> -->
-            <el-button type="primary" size="small" @click="handleEditArticle(scope.row)" >{{ $t('edit') }}</el-button>
+            <el-button type="primary" size="small" @click="openEditDialog(scope.row)" >{{ $t('edit') }}</el-button>
             <el-button type="danger" size="small" @click="handleDeleteArticle(scope.row)" >{{ $t('delete') }}</el-button>
           </template>
         </el-table-column>
@@ -65,47 +65,12 @@
           @current-change="handlePaginatorChange"/>
       </div>
     </el-card>
-    <!-- Data creation dialog -->
-    <el-dialog
-      :title="$t('industryUpdates.createArticle')"
-      :visible.sync="createArticleDialogVisible" >
-      <el-form :model="creationForm" label-position="top" >
-        <el-form-item :label="$t('industryUpdates.title')" >
-          <el-input v-model="creationForm.title" />
-        </el-form-item>
-        <el-form-item :label="$t('industryUpdates.mainPicture')" >
-          <upload-image :image-list.sync="creationForm.imageList" />
-        </el-form-item>
-        <el-form-item :label="$t('industryUpdates.content')" style="margin-top: 30px;" >
-          <tinymce v-model="creationForm.content" />
-        </el-form-item>
-        <div class="industry-update__form-actions" >
-          <el-button type="primary" >{{ $t('publish') }}</el-button>
-        </div>
-      </el-form>
-    </el-dialog>
-    <!-- Data editor dialog -->
-    <el-dialog
-      :title="$t('industryUpdates.editArticle')"
-      :visible.sync="editArticleDialogVisible" >
-      <el-form :model="editorForm" label-position="top" >
-        <el-form-item :label="$t('industryUpdates.title')" >
-          <el-input v-model="editorForm.title" />
-        </el-form-item>
-        <el-form-item :label="$t('industryUpdates.mainPicture')" >
-          <upload-image :image-list.sync="editorForm.imageList" />
-        </el-form-item>
-        <el-form-item :label="$t('industryUpdates.content')" style="margin-top: 30px;" >
-          <tinymce v-model="editorForm.content" />
-        </el-form-item>
-        <div class="industry-update__form-actions" >
-          <el-button type="primary" >{{ $t('publish') }}</el-button>
-        </div>
-      </el-form>
-    </el-dialog>
 
     <!-- 创建对话框 -->
     <create-industry-update-dialog/>
+
+    <!-- 编辑对话框 -->
+    <edit-industry-update-dialog/>
   </div>
 </template>
 
@@ -113,6 +78,7 @@
 import Tinymce from '@/components/Tinymce'
 import UploadImage from '@/components/UploadImage'
 import CreateIndustryUpdateDialog from './create'
+import EditIndustryUpdateDialog from './edit'
 
 import { createNamespacedHelpers } from 'vuex'
 const { mapState, mapMutations, mapActions } = createNamespacedHelpers('industryUpdate')
@@ -121,14 +87,11 @@ export default {
   components: {
     UploadImage,
     Tinymce,
-    CreateIndustryUpdateDialog
+    CreateIndustryUpdateDialog,
+    EditIndustryUpdateDialog
   },
   data() {
     return {
-      createArticleDialogVisible: false,
-      editArticleDialogVisible: false,
-      creationForm: { title: '', content: '', imageList: [] },
-      editorForm: { title: '', content: '', imageList: [] },
       currPage: 1
     }
   },
@@ -151,7 +114,9 @@ export default {
   },
   methods: {
     ...mapMutations([
-      'setCreateIndustryUpdateDialogVisible'
+      'setCreateIndustryUpdateDialogVisible',
+      'setEditIndustryUpdateDialogVisible',
+      'setEditIndustryUpdateDialogData'
     ]),
     ...mapActions([
       'fetchArticles'
@@ -173,6 +138,13 @@ export default {
      */
     openCreateDialog() {
       this.setCreateIndustryUpdateDialogVisible(true)
+    },
+    /**
+     * 编辑文章对话框
+     */
+    openEditDialog(articleData) {
+      this.setEditIndustryUpdateDialogData(articleData)
+      this.setEditIndustryUpdateDialogVisible(true)
     }
   }
 }

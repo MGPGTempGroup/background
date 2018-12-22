@@ -1,7 +1,7 @@
-
 import {
   fetchArticles,
-  createArticle
+  createArticle,
+  updateArticle
 } from '@/api/industryUpdate'
 
 const industryUpdate = {
@@ -12,7 +12,9 @@ const industryUpdate = {
       meta: {}
     },
     articlesTableLoading: false,
-    createIndustyUpdateDialogVisible: false
+    createIndustyUpdateDialogVisible: false,
+    editIndustryUpdateDialogVisible: false,
+    editIndustryUpdateDialogData: {}
   },
   mutations: {
     setArticles(state, payload) {
@@ -24,8 +26,19 @@ const industryUpdate = {
     setCreateIndustryUpdateDialogVisible(state, payload) {
       state.createIndustyUpdateDialogVisible = payload
     },
+    setEditIndustryUpdateDialogVisible(state, payload) {
+      state.editIndustryUpdateDialogVisible = payload
+    },
+    setEditIndustryUpdateDialogData(state, payload) {
+      state.editIndustryUpdateDialogData = payload
+    },
     addArticle(state, payload) {
       state.articles.data.push(payload)
+    },
+    setArticle(state, payload) {
+      state.articles.data = state.articles.data.map(article => {
+        return article.id !== payload.id ? article : payload
+      })
     }
   },
   actions: {
@@ -38,6 +51,10 @@ const industryUpdate = {
     async createArticle({ commit }, { data }) {
       const article = (await createArticle(data)).data
       commit('addArticle', article)
+    },
+    async updateArticle({ commit }, { data }) {
+      const article = (await updateArticle(data)).data
+      commit('setArticle', article)
     }
   }
 }

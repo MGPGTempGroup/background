@@ -13,14 +13,14 @@
       <upload-image
         :image-list.sync="formData.firstPic"
         :max-count="1"
-        :ratio="[495, 347]"/>
+        :cropper-ratio="[495, 347]"/>
     </div>
     <div class="service-area-create-dialog__section">
       <h2>{{ $t('contentMGT.topPicture') }}</h2>
       <upload-image
         :image-list.sync="formData.topPic"
         :max-count="1"
-        :ratio="[1200, 588]"/>
+        :cropper-ratio="[1200, 588]"/>
     </div>
     <div class="service-area-create-dialog__section">
       <h2 style="margin-top: 30px;" >{{ $t('contentMGT.mainContent') }}</h2>
