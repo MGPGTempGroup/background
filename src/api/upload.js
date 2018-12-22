@@ -1,7 +1,6 @@
 import request from '@/utils/request'
 
 export function uploadImage(image) {
-  console.log(image)
   const formData = new FormData()
   formData.append('images', image)
   return request({

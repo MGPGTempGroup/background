@@ -3,9 +3,16 @@
     <el-card shadow="never" >
       <template slot="header" class="industry-update__header" >
         <h2>{{ $t('industryUpdates.articleList') }}</h2>
-        <el-button type="primary" class="industry-update__add-btn" @click="createArticleDialogVisible = true" >{{ $t('create') }}</el-button>
+        <el-button
+          type="primary"
+          class="industry-update__add-btn"
+          @click="openCreateDialog">
+          {{ $t('create') }}
+        </el-button>
       </template>
-      <el-table :data="articles" >
+      <el-table
+        :data="articles.data"
+        :loading="articlesTableLoading">
         <el-table-column
           :label="$t('id')"
           prop="id"
@@ -14,16 +21,17 @@
         <el-table-column
           :label="$t('industryUpdates.title')"
           prop="title"
-          align="center"/>
-        <el-table-column
-          :label="$t('industryUpdates.contentFragment')"
-          prop="content"
-          align="center"/>
-        <el-table-column
-          :label="$t('industryUpdates.publisher')"
-          prop="publisher"
           align="center"
-          min-width="40"/>
+          min-width="150px"/>
+        <el-table-column
+          :label="$t('creator')"
+          prop="creator"
+          align="center"
+          min-width="40">
+          <template slot-scope="scope" >
+            {{ scope.row.creator ? scope.row.creator.name : $t('noData') }}
+          </template>
+        </el-table-column>
         <el-table-column
           :label="$t('createdAt')"
           prop="created_at"
@@ -95,17 +103,26 @@
         </div>
       </el-form>
     </el-dialog>
+
+    <!-- 创建对话框 -->
+    <create-industry-update-dialog/>
   </div>
 </template>
 
 <script>
 import Tinymce from '@/components/Tinymce'
 import UploadImage from '@/components/UploadImage'
+import CreateIndustryUpdateDialog from './create'
+
 import { createNamespacedHelpers } from 'vuex'
-const { mapState } = createNamespacedHelpers('industryUpdates')
+const { mapState, mapMutations, mapActions } = createNamespacedHelpers('industryUpdate')
 export default {
   name: 'IndustryUpdate',
-  components: { UploadImage, Tinymce },
+  components: {
+    UploadImage,
+    Tinymce,
+    CreateIndustryUpdateDialog
+  },
   data() {
     return {
       createArticleDialogVisible: false,
@@ -117,10 +134,28 @@ export default {
   },
   computed: {
     ...mapState([
-      'articles'
+      'articles',
+      'articlesTableLoading'
     ])
   },
+  async created() {
+    // 调用拉取文章列表Action
+    try {
+      this.fetchArticles()
+    } catch (err) {
+      this.$message({
+        type: 'error',
+        message: this.$t('getDataError')
+      })
+    }
+  },
   methods: {
+    ...mapMutations([
+      'setCreateIndustryUpdateDialogVisible'
+    ]),
+    ...mapActions([
+      'fetchArticles'
+    ]),
     handlePaginatorSizeChange() {},
     handlePaginatorChange() {},
     handleEditArticle(rowData) {
@@ -132,6 +167,12 @@ export default {
         confirmButtonText: this.$t('confirm'),
         cancelButtonText: this.$t('cancel')
       }).then(() => {}).catch(action => { })
+    },
+    /**
+     * 打开文章创建对话框
+     */
+    openCreateDialog() {
+      this.setCreateIndustryUpdateDialogVisible(true)
     }
   }
 }

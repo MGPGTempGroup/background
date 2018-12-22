@@ -9,9 +9,9 @@ import house from './modules/house'
 import propertyOwner from './modules/propertyOwner'
 import serviceMessage from './modules/serviceMessage'
 import service from './modules/service'
-import industryUpdates from './modules/industryUpdates'
 import company from './modules/company'
 import project from './modules/project'
+import industryUpdate from './modules/industryUpdate'
 import getters from './getters'
 
 Vue.use(Vuex)
@@ -28,8 +28,8 @@ const store = new Vuex.Store({
     service,
     serviceMessage,
     company,
-    industryUpdates,
-    project
+    project,
+    industryUpdate
   },
   getters
 })

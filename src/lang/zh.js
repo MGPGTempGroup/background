@@ -419,7 +419,11 @@ export default {
     mainPicture: '主图',
     content: '内容',
     editArticle: '编辑文章',
-    confirmDeleteTips: '你确定要删除这篇文章吗？'
+    confirmDeleteTips: '你确定要删除这篇文章吗？',
+    createArticleTitle: '创建文章',
+    firstPicture: '首图',
+    topPicture: '头图',
+    requiredArticlePicture: '请选择要上传的图片'
   },
   company: {
     memberList: '成员列表',

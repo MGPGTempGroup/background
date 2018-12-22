@@ -418,7 +418,11 @@ export default {
     mainPicture: 'Main picture',
     content: 'Content',
     editArticle: 'Edit article',
-    confirmDeleteTips: 'Are you sure you want to delete this article?'
+    confirmDeleteTips: 'Are you sure you want to delete this article?',
+    createArticleTitle: 'Create article',
+    firstPicture: 'First picture',
+    topPicture: 'Top Picture',
+    requiredArticlePicture: 'Please select the article pictures.'
   },
   company: {
     memberList: 'Member list',
