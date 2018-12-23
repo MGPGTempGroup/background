@@ -281,11 +281,12 @@ export default {
 
 <style lang="scss" scoped >
 .service {
+  margin-top: 30px;
   &__container {
     padding: 20px;
   }
   &__select-contacts-wrapper {
-    margin-top: 30px;
+    margin-top: 20px;
   }
   &__actions {
     display: flex;
