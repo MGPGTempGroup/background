@@ -101,16 +101,9 @@ export default {
       'articlesTablePageSize'
     ])
   },
-  async created() {
+  created() {
     // 调用拉取文章列表Action
-    try {
-      this.fetchArticles()
-    } catch (err) {
-      this.$message({
-        type: 'error',
-        message: this.$t('getDataError')
-      })
-    }
+    this.dispatchFetchArticlesAction()
   },
   methods: {
     ...mapMutations([
@@ -124,10 +117,9 @@ export default {
       'fetchArticles',
       'deleteArticle'
     ]),
-    handlePaginatorSizeChange(pageSize) {
-      this.setArticlesTablePageSize(pageSize)
+    async dispatchFetchArticlesAction() {
       try {
-        this.fetchArticles()
+        await this.fetchArticles()
       } catch (err) {
         this.$message({
           type: 'error',
@@ -135,16 +127,19 @@ export default {
         })
       }
     },
+    /**
+     * 处理分页组件分页大小改变
+     */
+    handlePaginatorSizeChange(pageSize) {
+      this.setArticlesTablePageSize(pageSize)
+      this.dispatchFetchArticlesAction()
+    },
+    /**
+     * 处理分页组件分页页数改变
+     */
     handlePaginatorChange(page) {
       this.setArticlesTablePage(page)
-      try {
-        this.fetchArticles()
-      } catch (err) {
-        this.$message({
-          type: 'error',
-          message: this.$t('getDataError')
-        })
-      }
+      this.dispatchFetchArticlesAction()
     },
     /**
      * 打开文章创建对话框
