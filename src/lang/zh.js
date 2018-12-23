@@ -424,7 +424,8 @@ export default {
     editArticleTitle: '编辑文章',
     firstPicture: '首图',
     topPicture: '头图',
-    requiredArticlePicture: '请选择要上传的图片'
+    requiredArticlePicture: '请选择要上传的图片',
+    conditionalFiltering: '条件筛选'
   },
   company: {
     memberList: '成员列表',

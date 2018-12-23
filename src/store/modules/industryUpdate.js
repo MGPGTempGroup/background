@@ -4,6 +4,7 @@ import {
   updateArticle,
   deleteArticle
 } from '@/api/industryUpdate'
+import parseDataToConditionalParams from '@/utils/parseDataToConditionalParams'
 
 const industryUpdate = {
   namespaced: true,
@@ -12,6 +13,9 @@ const industryUpdate = {
       data: [],
       meta: {}
     },
+    articlesTablePage: 1,
+    articlesTablePageSize: 10,
+    articlesFilterForm: {},
     articlesTableLoading: false,
     createIndustyUpdateDialogVisible: false,
     editIndustryUpdateDialogVisible: false,
@@ -23,6 +27,15 @@ const industryUpdate = {
     },
     setArticlesTableLoading(state, payload) {
       state.articlesTableLoading = payload
+    },
+    setArticlesTablePage(state, payload) {
+      state.articlesTablePage = payload
+    },
+    setArticlesTablePageSize(state, payload) {
+      state.articlesTablePageSize = payload
+    },
+    setArticlesFilterForm(state, payload) {
+      state.articlesFilterForm = payload
     },
     setCreateIndustryUpdateDialogVisible(state, payload) {
       state.createIndustyUpdateDialogVisible = payload
@@ -46,9 +59,18 @@ const industryUpdate = {
     }
   },
   actions: {
-    async fetchArticles({ commit }, { params = {}} = {}) {
+    async fetchArticles({ state, commit }, { params = {}} = {}) {
       commit('setArticlesTableLoading', true)
-      const articles = (await fetchArticles()).data
+      const conditionalParams = parseDataToConditionalParams({
+        fuzzy: {
+          title: state.articlesFilterForm.title,
+          content: state.articlesFilterForm.content
+        }
+      })
+      const pageParams = `page=${state.articlesTablePage}&pageSize=${state.articlesTablePageSize}`
+      const articles = (await fetchArticles(
+        [conditionalParams, pageParams].filter(Boolean).join('&')
+      )).data
       commit('setArticles', articles)
       commit('setArticlesTableLoading', false)
     },

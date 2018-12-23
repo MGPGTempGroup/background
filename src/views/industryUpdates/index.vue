@@ -1,6 +1,7 @@
 <template>
   <div class="industry-update" >
-    <el-card shadow="never" >
+    <filter-form/>
+    <el-card shadow="never" style="margin-top: 20px;" >
       <template slot="header" class="industry-update__header" >
         <h2>{{ $t('industryUpdates.articleList') }}</h2>
         <el-button
@@ -11,8 +12,8 @@
         </el-button>
       </template>
       <el-table
-        :data="articles.data"
-        :loading="articlesTableLoading">
+        v-loading="articlesTableLoading"
+        :data="articles.data">
         <el-table-column
           :label="$t('id')"
           prop="id"
@@ -56,9 +57,9 @@
       </el-table>
       <div class="industry-update__paginator" >
         <el-pagination
-          :current-page="currPage"
-          :page-sizes="[100, 200, 300, 400]"
-          :page-size="100"
+          :current-page="articlesTablePage"
+          :page-sizes="[10, 30, 50, 100]"
+          :page-size="articlesTablePageSize"
           :total="400"
           layout="total, sizes, prev, pager, next, jumper"
           @size-change="handlePaginatorSizeChange"
@@ -79,6 +80,7 @@ import Tinymce from '@/components/Tinymce'
 import UploadImage from '@/components/UploadImage'
 import CreateIndustryUpdateDialog from './create'
 import EditIndustryUpdateDialog from './edit'
+import FilterForm from './filter'
 
 import { createNamespacedHelpers } from 'vuex'
 const { mapState, mapMutations, mapActions } = createNamespacedHelpers('industryUpdate')
@@ -88,17 +90,15 @@ export default {
     UploadImage,
     Tinymce,
     CreateIndustryUpdateDialog,
-    EditIndustryUpdateDialog
-  },
-  data() {
-    return {
-      currPage: 1
-    }
+    EditIndustryUpdateDialog,
+    FilterForm
   },
   computed: {
     ...mapState([
       'articles',
-      'articlesTableLoading'
+      'articlesTableLoading',
+      'articlesTablePage',
+      'articlesTablePageSize'
     ])
   },
   async created() {

@@ -423,7 +423,8 @@ export default {
     editArticleTitle: 'Edit article',
     firstPicture: 'First picture',
     topPicture: 'Top Picture',
-    requiredArticlePicture: 'Please select the article pictures.'
+    requiredArticlePicture: 'Please select the article pictures.',
+    conditionalFiltering: 'Conditional Filtering'
   },
   company: {
     memberList: 'Member list',
