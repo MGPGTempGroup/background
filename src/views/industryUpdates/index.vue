@@ -55,12 +55,12 @@
           </template>
         </el-table-column>
       </el-table>
-      <div class="industry-update__paginator" >
+      <div v-if="articles.meta.pagination" class="industry-update__paginator" >
         <el-pagination
           :current-page="articlesTablePage"
           :page-sizes="[10, 30, 50, 100]"
           :page-size="articlesTablePageSize"
-          :total="400"
+          :total="articles.meta.pagination.total"
           layout="total, sizes, prev, pager, next, jumper"
           @size-change="handlePaginatorSizeChange"
           @current-change="handlePaginatorChange"/>
@@ -116,14 +116,36 @@ export default {
     ...mapMutations([
       'setCreateIndustryUpdateDialogVisible',
       'setEditIndustryUpdateDialogVisible',
-      'setEditIndustryUpdateDialogData'
+      'setEditIndustryUpdateDialogData',
+      'setArticlesTablePage',
+      'setArticlesTablePageSize'
     ]),
     ...mapActions([
       'fetchArticles',
       'deleteArticle'
     ]),
-    handlePaginatorSizeChange() {},
-    handlePaginatorChange() {},
+    handlePaginatorSizeChange(pageSize) {
+      this.setArticlesTablePageSize(pageSize)
+      try {
+        this.fetchArticles()
+      } catch (err) {
+        this.$message({
+          type: 'error',
+          message: this.$t('getDataError')
+        })
+      }
+    },
+    handlePaginatorChange(page) {
+      this.setArticlesTablePage(page)
+      try {
+        this.fetchArticles()
+      } catch (err) {
+        this.$message({
+          type: 'error',
+          message: this.$t('getDataError')
+        })
+      }
+    },
     /**
      * 打开文章创建对话框
      */
