@@ -85,8 +85,8 @@ export default {
      */
     handleReset() {
       this.form = {
-        title: '',
-        content: ''
+        title: [],
+        content: []
       }
     },
     /**
