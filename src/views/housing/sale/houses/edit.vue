@@ -415,7 +415,7 @@ export default {
       // Formatting Data
       this.form = {
         ...form,
-        owner_id: form.owner.id,
+        owner_id: form.owner ? form.owner.id : undefined,
         property_type: form.property_type.map(item => item.id),
         available_date_range: [form.available_start_date, form.available_end_date].filter(Boolean),
         agents: form.agents.data.map(item => item.id)
@@ -439,7 +439,7 @@ export default {
           }
         ]
       }
-      this.owner = form.owner.name + ' ' + form.owner.surname
+      this.owner = form.owner ? form.owner.name + ' ' + form.owner.surname : ''
       if (this.$refs.tinymce) {
         this.$refs.tinymce.setContent(form.details)
       }

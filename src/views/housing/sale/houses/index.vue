@@ -113,9 +113,12 @@
           min-width="35px"
           align="center">
           <template slot-scope="scope" >
-            <el-tag>
-              {{ scope.row.owner.name + ' ' + scope.row.owner.surname || $t('noData') }}
+            <el-tag v-if="scope.row.owner" >
+              {{ scope.row.owner.name + ' ' + scope.row.owner.surname }}
             </el-tag>
+            <template v-else >
+              {{ $t('noData') }}
+            </template>
           </template>
         </el-table-column>
         <el-table-column

@@ -22,7 +22,7 @@
               <dd>{{ formattedData.name || $t('noData') }}</dd>
               <dt>{{ $t('house.address') }}</dt>
               <dd>
-                <template v-if="Array.isArray(formattedData.address)" >
+                <template v-if="Array.isArray(formattedData.address) && formattedData.address.length > 0" >
                   {{ formattedData.address.join('/') }}
                 </template>
                 <template v-else >
@@ -104,7 +104,7 @@
               </dd>
               <dt>{{ $t('house.owner') }}</dt>
               <dd>
-                <el-tag v-if="typeof formattedData.owner === 'object'" >
+                <el-tag v-if="formattedData.owner_name" >
                   {{ formattedData.owner_name }}
                 </el-tag>
                 <template v-else >
@@ -235,7 +235,7 @@ export default {
         formatted.bedrooms = numberFormatter(formatted.bedrooms)
         formatted.bathrooms = numberFormatter(formatted.bathrooms)
         formatted.lockup_garages = numberFormatter(formatted.lockup_garages)
-        if (typeof formatted.owner === 'object') {
+        if (formatted.owner) {
           formatted.owner_name = [formatted.owner.name, formatted.owner.surname].filter(Boolean).join(' ')
         }
         try {
