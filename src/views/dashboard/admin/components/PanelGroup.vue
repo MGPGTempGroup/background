@@ -1,24 +1,32 @@
 <template>
   <el-row :gutter="40" class="panel-group">
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
-      <div class="card-panel" @click="handleSetLineChartData('newVisitis')">
-        <div class="card-panel-icon-wrapper icon-people">
+      <div class="card-panel" @click="handleSetLineChartData('pv')">
+        <div class="card-panel-icon-wrapper icon-page-view">
           <svg-icon icon-class="pv" class-name="card-panel-icon" />
         </div>
         <div class="card-panel-description">
-          <div class="card-panel-text">{{ $t('components.newPageVisits') }}</div>
-          <count-to :start-val="0" :end-val="102400" :duration="2600" class="card-panel-num"/>
+          <div class="card-panel-text">
+            <el-badge :value="pv.today" >
+              {{ $t('components.pageViews') }}
+            </el-badge>
+          </div>
+          <count-to :start-val="0" :end-val="pv.total" :duration="2600" class="card-panel-num"/>
         </div>
       </div>
     </el-col>
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
-      <div class="card-panel" @click="handleSetLineChartData('newVisitis')">
-        <div class="card-panel-icon-wrapper icon-people">
+      <div class="card-panel" @click="handleSetLineChartData('uv')">
+        <div class="card-panel-icon-wrapper icon-unique-visitor">
           <svg-icon icon-class="uv" class-name="card-panel-icon" />
         </div>
         <div class="card-panel-description">
-          <div class="card-panel-text">{{ $t('components.newUniqueVisits') }}</div>
-          <count-to :start-val="0" :end-val="102400" :duration="2600" class="card-panel-num"/>
+          <div class="card-panel-text">
+            <el-badge :value="uv.today" >
+              {{ $t('components.uniqueVisitors') }}
+            </el-badge>
+          </div>
+          <count-to :start-val="0" :end-val="uv.total" :duration="2600" class="card-panel-num"/>
         </div>
       </div>
     </el-col>
@@ -28,19 +36,27 @@
           <svg-icon icon-class="message" class-name="card-panel-icon" />
         </div>
         <div class="card-panel-description">
-          <div class="card-panel-text">{{ $t('components.messages') }}</div>
-          <count-to :start-val="0" :end-val="81212" :duration="3000" class="card-panel-num"/>
+          <div class="card-panel-text">
+            <el-badge :value="serviceMessagesCount.today" >
+              {{ $t('dashboard.serviceMessages') }}
+            </el-badge>
+          </div>
+          <count-to :start-val="0" :end-val="serviceMessagesCount.total" :duration="3000" class="card-panel-num"/>
         </div>
       </div>
     </el-col>
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
-      <div class="card-panel" @click="handleSetLineChartData('purchases')">
-        <div class="card-panel-icon-wrapper icon-money">
-          <svg-icon icon-class="money" class-name="card-panel-icon" />
+      <div class="card-panel" @click="handleSetLineChartData('inspections')">
+        <div class="card-panel-icon-wrapper icon-inspection">
+          <svg-icon icon-class="inspection" class-name="card-panel-icon" />
         </div>
         <div class="card-panel-description">
-          <div class="card-panel-text">{{ $t('components.turnover') }}</div>
-          <count-to :start-val="0" :end-val="9280" :duration="3200" class="card-panel-num"/>
+          <div class="card-panel-text">
+            <el-badge :value="houseInspectionsCount.today" >
+              {{ $t('dashboard.houseInspections') }}
+            </el-badge>
+          </div>
+          <count-to :start-val="0" :end-val="houseInspectionsCount.total" :duration="3200" class="card-panel-num"/>
         </div>
       </div>
     </el-col>
@@ -49,10 +65,20 @@
 
 <script>
 import CountTo from 'vue-count-to'
+import { createNamespacedHelpers } from 'vuex'
+const { mapState } = createNamespacedHelpers('appStatistics')
 
 export default {
   components: {
     CountTo
+  },
+  computed: {
+    ...mapState({
+      serviceMessagesCount: state => state.serviceMessages,
+      houseInspectionsCount: state => state.houseInspections,
+      pv: state => state.pageViews,
+      uv: state => state.uniqueVisitors
+    })
   },
   methods: {
     handleSetLineChartData(type) {
@@ -82,30 +108,30 @@ export default {
       .card-panel-icon-wrapper {
         color: #fff;
       }
-      .icon-people {
+      .icon-page-view {
         background: #40c9c6;
       }
-      .icon-message {
+      .icon-unique-visitor {
         background: #36a3f7;
       }
-      .icon-money {
+      .icon-message {
         background: #f4516c;
       }
-      .icon-shopping {
-        background: #34bfa3
+      .icon-inspection {
+        background: #36a3f7
       }
     }
-    .icon-people {
+    .icon-page-view {
       color: #40c9c6;
     }
-    .icon-message {
+    .icon-unique-visitor {
       color: #36a3f7;
     }
-    .icon-money {
+    .icon-message {
       color: #f4516c;
     }
-    .icon-shopping {
-      color: #34bfa3
+    .icon-inspection {
+      color: #36a3f7
     }
     .card-panel-icon-wrapper {
       float: left;
@@ -122,6 +148,7 @@ export default {
       float: right;
       font-weight: bold;
       margin: 26px;
+      margin-right: 40px;
       margin-left: 0px;
       .card-panel-text {
         line-height: 18px;
@@ -135,4 +162,12 @@ export default {
     }
   }
 }
+</style>
+
+<style lang="scss" >
+  .panel-group {
+    .el-badge__content {
+      right: 0px !important;
+    }
+  }
 </style>

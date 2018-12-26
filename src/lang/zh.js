@@ -105,6 +105,11 @@ export default {
     theme: '换肤',
     size: '布局大小'
   },
+  dashboard: {
+    customerComments: '客户留言',
+    houseInspections: '房屋预约检查',
+    serviceMessages: '服务留言'
+  },
   login: {
     title: 'MGPG后台管理系统登录',
     logIn: '登录',
@@ -138,6 +143,8 @@ export default {
     // extend
     newUniqueVisits: '最新唯一访问量',
     newPageVisits: '最新页面访问量',
+    pageViews: '页面访问量',
+    uniqueVisitors: '唯一访问量',
     messages: '信息',
     turnover: '营业额'
   },

@@ -104,6 +104,11 @@ export default {
     theme: 'Theme',
     size: 'Global Size'
   },
+  dashboard: {
+    customerComments: 'Customer comments',
+    houseInspections: 'House inspections',
+    serviceMessages: 'Service messages'
+  },
   login: {
     title: 'MGPG backstage login',
     logIn: 'Log in',
@@ -137,6 +142,8 @@ export default {
     // extend
     newUniqueVisits: 'New Unique Visits',
     newPageVisits: 'New Page Visits',
+    pageViews: 'Page views',
+    uniqueVisitors: 'Unique visitors',
     messages: 'Messages',
     turnover: 'Turnover'
   },
