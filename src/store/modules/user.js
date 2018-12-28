@@ -1,4 +1,5 @@
 import { loginByEmail, logout, getUserInfo } from '@/api/login'
+import { fetchNotifications } from '@/api/notification'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 
 const user = {
@@ -13,6 +14,10 @@ const user = {
     roles: [],
     setting: {
       articlePlatform: []
+    },
+    notifications: {
+      data: [],
+      meta: {}
     }
   },
 
@@ -40,6 +45,11 @@ const user = {
     },
     SET_ROLES: (state, roles) => {
       state.roles = roles
+    },
+    SET_NOTIFICATIONS: (state, { data, pagination }) => {
+      state.notifications = {
+        data, pagination
+      }
     }
   },
 
@@ -119,6 +129,18 @@ const user = {
           dispatch('GenerateRoutes', data) // 动态修改权限后 重绘侧边菜单
           resolve()
         })
+      })
+    },
+
+    // 获取通知
+    async fetchNotifications({ commit }, params = {}) {
+      const {
+        data,
+        pagination
+      } = (await fetchNotifications(params)).data
+      commit('SET_NOTIFICATIONS', {
+        data,
+        pagination
       })
     }
   }

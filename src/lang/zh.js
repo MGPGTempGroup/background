@@ -95,7 +95,8 @@ export default {
     information: '信息',
     // companyContactInfo: '公司联系信息',
     projects: '项目',
-    departmentsAndPositions: '部门 & 职位'
+    departmentsAndPositions: '部门 & 职位',
+    testimonials: '推荐信'
   },
   navbar: {
     logOut: '退出登录',
@@ -380,6 +381,14 @@ export default {
     requiredSurname: '当名未输入时，姓氏必须输入'
 
   },
+  customerIdentity: {
+    identity: '身份',
+    landlord: '房东',
+    vendor: '供应商',
+    other: '其他',
+    tenant: '租户',
+    purchaser: '购买者'
+  },
   userComment: {
     id: '序号',
     userCommentsList: '用户留言列表',
@@ -398,6 +407,13 @@ export default {
     comeFrom: '来自于',
     confirmDeleteTip: '你确定要删除此条留言吗？',
     page: '页面'
+  },
+  testimonial: {
+    tableTitle: '客户推荐信',
+    comment: '评价',
+    displayState: '当前展示状态',
+    starLevel: '评价星级',
+    clickToggleStatus: '点击切换'
   },
   contentMGT: {
     historicalContent: '历史内容',
@@ -580,5 +596,6 @@ export default {
   mobile: '联系方式',
   getDataError: '数据获取失败',
   selectPage: '选择页面',
-  noPicture: '无图片'
+  noPicture: '无图片',
+  message: '消息'
 }

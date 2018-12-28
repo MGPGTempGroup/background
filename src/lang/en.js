@@ -94,7 +94,8 @@ export default {
     members: 'Members',
     information: 'Information',
     projects: 'Projects',
-    departmentsAndPositions: 'Department & Positions'
+    departmentsAndPositions: 'Department & Positions',
+    testimonials: 'Testimonials'
   },
   navbar: {
     logOut: 'Log Out',
@@ -379,6 +380,14 @@ export default {
     requiredEmail: 'When the phone number and WeChat are not input, the Email field is required.',
     requiredSurname: 'When the name is not input, the surname field is required.'
   },
+  customerIdentity: {
+    identity: 'Identity',
+    landlord: 'Landlord',
+    vendor: 'Vendor',
+    other: 'Other',
+    tenant: 'Tenant',
+    purchaser: 'Purchaser'
+  },
   userComment: {
     id: 'ID',
     userCommentsList: 'User Comments List',
@@ -397,6 +406,13 @@ export default {
     comeFrom: 'Come from',
     confirmDeleteTip: 'Are you sure you want to delete this message?',
     page: 'Page'
+  },
+  testimonial: {
+    tableTitle: 'Customer testimonials',
+    comment: 'Comment',
+    displayState: 'Current display state',
+    starLevel: 'Star level',
+    clickToggleStatus: 'Click toggle status'
   },
   contentMGT: {
     historicalContent: 'Historical content',
@@ -580,5 +596,6 @@ export default {
   mobile: 'Mobile',
   getDataError: 'Failed to get data',
   selectPage: 'Select page',
-  noPicture: 'No picture'
+  noPicture: 'No picture',
+  message: 'Message'
 }

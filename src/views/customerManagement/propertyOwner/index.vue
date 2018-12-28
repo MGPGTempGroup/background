@@ -3,7 +3,10 @@
     <!-- 筛选表单 -->
     <filter-form />
     <!-- 列表 -->
-    <el-card class="property-owners__card" style="margin-top: 20px; padding: 0px;" shadow="never" >
+    <el-card
+      class="property-owners__card"
+      style="margin-top: 20px; padding: 0px;"
+      shadow="never">
       <div slot="header" class="property-owners__list-header" >
         <h2 style="margin: 0px;" >
           <i class="fa fa-list" />

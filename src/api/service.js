@@ -38,6 +38,14 @@ export function fetchAreasWeServe(params = {}) {
   })
 }
 
+export function fetchServiceTestimonials(params = {}) {
+  return request({
+    method: 'GET',
+    url: 'service/testimonials',
+    params
+  })
+}
+
 export function createAreaWeServe(data) {
   return request({
     method: 'POST',
@@ -69,6 +77,16 @@ export function updateServiceArea(data) {
     method: 'PATCH',
     url: `service-areas/${data.id}`,
     data
+  })
+}
+
+export function updateServiceTestimonial({ id, is_show }) {
+  return request({
+    method: 'PATCH',
+    url: `service/testimonials/${id}`,
+    data: {
+      is_show
+    }
   })
 }
 

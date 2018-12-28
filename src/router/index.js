@@ -112,6 +112,15 @@ export const asyncRouterMap = [
           title: 'userComment',
           roles: ['admin']
         }
+      },
+      {
+        path: 'testimonials',
+        component: () => import('@/views/customerManagement/testimonial'),
+        name: 'testimonials',
+        meta: {
+          title: 'testimonials',
+          roles: ['admin']
+        }
       }
     ]
   },
