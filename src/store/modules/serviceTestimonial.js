@@ -1,6 +1,7 @@
 import {
   fetchServiceTestimonials,
-  updateServiceTestimonial
+  updateServiceTestimonial,
+  deleteServiceTestimonial
 } from '@/api/service'
 
 const serviceTestimonial = {
@@ -34,6 +35,9 @@ const serviceTestimonial = {
         }
         return testimonial
       })
+    },
+    deleteTestimonial(state, { id }) {
+      state.testimonials.data = state.testimonials.data.filter(testimonial => testimonial.id !== id)
     }
   },
   actions: {
@@ -56,6 +60,10 @@ const serviceTestimonial = {
         id,
         is_show: resData.is_show
       })
+    },
+    async deleteTestimonial({ commit }, { id }) {
+      await deleteServiceTestimonial(id)
+      commit('deleteTestimonial', { id })
     }
   }
 }

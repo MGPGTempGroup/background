@@ -103,3 +103,10 @@ export function deleteServiceArea(id) {
     url: 'service-areas/' + id
   })
 }
+
+export function deleteServiceTestimonial(id) {
+  return request({
+    method: 'DELETE',
+    url: `service/testimonials/${id}`
+  })
+}

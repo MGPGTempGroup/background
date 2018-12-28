@@ -67,8 +67,17 @@
           prop="is_show"
           align="center">
           <template slot-scope="scope">
-            <el-button type="primary" @click="handleUpdateDisplayState(scope.row)" >
+            <el-button :type="['info', 'primary'][+scope.row.is_show]" @click="handleUpdateDisplayState(scope.row)" >
               {{ scope.row.is_show ? $t('show') : $t('hide') }}
+            </el-button>
+          </template>
+        </el-table-column>
+        <el-table-column :label="$t('actions')" >
+          <template slot-scope="scope" >
+            <el-button
+              type="text"
+              @click="handleDeleteTestimonial(scope.row)">
+              {{ $t('delete') }}
             </el-button>
           </template>
         </el-table-column>
@@ -115,7 +124,8 @@ export default {
     ]),
     ...mapActions([
       'fetchTestimonials',
-      'updateTestimonialDisplayState'
+      'updateTestimonialDisplayState',
+      'deleteTestimonial'
     ]),
     async dispatchFetchTestimonialsAction() {
       try {
@@ -145,11 +155,39 @@ export default {
       } catch (err) {
         this.$message({
           type: 'error',
-          message: this.$t('updateError')
+          message: this.$t('updateFailed')
         })
       } finally {
         this.setTestimonialsTableLoading(false)
       }
+    },
+    /**
+     * 删除推荐信
+     */
+    handleDeleteTestimonial(testimonial) {
+      this.$confirm(this.$t('deleteDataTips'), this.$t('tips'), {
+        confirmButtonText: this.$t('confirm'),
+        cancelButtonText: this.$t('cancel'),
+        type: 'warning'
+      }).then(async() => {
+        this.setTestimonialsTableLoading(true)
+        try {
+          await this.deleteTestimonial({
+            id: testimonial.id
+          })
+          this.$message({
+            type: 'success',
+            message: this.$t('deleteSuccess')
+          })
+        } catch (err) {
+          this.$message({
+            type: 'error',
+            message: this.$t('deleteFailed')
+          })
+        } finally {
+          this.setTestimonialsTableLoading(false)
+        }
+      })
     },
     /**
      * 分页相关
