@@ -10,6 +10,8 @@ const serviceTestimonial = {
       data: [],
       meta: {}
     },
+    testimonialsTablePage: 1,
+    testimonialsTablePageSize: 10,
     testimonialsTableLoading: false
   },
   mutations: {
@@ -18,6 +20,12 @@ const serviceTestimonial = {
     },
     setTestimonialsTableLoading(state, payload) {
       state.testimonialsTableLoading = payload
+    },
+    setTestimonialsTablePage(state, page) {
+      state.testimonialsTablePage = page
+    },
+    setTestimonialsTablePageSize(state, pageSize) {
+      state.testimonialsTablePageSize = pageSize
     },
     setTestimonialShowState(state, { id, is_show }) {
       state.testimonials.data = state.testimonials.data.map(testimonial => {
@@ -29,8 +37,12 @@ const serviceTestimonial = {
     }
   },
   actions: {
-    async fetchTestimonials({ commit }, { params = {}} = {}) {
+    async fetchTestimonials({ state, commit }, { params = {}} = {}) {
       commit('setTestimonialsTableLoading', true)
+      Object.assign(params, {
+        page: state.testimonialsTablePage,
+        pageSize: state.testimonialsTablePageSize
+      })
       const testimonials = (await fetchServiceTestimonials(params)).data
       commit('setTestimonials', testimonials)
       commit('setTestimonialsTableLoading', false)

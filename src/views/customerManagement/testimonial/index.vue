@@ -1,7 +1,7 @@
 <template>
   <div class="testimonials">
     <el-card>
-      <div slot="header" class="property-owners__list-header" >
+      <div slot="header" class="testimonials__list-header" >
         <h2 style="margin: 0px;" >
           <i class="fa fa-list" />
           &nbsp;
@@ -73,6 +73,17 @@
           </template>
         </el-table-column>
       </el-table>
+      <!-- Paginator -->
+      <div v-if="testimonials.meta.pagination" class="testimonials__list-pagination" >
+        <el-pagination
+          :current-page="testimonialsTablePage"
+          :page-sizes="[10, 30, 50, 100]"
+          :page-size="testimonialsTablePageSize"
+          :total="testimonials.meta.pagination.total"
+          layout="total, sizes, prev, pager, next, jumper"
+          @size-change="onPaginatorSizeChange"
+          @current-change="onPaginatorChange"/>
+      </div>
     </el-card>
   </div>
 </template>
@@ -88,27 +99,34 @@ export default {
   computed: {
     ...mapState([
       'testimonials',
-      'testimonialsTableLoading'
+      'testimonialsTableLoading',
+      'testimonialsTablePage',
+      'testimonialsTablePageSize'
     ])
   },
-  async created() {
-    try {
-      await this.fetchTestimonials()
-    } catch (err) {
-      this.$message({
-        type: 'error',
-        message: this.$t('getDataError')
-      })
-    }
+  created() {
+    this.dispatchFetchTestimonialsAction()
   },
   methods: {
     ...mapMutations([
-      'setTestimonialsTableLoading'
+      'setTestimonialsTableLoading',
+      'setTestimonialsTablePage',
+      'setTestimonialsTablePageSize'
     ]),
     ...mapActions([
       'fetchTestimonials',
       'updateTestimonialDisplayState'
     ]),
+    async dispatchFetchTestimonialsAction() {
+      try {
+        await this.fetchTestimonials()
+      } catch (err) {
+        this.$message({
+          type: 'error',
+          message: this.$t('getDataError')
+        })
+      }
+    },
     /**
      * 切换推荐信显示状态
      */
@@ -132,6 +150,17 @@ export default {
       } finally {
         this.setTestimonialsTableLoading(false)
       }
+    },
+    /**
+     * 分页相关
+     */
+    onPaginatorSizeChange(pageSize) {
+      this.setTestimonialsTablePageSize(pageSize)
+      this.dispatchFetchTestimonialsAction()
+    },
+    onPaginatorChange(page) {
+      this.setTestimonialsTablePage(page)
+      this.dispatchFetchTestimonialsAction()
     }
   }
 }
@@ -142,6 +171,12 @@ export default {
     padding: 20px;
     &__list-header {
       position: relative;
+    }
+    &__list-pagination {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 20px;
     }
   }
 </style>
