@@ -285,6 +285,8 @@ export default {
     query: 'Query',
     startDate: 'Start date',
     endDate: 'End date',
+    startTime: 'Start time',
+    endTime: 'End time',
     regionSelection: 'Region selection',
     regionSelectionPlaceholder: 'Please select one or more regions',
     minimumRent: 'minimum rent',
@@ -597,5 +599,7 @@ export default {
   getDataError: 'Failed to get data',
   selectPage: 'Select page',
   noPicture: 'No picture',
-  message: 'Message'
+  addWatermark: 'Add watermark',
+  message: 'Message',
+  clickUpload: 'Click upload'
 }

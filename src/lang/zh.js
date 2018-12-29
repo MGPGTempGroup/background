@@ -285,6 +285,8 @@ export default {
     query: '查询',
     startDate: '开始日期',
     endDate: '结束日期',
+    startTime: '开始时间',
+    endTime: '结束时间',
     regionSelection: '地区选择',
     regionSelectionPlaceholder: '请选择一个或多个区域',
     minimumRent: '最小租金',
@@ -597,5 +599,7 @@ export default {
   getDataError: '数据获取失败',
   selectPage: '选择页面',
   noPicture: '无图片',
-  message: '消息'
+  addWatermark: '添加水印',
+  message: '消息',
+  clickUpload: '点击上传'
 }
