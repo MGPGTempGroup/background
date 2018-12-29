@@ -49,7 +49,7 @@
                   step: '00:15',
                   end: '24:00'
                 }"
-                placeholder="起始时间"/>
+                :placeholder="$t('startTime')"/>
               <el-time-select
                 v-model="form.opening_hours.monday.end_time"
                 :picker-options="{
@@ -58,7 +58,7 @@
                   end: '24:00',
                   minTime: form.opening_hours.monday.start_time
                 }"
-                placeholder="结束时间"/>
+                :placeholder="$t('endTime')"/>
             </el-form-item>
           </el-col>
           <el-col v-bind="formItemLayoutProps" >
@@ -70,7 +70,7 @@
                   step: '00:15',
                   end: '24:00'
                 }"
-                placeholder="起始时间"/>
+                :placeholder="$t('startTime')"/>
               <el-time-select
                 v-model="form.opening_hours.tuesday.end_time"
                 :picker-options="{
@@ -79,7 +79,7 @@
                   end: '24:00',
                   minTime: form.opening_hours.tuesday.start_time
                 }"
-                placeholder="结束时间"/>
+                :placeholder="$t('endTime')"/>
             </el-form-item>
           </el-col>
           <el-col v-bind="formItemLayoutProps" >
@@ -91,7 +91,7 @@
                   step: '00:15',
                   end: '24:00'
                 }"
-                placeholder="起始时间"/>
+                :placeholder="$t('startTime')"/>
               <el-time-select
                 v-model="form.opening_hours.wednesday.end_time"
                 :picker-options="{
@@ -100,7 +100,7 @@
                   end: '24:00',
                   minTime: form.opening_hours.wednesday.start_time
                 }"
-                placeholder="结束时间"/>
+                :placeholder="$t('endTime')"/>
             </el-form-item>
           </el-col>
           <el-col v-bind="formItemLayoutProps" >
@@ -112,7 +112,7 @@
                   step: '00:15',
                   end: '24:00'
                 }"
-                placeholder="起始时间"/>
+                :placeholder="$t('startTime')"/>
               <el-time-select
                 v-model="form.opening_hours.thursday.end_time"
                 :picker-options="{
@@ -121,7 +121,7 @@
                   end: '24:00',
                   minTime: form.opening_hours.thursday.start_time
                 }"
-                placeholder="结束时间"/>
+                :placeholder="$t('endTime')"/>
             </el-form-item>
           </el-col>
           <el-col v-bind="formItemLayoutProps" >
@@ -133,7 +133,7 @@
                   step: '00:15',
                   end: '24:00'
                 }"
-                placeholder="起始时间"/>
+                :placeholder="$t('startTime')"/>
               <el-time-select
                 v-model="form.opening_hours.friday.end_time"
                 :picker-options="{
@@ -142,7 +142,7 @@
                   end: '24:00',
                   minTime: form.opening_hours.friday.start_time
                 }"
-                placeholder="结束时间"/>
+                :placeholder="$t('endTime')"/>
             </el-form-item>
           </el-col>
           <el-col v-bind="formItemLayoutProps" >
@@ -154,7 +154,7 @@
                   step: '00:15',
                   end: '24:00'
                 }"
-                placeholder="起始时间"/>
+                :placeholder="$t('startTime')"/>
               <el-time-select
                 v-model="form.opening_hours.saturday.end_time"
                 :picker-options="{
@@ -163,7 +163,7 @@
                   end: '24:00',
                   minTime: form.opening_hours.saturday.start_time
                 }"
-                placeholder="结束时间"/>
+                :placeholder="$t('endTime')"/>
             </el-form-item>
           </el-col>
           <el-col v-bind="formItemLayoutProps" >
@@ -175,7 +175,7 @@
                   step: '00:15',
                   end: '24:00'
                 }"
-                placeholder="起始时间"/>
+                :placeholder="$t('startTime')"/>
               <el-time-select
                 v-model="form.opening_hours.sunday.end_time"
                 :picker-options="{
@@ -184,7 +184,7 @@
                   end: '24:00',
                   minTime: form.opening_hours.sunday.start_time
                 }"
-                placeholder="结束时间"/>
+                :placeholder="$t('endTime')"/>
             </el-form-item>
           </el-col>
         </el-row>
@@ -297,4 +297,3 @@ export default {
     width: 100%;
   }
 </style>
-
