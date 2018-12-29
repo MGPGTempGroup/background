@@ -20,17 +20,19 @@
         <input class="upload-image__file-input" type="file" multiple @change="onFileChange" >
         <div class="upload-image__btn-text" >
           <i class="fa fa-cloud-upload" style="font-size: 20px;" />
-          <div style="margin-top: 5px;" >点击上传</div>
+          <div style="margin-top: 5px;" >{{ $t('clickUpload') }}</div>
         </div>
       </li>
     </ul>
+    <!-- 预览对话框 -->
     <el-dialog
-      :visible.sync="visible"
+      :visible.sync="previewDialogVisible"
       :title="$t('preview')"
       top="100px"
       append-to-body >
       <img :src="currPreviewImgSrc" style="width: 100%;" alt="">
     </el-dialog>
+    <!-- 剪裁对话框 -->
     <el-dialog
       :visible.sync="cropperDialogVisible"
       :title="$t('imgCropper')"
@@ -41,6 +43,7 @@
           ref="cropper"
           v-bind="cropperOpts" />
       </div>
+      <!-- 操作按钮 -->
       <div class="upload-image__cropper-control" >
         <el-button type="primary" @click="crop" >{{ $t('confirm') }}</el-button>
       </div>
@@ -76,18 +79,22 @@ export default {
       willDragToBeforeIndex: null,
       currPreviewImgSrc: '',
       availableTypes: ['image/jpg', 'image/jpeg', 'images/png', 'image/gif'],
-      visible: false,
+      previewDialogVisible: false,
       cropperDialogVisible: false,
       currCopperImageIndex: null,
       cropperOpts: {
         img: '', // 图片资源：dataURL or Blob or URL
         outputType: 'jpeg', // 剪裁后输出的图片文件类型
         size: 1, // 比例
-        // 自动开启剪裁
-        autoCrop: true,
-        // 按照比例剪裁
-        fixed: true,
-        fixedNumber: this.cropperRatio
+        autoCrop: true, // 自动开启剪裁
+        fixed: true, // 按照比例剪裁
+        fixedNumber: this.cropperRatio, // 剪裁比例
+        centerBox: true, // 裁剪框是否被限制在图片之内
+        // 设置剪裁框的宽度与高度
+        // 这里设置了一个尽可能更大的值，让插件尽可能的将剪裁框的大小与剪裁图片保持相同
+        // (因为插件不支持剪裁框宽度高度与图片相同)
+        autoCropWidth: 1 << 20,
+        autoCropHeight: 1 << 20
       }
     }
   },
@@ -122,7 +129,7 @@ export default {
      */
     preview(dataURL) {
       this.currPreviewImgSrc = dataURL
-      this.visible = true
+      this.previewDialogVisible = true
     },
     /**
      * 开始剪裁
@@ -143,8 +150,9 @@ export default {
       })
       this.$refs.cropper.getCropData(dataURL => {
         this.imageList[this.currCopperImageIndex].dataURL = dataURL
+        this.cropperOpts.img = dataURL
       })
-      this.cropperDialogVisible = false
+      // this.cropperDialogVisible = false
     },
     /**
      * 拖拽相关事件处理
