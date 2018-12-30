@@ -53,7 +53,7 @@ export default {
 
 <style scoped lang="scss" >
   .dashboard-container {
-    height: 100%;
-    background-color: #f0f2f5 !important;
+    min-height: calc(100vh - 84px) !important;
+    background-color: #f0f2f5;
   }
 </style>
