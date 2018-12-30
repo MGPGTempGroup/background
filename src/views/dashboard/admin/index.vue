@@ -4,16 +4,17 @@
     <panel-group @handleSetLineChartData="handleSetLineChartData"/>
 
     <el-row style="background:#fff; padding:16px 16px 0; padding-top: 0px; margin-bottom:32px;">
+      <div class="line-chart-action" >
+        <el-radio-group v-model="currChartDataType">
+          <el-radio-button label="last_7_days">
+            {{ $t('dashboard.last7Days') }}
+          </el-radio-button>
+          <el-radio-button label="last_12_months">
+            {{ $t('dashboard.last12Months') }}
+          </el-radio-button>
+        </el-radio-group>
+      </div>
       <line-chart :chart-data="chartData" :x-axis-data="chartXAxisData"/>
-    </el-row>
-
-    <el-row :gutter="8">
-      <el-col :xs="{span: 24}" :sm="{span: 24}" :md="{span: 24}" :lg="{span: 12}" :xl="{span: 18}" style="padding-right:8px;margin-bottom:30px;">
-        <notification-list/>
-      </el-col>
-      <el-col :xs="{span: 24}" :sm="{span: 24}" :md="{span: 12}" :lg="{span: 6}" :xl="{span: 6}" style="margin-bottom:30px;">
-        <todo-list/>
-      </el-col>
     </el-row>
 
   </div>
@@ -26,19 +27,19 @@ const { mapState } = createNamespacedHelpers('appStatistics')
 
 import PanelGroup from './components/PanelGroup'
 import LineChart from './components/LineChart'
-import TodoList from './components/TodoList'
-import NotificationList from './components/notification'
+// import TodoList from './components/TodoList'
+// import NotificationList from './components/notification'
 
 export default {
   name: 'DashboardAdmin',
   components: {
     PanelGroup,
-    LineChart,
-    TodoList,
-    NotificationList
+    LineChart
   },
   data() {
     return {
+      currChartDataType: 'last_7_days',
+      currChartDataKey: 'pv',
       chartData: {
         quantity: [0, 0, 0, 0, 0, 0, 0]
       },
@@ -48,22 +49,47 @@ export default {
   computed: {
     ...mapState({
       lineChartDataList: state => ({
-        messages: state.serviceMessages.last_7_days,
-        inspections: state.houseInspections.last_7_days,
-        pv: state.pageViews.last_7_days,
-        uv: state.uniqueVisitors.last_7_days
+        messages: {
+          last_7_days: state.serviceMessages.last_7_days,
+          last_12_months: state.serviceMessages.last_12_months
+        },
+        inspections: {
+          last_7_days: state.houseInspections.last_7_days,
+          last_12_months: state.houseInspections.last_12_months
+        },
+        pv: {
+          last_7_days: state.pageViews.last_7_days,
+          last_12_months: state.pageViews.last_12_months
+        },
+        uv: {
+          last_7_days: state.uniqueVisitors.last_7_days,
+          last_12_months: state.uniqueVisitors.last_12_months
+        }
       })
     })
   },
+  watch: {
+    currChartDataType: {
+      handler() {
+        this.handleSetLineChartData(
+          this.currChartDataKey
+        )
+      }
+    }
+  },
   created() {
-    this.handleSetLineChartData('pv')
+    this.handleSetLineChartData(
+      this.currChartDataKey
+    )
   },
   methods: {
     handleSetLineChartData(type) {
+      console.log(this.lineChartDataList[type])
       this.chartData = {
-        quantity: Object.values(this.lineChartDataList[type])
+        quantity: Object.values(this.lineChartDataList[type][this.currChartDataType])
       }
-      this.chartXAxisData = Object.keys(this.lineChartDataList[type])
+      this.chartXAxisData = Object.keys(this.lineChartDataList[type][this.currChartDataType])
+      this.currChartDataKey = type
     }
   }
 }
@@ -77,6 +103,11 @@ export default {
     background: #fff;
     padding: 16px 16px 0;
     margin-bottom: 32px;
+  }
+  .line-chart-action {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
   }
 }
 </style>

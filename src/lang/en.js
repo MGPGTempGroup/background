@@ -61,7 +61,6 @@ export default {
     clipboardDemo: 'Clipboard',
     i18n: 'I18n',
     externalLink: 'External Link',
-
     // extend
     propertyOwner: 'Property owner',
     content: 'Content',
@@ -108,7 +107,9 @@ export default {
   dashboard: {
     customerComments: 'Customer comments',
     houseInspections: 'House inspections',
-    serviceMessages: 'Service messages'
+    serviceMessages: 'Service messages',
+    last7Days: 'Last 7 days',
+    last12Months: 'Last 12 months'
   },
   login: {
     title: 'MGPG backstage login',

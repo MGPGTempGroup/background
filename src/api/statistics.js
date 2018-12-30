@@ -3,6 +3,13 @@ import request from '@/utils/request'
 export function getAll(params) {
   const url = 'statistics'
   return request({
-    url: url
+    url
+  })
+}
+
+export function getLast12MonthsStatistics(params) {
+  const url = 'statistics/past-12-months'
+  return request({
+    url
   })
 }

@@ -35,6 +35,7 @@ export default {
     })
     try {
       await store.dispatch('appStatistics/fetchAllStatistics')
+      store.dispatch('appStatistics/fetchLast12MonthsStatistics')
     } catch (err) {
       this.$t('getDataError')
     } finally {
@@ -49,3 +50,10 @@ export default {
   }
 }
 </script>
+
+<style scoped lang="scss" >
+  .dashboard-container {
+    height: 100%;
+    background-color: #f0f2f5 !important;
+  }
+</style>

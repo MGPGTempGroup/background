@@ -61,7 +61,6 @@ export default {
     clipboardDemo: 'Clipboard',
     i18n: '国际化',
     externalLink: '外链',
-
     // extend
     propertyOwner: '物业业主',
     content: '内容',
@@ -109,7 +108,9 @@ export default {
   dashboard: {
     customerComments: '客户留言',
     houseInspections: '房屋预约检查',
-    serviceMessages: '服务留言'
+    serviceMessages: '服务留言',
+    last7Days: '最近7天',
+    last12Months: '最近12月'
   },
   login: {
     title: 'MGPG后台管理系统登录',
