@@ -282,7 +282,7 @@ export default {
     dateOfConstruction: 'Date of construction',
     preciseCoordinates: 'Precise coordinates',
     coordinateHints: '(For Google map display)',
-    conditionalFiltering: 'Conditional filtering',
+    conditionalFiltering: 'Conditional filter search',
     query: 'Query',
     startDate: 'Start date',
     endDate: 'End date',
@@ -355,7 +355,7 @@ export default {
     details: 'Details',
     edit: 'Edit',
     agent: 'Agent',
-    conditionalFiltering: 'Conditional filtering',
+    conditionalFiltering: 'Conditional filter search',
     phone: 'Phone',
     startDate: 'Start date',
     endDate: 'End date',
@@ -405,7 +405,7 @@ export default {
     comments: 'Comments',
     comment: 'Comment',
     createdAt: 'Created At',
-    conditionalFiltering: 'Conditional filtering',
+    conditionalFiltering: 'Conditional filter search',
     comeFrom: 'Come from',
     confirmDeleteTip: 'Are you sure you want to delete this message?',
     page: 'Page'
@@ -450,7 +450,7 @@ export default {
     firstPicture: 'First picture',
     topPicture: 'Top Picture',
     requiredArticlePicture: 'Please select the article pictures.',
-    conditionalFiltering: 'Conditional Filtering'
+    conditionalFiltering: 'Conditional filter search'
   },
   company: {
     memberList: 'Member list',
@@ -470,7 +470,7 @@ export default {
     department: 'Department',
     departmentName: 'Department name',
     confirmDeleteMemberTips: 'Are you sure you want to delete the member data?',
-    conditionalFiltering: 'Conditional filtering',
+    conditionalFiltering: 'Conditional filter search',
     companyInformationEditor: 'Company information editor',
     socialNetworkingSiteHomepage: 'Social networking site Homepage',
     socialNetworkingSiteHomepageFormTips: 'If you do not fill in the input box, the front desk will not be displayed.',
@@ -513,7 +513,7 @@ export default {
     status: 'Status',
     details: 'Project details',
     basicInformation: 'Basic information',
-    conditionalFiltering: 'Conditional filtering'
+    conditionalFiltering: 'Conditional filter search'
   },
   projectStatus: {
     soldOut: 'Sold out'

@@ -74,7 +74,7 @@
         <el-pagination
           :current-page="currTablePage"
           :page-sizes="[10, 30, 50, 100]"
-          :page-size="owners.meta.pagination.per_page"
+          :page-size="currTabbePageSize"
           :total="owners.meta.pagination.total"
           layout="total, sizes, prev, pager, next, jumper"
           @size-change="onPaginatorSizeChange"
@@ -88,8 +88,10 @@
       width="60%">
       <add-form />
     </el-dialog>
+
     <!-- Owner Details Dialog -->
     <details-dialog />
+
     <!-- Edit Data Dialog -->
     <edit-dialog />
   </div>
@@ -114,7 +116,8 @@ export default {
     ...mapState({
       owners: state => state.owners,
       tableLoading: state => state.ownersTableLoading,
-      currTablePage: state => state.ownersTablePage
+      currTablePage: state => state.ownersTablePage,
+      currTabbePageSize: state => state.ownersTablePageSize
     }),
     dataCreationDialogVisible: {
       get() {

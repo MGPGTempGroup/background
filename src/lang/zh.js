@@ -282,7 +282,7 @@ export default {
     builtIn: '建成于',
     preciseCoordinates: '精确坐标',
     coordinateHints: '（用于谷歌地图显示）',
-    conditionalFiltering: '条件筛选',
+    conditionalFiltering: '条件筛选搜索',
     query: '查询',
     startDate: '开始日期',
     endDate: '结束日期',
@@ -355,7 +355,7 @@ export default {
     details: '详情',
     edit: '编辑',
     agent: '代理',
-    conditionalFiltering: '条件筛选',
+    conditionalFiltering: '条件筛选搜索',
     phone: '手机号码',
     startDate: '开始时间',
     endDate: '结束时间',
@@ -406,7 +406,7 @@ export default {
     comments: '留言',
     comment: '留言',
     createdAt: '创建时间',
-    conditionalFiltering: '条件筛选',
+    conditionalFiltering: '条件筛选搜索',
     comeFrom: '来自于',
     confirmDeleteTip: '你确定要删除此条留言吗？',
     page: '页面'
@@ -451,7 +451,7 @@ export default {
     firstPicture: '首图',
     topPicture: '头图',
     requiredArticlePicture: '请选择要上传的图片',
-    conditionalFiltering: '条件筛选'
+    conditionalFiltering: '条件筛选搜索'
   },
   company: {
     memberList: '成员列表',
@@ -471,7 +471,7 @@ export default {
     department: '部门',
     departmentName: '部门名称',
     confirmDeleteMemberTips: '您确定要删除此成员的数据吗？',
-    conditionalFiltering: '条件筛选',
+    conditionalFiltering: '条件筛选搜索',
     companyInformationEditor: '公司信息编辑',
     socialNetworkingSiteHomepage: '社交网站主页',
     socialNetworkingSiteHomepageFormTips: '如果您不填写输入框，网站前台将不显示。',
@@ -514,7 +514,7 @@ export default {
     status: '状态',
     details: '项目详情',
     basicInformation: '基本信息',
-    conditionalFiltering: '条件筛选'
+    conditionalFiltering: '条件筛选搜索'
   },
   projectStatus: {
     soldOut: '已售罄'
