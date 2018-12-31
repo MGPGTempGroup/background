@@ -143,6 +143,7 @@
                   :start-placeholder="$t('owner.startDate')"
                   :end-placeholder="$t('owner.endDate')"
                   :default-time="['12:00:00']"
+                  value-format="yyyy-MM-dd hh:mm:ss"
                   type="datetimerange" />
               </el-form-item>
             </el-col>
@@ -154,6 +155,7 @@
                   :start-placeholder="$t('owner.startDate')"
                   :end-placeholder="$t('owner.endDate')"
                   :default-time="['12:00:00']"
+                  value-format="yyyy-MM-dd hh:mm:ss"
                   type="datetimerange" />
               </el-form-item>
             </el-col>
