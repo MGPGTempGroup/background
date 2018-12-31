@@ -101,7 +101,7 @@
                     :start-placeholder="$t('startDate')"
                     :end-placeholder="$t('endDate')"
                     type="datetimerange"
-                    value-format="yyyy-MM-dd hh:mm:ss"
+                    value-format="yyyy-MM-dd HH:mm:ss"
                     align="right" />
                 </el-form-item>
               </el-col>

@@ -158,8 +158,8 @@
                   v-model="form.available_start_date_range"
                   :start-placeholder="$t('house.startDate')"
                   :end-placeholder="$t('house.endDate')"
-                  :default-time="['12:00:00']"
-                  value-format="yyyy-MM-dd hh:mm:ss"
+                  :default-time="['00:00:00', '23:59:59']"
+                  value-format="yyyy-MM-dd HH:mm:ss"
                   type="datetimerange"/>
               </el-form-item>
               <!-- 可用结束时间 -->
@@ -168,8 +168,8 @@
                   v-model="form.available_end_date_range"
                   :start-placeholder="$t('house.startDate')"
                   :end-placeholder="$t('house.endDate')"
-                  :default-time="['12:00:00']"
-                  value-format="yyyy-MM-dd hh:mm:ss"
+                  :default-time="['00:00:00', '23:59:59']"
+                  value-format="yyyy-MM-dd HH:mm:ss"
                   type="datetimerange"
                 />
               </el-form-item>
@@ -179,8 +179,8 @@
                   v-model="form.created_at_range"
                   :start-placeholder="$t('house.startDate')"
                   :end-placeholder="$t('house.endDate')"
-                  :default-time="['12:00:00']"
-                  value-format="yyyy-MM-dd hh:mm:ss"
+                  :default-time="['00:00:00', '23:59:59']"
+                  value-format="yyyy-MM-dd HH:mm:ss"
                   type="datetimerange"/>
               </el-form-item>
               <!-- 修改于 -->
@@ -189,8 +189,8 @@
                   v-model="form.updated_at_range"
                   :start-placeholder="$t('house.startDate')"
                   :end-placeholder="$t('house.endDate')"
-                  :default-time="['12:00:00']"
-                  value-format="yyyy-MM-dd hh:mm:ss"
+                  :default-time="['00:00:00', '23:59:59']"
+                  value-format="yyyy-MM-dd HH:mm:ss"
                   type="datetimerange" />
               </el-form-item>
               <!-- agent -->

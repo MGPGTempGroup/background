@@ -76,8 +76,8 @@
                 v-model="form.available_date_range"
                 :start-placeholder="$t('house.startDate')"
                 :end-placeholder="$t('house.endDate')"
-                :default-time="['12:00:00']"
-                value-format="yyyy-MM-dd hh:mm:ss"
+                :default-time="['00:00:00', '23:59:59']"
+                value-format="yyyy-MM-dd HH:mm:ss"
                 type="datetimerange"/>
             </el-form-item>
             <el-form-item :label="$t('house.upcomingInspectionDatetime')" >
@@ -185,7 +185,7 @@
                   <el-date-picker
                     v-model="form.constructed_in"
                     type="datetime"
-                    value-format="yyyy-MM-dd hh:mm:ss"
+                    value-format="yyyy-MM-dd HH:mm:ss"
                     style="width: 100%;" />
                 </el-form-item>
               </el-col>
@@ -194,7 +194,7 @@
                   <el-date-picker
                     v-model="form.built_in"
                     type="datetime"
-                    value-format="yyyy-MM-dd hh:mm:ss"
+                    value-format="yyyy-MM-dd HH:mm:ss"
                     style="width: 100%;" />
                 </el-form-item>
               </el-col>
@@ -204,8 +204,8 @@
                 v-model="form.upcoming_inspections_date_range"
                 :start-placeholder="$t('house.startDate')"
                 :end-placeholder="$t('house.endDate')"
-                :default-time="['12:00:00']"
-                value-format="yyyy-MM-dd hh:mm:ss"
+                :default-time="['00:00:00', '23:59:59']"
+                value-format="yyyy-MM-dd HH:mm:ss"
                 type="datetimerange"/>
             </el-form-item> -->
           </el-col>

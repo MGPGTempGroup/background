@@ -142,8 +142,8 @@
                   v-model="filterForm.createdDateRange"
                   :start-placeholder="$t('owner.startDate')"
                   :end-placeholder="$t('owner.endDate')"
-                  :default-time="['12:00:00']"
-                  value-format="yyyy-MM-dd hh:mm:ss"
+                  :default-time="['00:00:00', '23:59:59']"
+                  value-format="yyyy-MM-dd HH:mm:ss"
                   type="datetimerange" />
               </el-form-item>
             </el-col>
@@ -154,9 +154,9 @@
                   v-model="filterForm.updatedDateRange"
                   :start-placeholder="$t('owner.startDate')"
                   :end-placeholder="$t('owner.endDate')"
-                  :default-time="['12:00:00']"
-                  value-format="yyyy-MM-dd hh:mm:ss"
-                  type="datetimerange" />
+                  :default-time="['00:00:00', '23:59:59']"
+                  value-format="yyyy-MM-dd HH:mm:ss"
+                  type="daterange" />
               </el-form-item>
             </el-col>
           </el-row>

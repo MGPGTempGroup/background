@@ -9,7 +9,7 @@
         :range-separator="$t('to')"
         :start-placeholder="$t('startDate')"
         :end-placeholder="$t('endDate')"
-        value-format="yyyy-MM-dd hh:mm:ss"
+        value-format="yyyy-MM-dd HH:mm:ss"
         type="datetimerange"
         align="right" />
       <el-button

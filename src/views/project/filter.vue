@@ -139,8 +139,8 @@
                   v-model="form.created_at_range"
                   :start-placeholder="$t('startDate')"
                   :end-placeholder="$t('endDate')"
-                  :default-time="['00:00:00']"
-                  value-format="yyyy-MM-dd hh:mm:ss"
+                  :default-time="['00:00:00', '23:59:59']"
+                  value-format="yyyy-MM-dd HH:mm:ss"
                   type="datetimerange"/>
               </el-form-item>
               <!-- 修改于 -->
@@ -149,8 +149,8 @@
                   v-model="form.updated_at_range"
                   :start-placeholder="$t('startDate')"
                   :end-placeholder="$t('endDate')"
-                  :default-time="['00:00:00']"
-                  value-format="yyyy-MM-dd hh:mm:ss"
+                  :default-time="['00:00:00', '23:59:59']"
+                  value-format="yyyy-MM-dd HH:mm:ss"
                   type="datetimerange" />
               </el-form-item>
               <el-form-item :label="$t('project.yearBuilt')" >

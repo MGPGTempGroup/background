@@ -190,7 +190,7 @@
                       v-model="form.constructed_in"
                       :start-placeholder="$t('house.startDate')"
                       :end-placeholder="$t('house.endDate')"
-                      value-format="yyyy-MM-dd hh:mm:ss"
+                      value-format="yyyy-MM-dd HH:mm:ss"
                       type="date"/>
                   </el-form-item>
                 </el-col>
@@ -200,7 +200,7 @@
                       v-model="form.built_in"
                       :start-placeholder="$t('house.startDate')"
                       :end-placeholder="$t('house.endDate')"
-                      value-format="yyyy-MM-dd hh:mm:ss"
+                      value-format="yyyy-MM-dd HH:mm:ss"
                       type="date"/>
                   </el-form-item>
                 </el-col>
@@ -211,8 +211,8 @@
                   v-model="form.available_date_range"
                   :start-placeholder="$t('house.startDate')"
                   :end-placeholder="$t('house.endDate')"
-                  :default-time="['12:00:00']"
-                  value-format="yyyy-MM-dd hh:mm:ss"
+                  :default-time="['00:00:00', '23:59:59']"
+                  value-format="yyyy-MM-dd HH:mm:ss"
                   type="datetimerange"/>
               </el-form-item>
               <!-- 创建于 -->
@@ -221,8 +221,8 @@
                   v-model="form.created_at_range"
                   :start-placeholder="$t('house.startDate')"
                   :end-placeholder="$t('house.endDate')"
-                  :default-time="['12:00:00']"
-                  value-format="yyyy-MM-dd hh:mm:ss"
+                  :default-time="['00:00:00', '23:59:59']"
+                  value-format="yyyy-MM-dd HH:mm:ss"
                   type="datetimerange"/>
               </el-form-item>
               <!-- 修改于 -->
@@ -231,8 +231,8 @@
                   v-model="form.updated_at_range"
                   :start-placeholder="$t('house.startDate')"
                   :end-placeholder="$t('house.endDate')"
-                  :default-time="['12:00:00']"
-                  value-format="yyyy-MM-dd hh:mm:ss"
+                  :default-time="['00:00:00', '23:59:59']"
+                  value-format="yyyy-MM-dd HH:mm:ss"
                   type="datetimerange" />
               </el-form-item>
             </el-col>
