@@ -107,6 +107,8 @@ export default {
   },
   dashboard: {
     customerComments: '客户留言',
+    pageViews: '页面访问量',
+    uniqueVisitors: '唯一访问量',
     houseInspections: '房屋预约检查',
     serviceMessages: '服务留言',
     last7Days: '最近7天',

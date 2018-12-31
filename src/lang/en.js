@@ -106,6 +106,8 @@ export default {
   },
   dashboard: {
     customerComments: 'Customer comments',
+    pageViews: 'Page views',
+    uniqueVisitors: 'Unique visitors',
     houseInspections: 'House inspections',
     serviceMessages: 'Service messages',
     last7Days: 'Last 7 days',

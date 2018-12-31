@@ -8,7 +8,7 @@
         <div class="card-panel-description">
           <div class="card-panel-text">
             <el-badge :value="pv.today" >
-              {{ $t('components.pageViews') }}
+              {{ $t('dashboard.pageViews') }}
             </el-badge>
           </div>
           <count-to :start-val="0" :end-val="pv.total" :duration="2600" class="card-panel-num"/>
@@ -23,7 +23,7 @@
         <div class="card-panel-description">
           <div class="card-panel-text">
             <el-badge :value="uv.today" >
-              {{ $t('components.uniqueVisitors') }}
+              {{ $t('dashboard.uniqueVisitors') }}
             </el-badge>
           </div>
           <count-to :start-val="0" :end-val="uv.total" :duration="2600" class="card-panel-num"/>

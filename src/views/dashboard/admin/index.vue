@@ -3,7 +3,10 @@
 
     <panel-group @handleSetLineChartData="handleSetLineChartData"/>
 
-    <el-row style="background:#fff; padding:16px 16px 0; padding-top: 0px; margin-bottom:32px;">
+    <el-row style="position:relative;background:#fff; padding:16px 16px 0; padding-top: 0px; margin-bottom:32px;">
+      <div class="line-chart-title" >
+        {{ lineChartTitle }}
+      </div>
       <div class="line-chart-action" >
         <el-radio-group v-model="currChartDataType">
           <el-radio-button label="last_7_days">
@@ -73,7 +76,15 @@ export default {
           last_12_months: state.uniqueVisitors.last_12_months
         }
       })
-    })
+    }),
+    lineChartTitle() {
+      return ({
+        pv: this.$t(`dashboard.pageViews`),
+        uv: this.$t(`dashboard.uniqueVisitors`),
+        inspections: this.$t(`dashboard.houseInspections`),
+        messages: this.$t('dashboard.serviceMessages')
+      })[this.currChartDataKey]
+    }
   },
   watch: {
     currChartDataType: {
@@ -115,6 +126,14 @@ export default {
     display: flex;
     justify-content: center;
     margin-top: 20px;
+  }
+  .line-chart-title {
+    position: absolute;
+    left: 32px;
+    top: 20px;
+    font-weight: bold;
+    font-size: 20px;
+    color: rgba(0,0,0,.55);
   }
 }
 </style>
