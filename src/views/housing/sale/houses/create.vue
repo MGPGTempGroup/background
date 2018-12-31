@@ -468,9 +468,13 @@ export default {
     &__details-editor {
       margin-top: 22px;
     }
+    &__upload-image-wrapper {
+      padding-top: 1px;
+      margin-top: 20px;
+    }
     &__upload-pdf-wrapper {
       padding-top: 1px;
-      margin-top: 22px;
+      margin-top: 10px;
     }
   }
 </style>
