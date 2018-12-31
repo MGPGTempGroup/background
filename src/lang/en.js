@@ -109,6 +109,7 @@ export default {
     houseInspections: 'House inspections',
     serviceMessages: 'Service messages',
     last7Days: 'Last 7 days',
+    last30Days: 'Last 30 days',
     last12Months: 'Last 12 months'
   },
   login: {
@@ -602,5 +603,6 @@ export default {
   noPicture: 'No picture',
   addWatermark: 'Add watermark',
   message: 'Message',
-  clickUpload: 'Click upload'
+  clickUpload: 'Click upload',
+  selectAddress: 'Select address'
 }

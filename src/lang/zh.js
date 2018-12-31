@@ -110,6 +110,7 @@ export default {
     houseInspections: '房屋预约检查',
     serviceMessages: '服务留言',
     last7Days: '最近7天',
+    last30Days: '最近30天',
     last12Months: '最近12月'
   },
   login: {
@@ -390,7 +391,7 @@ export default {
     vendor: '供应商',
     other: '其他',
     tenant: '租户',
-    purchaser: '购买者'
+    purchaser: '买方'
   },
   userComment: {
     id: '序号',
@@ -602,5 +603,6 @@ export default {
   noPicture: '无图片',
   addWatermark: '添加水印',
   message: '消息',
-  clickUpload: '点击上传'
+  clickUpload: '点击上传',
+  selectAddress: '选择地址'
 }

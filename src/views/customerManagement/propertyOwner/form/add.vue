@@ -47,12 +47,12 @@
           </el-form-item>
         </el-col>
         <el-col v-bind="formItemLayoutProps" >
-          <el-form-item :label="$t('owner.identity')" prop="identity" >
+          <el-form-item :label="$t('customerIdentity.identity')" prop="identity" >
             <el-select v-model="dataCreationForm.identity_id" >
               <el-option
                 v-for="(item) in availableIdentity"
                 :key="item.id"
-                :label="$t(`owner.${item.label}`)"
+                :label="$t(`customerIdentity.${item.label}`)"
                 :value="item.value" />
             </el-select>
           </el-form-item>

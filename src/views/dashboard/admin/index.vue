@@ -9,6 +9,9 @@
           <el-radio-button label="last_7_days">
             {{ $t('dashboard.last7Days') }}
           </el-radio-button>
+          <el-radio-button label="last_30_days">
+            {{ $t('dashboard.last30Days') }}
+          </el-radio-button>
           <el-radio-button label="last_12_months">
             {{ $t('dashboard.last12Months') }}
           </el-radio-button>
@@ -51,18 +54,22 @@ export default {
       lineChartDataList: state => ({
         messages: {
           last_7_days: state.serviceMessages.last_7_days,
+          last_30_days: state.serviceMessages.last_30_days,
           last_12_months: state.serviceMessages.last_12_months
         },
         inspections: {
           last_7_days: state.houseInspections.last_7_days,
+          last_30_days: state.houseInspections.last_30_days,
           last_12_months: state.houseInspections.last_12_months
         },
         pv: {
           last_7_days: state.pageViews.last_7_days,
+          last_30_days: state.pageViews.last_30_days,
           last_12_months: state.pageViews.last_12_months
         },
         uv: {
           last_7_days: state.uniqueVisitors.last_7_days,
+          last_30_days: state.uniqueVisitors.last_30_days,
           last_12_months: state.uniqueVisitors.last_12_months
         }
       })

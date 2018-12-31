@@ -26,6 +26,9 @@ export default {
       'roles'
     ])
   },
+  /**
+   * 路由进入之前加载应用统计数据
+   */
   async beforeRouteEnter(to, from, next) {
     const loading = Loading.service({
       lock: true,
@@ -35,6 +38,7 @@ export default {
     })
     try {
       await store.dispatch('appStatistics/fetchAllStatistics')
+      store.dispatch('appStatistics/fetchLast30DaysStatistics')
       store.dispatch('appStatistics/fetchLast12MonthsStatistics')
     } catch (err) {
       this.$t('getDataError')

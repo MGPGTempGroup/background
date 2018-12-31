@@ -6,26 +6,30 @@ const appStatistics = {
   state: {
     serviceMessages: {
       total: undefined,
-      last_7_days: undefined,
       today: undefined,
+      last_7_days: undefined,
+      last_30_days: undefined,
       last_12_months: undefined
     },
     houseInspections: {
       total: undefined,
-      last_7_days: undefined,
       today: undefined,
+      last_7_days: undefined,
+      last_30_days: undefined,
       last_12_months: undefined
     },
     pageViews: {
       total: undefined,
-      last_7_days: undefined,
       today: undefined,
+      last_7_days: undefined,
+      last_30_days: undefined,
       last_12_months: undefined
     },
     uniqueVisitors: {
       total: undefined,
-      last_7_days: undefined,
       today: undefined,
+      last_7_days: undefined,
+      last_30_days: undefined,
       last_12_months: undefined
     }
   },
@@ -65,7 +69,6 @@ const appStatistics = {
     },
     async fetchLast12MonthsStatistics({ commit }, payload = {}) {
       const statisticsData = (await statisticsAPI.getLast12MonthsStatistics()).data
-      console.log(statisticsData)
       commit('setServiceMessages', {
         last_12_months: statisticsData.service_messages
       })
@@ -77,6 +80,21 @@ const appStatistics = {
       })
       commit('setUniqueVisitors', {
         last_12_months: statisticsData.unique_visitor
+      })
+    },
+    async fetchLast30DaysStatistics({ commit }, payload = {}) {
+      const statisticsData = (await statisticsAPI.getLast30DaysStatistics()).data
+      commit('setServiceMessages', {
+        last_30_days: statisticsData.service_messages
+      })
+      commit('setHouseInspections', {
+        last_30_days: statisticsData.house_inspections
+      })
+      commit('setPageViews', {
+        last_30_days: statisticsData.page_view
+      })
+      commit('setUniqueVisitors', {
+        last_30_days: statisticsData.unique_visitor
       })
     }
   }

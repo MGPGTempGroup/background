@@ -13,3 +13,10 @@ export function getLast12MonthsStatistics(params) {
     url
   })
 }
+
+export function getLast30DaysStatistics(params) {
+  const url = 'statistics/past-30-days'
+  return request({
+    url
+  })
+}
