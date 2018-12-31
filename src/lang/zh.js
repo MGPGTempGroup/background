@@ -606,5 +606,6 @@ export default {
   addWatermark: '添加水印',
   message: '消息',
   clickUpload: '点击上传',
-  selectAddress: '选择地址'
+  selectAddress: '选择地址',
+  searchAndSelect: '搜索并选择'
 }

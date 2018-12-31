@@ -131,6 +131,7 @@
                   <el-autocomplete
                     v-model="form.owner_name"
                     :fetch-suggestions="searchOwners"
+                    :placeholder="$t('searchAndSelect')"
                     style="width: 100%;"
                     @select="handleOwnerSelect"
                   />
@@ -143,6 +144,7 @@
                     v-model="form.agents"
                     :remote-method="searchMembers"
                     :loading="searchMembersLoading"
+                    :placeholder="$t('searchAndSelect')"
                     multiple
                     filterable
                     remote

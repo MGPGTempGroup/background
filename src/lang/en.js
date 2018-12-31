@@ -606,5 +606,6 @@ export default {
   addWatermark: 'Add watermark',
   message: 'Message',
   clickUpload: 'Click upload',
-  selectAddress: 'Select address'
+  selectAddress: 'Select address',
+  searchAndSelect: 'Search and select'
 }
