@@ -8,6 +8,7 @@ const user = {
     status: '',
     code: '',
     token: getToken(),
+    id: undefined,
     name: '',
     avatar: '',
     introduction: '',
@@ -43,6 +44,9 @@ const user = {
     SET_AVATAR: (state, avatar) => {
       state.avatar = avatar
     },
+    SET_ID: (state, id) => {
+      state.id = id
+    },
     SET_ROLES: (state, roles) => {
       state.roles = roles
     },
@@ -71,6 +75,7 @@ const user = {
           commit('SET_NAME', data.name)
           commit('SET_AVATAR', data.avatar)
           commit('SET_INTRODUCTION', data.introduction)
+          commit('SET_ID', data.id)
           resolve(response)
         }).catch(error => {
           reject(error)

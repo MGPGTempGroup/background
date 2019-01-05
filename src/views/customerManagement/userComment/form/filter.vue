@@ -15,6 +15,7 @@
                 <el-form-item :label="$t('surname')" >
                   <el-select
                     v-model="filterForm.surname"
+                    :placeholder="$t('searchBySurnamePlaceholder')"
                     multiple
                     allow-create
                     remote
@@ -26,6 +27,7 @@
                 <el-form-item :label="$t('userComment.name')" >
                   <el-select
                     v-model="filterForm.name"
+                    :placeholder="$t('searchByNamePlaceholder')"
                     multiple
                     allow-create
                     remote
@@ -37,6 +39,7 @@
                 <el-form-item :label="$t('userComment.email')" >
                   <el-select
                     v-model="filterForm.email"
+                    :placeholder="$t('searchByEmailPlaceholder')"
                     multiple
                     allow-create
                     remote
@@ -48,6 +51,7 @@
                 <el-form-item :label="$t('userComment.phone')" >
                   <el-select
                     v-model="filterForm.phone"
+                    :placeholder="$t('searchByPhonePlaceholder')"
                     multiple
                     allow-create
                     remote
@@ -59,6 +63,7 @@
                 <el-form-item :label="$t('userComment.wechat')" >
                   <el-select
                     v-model="filterForm.wechat"
+                    :placeholder="$t('searchByWeChatPlaceholder')"
                     multiple
                     allow-create
                     remote
@@ -70,6 +75,7 @@
                 <el-form-item :label="$t('userComment.identity')" >
                   <el-select
                     v-model="filterForm.identity"
+                    :placeholder="$t('selectByIdentityPlaceholder')"
                     multiple
                     filterable>
                     <el-option
@@ -85,6 +91,7 @@
                 <el-form-item :label="$t('userComment.comments')" >
                   <el-select
                     v-model="filterForm.comments"
+                    :placeholder="$t('searchByCommentsPlaceholder')"
                     multiple
                     allow-create
                     remote

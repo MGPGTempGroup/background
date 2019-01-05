@@ -19,7 +19,7 @@
               <el-form-item :label="$t('owner.surname')" >
                 <el-select
                   v-model="filterForm.surname"
-                  :placeholder="$t('owner.searchBySurnamePlaceholder')"
+                  :placeholder="$t('searchBySurnamePlaceholder')"
                   :remote-method="() => null"
                   multiple
                   filterable
@@ -34,7 +34,7 @@
               <el-form-item :label="$t('owner.name')" >
                 <el-select
                   v-model="filterForm.name"
-                  :placeholder="$t('owner.searchByNamePlaceholder')"
+                  :placeholder="$t('searchByNamePlaceholder')"
                   :remote-method="() => null"
                   multiple
                   filterable
@@ -49,7 +49,7 @@
               <el-form-item :label="$t('owner.phone')" >
                 <el-select
                   v-model="filterForm.phone"
-                  :placeholder="$t('owner.searchByPhonePlaceholder')"
+                  :placeholder="$t('searchByPhonePlaceholder')"
                   :remote-method="() => null"
                   multiple
                   filterable
@@ -64,7 +64,7 @@
               <el-form-item :label="$t('owner.email')" >
                 <el-select
                   v-model="filterForm.email"
-                  :placeholder="$t('owner.searchByEmailPlaceholder')"
+                  :placeholder="$t('searchByEmailPlaceholder')"
                   :remote-method="() => null"
                   multiple
                   filterable
@@ -79,7 +79,7 @@
               <el-form-item :label="$t('owner.idCardNum')" >
                 <el-select
                   v-model="filterForm.id_card"
-                  :placeholder="$t('owner.searchByIdCardNumPlaceholder')"
+                  :placeholder="$t('searchByIdCardNumPlaceholder')"
                   :remote-method="() => null"
                   multiple
                   filterable
@@ -94,7 +94,7 @@
               <el-form-item :label="$t('owner.wechat')" >
                 <el-select
                   v-model="filterForm.wechat"
-                  :placeholder="$t('owner.searchByWeChatPlaceholder')"
+                  :placeholder="$t('searchByWeChatPlaceholder')"
                   :remote-method="() => null"
                   multiple
                   filterable
@@ -109,7 +109,7 @@
               <el-form-item :label="$t('owner.address')" >
                 <el-select
                   v-model="filterForm.address"
-                  :placeholder="$t('owner.searchByAddressPlaceholder')"
+                  :placeholder="$t('searchByAddressPlaceholder')"
                   :remote-method="() => null"
                   multiple
                   filterable
@@ -124,7 +124,7 @@
               <el-form-item :label="$t('owner.identity')" >
                 <el-select
                   v-model="filterForm.identity_id"
-                  :placeholder="$t('owner.selectByIdentityPlaceholder')"
+                  :placeholder="$t('selectByIdentityPlaceholder')"
                   multiple>
                   <el-option
                     v-for="(item, index) in availableIdentity"

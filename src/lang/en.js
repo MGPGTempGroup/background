@@ -150,7 +150,8 @@ export default {
     pageViews: 'Page views',
     uniqueVisitors: 'Unique visitors',
     messages: 'Messages',
-    turnover: 'Turnover'
+    turnover: 'Turnover',
+    writeRemarkContentPlaceholder: 'Write remarks content...'
   },
   table: {
     dynamicTips1: 'Fixed header, sorted by header order',
@@ -367,16 +368,6 @@ export default {
     reset: 'Reset',
     query: 'Query',
     create: 'Create',
-    // placeholder
-    searchBySurnamePlaceholder: 'Input surname fragment',
-    searchByNamePlaceholder: 'Input name fragment',
-    searchByPhonePlaceholder: 'Input phone fragment',
-    searchByEmailPlaceholder: 'Input email fragment',
-    searchByIdCardNumPlaceholder: 'Input ID Card number fragment',
-    searchByWeChatPlaceholder: 'Input wechat number fragment',
-    searchByAddressPlaceholder: 'Input address number fragment',
-    selectByIdentityPlaceholder: 'Select customer identity',
-    searchByAgentNamePlaceholder: 'Input agent name fragment',
 
     // input validation messages
     illegalEmailAddress: 'Illegal email address.',
@@ -607,5 +598,17 @@ export default {
   message: 'Message',
   clickUpload: 'Click upload',
   selectAddress: 'Select address',
-  searchAndSelect: 'Search and select'
+  searchAndSelect: 'Search and select',
+  remarks: 'Remarks',
+  // placeholder
+  searchBySurnamePlaceholder: 'Input surname fragment',
+  searchByNamePlaceholder: 'Input name fragment',
+  searchByPhonePlaceholder: 'Input phone fragment',
+  searchByEmailPlaceholder: 'Input email fragment',
+  searchByIdCardNumPlaceholder: 'Input ID Card number fragment',
+  searchByWeChatPlaceholder: 'Input wechat number fragment',
+  searchByAddressPlaceholder: 'Input address number fragment',
+  selectByIdentityPlaceholder: 'Select customer identity',
+  searchByAgentNamePlaceholder: 'Input agent name fragment',
+  searchByCommentsPlaceholder: 'Input comment fragment'
 }

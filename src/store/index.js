@@ -14,6 +14,7 @@ import company from './modules/company'
 import project from './modules/project'
 import industryUpdate from './modules/industryUpdate'
 import appStatistics from './modules/appStatistics'
+import remark from './modules/remark'
 import getters from './getters'
 
 Vue.use(Vuex)
@@ -33,7 +34,8 @@ const store = new Vuex.Store({
     company,
     project,
     industryUpdate,
-    appStatistics
+    appStatistics,
+    remark
   },
   getters
 })

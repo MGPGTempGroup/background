@@ -151,7 +151,8 @@ export default {
     pageViews: '页面访问量',
     uniqueVisitors: '唯一访问量',
     messages: '信息',
-    turnover: '营业额'
+    turnover: '营业额',
+    writeRemarkContentPlaceholder: '编写备注内容...'
   },
   table: {
     dynamicTips1: '固定表头, 按照表头顺序排序',
@@ -367,16 +368,6 @@ export default {
     reset: '重置',
     query: '查询',
     create: '创建',
-    // placeholder
-    searchBySurnamePlaceholder: '输入姓氏的部分字符',
-    searchByNamePlaceholder: '输入名的部分字符',
-    searchByPhonePlaceholder: '输入部分手机号码',
-    searchByEmailPlaceholder: '输入邮箱部分字符',
-    searchByIdCardNumPlaceholder: '输入身份证号码部分字符',
-    searchByWeChatPlaceholder: '输入微信部分号码',
-    searchByAddressPlaceholder: '输入地址部分信息',
-    selectByIdentityPlaceholder: '选择客户身份',
-    searchByAgentNamePlaceholder: '输入代理名称部分字符',
 
     // input validation messages
     illegalEmailAddress: '非法邮箱地址。',
@@ -607,5 +598,17 @@ export default {
   message: '消息',
   clickUpload: '点击上传',
   selectAddress: '选择地址',
-  searchAndSelect: '搜索并选择'
+  searchAndSelect: '搜索并选择',
+  remarks: '备注',
+  // placeholder
+  searchBySurnamePlaceholder: '输入姓氏的部分字符',
+  searchByNamePlaceholder: '输入名称部分字符',
+  searchByPhonePlaceholder: '输入部分手机号码',
+  searchByEmailPlaceholder: '输入邮箱部分字符',
+  searchByIdCardNumPlaceholder: '输入身份证号码部分字符',
+  searchByWeChatPlaceholder: '输入微信部分号码',
+  searchByAddressPlaceholder: '输入地址部分信息',
+  selectByIdentityPlaceholder: '选择客户身份',
+  searchByAgentNamePlaceholder: '输入代理名称部分字符',
+  searchByCommentsPlaceholder: '输入留言部分字符'
 }

@@ -63,6 +63,7 @@
           align="center"
           min-width="70px;">
           <template slot-scope="scope">
+            <el-button type="text" size="small" @click="openRemarkDialog(scope.row.id)">{{ $t('remarks') }}</el-button>
             <el-button type="text" size="small" @click="handleDetailsClick(scope.row)">{{ $t('owner.details') }}</el-button>
             <el-button type="text" size="small" @click="handleEditClick(scope.row)" >{{ $t('owner.edit') }}</el-button>
             <el-button type="text" size="small" @click="handleDeleteClick(scope.row.id)" >{{ $t('delete') }}</el-button>
@@ -94,6 +95,7 @@
 
     <!-- Edit Data Dialog -->
     <edit-dialog />
+
   </div>
 </template>
 
@@ -102,15 +104,24 @@ import filterForm from './form/filter'
 import addForm from './form/add'
 import detailsDialog from './dialog/details'
 import editDialog from './dialog/edit'
+
 import 'font-awesome/css/font-awesome.min.css'
+
 import { createNamespacedHelpers } from 'vuex'
 const { mapState, mapMutations, mapActions } = createNamespacedHelpers('propertyOwner')
 
 export default {
   name: 'PropertyOwner',
-  components: { filterForm, addForm, editDialog, detailsDialog },
+  components: {
+    filterForm,
+    addForm,
+    editDialog,
+    detailsDialog
+  },
   data() {
-    return {}
+    return {
+      remarkDialogVisible: false
+    }
   },
   computed: {
     ...mapState({
@@ -172,6 +183,28 @@ export default {
           })
         })
       })
+    },
+    async openRemarkDialog(come_from_id) {
+      const COME_FROM_TYPE = 'property_owners'
+      const loading = this.$loading({
+        lock: true,
+        text: 'Loading',
+        spinner: 'el-icon-loading',
+        background: 'rgba(0, 0, 0, 0.7)'
+      })
+      try {
+        this.$store.dispatch('remark/init', {
+          come_from_type: COME_FROM_TYPE,
+          come_from_id
+        })
+      } catch (err) {
+        this.$message({
+          type: 'error',
+          message: this.$t('getDataError')
+        })
+      } finally {
+        loading.close()
+      }
     },
     onPaginatorSizeChange(pageSize) {
       this.setTablePageSize(pageSize)
