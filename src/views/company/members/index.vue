@@ -89,8 +89,14 @@
         <el-table-column
           :label="$t('actions')"
           align="center"
-          min-width="50">
+          min-width="80px">
           <template slot-scope="scope" >
+            <el-button
+              type="text"
+              size="small"
+              @click="$store.dispatch('remark/init', { come_from_type: 'company_members', come_from_id: scope.row.id })">
+              {{ $t('remarks') }}
+            </el-button>
             <el-button type="text" @click="handleMemberEdit(scope.row)" >{{ $t('edit') }}</el-button>
             <el-button type="text" @click="handleMemberDelete(scope.row.id)" >{{ $t('delete') }}</el-button>
           </template>

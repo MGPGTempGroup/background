@@ -73,6 +73,12 @@
           label="操作"
           width="100">
           <template slot-scope="scope">
+            <el-button
+              type="text"
+              size="small"
+              @click="$store.dispatch('remark/init', { come_from_type: 'service_messages', come_from_id: scope.row.id })">
+              {{ $t('remarks') }}
+            </el-button>
             <el-button type="text" size="small" @click="deleteComment(scope.row)">{{ $t('delete') }}</el-button>
           </template>
         </el-table-column>

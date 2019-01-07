@@ -121,6 +121,12 @@
         align="center"
         min-width="40px;">
         <template slot-scope="scope">
+          <el-button
+            type="text"
+            size="small"
+            @click="$store.dispatch('remark/init', { come_from_type: 'house_inspections', come_from_id: scope.row.id })">
+            {{ $t('remarks') }}
+          </el-button>
           <el-button type="text" size="small" @click="handleDelete(scope.row.id)" >{{ $t('delete') }}</el-button>
         </template>
       </el-table-column>

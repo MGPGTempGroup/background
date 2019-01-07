@@ -170,9 +170,15 @@
         <el-table-column
           :label="$t('house.actions')"
           fixed="right"
-          width="100"
+          min-width="100px"
           align="center">
           <template slot-scope="scope">
+            <el-button
+              type="text"
+              size="small"
+              @click="$store.dispatch('remark/init', { come_from_type: 'residences', come_from_id: scope.row.id })">
+              {{ $t('remarks') }}
+            </el-button>
             <el-button type="text" size="small" @click="handleDetails(scope.row)">{{ $t('house.details') }}</el-button>
             <el-button type="text" size="small" @click="handleEdit(scope.row)" >{{ $t('house.edit') }}</el-button>
             <el-button type="text" size="small" @click="handleDelete(scope.row.id)" >{{ $t('delete') }}</el-button>

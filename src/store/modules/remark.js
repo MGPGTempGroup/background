@@ -5,6 +5,8 @@ import {
   deleteRemark
 } from '@/api/remark'
 
+import { Loading } from 'element-ui'
+
 const remark = {
   namespaced: true,
   state: {
@@ -58,6 +60,12 @@ const remark = {
   },
   actions: {
     async init({ commit, dispatch }, { come_from_type, come_from_id }) {
+      const loading = Loading.service({
+        lock: true,
+        text: 'Loading',
+        spinner: 'el-icon-loading',
+        background: 'rgba(0, 0, 0, 0.7)'
+      })
       // 初始化分页参数
       commit('setComeFromType', come_from_type)
       commit('setComeFromId', come_from_id)
@@ -66,6 +74,7 @@ const remark = {
       // 重新拉取备注数据
       await dispatch('fetchRemarks')
       commit('setDialogVisible', { visible: true })
+      loading.close()
     },
     async fetchRemarks({ commit, state }) {
       const remarks = (await fetchRemarks({

@@ -309,14 +309,14 @@ const house = {
       commit('setAvailablePropertyType', propertyTypes)
     },
     async fetchLeaseInspections({ commit }, payload = {}) {
-      let params = 'type=lease&include=house,followUp'
+      let params = 'type=leases&include=house,followUp'
       if (payload.page) params += '&page=' + payload.page
       if (payload.pageSize) params += '&pageSize=' + payload.pageSize
       const inspections = (await fetchInspections(params)).data
       commit('setLeaseInspections', inspections)
     },
     async fetchSaleInspections({ commit }, payload = {}) {
-      let params = 'type=sale&include=house,followUp'
+      let params = 'type=residences&include=house,followUp'
       if (payload.page) params += '&page=' + payload.page
       if (payload.pageSize) params += '&pageSize=' + payload.pageSize
       const inspections = (await fetchInspections(params)).data
