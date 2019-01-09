@@ -14,6 +14,7 @@
               <el-form-item :label="$t('surname')" >
                 <el-select
                   v-model="form.surname"
+                  :placeholder="$t('searchBySurnamePlaceholder')"
                   multiple
                   filterable
                   remote
@@ -25,6 +26,7 @@
               <el-form-item :label="$t('name')" >
                 <el-select
                   v-model="form.name"
+                  :placeholder="$t('searchByNamePlaceholder')"
                   multiple
                   filterable
                   remote
@@ -36,6 +38,7 @@
               <el-form-item :label="$t('phone')" >
                 <el-select
                   v-model="form.phone"
+                  :placeholder="$t('searchByPhonePlaceholder')"
                   multiple
                   filterable
                   remote
@@ -47,6 +50,7 @@
               <el-form-item :label="$t('email')" >
                 <el-select
                   v-model="form.email"
+                  :placeholder="$t('searchByEmailPlaceholder')"
                   multiple
                   filterable
                   remote

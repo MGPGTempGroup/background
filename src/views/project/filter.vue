@@ -16,6 +16,7 @@
               <el-form-item :label="$t('project.name')" >
                 <el-select
                   v-model="form.name"
+                  :placeholder="$t('searchByProjectNamePlaceholder')"
                   multiple
                   filterable
                   allow-create
@@ -24,6 +25,7 @@
               <el-form-item :label="$t('project.address')" >
                 <el-select
                   v-model="form.address"
+                  :placeholder="$t('searchByAddressPlaceholder')"
                   multiple
                   filterable
                   allow-create
@@ -32,6 +34,7 @@
               <el-form-item :label="$t('project.location')" >
                 <el-select
                   v-model="form.location"
+                  :placeholder="$t('searchByLocationPlaceholder')"
                   multiple
                   filterable
                   allow-create
@@ -40,6 +43,7 @@
               <el-form-item :label="$t('project.description')" >
                 <el-select
                   v-model="form.description"
+                  :placeholder="$t('searchByDescriptionPlaceholder')"
                   multiple
                   filterable
                   allow-create
@@ -57,13 +61,13 @@
               <el-form-item :label="$t('house.price')">
                 <el-row :gutter="20">
                   <el-col v-bind="{ span: 11 }" >
-                    <el-input v-model.number="form.min_price" type="number" />
+                    <el-input v-model.number="form.min_price" :placeholder="$t('minPricePlaceholder')" type="number" />
                   </el-col>
                   <el-col v-bind="{ span: 2 }" style="text-align: center;" >
                     ~
                   </el-col>
                   <el-col v-bind="{ span: 11 }" >
-                    <el-input v-model.number="form.max_price" type="number" />
+                    <el-input v-model.number="form.max_price" :placeholder="$t('maxPricePlaceholder')" type="number" />
                   </el-col>
                 </el-row>
               </el-form-item>
@@ -72,7 +76,7 @@
                 <el-select
                   v-model="form.agents"
                   :loading="agentsSearchLoading"
-                  :placeholder="$t('house.agent')"
+                  :placeholder="$t('searchAgentsAndSelect')"
                   :remote-method="searchAgents"
                   remote
                   multiple
@@ -90,7 +94,7 @@
                 <el-select
                   v-model="form.owner_id"
                   :loading="ownersSearchLoading"
-                  :placeholder="$t('house.owner')"
+                  :placeholder="$t('searchOwnersAndSelect')"
                   :remote-method="searchOwners"
                   multiple=""
                   remote

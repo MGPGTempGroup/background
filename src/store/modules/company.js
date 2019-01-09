@@ -36,6 +36,8 @@ const company = {
     createMembersDialogVisible: false,
     editMembersDialogVisible: false,
     memberEditForm: {},
+    memberDetailsData: {},
+    memberDetailsDialogVisible: false,
     // 公司相关数据
     companyInfo: {
       telephone: '',
@@ -87,6 +89,12 @@ const company = {
     },
     setEditMembersForm(state, payload) {
       state.memberEditForm = payload
+    },
+    setMemberDetailsDialogVisible(state, visible) {
+      state.memberDetailsDialogVisible = visible
+    },
+    setMemberDetailsData(state, data) {
+      state.memberDetailsData = data
     },
     setDepartments(state, payload) {
       state.companyDepartments = payload

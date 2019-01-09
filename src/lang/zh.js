@@ -610,5 +610,17 @@ export default {
   searchByAddressPlaceholder: '输入地址部分信息',
   selectByIdentityPlaceholder: '选择客户身份',
   searchByAgentNamePlaceholder: '输入代理名称部分字符',
-  searchByCommentsPlaceholder: '输入留言部分字符'
+  searchByCommentsPlaceholder: '输入留言部分字符',
+  searchBySuburbNamePlaceholder: '输入郊区名称部分字符',
+  searchByStreetNamePlaceholder: '输入街道名称部分字符',
+  searchByAddressDescriptionPlaceholder: '输入地址描述部分字符',
+  searchAgentsAndSelect: '搜素代理成员并选择',
+  searchOwnersAndSelect: '搜索物业业主并选择',
+  searchByProjectNamePlaceholder: '输入项目名称部分字符',
+  searchByLocationPlaceholder: '输入位置部分字符',
+  searchByDescriptionPlaceholder: '输入描述部分字符',
+  searchByTitlePlaceholder: '输入标题部分字符',
+  searchByContentPlaceholder: '输入内容部分字符',
+  minPricePlaceholder: '最小价格',
+  maxPricePlaceholder: '最高价格'
 }

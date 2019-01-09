@@ -16,6 +16,7 @@
               <el-form-item :label="$t('house.name')" >
                 <el-select
                   v-model="form.name"
+                  :placeholder="$t('searchByNamePlaceholder')"
                   multiple
                   filterable
                   allow-create
@@ -25,6 +26,7 @@
               <el-form-item :label="$t('house.address')" >
                 <el-select
                   v-model="form.address"
+                  :placeholder="$t('searchByAddressPlaceholder')"
                   multiple
                   filterable
                   allow-create
@@ -34,6 +36,7 @@
               <el-form-item :label="$t('house.suburbName')" >
                 <el-select
                   v-model="form.suburb_name"
+                  :placeholder="$t('searchBySuburbNamePlaceholder')"
                   multiple
                   filterable
                   allow-create
@@ -43,6 +46,7 @@
               <el-form-item :label="$t('house.streetName')" >
                 <el-select
                   v-model="form.street_name"
+                  :placeholder="$t('searchByStreetNamePlaceholder')"
                   multiple
                   filterable
                   allow-create
@@ -52,6 +56,7 @@
               <el-form-item :label="$t('house.addressDescription')" >
                 <el-select
                   v-model="form.address_description"
+                  :placeholder="$t('searchByAddressDescriptionPlaceholder')"
                   multiple
                   filterable
                   allow-create
@@ -137,7 +142,7 @@
                 <el-select
                   v-model="form.agents"
                   :loading="agentsSearchLoading"
-                  :placeholder="$t('house.agent')"
+                  :placeholder="$t('searchAgentsAndSelect')"
                   :remote-method="searchAgents"
                   remote
                   multiple
@@ -155,7 +160,7 @@
                 <el-select
                   v-model="form.owner_id"
                   :loading="ownersSearchLoading"
-                  :placeholder="$t('house.owner')"
+                  :placeholder="$t('searchOwnersAndSelect')"
                   :remote-method="searchOwners"
                   multiple=""
                   remote

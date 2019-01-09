@@ -16,6 +16,7 @@
               <el-form-item :label="$t('industryUpdates.title')" >
                 <el-select
                   v-model="form.title"
+                  :placeholder="$t('searchByTitlePlaceholder')"
                   multiple
                   filterable
                   allow-create
@@ -28,6 +29,7 @@
               <el-form-item :label="$t('industryUpdates.content')" >
                 <el-select
                   v-model="form.content"
+                  :placeholder="$t('searchByContentPlaceholder')"
                   multiple
                   filterable
                   allow-create

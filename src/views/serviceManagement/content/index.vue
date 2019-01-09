@@ -27,6 +27,7 @@
           v-model="selectedMembersId"
           :remote-method="searchMembers"
           :loading="searchLoading"
+          :placeholder="$t('searchAgentsAndSelect')"
           multiple
           filterable
           remote
@@ -286,6 +287,10 @@ export default {
     padding: 20px;
   }
   &__select-contacts-wrapper {
+    margin-top: 20px;
+  }
+  &__rich-editor-wrapper {
+    padding-top: 1px; // Margin重叠
     margin-top: 20px;
   }
   &__actions {

@@ -610,5 +610,17 @@ export default {
   searchByAddressPlaceholder: 'Input address number fragment',
   selectByIdentityPlaceholder: 'Select customer identity',
   searchByAgentNamePlaceholder: 'Input agent name fragment',
-  searchByCommentsPlaceholder: 'Input comment fragment'
+  searchByCommentsPlaceholder: 'Input comment fragment',
+  searchBySuburbNamePlaceholder: 'Input suburb name fragment',
+  searchByStreetNamePlaceholder: 'Input street name fragment',
+  searchByAddressDescriptionPlaceholder: 'Input address description fragment',
+  searchAgentsAndSelect: 'Search for Agent Members and Select',
+  searchOwnersAndSelect: 'Search for Property Owners and Select',
+  searchByProjectNamePlaceholder: 'Input project name fragment',
+  searchByLocationPlaceholder: 'Input location fragment',
+  searchByDescriptionPlaceholder: 'Input description fragment',
+  searchByTitlePlaceholder: 'Input title fragment',
+  searchByContentPlaceholder: 'Input content fragment',
+  minPricePlaceholder: 'Min price',
+  maxPricePlaceholder: 'Max price'
 }
