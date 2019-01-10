@@ -28,7 +28,8 @@ const project = {
     projectDetailsData: {},
     projectFilterForm: {},
     projectStatus: [
-      { label: i18n.t('projectStatus.soldOut'), value: 3 }
+      { label: i18n.t('projectStatus.soldOut'), value: 3 },
+      { label: i18n.t('projectStatus.inSale'), value: 2 }
     ]
   },
   mutations: {

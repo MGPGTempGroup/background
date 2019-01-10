@@ -512,7 +512,8 @@ export default {
     estimatedCompletionDate: '预计完工日期'
   },
   projectStatus: {
-    soldOut: '已售罄'
+    soldOut: '已售罄',
+    inSale: '销售中'
   },
   all: '全部',
   id: '编号',

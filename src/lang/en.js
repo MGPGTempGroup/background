@@ -511,7 +511,8 @@ export default {
     estimatedCompletionDate: 'Estimated completion date'
   },
   projectStatus: {
-    soldOut: 'Sold out'
+    soldOut: 'Sold out',
+    inSale: 'In sale'
   },
   all: 'ALL',
   id: 'ID',
