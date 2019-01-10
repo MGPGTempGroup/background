@@ -507,7 +507,8 @@ export default {
     status: 'Status',
     details: 'Project details',
     basicInformation: 'Basic information',
-    conditionalFiltering: 'Conditional filter search'
+    conditionalFiltering: 'Conditional filter search',
+    estimatedCompletionDate: 'Estimated completion date'
   },
   projectStatus: {
     soldOut: 'Sold out'
@@ -600,6 +601,7 @@ export default {
   selectAddress: 'Select address',
   searchAndSelect: 'Search and select',
   remarks: 'Remarks',
+  description: 'Description',
   // placeholder
   searchBySurnamePlaceholder: 'Input surname fragment',
   searchByNamePlaceholder: 'Input name fragment',

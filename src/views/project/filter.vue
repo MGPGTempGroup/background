@@ -165,6 +165,14 @@
                   value-format="yyyy-MM-dd"
                   type="daterange"/>
               </el-form-item>
+              <el-form-item :label="$t('project.estimatedCompletionDate')" >
+                <el-date-picker
+                  v-model="form.estimated_completion_date_range"
+                  :start-placeholder="$t('startDate')"
+                  :end-placeholder="$t('endDate')"
+                  value-format="yyyy-MM-dd"
+                  type="daterange"/>
+              </el-form-item>
             </el-col>
             <el-col
               :xs="{ span: 24 }"

@@ -43,6 +43,15 @@
             </el-form-item>
           </el-col>
           <el-col v-bind="formItemLayoutProps">
+            <el-form-item :label="$t('project.estimatedCompletionDate')" >
+              <el-date-picker
+                v-model="form.estimated_completion_date"
+                value-format="yyyy-MM-dd"
+                type="date"
+                style="width: 100%"/>
+            </el-form-item>
+          </el-col>
+          <el-col v-bind="formItemLayoutProps">
             <el-form-item :label="$t('project.owner')" >
               <el-autocomplete
                 v-model="form.owner_name"

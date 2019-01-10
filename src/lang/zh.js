@@ -508,7 +508,8 @@ export default {
     status: '状态',
     details: '项目详情',
     basicInformation: '基本信息',
-    conditionalFiltering: '条件筛选搜索'
+    conditionalFiltering: '条件筛选搜索',
+    estimatedCompletionDate: '预计完工日期'
   },
   projectStatus: {
     soldOut: '已售罄'
@@ -600,6 +601,7 @@ export default {
   selectAddress: '选择地址',
   searchAndSelect: '搜索并选择',
   remarks: '备注',
+  description: '描述',
   // placeholder
   searchBySurnamePlaceholder: '输入姓氏的部分字符',
   searchByNamePlaceholder: '输入名称部分字符',

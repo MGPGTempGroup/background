@@ -32,7 +32,9 @@
               <dt>{{ $t('project.description') }}</dt>
               <dd>{{ projectDetailsData.description || $t('noData') }}</dd>
               <dt>{{ $t('project.yearBuilt') }}</dt>
-              <dd>{{ projectDetailsData.yearBuilt || $t('noData') }}</dd>
+              <dd>{{ projectDetailsData.year_built || $t('noData') }}</dd>
+              <dt>{{ $t('project.estimatedCompletionDate') }}</dt>
+              <dd>{{ projectDetailsData.estimated_completion_date || $t('noData') }}</dd>
               <dt>{{ $t('project.price') }}</dt>
               <dd>
                 ${{ projectDetailsData.min_price }} ~ ${{ projectDetailsData.max_price }}

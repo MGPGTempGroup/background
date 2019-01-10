@@ -116,7 +116,8 @@ const project = {
         dateRange: {
           created_at: filterForm.created_at_range,
           updated_at: filterForm.updated_at_range,
-          year_built: filterForm.year_built_range
+          year_built: filterForm.year_built_range,
+          estimated_completion_date: filterForm.estimated_completion_date_range
         }
       }))
       if (Array.isArray(filterForm.agents) && filterForm.agents.length) {
