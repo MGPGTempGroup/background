@@ -21,7 +21,7 @@
           <template slot-scope="scope" >
             <el-popover
               placement="right-start"
-              trigger="hover">
+              trigger="click">
               <div style="margin-bottom: -5px; margin-right: -5px;" >
                 <el-tag
                   v-for="(position, index) in scope.row.positions.data"
@@ -39,14 +39,7 @@
           align="center"
           min-width="25">
           <template slot-scope="scope" >
-            <el-popover
-              placement="right-start"
-              trigger="hover">
-              <div v-html="scope.row.introduction || $t('noData')">
-                {{ $t('noData') }}
-              </div>
-              <el-button slot="reference">{{ $t('details') }}</el-button>
-            </el-popover>
+            <el-button slot="reference" @click="viewIntroduction(scope.row.introduction)" >{{ $t('details') }}</el-button>
           </template>
         </el-table-column>
         <el-table-column
@@ -56,7 +49,7 @@
           <template slot-scope="scope" >
             <el-popover
               placement="right-start"
-              trigger="hover">
+              trigger="click">
               <img :src="scope.row.photo" style="max-width: 400px;" >
               <el-button slot="reference">{{ $t('details') }}</el-button>
             </el-popover>
@@ -115,8 +108,16 @@
     </el-card>
     <!-- Create member -->
     <create-members-dialog />
+
     <!-- Edit member -->
     <edit-members-dialog />
+
+    <!-- Introduction Dialog -->
+    <el-dialog
+      :title="$t('introduction')"
+      :visible.sync="introductionDialogVisible">
+      <div v-html="introductionDialogContent" />
+    </el-dialog>
   </div>
 </template>
 
@@ -133,7 +134,10 @@ export default {
     CreateMembersDialog, EditMembersDialog, FilterForm
   },
   data() {
-    return {}
+    return {
+      introductionDialogVisible: false,
+      introductionDialogContent: ''
+    }
   },
   computed: {
     ...mapState([
@@ -181,6 +185,13 @@ export default {
       memberData = deepClone(memberData)
       memberData.positions = memberData.positions.data.map(item => item.id)
       this.setEditMembersForm(memberData)
+    },
+    /**
+     * 展示成员介绍（Introduction）
+     */
+    viewIntroduction(introduction) {
+      this.introductionDialogContent = introduction
+      this.introductionDialogVisible = true
     },
     /**
      * 处理成员删除
