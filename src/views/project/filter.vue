@@ -231,7 +231,7 @@ export default {
         // 物业业主
         owner_id: [],
         // 项目状态
-        status: [],
+        status: [3, 2],
         // 是否为最新开发
         is_new_development: [0, 1],
         // 是否为过去的成功
