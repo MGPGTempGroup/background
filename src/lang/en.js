@@ -625,5 +625,7 @@ export default {
   searchByTitlePlaceholder: 'Input title fragment',
   searchByContentPlaceholder: 'Input content fragment',
   minPricePlaceholder: 'Min price',
-  maxPricePlaceholder: 'Max price'
+  maxPricePlaceholder: 'Max price',
+  startTime: 'Start time',
+  endTime: 'End time'
 }

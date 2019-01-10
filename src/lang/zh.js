@@ -625,5 +625,7 @@ export default {
   searchByTitlePlaceholder: '输入标题部分字符',
   searchByContentPlaceholder: '输入内容部分字符',
   minPricePlaceholder: '最小价格',
-  maxPricePlaceholder: '最高价格'
+  maxPricePlaceholder: '最高价格',
+  startTime: '开始时间',
+  endTime: '结束时间'
 }
