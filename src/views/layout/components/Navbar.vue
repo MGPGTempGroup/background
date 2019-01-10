@@ -21,8 +21,7 @@
 
       <el-dropdown class="avatar-container right-menu-item" trigger="click">
         <div class="avatar-wrapper">
-          <img src="https://s3.amazonaws.com/uifaces/faces/twitter/gojeanyn/128.jpg" class="user-avatar">
-          <i class="el-icon-caret-bottom"/>
+          <img :src="avatar || defaultAvatar" class="user-avatar">
         </div>
         <el-dropdown-menu slot="dropdown">
           <router-link to="/">
@@ -48,6 +47,7 @@ import Screenfull from '@/components/Screenfull'
 import SizeSelect from '@/components/SizeSelect'
 import LangSelect from '@/components/LangSelect'
 import ThemePicker from '@/components/ThemePicker'
+import defaultAvatar from '@/assets/defaultAvatar.png'
 
 export default {
   components: {
@@ -58,6 +58,11 @@ export default {
     SizeSelect,
     LangSelect,
     ThemePicker
+  },
+  data() {
+    return {
+      defaultAvatar
+    }
   },
   computed: {
     ...mapGetters([

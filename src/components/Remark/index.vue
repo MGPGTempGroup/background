@@ -12,7 +12,7 @@
               :key="remark.id"
               class="remark__item">
               <div class="remark__item-avatar" >
-                <img src="https://s3.amazonaws.com/uifaces/faces/twitter/raquelwilson/128.jpg" alt="">
+                <img :src="remark.creator.avatar || defaultAvatar" alt="">
                 <div>
                   {{ remark.creator.name }}
                 </div>
@@ -84,6 +84,8 @@
 </template>
 
 <script>
+import defaultAvatar from '@/assets/defaultAvatar.png'
+
 import { createNamespacedHelpers } from 'vuex'
 const { mapState, mapMutations, mapActions } = createNamespacedHelpers('remark')
 
@@ -95,7 +97,8 @@ export default {
       editDialogVisible: false,
       editRemarkData: {
         content: ''
-      }
+      },
+      defaultAvatar
     }
   },
   computed: {
