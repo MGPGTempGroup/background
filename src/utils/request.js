@@ -69,8 +69,7 @@ service.interceptors.response.use(
       type: 'error',
       duration: 12 * 1000
     })
-    // 如果返回的状态码为401 (Token expired) 则跳转登录路由
-    if (error.response.status === 401) {
+    if (error.response.status === 401 && error.response.data.login_again) {
       // store.dispatch('FedLogOut')
       setTimeout(() => {
         location.reload()
