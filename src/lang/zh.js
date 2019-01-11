@@ -98,6 +98,7 @@ export default {
     testimonials: '推荐信'
   },
   navbar: {
+    changePassword: '修改密码',
     logOut: '退出登录',
     dashboard: '首页',
     github: '项目地址',
@@ -603,6 +604,11 @@ export default {
   searchAndSelect: '搜索并选择',
   remarks: '备注',
   description: '描述',
+  oldPassword: '旧密码',
+  newPassword: '新密码',
+  confirmation: '确认',
+  confirmPassword: '确认密码',
+  confirmTheNewPassword: '确认新密码',
   // placeholder
   searchBySurnamePlaceholder: '输入姓氏的部分字符',
   searchByNamePlaceholder: '输入名称部分字符',
@@ -624,8 +630,12 @@ export default {
   searchByDescriptionPlaceholder: '输入描述部分字符',
   searchByTitlePlaceholder: '输入标题部分字符',
   searchByContentPlaceholder: '输入内容部分字符',
+  enterTheOldPassword: '输入旧密码',
+  enterAtLeast6Characters: '至少输入6个字符',
+  confirmThePasswordAgain: '再次确认密码',
   minPricePlaceholder: '最小价格',
   maxPricePlaceholder: '最高价格',
   startTime: '开始时间',
-  endTime: '结束时间'
+  endTime: '结束时间',
+  changePasswordSuccessMessage: '密码修改成功，请重新登录'
 }

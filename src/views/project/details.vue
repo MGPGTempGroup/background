@@ -28,7 +28,7 @@
                 </template>
               </dd>
               <dt>{{ $t('project.location') }}</dt>
-              <dd>{{ projectDetailsData.location || $t('noData') }}</dd>
+              <dd>{{ projectDetailsData.location || $t('noData') }}s</dd>
               <dt>{{ $t('project.description') }}</dt>
               <dd>{{ projectDetailsData.description || $t('noData') }}</dd>
               <dt>{{ $t('project.yearBuilt') }}</dt>

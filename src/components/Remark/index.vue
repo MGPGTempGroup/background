@@ -85,7 +85,6 @@
 
 <script>
 import defaultAvatar from '@/assets/defaultAvatar.png'
-
 import { createNamespacedHelpers } from 'vuex'
 const { mapState, mapMutations, mapActions } = createNamespacedHelpers('remark')
 

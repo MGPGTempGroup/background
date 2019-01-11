@@ -97,6 +97,7 @@ export default {
     testimonials: 'Testimonials'
   },
   navbar: {
+    changePassword: 'Change password',
     logOut: 'Log Out',
     dashboard: 'Dashboard',
     github: 'Github',
@@ -603,6 +604,10 @@ export default {
   searchAndSelect: 'Search and select',
   remarks: 'Remarks',
   description: 'Description',
+  oldPassword: 'Old password',
+  newPassword: 'New password',
+  confirmation: 'Confirmation',
+  confirmPassword: 'Confirm password',
   // placeholder
   searchBySurnamePlaceholder: 'Input surname fragment',
   searchByNamePlaceholder: 'Input name fragment',
@@ -624,8 +629,13 @@ export default {
   searchByDescriptionPlaceholder: 'Input description fragment',
   searchByTitlePlaceholder: 'Input title fragment',
   searchByContentPlaceholder: 'Input content fragment',
+  enterTheOldPassword: 'Enter the old password',
+  enterAtLeast6Characters: 'Enter at least 6 characters',
+  confirmThePasswordAgain: 'Confirm the password again',
+  confirmTheNewPassword: 'Confirm the new password',
   minPricePlaceholder: 'Min price',
   maxPricePlaceholder: 'Max price',
   startTime: 'Start time',
-  endTime: 'End time'
+  endTime: 'End time',
+  changePasswordSuccessMessage: 'Password changed successfully, please log in again'
 }

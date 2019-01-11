@@ -24,6 +24,17 @@ export function loginByEmail(email, password) {
   })
 }
 
+export function changePassword({ old_pwd, new_pwd, new_pwd_confirmation }) {
+  const url = 'admin-users/current/password'
+  return request({
+    method: 'PATCH',
+    url,
+    data: {
+      old_pwd, new_pwd, new_pwd_confirmation
+    }
+  })
+}
+
 export function logout() {
   return request({
     url: 'authorizations/current',
