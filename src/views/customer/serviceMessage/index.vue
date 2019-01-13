@@ -136,11 +136,23 @@ export default {
         confirmButtonText: this.$t('confirm'),
         cancelButtonText: this.$t('cancel'),
         type: 'warning'
-      }).then(() => {
+      }).then(async() => {
         this.setTableLoading(true)
-        return this.deleteMessage(row.id)
-      }).finally(() => {
+        try {
+          await this.deleteMessage(row.id)
+        } catch (err) {
+          this.$message({
+            type: 'error',
+            message: this.$t('deleteFailed')
+          })
+        }
+        this.$message({
+          type: 'success',
+          message: this.$t('deleteSuccess')
+        })
         this.setTableLoading(false)
+      }).catch(() => {
+        // ...
       })
     },
     onPaginatorSizeChange(pageSize) {
