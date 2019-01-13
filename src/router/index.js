@@ -97,7 +97,7 @@ export const asyncRouterMap = [
     children: [
       {
         path: 'owners',
-        component: () => import('@/views/customerManagement/propertyOwner'),
+        component: () => import('@/views/customer/propertyOwner'),
         name: 'propertyOwner',
         meta: {
           title: 'propertyOwner',
@@ -105,17 +105,26 @@ export const asyncRouterMap = [
         }
       },
       {
-        path: 'user-comment',
-        component: () => import('@/views/customerManagement/userComment'),
-        name: 'userComment',
+        path: 'service-messages',
+        component: () => import('@/views/customer/serviceMessage'),
+        name: 'serviceMessage',
         meta: {
-          title: 'userComment',
+          title: 'serviceMessage',
+          roles: ['admin']
+        }
+      },
+      {
+        path: 'leave-messages',
+        component: () => import('@/views/customer/leaveMessage'),
+        name: 'leaveMessage',
+        meta: {
+          title: 'leaveMessage',
           roles: ['admin']
         }
       },
       {
         path: 'testimonials',
-        component: () => import('@/views/customerManagement/testimonial'),
+        component: () => import('@/views/customer/testimonial'),
         name: 'testimonials',
         meta: {
           title: 'testimonials',

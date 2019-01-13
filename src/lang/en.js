@@ -94,7 +94,9 @@ export default {
     information: 'Information',
     projects: 'Projects',
     departmentsAndPositions: 'Department & Positions',
-    testimonials: 'Testimonials'
+    testimonials: 'Testimonials',
+    serviceMessage: 'Service message',
+    leaveMessage: 'Leave messages'
   },
   navbar: {
     changePassword: 'Change password',
@@ -411,6 +413,11 @@ export default {
     displayState: 'Current display state',
     starLevel: 'Star level',
     clickToggleStatus: 'Click toggle status'
+  },
+  leaveMessage: {
+    messages: 'Leave messages',
+    name: 'Name',
+    content: 'Content'
   },
   contentMGT: {
     historicalContent: 'Historical content',

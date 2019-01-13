@@ -92,10 +92,11 @@ export default {
     saleHouse: '出售房屋',
     members: '成员',
     information: '信息',
-    // companyContactInfo: '公司联系信息',
     projects: '项目',
     departmentsAndPositions: '部门 & 职位',
-    testimonials: '推荐信'
+    testimonials: '推荐信',
+    serviceMessage: '服务留言',
+    leaveMessage: '留言'
   },
   navbar: {
     changePassword: '修改密码',
@@ -412,6 +413,11 @@ export default {
     displayState: '当前展示状态',
     starLevel: '评价星级',
     clickToggleStatus: '点击切换'
+  },
+  leaveMessage: {
+    messages: '留言',
+    name: '名称',
+    content: '内容'
   },
   contentMGT: {
     historicalContent: '历史内容',
