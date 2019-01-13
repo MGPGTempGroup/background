@@ -417,7 +417,8 @@ export default {
   leaveMessage: {
     messages: 'Leave messages',
     name: 'Name',
-    content: 'Content'
+    content: 'Content',
+    conditionalFiltering: 'Conditional filter search'
   },
   contentMGT: {
     historicalContent: 'Historical content',
@@ -636,6 +637,7 @@ export default {
   searchByDescriptionPlaceholder: 'Input description fragment',
   searchByTitlePlaceholder: 'Input title fragment',
   searchByContentPlaceholder: 'Input content fragment',
+  searchByMessageContentPlaceholer: 'Input leave message content fragment',
   enterTheOldPassword: 'Enter the old password',
   enterAtLeast6Characters: 'Enter at least 6 characters',
   confirmThePasswordAgain: 'Confirm the password again',

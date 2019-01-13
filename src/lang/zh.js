@@ -417,7 +417,8 @@ export default {
   leaveMessage: {
     messages: '留言',
     name: '名称',
-    content: '内容'
+    content: '内容',
+    conditionalFiltering: '条件筛选搜索'
   },
   contentMGT: {
     historicalContent: '历史内容',
@@ -636,6 +637,7 @@ export default {
   searchByDescriptionPlaceholder: '输入描述部分字符',
   searchByTitlePlaceholder: '输入标题部分字符',
   searchByContentPlaceholder: '输入内容部分字符',
+  searchByMessageContentPlaceholer: '输入消息内容部分字符',
   enterTheOldPassword: '输入旧密码',
   enterAtLeast6Characters: '至少输入6个字符',
   confirmThePasswordAgain: '再次确认密码',

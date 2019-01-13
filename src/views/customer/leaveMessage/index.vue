@@ -1,5 +1,6 @@
 <template>
   <div class="customer-leave-message" >
+    <filter-form/>
     <el-card class="customer-leave-message__list-card" shadow="never" >
       <div slot="header" class="customer-leave-message__list-header" >
         <h2 style="margin: 0;" >
@@ -8,7 +9,7 @@
         </h2>
       </div>
       <el-table
-        v-loading="tableLoading"
+        v-loading="messagesTableLoading"
         :data="messages.data">
         <el-table-column
           :label="$t('id')"
@@ -55,24 +56,23 @@
 </template>
 
 <script>
+import 'font-awesome/css/font-awesome.min.css'
 import { createNamespacedHelpers } from 'vuex'
 import MessagesDialog from './messagesDialog'
+import FilterForm from './filter'
 const { mapState, mapMutations, mapActions } = createNamespacedHelpers('leaveMessage')
 export default {
   name: 'LeaveMessage',
   components: {
-    MessagesDialog
-  },
-  data() {
-    return {
-      tableLoading: false
-    }
+    MessagesDialog,
+    FilterForm
   },
   computed: {
     ...mapState([
       'messagesPage',
       'messagesPageSize',
-      'messages'
+      'messages',
+      'messagesTableLoading'
     ])
   },
   created() {
@@ -83,14 +83,15 @@ export default {
       'setMessagesPage',
       'setMessagesPageSize',
       'setMessagesDialogVisible',
-      'setMessagesDialogData'
+      'setMessagesDialogData',
+      'setMessagesTableLoading'
     ]),
     ...mapActions([
       'fetchMessages',
       'deleteMessage'
     ]),
     async dispatchFetchMessagesAction() {
-      this.tableLoading = true
+      this.setMessagesTableLoading(true)
       try {
         await this.fetchMessages()
       } catch (err) {
@@ -99,14 +100,16 @@ export default {
           message: this.$t('getDataError')
         })
       } finally {
-        this.tableLoading = false
+        this.setMessagesTableLoading(false)
       }
     },
     onPaginatorSizeChange(pageSize) {
       this.setMessagesPageSize(pageSize)
+      this.dispatchFetchMessagesAction()
     },
     onPaginatorChange(page) {
       this.setMessagesPage(page)
+      this.dispatchFetchMessagesAction()
     },
     openMessagesDialog(messages) {
       this.setMessagesDialogData(messages)
@@ -118,7 +121,7 @@ export default {
         cancelButtonText: this.$t('cancel'),
         type: 'warning'
       }).then(async() => {
-        this.tableLoading = true
+        this.setMessagesTableLoading(true)
         try {
           await this.deleteMessage({ id })
         } catch (err) {
@@ -128,7 +131,7 @@ export default {
           })
           return
         } finally {
-          this.tableLoading = false
+          this.setMessagesTableLoading(false)
         }
         this.$message({
           type: 'success',
@@ -146,7 +149,7 @@ export default {
 .customer-leave-message {
   padding: 20px;
   &__list-card {
-    // margin-top: 20px;
+    margin-top: 20px;
   }
   &__list-header {
     position: relative;
