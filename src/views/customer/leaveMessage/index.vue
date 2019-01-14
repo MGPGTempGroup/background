@@ -34,6 +34,11 @@
           min-width="100px">
           <template slot-scope="scope">
             <el-button type="text" @click="openMessagesDialog(scope.row.messages)" >{{ $t('details') }}</el-button>
+            <el-button
+              type="text"
+              @click="$store.dispatch('remark/init', { come_from_type: 'leave_messages', come_from_id: scope.row.id })">
+              {{ $t('remarks') }}
+            </el-button>
             <el-button type="text" @click="handleDelete(scope.row.id)">{{ $t('delete') }}</el-button>
           </template>
         </el-table-column>
