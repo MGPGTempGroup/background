@@ -33,8 +33,8 @@
           align="center"
           min-width="100px">
           <template slot-scope="scope">
-            <el-button type="text" size="smaill" @click="openMessagesDialog(scope.row.messages)" >{{ $t('leaveMessage.messages') }}</el-button>
-            <el-button type="text" size="small" @click="handleDelete(scope.row.id)">{{ $t('delete') }}</el-button>
+            <el-button type="text" @click="openMessagesDialog(scope.row.messages)" >{{ $t('details') }}</el-button>
+            <el-button type="text" @click="handleDelete(scope.row.id)">{{ $t('delete') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
