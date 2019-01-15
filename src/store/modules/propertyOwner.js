@@ -34,20 +34,13 @@ const propertyOwner = {
       email: '',
       wechat: '',
       address: [],
-      identity_id: 1,
+      identity_id: '',
       id_card: ''
     },
     dataEditionDialogVisible: false,
     dataEditionForm: {},
     detailsDialogVisible: false,
-    detailsData: {},
-    availableIdentity: [
-      { label: 'landlord', value: 1 },
-      { label: 'vendor', value: 4 },
-      { label: 'other', value: 5 },
-      { label: 'tenant', value: 2 },
-      { label: 'purchaser', value: 3 }
-    ]
+    detailsData: {}
   },
   mutations: {
     resetOwnersData(state, payload) {

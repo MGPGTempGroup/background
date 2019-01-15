@@ -3,7 +3,7 @@
     <el-select
       v-model="values"
       :placeholder="$t('selectByIdentityPlaceholder')"
-      multiple
+      v-bind="extraElSelectOpts"
       filterable>
       <el-option
         v-for="(item, index) in availableIdentities"
@@ -23,8 +23,14 @@ export default {
   },
   props: {
     identities: {
-      type: Array,
-      default: () => []
+      required: true,
+      type: [Array, Number]
+    },
+    extraElSelectOpts: {
+      type: Object,
+      default: () => ({
+        multiple: true
+      })
     }
   },
   data() {

@@ -25,12 +25,7 @@ const serviceMessage = {
       identity: [],
       comments: [],
       created_at_range: []
-    },
-    // 可用身份
-    availableIdentity: [
-      { value: 'landlord' },
-      { value: 'vendor' }
-    ]
+    }
   },
   mutations: {
     setMessages(state, payload) {
@@ -41,6 +36,9 @@ const serviceMessage = {
     },
     setTablePageSize(state, payload) {
       state.tablePageSize = payload
+    },
+    setFilterForm(state, payload) {
+      state.filterForm = payload
     },
     setFilterServices(state, payload) {
       state.filterServices = payload
