@@ -37,11 +37,11 @@
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">
-            <el-badge :value="serviceMessagesCount.today" >
-              {{ $t('dashboard.serviceMessages') }}
+            <el-badge :value="messagesCount.today" >
+              {{ $t('dashboard.messages') }}
             </el-badge>
           </div>
-          <count-to :start-val="0" :end-val="serviceMessagesCount.total" :duration="3000" class="card-panel-num"/>
+          <count-to :start-val="0" :end-val="messagesCount.total" :duration="3000" class="card-panel-num"/>
         </div>
       </div>
     </el-col>
@@ -74,7 +74,7 @@ export default {
   },
   computed: {
     ...mapState({
-      serviceMessagesCount: state => state.serviceMessages,
+      messagesCount: state => state.messages,
       houseInspectionsCount: state => state.houseInspections,
       pv: state => state.pageViews,
       uv: state => state.uniqueVisitors

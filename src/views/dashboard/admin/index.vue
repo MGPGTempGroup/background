@@ -56,9 +56,9 @@ export default {
     ...mapState({
       lineChartDataList: state => ({
         messages: {
-          last_7_days: state.serviceMessages.last_7_days,
-          last_30_days: state.serviceMessages.last_30_days,
-          last_12_months: state.serviceMessages.last_12_months
+          last_7_days: state.messages.last_7_days,
+          last_30_days: state.messages.last_30_days,
+          last_12_months: state.messages.last_12_months
         },
         inspections: {
           last_7_days: state.houseInspections.last_7_days,
@@ -82,7 +82,7 @@ export default {
         pv: this.$t(`dashboard.pageViews`),
         uv: this.$t(`dashboard.uniqueVisitors`),
         inspections: this.$t(`dashboard.houseInspections`),
-        messages: this.$t('dashboard.serviceMessages')
+        messages: this.$t('dashboard.messages')
       })[this.currChartDataKey]
     }
   },

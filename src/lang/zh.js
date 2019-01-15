@@ -113,6 +113,7 @@ export default {
     uniqueVisitors: '唯一访问量',
     houseInspections: '房屋预约检查',
     serviceMessages: '服务留言',
+    messages: '消息量',
     last7Days: '最近7天',
     last30Days: '最近30天',
     last12Months: '最近12月'

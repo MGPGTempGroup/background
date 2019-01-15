@@ -113,6 +113,7 @@ export default {
     uniqueVisitors: 'Unique visitors',
     houseInspections: 'House inspections',
     serviceMessages: 'Service messages',
+    messages: 'Messages',
     last7Days: 'Last 7 days',
     last30Days: 'Last 30 days',
     last12Months: 'Last 12 months'

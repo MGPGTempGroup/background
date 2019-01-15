@@ -4,7 +4,7 @@ import * as statisticsAPI from '@/api/statistics'
 const appStatistics = {
   namespaced: true,
   state: {
-    serviceMessages: {
+    messages: {
       total: undefined,
       today: undefined,
       last_7_days: undefined,
@@ -34,9 +34,9 @@ const appStatistics = {
     }
   },
   mutations: {
-    setServiceMessages(state, payload) {
-      state.serviceMessages = {
-        ...state.serviceMessages,
+    setMessages(state, payload) {
+      state.messages = {
+        ...state.messages,
         ...payload
       }
     },
@@ -62,15 +62,15 @@ const appStatistics = {
   actions: {
     async fetchAllStatistics({ commit }, payload = {}) {
       const statisticsData = (await statisticsAPI.getAll()).data
-      commit('setServiceMessages', statisticsData.service_messages)
+      commit('setMessages', statisticsData.messages)
       commit('setHouseInspections', statisticsData.house_inspections)
       commit('setPageViews', statisticsData.page_view)
       commit('setUniqueVisitors', statisticsData.unique_visitor)
     },
     async fetchLast12MonthsStatistics({ commit }, payload = {}) {
       const statisticsData = (await statisticsAPI.getLast12MonthsStatistics()).data
-      commit('setServiceMessages', {
-        last_12_months: statisticsData.service_messages
+      commit('setMessages', {
+        last_12_months: statisticsData.messages
       })
       commit('setHouseInspections', {
         last_12_months: statisticsData.house_inspections
@@ -84,8 +84,8 @@ const appStatistics = {
     },
     async fetchLast30DaysStatistics({ commit }, payload = {}) {
       const statisticsData = (await statisticsAPI.getLast30DaysStatistics()).data
-      commit('setServiceMessages', {
-        last_30_days: statisticsData.service_messages
+      commit('setMessages', {
+        last_30_days: statisticsData.messages
       })
       commit('setHouseInspections', {
         last_30_days: statisticsData.house_inspections
