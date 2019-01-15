@@ -122,7 +122,8 @@
             <el-col v-bind="filterFormLayoutProps" >
               <!-- Identity -->
               <el-form-item :label="$t('owner.identity')" >
-                <el-select
+                <customer-identity-select v-model="filterForm.identity_id" />
+                <!-- <el-select
                   v-model="filterForm.identity_id"
                   :placeholder="$t('selectByIdentityPlaceholder')"
                   multiple>
@@ -132,7 +133,7 @@
                     :label="$t(`owner.${item.label}`)"
                     :value="item.value"
                   />
-                </el-select>
+                </el-select> -->
               </el-form-item>
             </el-col>
             <el-col v-bind="filterFormLayoutProps" >
@@ -175,6 +176,7 @@
 </template>
 
 <script>
+import CustomerIdentitySelect from '@/businessComponent/CustomerIdentitySelect'
 import { createNamespacedHelpers } from 'vuex'
 const {
   mapState,
@@ -184,6 +186,9 @@ const {
 
 export default {
   name: 'PropertyOwnersFilterForm',
+  components: {
+    CustomerIdentitySelect
+  },
   data() {
     return {
       collapseActiveNames: [],
@@ -193,7 +198,6 @@ export default {
   computed: {
     ...mapState({
       filterForm: state => state.filterForm,
-      availableIdentity: state => state.availableIdentity,
       ownersTablePageSize: state => state.ownersTablePageSize
     })
   },

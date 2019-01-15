@@ -73,18 +73,7 @@
               </el-col>
               <el-col v-bind="filterFormItemLayoutProps" >
                 <el-form-item :label="$t('userComment.identity')" >
-                  <el-select
-                    v-model="filterForm.identity"
-                    :placeholder="$t('selectByIdentityPlaceholder')"
-                    multiple
-                    filterable>
-                    <el-option
-                      v-for="(item, index) in availableIdentity"
-                      :key="index"
-                      :label="$t(`userComment.${item.value}`)"
-                      :value="item.value"
-                    />
-                  </el-select>
+                  <customer-identity-select v-model="filterForm.identity" />
                 </el-form-item>
               </el-col>
               <el-col v-bind="filterFormItemLayoutProps" >
@@ -103,7 +92,6 @@
                 <el-form-item :label="$t('userComment.createdAt')" >
                   <el-date-picker
                     v-model="filterForm.created_at_range"
-                    :picker-options="pickerOptions"
                     :range-separator="$t('to')"
                     :start-placeholder="$t('startDate')"
                     :end-placeholder="$t('endDate')"
@@ -122,7 +110,7 @@
             </el-row>
           </el-form>
           <div class="user-comment-filter__form-actions" >
-            <el-button type="info" >
+            <el-button type="info" @click="handleReset" >
               {{ $t('reset') }}
             </el-button>
             &nbsp;&nbsp;
@@ -137,47 +125,23 @@
 </template>
 
 <script>
+import CustomerIdentitySelect from '@/businessComponent/CustomerIdentitySelect'
 import { createNamespacedHelpers } from 'vuex'
 const { mapState, mapMutations, mapActions } = createNamespacedHelpers('serviceMessage')
 export default {
   name: 'UserCommentFilter',
+  components: {
+    CustomerIdentitySelect
+  },
   data() {
     return {
       collapseActiveNames: [],
-      filterFormItemLayoutProps: { xs: 24, sm: 24, md: 12, lg: 8, xl: 6 },
-      pickerOptions: {
-        shortcuts: [{
-          text: '最近一周',
-          onClick(picker) {
-            const end = new Date()
-            const start = new Date()
-            start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
-            picker.$emit('pick', [start, end])
-          }
-        }, {
-          text: '最近一个月',
-          onClick(picker) {
-            const end = new Date()
-            const start = new Date()
-            start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
-            picker.$emit('pick', [start, end])
-          }
-        }, {
-          text: '最近三个月',
-          onClick(picker) {
-            const end = new Date()
-            const start = new Date()
-            start.setTime(start.getTime() - 3600 * 1000 * 24 * 90)
-            picker.$emit('pick', [start, end])
-          }
-        }]
-      }
+      filterFormItemLayoutProps: { xs: 24, sm: 24, md: 12, lg: 8, xl: 6 }
     }
   },
   computed: {
     ...mapState([
       'filterForm',
-      'availableIdentity',
       'filterServices',
       'services'
     ]),
@@ -193,12 +157,25 @@ export default {
   methods: {
     ...mapMutations([
       'setFilterServices',
-      'setTableLoading'
+      'setTableLoading',
+      'setFilterForm'
     ]),
     ...mapActions([
       'fetchServices',
       'fetchMessages'
     ]),
+    handleReset() {
+      this.setFilterForm({
+        surname: [],
+        name: [],
+        email: [],
+        phone: [],
+        wechat: [],
+        identity: [],
+        comments: [],
+        created_at_range: []
+      })
+    },
     handleQuery() {
       this.setTableLoading(true)
       this.fetchMessages().finally(() => {

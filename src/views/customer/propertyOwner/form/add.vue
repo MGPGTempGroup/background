@@ -48,13 +48,14 @@
         </el-col>
         <el-col v-bind="formItemLayoutProps" >
           <el-form-item :label="$t('customerIdentity.identity')" prop="identity" >
-            <el-select v-model="dataCreationForm.identity_id" >
+            <customer-identity-select v-model="dataCreationForm.identity_id" :extra-el-select-opts="{ multiple: false }" />
+            <!-- <el-select v-model="dataCreationForm.identity_id" >
               <el-option
                 v-for="(item) in availableIdentity"
                 :key="item.id"
                 :label="$t(`customerIdentity.${item.label}`)"
                 :value="item.value" />
-            </el-select>
+            </el-select> -->
           </el-form-item>
         </el-col>
       </el-row>
@@ -73,17 +74,18 @@
 </template>
 
 <script>
+import CustomerIdentitySelect from '@/businessComponent/CustomerIdentitySelect'
 import { filterObjEmptyVal } from '@/utils'
 import { validateEmail, requiredWithoutAll } from '@/utils/validate'
-
 import areaDataStorage from '@/utils/areaDataStorage'
-
 import { createNamespacedHelpers } from 'vuex'
 const { mapState, mapActions } = createNamespacedHelpers('propertyOwner')
 
 export default {
   name: 'PropertyOwnersAddForm',
-  components: {},
+  components: {
+    CustomerIdentitySelect
+  },
   data() {
     return {
       formItemLayoutProps: { xs: 24, sm: 12, md: 12, lg: 8, xl: 8 },
@@ -150,7 +152,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['dataCreationForm', 'availableIdentity'])
+    ...mapState(['dataCreationForm'])
   },
   methods: {
     ...mapActions([
