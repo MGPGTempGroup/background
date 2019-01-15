@@ -222,6 +222,7 @@ export default {
     closeAll: '关闭所有'
   },
   house: {
+    house: '房屋',
     houseManagement: '房屋管理',
     confirm: '确定',
     id: '序号',
@@ -275,16 +276,6 @@ export default {
     dataCreator: '数据创建者',
     currState: '目前状态',
     reserved: '已预订',
-    house: '房屋',
-    studio: '工作室',
-    unit: '单位',
-    apartment: '公寓',
-    townHouse: '城市住房',
-    terrace: '阶地',
-    villa: '别墅',
-    semi: '半独立式住宅',
-    duplex: '复式住宅',
-    penthouse: '阁楼',
     constructedIn: '修建时间',
     builtIn: '建成于',
     preciseCoordinates: '精确坐标',
@@ -325,6 +316,30 @@ export default {
     followUpState: '跟进状态',
     comment: '留言',
     belongTo: '属于'
+  },
+  propertyType: {
+    house: '房屋',
+    studio: '工作室',
+    unit: '单位',
+    apartment: '公寓',
+    townHouse: '城市住房',
+    terrace: '阶地',
+    villa: '别墅',
+    semi: '半独立式住宅',
+    duplex: '复式住宅',
+    penthouse: '阁楼'
+  },
+  productType: {
+    house: '房屋',
+    studio: '工作室',
+    unit: '单位',
+    apartment: '公寓',
+    townHouse: '城市住房',
+    terrace: '阶地',
+    villa: '别墅',
+    semi: '半独立式住宅',
+    duplex: '复式住宅',
+    penthouse: '阁楼'
   },
   addressList: {
     australia: '澳大利亚',

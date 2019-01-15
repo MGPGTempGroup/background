@@ -114,7 +114,7 @@
                   <el-option
                     v-for="item in productTypes.data"
                     :key="item.id"
-                    :label="item.name"
+                    :label="$t(`productType.${item.name}`)"
                     :value="item.id" />
                 </el-select>
               </el-form-item>

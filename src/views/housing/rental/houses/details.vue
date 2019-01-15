@@ -54,7 +54,7 @@
                     v-for="(item, index) in formattedData.property_type"
                     :key="index"
                     class="rental-housing-details__property-type-list-item" >
-                    {{ item.name }}
+                    {{ $t(`propertyType.${item.name}`) }}
                   </el-tag>
                 </template>
                 <template v-else >

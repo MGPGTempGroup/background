@@ -122,7 +122,7 @@
                 v-for="item in scope.row.productTypes.data"
                 :key="item.id"
                 style="margin-right: 3px;">
-                {{ item.name }}
+                {{ $t(`productType.${item.name}`) }}
               </el-tag>
             </template>
             <template v-else >

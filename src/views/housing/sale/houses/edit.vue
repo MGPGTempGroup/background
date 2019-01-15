@@ -157,7 +157,7 @@
                     <el-option
                       v-for="item in availablePropertyType"
                       :key="item.id"
-                      :label="item.name"
+                      :label="$t(`propertyType.${item.name}`)"
                       :value="item.id" />
                   </el-select>
                 </el-form-item>
