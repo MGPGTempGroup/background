@@ -45,7 +45,12 @@
       </div>
       <!-- 操作按钮 -->
       <div class="upload-image__cropper-control" >
-        <el-button type="primary" @click="crop" >{{ $t('confirm') }}</el-button>
+        <el-button type="info" @click="cropperDialogVisible = false" >
+          {{ $t('close') }}
+        </el-button>
+        <el-button type="primary" @click="crop" >
+          {{ $t('confirm') }}
+        </el-button>
       </div>
     </el-dialog>
   </div>
