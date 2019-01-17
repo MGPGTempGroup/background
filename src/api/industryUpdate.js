@@ -9,19 +9,21 @@ export function fetchArticles(params = null) {
   })
 }
 
-export function createArticle(data) {
+export function createArticle(data, params = {}) {
   return request({
     method: 'POST',
     url: 'industry-updates',
-    data
+    data,
+    params
   })
 }
 
-export function updateArticle(data) {
+export function updateArticle(data, params = {}) {
   return request({
     method: 'PATCH',
     url: 'industry-updates/' + data.id,
-    data
+    data,
+    params
   })
 }
 

@@ -68,18 +68,23 @@ const industryUpdate = {
         }
       })
       const pageParams = `page=${state.articlesTablePage}&pageSize=${state.articlesTablePageSize}`
+      const includeParams = 'include=creator'
       const articles = (await fetchArticles(
-        [conditionalParams, pageParams].filter(Boolean).join('&')
+        [conditionalParams, pageParams, includeParams].filter(Boolean).join('&')
       )).data
       commit('setArticles', articles)
       commit('setArticlesTableLoading', false)
     },
     async createArticle({ commit }, { data }) {
-      const article = (await createArticle(data)).data
+      const article = (await createArticle(data, {
+        include: 'creator'
+      })).data
       commit('addArticle', article)
     },
     async updateArticle({ commit }, { data }) {
-      const article = (await updateArticle(data)).data
+      const article = (await updateArticle(data, {
+        include: 'creator'
+      })).data
       commit('setArticle', article)
     },
     async deleteArticle({ commit }, { id }) {
