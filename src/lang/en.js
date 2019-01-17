@@ -96,10 +96,12 @@ export default {
     departmentsAndPositions: 'Department & Positions',
     testimonials: 'Testimonials',
     serviceMessage: 'Service message',
-    leaveMessage: 'Leave messages'
+    leaveMessage: 'Leave messages',
+    personal: 'Personal'
   },
   navbar: {
     changePassword: 'Change password',
+    personalInfo: 'Personal info',
     logOut: 'Log Out',
     dashboard: 'Dashboard',
     github: 'Github',
@@ -539,6 +541,10 @@ export default {
     soldOut: 'Sold out',
     inSale: 'In sale'
   },
+  personal: {
+    title: 'Personal information',
+    name: 'Name'
+  },
   all: 'ALL',
   id: 'ID',
   submit: 'Submit',
@@ -662,5 +668,6 @@ export default {
   maxPricePlaceholder: 'Max price',
   startTime: 'Start time',
   endTime: 'End time',
-  changePasswordSuccessMessage: 'Password changed successfully, please log in again'
+  changePasswordSuccessMessage: 'Password changed successfully, please log in again',
+  changeAvatar: 'Change avatar'
 }

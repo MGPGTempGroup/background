@@ -29,7 +29,12 @@
               {{ $t('navbar.dashboard') }}
             </el-dropdown-item>
           </router-link>
-          <el-dropdown-item divided>
+          <router-link to="/personal/information">
+            <el-dropdown-item divided>
+              {{ $t('navbar.personalInfo') }}
+            </el-dropdown-item>
+          </router-link>
+          <el-dropdown-item>
             <div @click="changePasswordDialogVisible = true" >{{ $t('navbar.changePassword') }}</div>
           </el-dropdown-item>
           <el-dropdown-item>

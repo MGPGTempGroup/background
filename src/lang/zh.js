@@ -96,10 +96,12 @@ export default {
     departmentsAndPositions: '部门 & 职位',
     testimonials: '推荐信',
     serviceMessage: '服务留言',
-    leaveMessage: '留言'
+    leaveMessage: '留言',
+    personal: '个人'
   },
   navbar: {
     changePassword: '修改密码',
+    personalInfo: '个人信息',
     logOut: '退出登录',
     dashboard: '首页',
     github: '项目地址',
@@ -539,6 +541,10 @@ export default {
     soldOut: '已售罄',
     inSale: '销售中'
   },
+  personal: {
+    title: '个人信息',
+    name: '名称'
+  },
   all: '全部',
   id: '编号',
   submit: '提交',
@@ -661,5 +667,6 @@ export default {
   maxPricePlaceholder: '最高价格',
   startTime: '开始时间',
   endTime: '结束时间',
-  changePasswordSuccessMessage: '密码修改成功，请重新登录'
+  changePasswordSuccessMessage: '密码修改成功，请重新登录',
+  changeAvatar: '修改头像'
 }

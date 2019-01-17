@@ -1,4 +1,5 @@
 import { loginByEmail, logout, getUserInfo } from '@/api/login'
+import * as userAPI from '@/api/user'
 import { fetchNotifications } from '@/api/notification'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 
@@ -11,7 +12,10 @@ const user = {
     id: undefined,
     name: '',
     avatar: '',
+    email: '',
     introduction: '',
+    created_at: '',
+    updated_at: '',
     roles: [],
     setting: {
       articlePlatform: []
@@ -44,6 +48,15 @@ const user = {
     SET_AVATAR: (state, avatar) => {
       state.avatar = avatar
     },
+    SET_EMAIL: (state, email) => {
+      state.email = email
+    },
+    SET_CREATED_AT: (state, created_at) => {
+      state.created_at = created_at
+    },
+    SET_UPDATED_AT: (state, updated_at) => {
+      state.updated_at = updated_at
+    },
     SET_ID: (state, id) => {
       state.id = id
     },
@@ -66,7 +79,7 @@ const user = {
       commit('SET_TOKEN', tokenValue)
     },
 
-    // 获取用户信息
+    // 更新管理员信息
     GetUserInfo({ commit, state }) {
       return new Promise((resolve, reject) => {
         getUserInfo(state.token).then(response => {
@@ -74,13 +87,28 @@ const user = {
           commit('SET_ROLES', ['admin'])
           commit('SET_NAME', data.name)
           commit('SET_AVATAR', data.avatar)
+          commit('SET_EMAIL', data.email)
           commit('SET_INTRODUCTION', data.introduction)
           commit('SET_ID', data.id)
+          commit('SET_CREATED_AT', data.created_at)
+          commit('SET_UPDATED_AT', data.updated_at)
           resolve(response)
         }).catch(error => {
           reject(error)
         })
       })
+    },
+
+    // 更新管理员信息
+    async UpdateUserInfo({ commit }, payload) {
+      const data = (await userAPI.updateInfo(payload)).data
+      commit('SET_NAME', data.name)
+      commit('SET_AVATAR', data.avatar)
+      commit('SET_EMAIL', data.email)
+      commit('SET_INTRODUCTION', data.introduction)
+      commit('SET_ID', data.id)
+      commit('SET_CREATED_AT', data.created_at)
+      commit('SET_UPDATED_AT', data.updated_at)
     },
 
     // 第三方验证登录

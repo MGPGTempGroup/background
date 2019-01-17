@@ -254,7 +254,7 @@ export const asyncRouterMap = [
     ]
   },
   {
-    path: '/industry-updates',
+    path: '/industry-updates-management',
     component: Layout,
     redirect: '/industry-updates/article',
     alwaysShow: true,
@@ -272,6 +272,24 @@ export const asyncRouterMap = [
         meta: {
           title: 'articleList',
           roles: ['admin'] // or you can only set roles in sub nav
+        }
+      }
+    ]
+  },
+  {
+    path: '/personal',
+    name: 'Personal',
+    hidden: true,
+    component: Layout,
+    redirect: '/personal/information',
+    children: [
+      {
+        path: 'information',
+        component: () => import('@/views/personal/info'),
+        name: 'Information',
+        meta: {
+          title: 'information',
+          roles: ['admin']
         }
       }
     ]
