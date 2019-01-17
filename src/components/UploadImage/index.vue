@@ -17,7 +17,7 @@
         </div>
       </li>
       <li class="upload-image__btn" >
-        <input class="upload-image__file-input" type="file" multiple @change="onFileChange" >
+        <input ref="fileInput" class="upload-image__file-input" type="file" multiple @change="onFileChange" >
         <div class="upload-image__btn-text" >
           <i class="fa fa-cloud-upload" style="font-size: 20px;" />
           <div style="margin-top: 5px;" >{{ $t('clickUpload') }}</div>
@@ -128,6 +128,9 @@ export default {
      */
     del(item, index) {
       this.$emit('update:imageList', this.imageList.filter((v, i) => i !== index))
+      // 清除file input的value
+      // 防止删除某个图片后其文件还残留在file input中（再次选择删除的图片时无法触发元素change事件）
+      this.$refs.fileInput.value = ''
     },
     /**
      * 图片预览
@@ -251,7 +254,7 @@ export default {
       flex-wrap: wrap;
       position: relative;
       margin-bottom: 15px;
-      width: 200px;
+      width: 150px;
       height: 120px;
       font-size: 14px;
       letter-spacing: .5px;
