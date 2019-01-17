@@ -94,7 +94,7 @@ export default {
         autoCrop: true, // 自动开启剪裁
         fixed: true, // 按照比例剪裁
         fixedNumber: this.cropperRatio, // 剪裁比例
-        centerBox: true, // 裁剪框是否被限制在图片之内
+        // centerBox: true, // 裁剪框是否被限制在图片之内
         // 设置剪裁框的宽度与高度
         // 这里设置了一个尽可能更大的值，让插件尽可能的将剪裁框的大小与剪裁图片保持相同
         // (因为插件不支持剪裁框宽度高度与图片相同)
