@@ -24,7 +24,12 @@ export default {
   props: {
     identities: {
       required: true,
-      type: [Array, Number]
+      validator(value) {
+        if (value instanceof Array || ['string', 'number', 'undefined'].includes(typeof value)) {
+          return true
+        }
+        return false
+      }
     },
     extraElSelectOpts: {
       type: Object,
