@@ -509,7 +509,8 @@ export default {
     deletePositionTips: '该职位下包含的成员将会被清除职位关系。',
     deleteDepartmentTips: '您确认要删除该部门吗？删除后该部门对应职位以及职位与成员之间的关系也将会被删除。',
     inputPositionNameTips: '请输入职位名称',
-    createPosition: '创建职位'
+    createPosition: '创建职位',
+    basicInfo: '基本信息'
   },
   project: {
     list: '项目列表',
@@ -543,7 +544,8 @@ export default {
   },
   personal: {
     title: '个人信息',
-    name: '名称'
+    name: '名称',
+    memberInfo: '成员信息'
   },
   all: '全部',
   id: '编号',
@@ -668,5 +670,7 @@ export default {
   startTime: '开始时间',
   endTime: '结束时间',
   changePasswordSuccessMessage: '密码修改成功，请重新登录',
-  changeAvatar: '修改头像'
+  changeAvatar: '修改头像',
+  AdministratorOrNot: '是否为管理员用户',
+  editInfo: '修改信息'
 }

@@ -41,11 +41,3 @@ export function logout() {
     method: 'delete'
   })
 }
-
-export function getUserInfo() {
-  return request({
-    url: 'admin-users/current',
-    method: 'get'
-  })
-}
-

@@ -509,7 +509,9 @@ export default {
     deletePositionTips: 'The members included in the position will be removed from the position.',
     deleteDepartmentTips: 'Are you sure you want to delete this department? After deletion, the corresponding positions in the Department and the relationship between positions and members will also be deleted.',
     inputPositionNameTips: 'Please input position name',
-    createPosition: 'Create position'
+    createPosition: 'Create position',
+    basicInfo: 'Basic information',
+    photo: '照片'
   },
   project: {
     list: 'List of projects',
@@ -543,7 +545,8 @@ export default {
   },
   personal: {
     title: 'Personal information',
-    name: 'Name'
+    name: 'Name',
+    memberInfo: 'Member information'
   },
   all: 'ALL',
   id: 'ID',
@@ -669,5 +672,7 @@ export default {
   startTime: 'Start time',
   endTime: 'End time',
   changePasswordSuccessMessage: 'Password changed successfully, please log in again',
-  changeAvatar: 'Change avatar'
+  changeAvatar: 'Change avatar',
+  AdministratorOrNot: 'Administrator or not',
+  editInfo: 'Edit information'
 }

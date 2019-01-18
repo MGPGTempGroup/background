@@ -1,4 +1,4 @@
-import { loginByEmail, logout, getUserInfo } from '@/api/login'
+import { loginByEmail, logout } from '@/api/login'
 import * as userAPI from '@/api/user'
 import { fetchNotifications } from '@/api/notification'
 import { getToken, setToken, removeToken } from '@/utils/auth'
@@ -16,6 +16,7 @@ const user = {
     introduction: '',
     created_at: '',
     updated_at: '',
+    member: '',
     roles: [],
     setting: {
       articlePlatform: []
@@ -60,6 +61,9 @@ const user = {
     SET_ID: (state, id) => {
       state.id = id
     },
+    SET_MEMBER: (state, member) => {
+      state.member = member
+    },
     SET_ROLES: (state, roles) => {
       state.roles = roles
     },
@@ -79,10 +83,12 @@ const user = {
       commit('SET_TOKEN', tokenValue)
     },
 
-    // 更新管理员信息
+    // 获取管理员信息
     GetUserInfo({ commit, state }) {
       return new Promise((resolve, reject) => {
-        getUserInfo(state.token).then(response => {
+        userAPI.getUserInfo({
+          include: 'member'
+        }).then(response => {
           const data = response.data
           commit('SET_ROLES', ['admin'])
           commit('SET_NAME', data.name)
@@ -92,6 +98,7 @@ const user = {
           commit('SET_ID', data.id)
           commit('SET_CREATED_AT', data.created_at)
           commit('SET_UPDATED_AT', data.updated_at)
+          commit('SET_MEMBER', data.member)
           resolve(response)
         }).catch(error => {
           reject(error)
@@ -153,7 +160,7 @@ const user = {
       return new Promise(resolve => {
         commit('SET_TOKEN', role)
         setToken(role)
-        getUserInfo(role).then(response => {
+        userAPI.getUserInfo(role).then(response => {
           const data = response.data
           commit('SET_ROLES', data.roles)
           commit('SET_NAME', data.name)

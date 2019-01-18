@@ -3,6 +3,9 @@
     <el-card>
       <div slot="header" >
         <h2 style="margin: 0px;" >{{ $t('personal.title') }}</h2>
+        <el-button type="primary" class="personal-info__edit-btn" @click="openEditDialog" >
+          {{ $t('editInfo') }}
+        </el-button>
       </div>
       <el-row :gutter="48" class="personal-info__wrapper" >
         <el-col v-bind="{ xs: 24, sm: 8, md: 6, lg: 4, xl: 4}">
@@ -34,6 +37,15 @@
               <dd> {{ user.created_at }} </dd>
               <dt> {{ $t('updatedAt') }} </dt>
               <dd> {{ user.updated_at }} </dd>
+              <!-- <dt> {{ $t('personal.memberInfo') }} </dt>
+              <dd>
+                <el-button
+                  v-if="typeof user.member === 'object'"
+                  type="text"
+                  @click="openMemberDetailsDialog" >
+                  {{ [user.member.name, user.member.surname].filter(Boolean).join(' ') }}
+                </el-button>
+              </dd> -->
             </el-col>
           </el-row>
         </el-col>
@@ -54,10 +66,36 @@
         </el-button>
       </div>
     </el-dialog>
+    <!-- 成员详情对话框 -->
+    <!-- <company-member-details-dialog/> -->
+    <!-- 信息编辑对话框 -->
+    <el-dialog
+      :visible.sync="editDialogVisible"
+      :title="$t('editInfo')"
+      width="300px"
+      class="edit-info-dialog">
+      <el-form :model="editFormData" label-position="top" >
+        <el-form-item :label="$t('personal.name')" >
+          <el-input v-model="editFormData.name" />
+        </el-form-item>
+        <el-form-item :label="$t('email')" >
+          <el-input v-model="editFormData.email" />
+        </el-form-item>
+        <div class="edit-info-dialog__actions" >
+          <el-button type="info" @click="resetEditForm">
+            {{ $t('reset') }}
+          </el-button>
+          <el-button type="primary" @click="updateInfo" >
+            {{ $t('update') }}
+          </el-button>
+        </div>
+      </el-form>
+    </el-dialog>
   </div>
 </template>
 
 <script>
+import CompanyMemberDetailsDialog from '@/views/company/members/details'
 import UploadImage from '@/components/UploadImage'
 import { uploadImage as UploadImageAPI } from '@/api/upload'
 import defaultAvatar from '@/assets/defaultAvatar.png'
@@ -65,19 +103,37 @@ import { mapState, mapActions } from 'vuex'
 export default {
   name: 'Personal',
   components: {
-    UploadImage
+    UploadImage,
+    CompanyMemberDetailsDialog
   },
   data() {
     return {
       defaultAvatar,
       changeAvatarDialogVisible: false,
-      uploadImageList: []
+      uploadImageList: [],
+      editDialogVisible: false,
+      editFormData: {
+        name: undefined,
+        email: undefined
+      }
     }
   },
   computed: {
     ...mapState([
       'user'
     ])
+  },
+  watch: {
+    user: {
+      deep: true,
+      immediate: true,
+      handler: function(user) {
+        this.editFormData = {
+          name: user.name,
+          email: user.email
+        }
+      }
+    }
   },
   methods: {
     ...mapActions([
@@ -163,7 +219,58 @@ export default {
         .finally(() => {
           loading.close()
         })
+    },
+    /**
+     * 打开编辑信息对话框
+     */
+    openEditDialog() {
+      this.editDialogVisible = true
+    },
+    /**
+     * 更新个人信息
+     */
+    async updateInfo() {
+      const loading = this.$loading({
+        lock: true,
+        text: 'Loading',
+        spinner: 'el-icon-loading',
+        background: 'rgba(0, 0, 0, 0.7)'
+      })
+      try {
+        await this.UpdateUserInfo({
+          name: this.editFormData.name,
+          email: this.editFormData.email
+        })
+      } catch (err) {
+        this.$message({
+          type: 'error',
+          message: this.$t('updateFailed')
+        })
+      } finally {
+        loading.close()
+      }
+      this.$message({
+        type: 'success',
+        message: this.$t('updateSuccess')
+      })
+      this.editDialogVisible = false
+    },
+    /**
+     * 重置表单
+     */
+    resetEditForm() {
+      this.editFormData = {
+        name: this.user.name,
+        email: this.user.email
+      }
     }
+    /**
+     * 打开该管理员对应的成员对话框
+     */
+    // openMemberDetailsDialog() {
+    //   this.$store.commit('company/setMemberDetailsData', this.user.member)
+    //   this.$store.commit('company/setMemberDetailsDialogVisible', true)
+    // }
   }
 }
 </script>
@@ -172,6 +279,12 @@ export default {
 @import '@/styles/dl.scss';
 .personal-info {
   padding: 20px;
+  &__edit-btn {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
   &__wrapper {
     display: flex;
     padding: 10px;
@@ -218,8 +331,26 @@ export default {
     }
   }
 }
+.edit-info-dialog {
+  .el-dialog__body {
+    padding-top: 10px;
+  }
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+  }
+}
 </style>
 
-<style scoped >
+<style scoped>
   @import url('font-awesome/css/font-awesome.min.css');
+</style>
+
+<style lang="scss" >
+.personal-info {
+  .el-card__header {
+    position: relative;
+  }
+}
 </style>
