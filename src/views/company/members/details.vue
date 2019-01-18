@@ -1,148 +1,95 @@
 <template>
   <el-dialog
-    :title="$t('project.details')"
+    :title="$t('details')"
     :visible.sync="dialogVisible"
     width="50%"
     center
     lock-scroll
     top="40px"
     append-to-body>
-    <div v-if="Object.keys(projectDetailsData).length" class="project-details" >
+    <div v-if="Object.keys(memberDetailsData).length" class="member-details" >
       <el-tabs tab-position="left" >
-        <el-tab-pane :label="$t('project.basicInformation')" class="project-details__tab-content">
+        <el-tab-pane :label="$t('company.basicInfo')" class="member-details__tab-content">
           <el-row
             :gutter="24"
-            class="project-details__tab-content-inner project-details__basic-info">
+            class="member-details__tab-content-inner member-details__basic-info">
             <el-col v-bind="layoutItemProps" tag="dl" >
               <dt>{{ $t('id') }}</dt>
-              <dd>{{ projectDetailsData.id }}</dd>
-              <dt>{{ $t('project.name') }}</dt>
-              <dd>{{ projectDetailsData.name || $t('noData') }}</dd>
-              <dt>{{ $t('project.address') }}</dt>
-              <dd>
-                <template v-if="Array.isArray(projectDetailsData.address)" >
-                  {{ projectDetailsData.address.join('/') }}
-                </template>
-                <template v-else >
-                  {{ $t('noData') }}
-                </template>
-              </dd>
-              <dt>{{ $t('project.location') }}</dt>
-              <dd>{{ projectDetailsData.location || $t('noData') }}</dd>
-              <dt>{{ $t('project.description') }}</dt>
-              <dd>{{ projectDetailsData.description || $t('noData') }}</dd>
-              <dt>{{ $t('project.yearBuilt') }}</dt>
-              <dd>{{ projectDetailsData.yearBuilt || $t('noData') }}</dd>
-              <dt>{{ $t('project.price') }}</dt>
-              <dd>
-                ${{ projectDetailsData.min_price }} ~ ${{ projectDetailsData.max_price }}
-              </dd>
-              <dt>{{ $t('project.agents') }}</dt>
-              <dd>
-                <template v-if="projectDetailsData.agents.data.length" >
+              <dd>{{ memberDetailsData.id }}</dd>
+              <dt>{{ $t('name') }}</dt>
+              <dd>{{ memberDetailsData.name || $t('noData') }}</dd>
+              <dt>{{ $t('surname') }}</dt>
+              <dd>{{ memberDetailsData.surname || $t('noData') }}</dd>
+              <dt>{{ $t('phone') }}</dt>
+              <dd>{{ memberDetailsData.phone || $t('noData') }}</dd>
+              <dt>{{ $t('email') }}</dt>
+              <dd>{{ memberDetailsData.email || $t('noData') }}</dd>
+              <dt>{{ $t('company.positions') }}</dt>
+              <dd style="margin-left: -5px;" >
+                <template v-if="memberDetailsData.positions.data.length" >
                   <el-tag
-                    v-for="item in projectDetailsData.agents.data"
-                    :key="item.id"
-                    style="margin-right: 3px;">
-                    {{ item.name + ' ' + item.surname }}
+                    v-for="position in memberDetailsData.positions.data"
+                    :key="position.id"
+                    style="margin-left: 5px;">
+                    {{ position.name }}
                   </el-tag>
                 </template>
-                <template v-else >
-                  {{ $t('noData') }}
-                </template>
-              </dd>
-              <dt>{{ $t('project.owner') }}</dt>
-              <dd>
-                <el-tag v-if="projectDetailsData.owner" >
-                  {{ projectDetailsData.owner.name + ' ' + projectDetailsData.owner.surname }}
-                </el-tag>
                 <template v-else >
                   {{ $t('noData') }}
                 </template>
               </dd>
             </el-col>
             <el-col v-bind="layoutItemProps" tag="dl" >
-              <dt>{{ $t('project.productType') }}</dt>
+              <dt>{{ $t('company.googlePlusHomePage') }}</dt>
               <dd>
-                <template v-if="projectDetailsData.productTypes.data.length" >
-                  <el-tag
-                    v-for="item in projectDetailsData.productTypes.data"
-                    :key="item.id"
-                    style="margin-right: 3px;">
-                    {{ item.name }}
-                  </el-tag>
-                </template>
-                <template v-else >
-                  {{ $t('noData') }}
-                </template>
+                <a
+                  v-if="memberDetailsData.google_plus_homepage"
+                  :href="memberDetailsData.google_plus_homepage"
+                  target="_blank">
+                  {{ memberDetailsData.google_plus_homepage }}
+                </a>
+                <span v-else>{{ $t('noData') }}</span>
               </dd>
-              <dt>{{ $t('project.status') }}</dt>
+              <dt>{{ $t('company.linkinHomePage') }}</dt>
               <dd>
-                <el-tag>
-                  {{ projectStatus.find(item => item.value == projectDetailsData.status).label }}
-                </el-tag>
-              </dd>
-              <dt>{{ $t('project.isNewDevelopment') }}</dt>
-              <dd>
-                <el-tag v-if="projectDetailsData.is_new_development" >
-                  {{ $t('yes') }}
-                </el-tag>
-                <el-tag v-else >
-                  {{ $t('no') }}
-                </el-tag>
-              </dd>
-              <dt>{{ $t('project.isPastSuccess') }}</dt>
-              <dd>
-                <el-tag v-if="projectDetailsData.is_past_success" >
-                  {{ $t('yes') }}
-                </el-tag>
-                <el-tag v-else >
-                  {{ $t('no') }}
-                </el-tag>
-              </dd>
-              <dt>{{ $t('project.creator') }}</dt>
-              <dd>
-                {{ projectDetailsData.creator.name }}
+                <a
+                  v-if="memberDetailsData.linkin_homepage"
+                  :href="memberDetailsData.linkin_homepage"
+                  target="_blank">
+                  {{ memberDetailsData.linkin_homepage }}
+                </a>
+                <span v-else>{{ $t('noData') }}</span>
               </dd>
               <dt>{{ $t('createdAt') }}</dt>
-              <dd>
-                {{ projectDetailsData.created_at }}
-              </dd>
+              <dd>{{ memberDetailsData.created_at || $t('noData') }}</dd>
               <dt>{{ $t('updatedAt') }}</dt>
+              <dd>{{ memberDetailsData.updated_at || $t('noData') }}</dd>
+              <dt>{{ $t('AdministratorOrNot') }}</dt>
               <dd>
-                {{ projectDetailsData.updated_at }}
+                <el-tag v-if="memberDetailsData.admin_user_id" type="primary" >
+                  {{ $t('yes') }}
+                </el-tag>
+                <el-tag v-else type="warning" >
+                  {{ $t('no') }}
+                </el-tag>
               </dd>
             </el-col>
           </el-row>
         </el-tab-pane>
-        <el-tab-pane :label="$t('project.introduction')" class="project-details__tab-content">
+        <el-tab-pane :label="$t('company.introduction')" class="member-details__tab-content">
           <div
-            class="project-details__tab-content-inner project-details__introduction"
-            v-html="projectDetailsData.introduction">
+            class="member-details__tab-content-inner member-details__introduction"
+            v-html="memberDetailsData.introduction">
             {{ $t('noData') }}
           </div>
         </el-tab-pane>
-        <el-tab-pane :label="$t('project.pictures')" class="project-details__tab-content">
-          <el-row
-            :gutter="24"
-            class="project-details__tab-content-inner project-details__photo-and-video" >
-            <template v-if="projectDetailsData.broadcast_pictures && projectDetailsData.broadcast_pictures.length" >
-              <el-col
-                v-for="item in projectDetailsData.broadcast_pictures"
-                v-bind="{ xs: 24, sm: 12, md: 8, lg: 6, xl: 6 }"
-                :key="item.index">
-                <el-card
-                  style="width: 100%; cursor: pointer;"
-                  body-style="padding: 5px;"
-                  shadow="hover" >
-                  <img :src="item.url" style="width: 100%;" >
-                </el-card>
-              </el-col>
-            </template>
-            <template v-else >
-              {{ $t('noData') }}
-            </template>
-          </el-row>
+        <el-tab-pane :label="$t('photo')" class="member-details__tab-content">
+          <template v-if="memberDetailsData.photo" >
+            <img :src="memberDetailsData.photo" alt="">
+          </template>
+          <template v-else >
+            {{ $t('noData') }}
+          </template>
         </el-tab-pane>
       </el-tabs>
     </div>
@@ -154,9 +101,9 @@
 
 <script>
 import { createNamespacedHelpers } from 'vuex'
-const { mapState, mapMutations } = createNamespacedHelpers('project')
+const { mapState, mapMutations } = createNamespacedHelpers('company')
 export default {
-  name: 'ProjectDetails',
+  name: 'MemberDetails',
   data() {
     return {
       layoutItemProps: { xs: 24, sm: 24, md: 12, lg: 12, xl: 12 }
@@ -164,22 +111,21 @@ export default {
   },
   computed: {
     ...mapState([
-      'projectDetailsDialogVisible',
-      'projectDetailsData',
-      'projectStatus'
+      'memberDetailsDialogVisible',
+      'memberDetailsData'
     ]),
     dialogVisible: {
       get() {
-        return this.projectDetailsDialogVisible
+        return this.memberDetailsDialogVisible
       },
       set(visible) {
-        this.setProjectDetailsDialogVisible(visible)
+        this.setMemberDetailsDialogVisible(visible)
       }
     }
   },
   methods: {
     ...mapMutations([
-      'setProjectDetailsDialogVisible'
+      'setMemberDetailsDialogVisible'
     ])
   }
 }
@@ -187,7 +133,7 @@ export default {
 
 <style scoped lang="scss" >
   @import '@/styles/dl.scss';
-  .project-details {
+  .member-details {
     &__tab-content {
       padding-left: 10px;
     }

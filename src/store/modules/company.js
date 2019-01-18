@@ -1,6 +1,7 @@
 import {
   fetchInfo,
   fetchMembers,
+  fetchMember,
   fetchDepartments,
   fetchPositions,
   createMember,
@@ -179,7 +180,6 @@ const company = {
         spinner: 'el-icon-loading',
         background: 'rgba(0, 0, 0, 0.7)'
       })
-
       const data = (await fetchInfo()).data
       commit('setCompanyInfo', data)
       loading.close()
@@ -271,6 +271,11 @@ const company = {
         department_id,
         position_id: id
       })
+    },
+    async initMemberDetailsDialog({ commit }, { member_id, params = {}}) {
+      const member = (await fetchMember(member_id, params)).data
+      commit('setMemberDetailsData', member)
+      commit('setMemberDetailsDialogVisible', true)
     }
   }
 }

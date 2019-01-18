@@ -90,6 +90,7 @@
               @click="$store.dispatch('remark/init', { come_from_type: 'company_members', come_from_id: scope.row.id })">
               {{ $t('remarks') }}
             </el-button>
+            <el-button type="text" @click="openMemberDetailsDialog(scope.row)" >{{ $t('details') }}</el-button>
             <el-button type="text" @click="handleMemberEdit(scope.row)" >{{ $t('edit') }}</el-button>
             <el-button type="text" @click="handleMemberDelete(scope.row.id)" >{{ $t('delete') }}</el-button>
           </template>
@@ -112,6 +113,9 @@
     <!-- Edit member -->
     <edit-members-dialog />
 
+    <!-- member details dialog -->
+    <member-details-dialog/>
+
     <!-- Introduction Dialog -->
     <el-dialog
       :title="$t('introduction')"
@@ -124,6 +128,7 @@
 <script>
 import CreateMembersDialog from './create'
 import EditMembersDialog from './edit'
+import MemberDetailsDialog from './details'
 import FilterForm from './filter'
 import { deepClone } from '@/utils'
 import { createNamespacedHelpers } from 'vuex'
@@ -131,7 +136,10 @@ const { mapState, mapMutations, mapActions } = createNamespacedHelpers('company'
 export default {
   name: 'CompanyMembersPage',
   components: {
-    CreateMembersDialog, EditMembersDialog, FilterForm
+    CreateMembersDialog,
+    EditMembersDialog,
+    FilterForm,
+    MemberDetailsDialog
   },
   data() {
     return {
@@ -170,13 +178,22 @@ export default {
       'setMembersTableLoading',
       'setCreateMemberDialogVisible',
       'setEditMemberDialogVisible',
-      'setEditMembersForm'
+      'setEditMembersForm',
+      'setMemberDetailsDialogVisible',
+      'setMemberDetailsData'
     ]),
     ...mapActions([
       'fetchCompanyMembers',
       'fetchCompanyDepartments',
       'deleteCompanyMember'
     ]),
+    /**
+     * 打开成员详情对话框
+     */
+    openMemberDetailsDialog(memberData) {
+      this.setMemberDetailsData(memberData)
+      this.setMemberDetailsDialogVisible(true)
+    },
     /**
      * 处理成员编辑
      */

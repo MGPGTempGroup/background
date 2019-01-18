@@ -17,6 +17,15 @@ export function fetchMembers(params) {
   })
 }
 
+export function fetchMember(memberID, params = {}) {
+  const url = 'company/members/' + memberID
+  return request({
+    method: 'GET',
+    url,
+    params
+  })
+}
+
 export function fetchDepartments(params = {}) {
   return request({
     method: 'GET',
