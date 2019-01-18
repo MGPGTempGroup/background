@@ -30,7 +30,7 @@
                   <el-tag
                     v-for="position in memberDetailsData.positions.data"
                     :key="position.id"
-                    style="margin-left: 5px;">
+                    style="margin-left: 5px; margin-bottom: 5px;">
                     {{ position.name }}
                   </el-tag>
                 </template>
@@ -64,7 +64,7 @@
               <dd>{{ memberDetailsData.created_at || $t('noData') }}</dd>
               <dt>{{ $t('updatedAt') }}</dt>
               <dd>{{ memberDetailsData.updated_at || $t('noData') }}</dd>
-              <dt>{{ $t('AdministratorOrNot') }}</dt>
+              <!-- <dt>{{ $t('AdministratorOrNot') }}</dt>
               <dd>
                 <el-tag v-if="memberDetailsData.admin_user_id" type="primary" >
                   {{ $t('yes') }}
@@ -72,7 +72,7 @@
                 <el-tag v-else type="warning" >
                   {{ $t('no') }}
                 </el-tag>
-              </dd>
+              </dd> -->
             </el-col>
           </el-row>
         </el-tab-pane>

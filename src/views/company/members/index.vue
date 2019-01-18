@@ -22,7 +22,7 @@
             <el-popover
               placement="right-start"
               trigger="click">
-              <div style="margin-bottom: -5px; margin-right: -5px;" >
+              <div v-if="scope.row.positions.data.length" style="margin-bottom: -5px; margin-right: -5px;" >
                 <el-tag
                   v-for="(position, index) in scope.row.positions.data"
                   :key="index"
@@ -30,27 +30,9 @@
                   {{ position.name }}
                 </el-tag>
               </div>
-              <el-button slot="reference">{{ $t('details') }}</el-button>
-            </el-popover>
-          </template>
-        </el-table-column>
-        <el-table-column
-          :label="$t('company.introduction')"
-          align="center"
-          min-width="25">
-          <template slot-scope="scope" >
-            <el-button slot="reference" @click="viewIntroduction(scope.row.introduction)" >{{ $t('details') }}</el-button>
-          </template>
-        </el-table-column>
-        <el-table-column
-          :label="$t('photo')"
-          align="center"
-          min-width="25">
-          <template slot-scope="scope" >
-            <el-popover
-              placement="right-start"
-              trigger="click">
-              <img :src="scope.row.photo" style="max-width: 400px;" >
+              <div v-else >
+                {{ $t('noData') }}
+              </div>
               <el-button slot="reference">{{ $t('details') }}</el-button>
             </el-popover>
           </template>
@@ -117,11 +99,11 @@
     <member-details-dialog/>
 
     <!-- Introduction Dialog -->
-    <el-dialog
+    <!-- <el-dialog
       :title="$t('introduction')"
       :visible.sync="introductionDialogVisible">
       <div v-html="introductionDialogContent" />
-    </el-dialog>
+    </el-dialog> -->
   </div>
 </template>
 
@@ -143,8 +125,8 @@ export default {
   },
   data() {
     return {
-      introductionDialogVisible: false,
-      introductionDialogContent: ''
+      // introductionDialogVisible: false,
+      // introductionDialogContent: ''
     }
   },
   computed: {
@@ -206,10 +188,10 @@ export default {
     /**
      * 展示成员介绍（Introduction）
      */
-    viewIntroduction(introduction) {
-      this.introductionDialogContent = introduction
-      this.introductionDialogVisible = true
-    },
+    // viewIntroduction(introduction) {
+    //   this.introductionDialogContent = introduction
+    //   this.introductionDialogVisible = true
+    // },
     /**
      * 处理成员删除
      */
