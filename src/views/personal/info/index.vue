@@ -353,4 +353,9 @@ export default {
     position: relative;
   }
 }
+.edit-info-dialog {
+  .el-dialog__body {
+    padding-top: 10px;
+  }
+}
 </style>
