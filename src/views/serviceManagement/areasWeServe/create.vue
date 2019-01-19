@@ -128,10 +128,11 @@ export default {
         // ...
       }
 
-      // 调用修改Action
+      // 调用创建Action
       this.createServiceArea(requestData)
         .then(() => {
           this.dialogVisible = false
+          this.reset() // reset form
           this.$message({
             type: 'success',
             message: this.$t('createSuccess')
@@ -157,7 +158,7 @@ export default {
     &:first-of-type {
       margin-top: 0px !important;
     }
-    margin-top: 20px;
+    margin-top: 10px;
     padding-top: 1px; // margin 重叠
   }
   &__actions {
