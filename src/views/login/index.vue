@@ -77,8 +77,8 @@ export default {
     }
     return {
       loginForm: {
-        email: 'Tingting-gao@outlook.com',
-        password: '123456'
+        email: '',
+        password: ''
       },
       loginRules: {
         email: [{ required: true, trigger: 'blur', validator: validateEmail }],
