@@ -63,6 +63,7 @@ export default {
     position: relative;
     display: inline-block;
     margin-top: -7px;
+    width: 100%;
     &__item {
       margin-top: 7px;
     }
@@ -73,3 +74,12 @@ export default {
     }
   }
 </style>
+
+<style lang="scss" >
+  // .multiple-datepicker {
+  //   .el-date-editor {
+  //     width: 80%;
+  //   }
+  // }
+</style>
+
