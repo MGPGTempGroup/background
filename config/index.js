@@ -11,7 +11,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '*': {
-        target: 'http://api.melgrand.com/admin',
+        target: 'http://api.melgrand.com:8088/admin',
         changeOrigin: true,
         bypass: function(req, res, proxyOptions) {
           if (req.url.indexOf('/static') !== -1)
