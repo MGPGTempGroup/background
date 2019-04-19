@@ -1,5 +1,6 @@
 <template>
   <div class="upload-image" >
+    <h4>{{ $t('components.theSizeOfEachFileToBeUploadedShouldNotExceed3MB') }}</h4>
     <ul ref="list" refs="list" class="upload-image__list" dragable @drop="drop" >
       <li
         v-for="(item, index) in imageList"

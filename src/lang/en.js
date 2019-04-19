@@ -157,7 +157,8 @@ export default {
     uniqueVisitors: 'Unique visitors',
     messages: 'Messages',
     turnover: 'Turnover',
-    writeRemarkContentPlaceholder: 'Write remarks content...'
+    writeRemarkContentPlaceholder: 'Write remarks content...',
+    theSizeOfEachFileToBeUploadedShouldNotExceed3MB: 'The size of each file to be uploaded should not exceed 3MB'
   },
   table: {
     dynamicTips1: 'Fixed header, sorted by header order',

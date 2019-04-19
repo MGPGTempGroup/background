@@ -157,7 +157,8 @@ export default {
     uniqueVisitors: '唯一访问量',
     messages: '信息',
     turnover: '营业额',
-    writeRemarkContentPlaceholder: '编写备注内容...'
+    writeRemarkContentPlaceholder: '编写备注内容...',
+    theSizeOfEachFileToBeUploadedShouldNotExceed3MB: '每个要上传的文件的大小不应超过 3MB'
   },
   table: {
     dynamicTips1: '固定表头, 按照表头顺序排序',
