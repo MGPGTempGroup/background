@@ -158,7 +158,9 @@ export default {
     messages: 'Messages',
     turnover: 'Turnover',
     writeRemarkContentPlaceholder: 'Write remarks content...',
-    theSizeOfEachFileToBeUploadedShouldNotExceed3MB: 'The size of each file to be uploaded should not exceed 3MB'
+    theSizeOfEachFileToBeUploadedShouldNotExceed2MB: 'The size of each file to be uploaded should not exceed 2MB',
+    uploadError: 'Upload error',
+    fileIsTooLarge: 'File is too large'
   },
   table: {
     dynamicTips1: 'Fixed header, sorted by header order',

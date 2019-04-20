@@ -158,7 +158,9 @@ export default {
     messages: '信息',
     turnover: '营业额',
     writeRemarkContentPlaceholder: '编写备注内容...',
-    theSizeOfEachFileToBeUploadedShouldNotExceed3MB: '每个要上传的文件的大小不应超过 3MB'
+    theSizeOfEachFileToBeUploadedShouldNotExceed2MB: '每个要上传的文件的大小不应超过 2MB',
+    uploadError: '上传错误',
+    fileIsTooLarge: '文件过大'
   },
   table: {
     dynamicTips1: '固定表头, 按照表头顺序排序',

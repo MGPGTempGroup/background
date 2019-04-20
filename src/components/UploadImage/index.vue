@@ -74,6 +74,10 @@ export default {
       type: Number,
       default: 1
     },
+    maxSize: {
+      type: Number,
+      default: 2048
+    },
     cropperRatio: {
       type: Array,
       default: () => [260, 200]
@@ -110,19 +114,41 @@ export default {
      */
     onFileChange(event) {
       const files = event.target.files
-      const promises = Object.values(files).filter((item, index) => index < this.maxCount).map(function(file) {
-        return new Promise((resolve, reject) => {
-          const fr = new FileReader()
-          fr.readAsDataURL(file)
-          fr.onload = () => resolve({
-            file, dataURL: fr.result
-          })
-          fr.onerror = () => reject(file)
+      const promises = Object.values(files)
+        .filter((item, index) => index < this.maxCount)
+        .filter(item => {
+          if (item.size / 1000 > this.maxSize) {
+            this.$notify({
+              title: this.$t('components.uploadError'),
+              message: `${this.$t('components.fileIsTooLarge')}： ${item.name}`,
+              type: 'warning'
+            })
+            return false
+          }
+          return true
         })
-      })
-      Promise.all(promises).then(res => {
-        this.$emit('update:imageList', res)
-      })
+        .map(function(file) {
+          return new Promise((resolve, reject) => {
+            const fr = new FileReader()
+            fr.readAsDataURL(file)
+            fr.onload = () => resolve({
+              file, dataURL: fr.result
+            })
+            fr.onerror = () => reject(file)
+          })
+        })
+
+      Promise.all(promises)
+        .then(res => {
+          this.$emit('update:imageList', res)
+        })
+        .catch(err => {
+          this.$notify({
+            title: this.$t('components.uploadError'),
+            message: err.name,
+            type: 'warning'
+          })
+        })
     },
     /**
      * 删除图片
