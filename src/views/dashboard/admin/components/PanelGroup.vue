@@ -53,7 +53,7 @@
         <div class="card-panel-description">
           <div class="card-panel-text">
             <el-badge :value="houseInspectionsCount.today" >
-              {{ $t('dashboard.houseInspections') }}
+              {{ $t('dashboard.inspections') }}
             </el-badge>
           </div>
           <count-to :start-val="0" :end-val="houseInspectionsCount.total" :duration="3200" class="card-panel-num"/>

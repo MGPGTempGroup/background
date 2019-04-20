@@ -113,6 +113,7 @@ export default {
     customerComments: '客户留言',
     pageViews: '页面访问量',
     uniqueVisitors: '唯一访问量',
+    inspections: '预约检查',
     houseInspections: '房屋预约检查',
     serviceMessages: '服务留言',
     messages: '消息量',

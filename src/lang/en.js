@@ -113,6 +113,7 @@ export default {
     customerComments: 'Customer comments',
     pageViews: 'Page views',
     uniqueVisitors: 'Unique visitors',
+    inspections: 'Inspections',
     houseInspections: 'House inspections',
     serviceMessages: 'Service messages',
     messages: 'Messages',
