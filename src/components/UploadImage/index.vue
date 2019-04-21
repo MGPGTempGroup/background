@@ -18,7 +18,13 @@
         </div>
       </li>
       <li class="upload-image__btn" >
-        <input ref="fileInput" class="upload-image__file-input" type="file" multiple @change="onFileChange" >
+        <input
+          ref="fileInput"
+          class="upload-image__file-input"
+          type="file"
+          multiple
+          @change="onFileChange"
+        >
         <div class="upload-image__btn-text" >
           <i class="fa fa-cloud-upload" style="font-size: 20px;" />
           <div style="margin-top: 5px;" >{{ $t('clickUpload') }}</div>
@@ -148,6 +154,9 @@ export default {
             message: err.name,
             type: 'warning'
           })
+        })
+        .finally(() => {
+          event.target.value = ''
         })
     },
     /**
