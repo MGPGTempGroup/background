@@ -89,8 +89,8 @@ const service = {
       commit('setServiceData', serviceData)
     },
     async createServiceArea({ commit }, payload) {
-      await createAreaWeServe(payload)
-      commit('addAreaWeServe', payload)
+      const response = await createAreaWeServe(payload)
+      commit('addAreaWeServe', response.data)
     },
     async updateServiceArea({ commit }, payload) {
       const area = (await updateServiceArea(payload)).data
