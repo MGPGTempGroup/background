@@ -246,6 +246,7 @@ export default {
           type: 'error',
           message: this.$t('updateFailed')
         })
+        return
       } finally {
         loading.close()
       }
