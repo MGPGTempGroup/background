@@ -195,7 +195,7 @@ export const asyncRouterMap = [
     children: [
       {
         path: 'content',
-        component: () => import('@/views/serviceManagement/content'),
+        component: () => import('@/views/service/content'),
         name: 'contentManagement',
         meta: {
           title: 'contentManagement',
@@ -204,7 +204,7 @@ export const asyncRouterMap = [
       },
       {
         path: 'areas-we-serve',
-        component: () => import('@/views/serviceManagement/areasWeServe'),
+        component: () => import('@/views/service/areasWeServe'),
         name: 'areasWeServeManagement',
         meta: {
           title: 'areasWeServe',
